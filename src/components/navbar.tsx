@@ -15,6 +15,7 @@ import { motion } from 'framer-motion'
 import { Link } from './link'
 import { Logo } from './logo'
 import { PlusGrid, PlusGridItem, PlusGridRow } from './plus-grid'
+import React from 'react'
 
 const links = [
   { href: '/company', label: 'About Us' },
@@ -47,7 +48,7 @@ function ServicesDropdown({
             </Link>
           </MenuItem>
           {serviceCategories.length > 0 && (
-            <>
+            <React.Fragment key="service-categories">
               <div className="my-2 border-t border-gray-100" />
               {serviceCategories.map((category) => (
                 <MenuItem key={category._id}>
@@ -68,7 +69,7 @@ function ServicesDropdown({
                   </Link>
                 </MenuItem>
               ))}
-            </>
+            </React.Fragment>
           )}
         </div>
       </MenuItems>

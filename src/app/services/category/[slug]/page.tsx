@@ -10,6 +10,7 @@ import type { ServiceCategory } from '@/sanity/types/serviceCategory'
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
+import React from 'react'
 
 interface CategoryPageProps {
   params: Promise<{ slug: string }>
@@ -91,7 +92,7 @@ export default async function ServiceCategoryPage({
       {/* Services Grid */}
       <Container className="mt-16">
         {services.data && services.data.length > 0 ? (
-          <>
+          <React.Fragment key="services-list">
             <Subheading>Available Services</Subheading>
             <div className="mt-8 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
               {services.data.map((service: ServiceExpanded) => (
@@ -154,7 +155,7 @@ export default async function ServiceCategoryPage({
                 </Link>
               ))}
             </div>
-          </>
+          </React.Fragment>
         ) : (
           <div className="py-16 text-center">
             <div className="mx-auto max-w-md">

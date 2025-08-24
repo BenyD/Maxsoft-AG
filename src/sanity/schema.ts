@@ -3,7 +3,6 @@ import type { SchemaTypeDefinition } from 'sanity'
 import { contactType } from './schemaTypes/contactType'
 import { externalLinkType } from './schemaTypes/externalLinkType'
 import { industryPartnerType } from './schemaTypes/industryPartnerType'
-import { jobApplicationType } from './schemaTypes/jobApplicationType'
 import { jobCategoryType } from './schemaTypes/jobCategoryType'
 import { jobListingType } from './schemaTypes/jobListingType'
 import { officeLocationType } from './schemaTypes/officeLocationType'
@@ -29,7 +28,6 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     teamMemberType,
     technologyPartnerType,
     industryPartnerType,
-    jobApplicationType,
     jobCategoryType,
     jobListingType,
     serviceCategoryType,

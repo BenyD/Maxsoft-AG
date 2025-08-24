@@ -46,7 +46,7 @@ export default async function JobPage({ params }: JobPageProps) {
         <Navbar />
       </Container>
 
-      <Container className="mt-16">
+      <Container className="mt-16 mb-16">
         <JobPageClient job={job.data} />
       </Container>
 

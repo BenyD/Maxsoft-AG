@@ -8,6 +8,11 @@ import { Heading, Lead, Subheading } from '@/components/text'
 import { getJobCategories, getJobListings } from '@/sanity/queries'
 import type { JobCategory } from '@/sanity/types/jobCategory'
 import type { JobListingExpanded } from '@/sanity/types/jobListing'
+import {
+  BriefcaseIcon,
+  CurrencyDollarIcon,
+  MapPinIcon,
+} from '@heroicons/react/24/solid'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
@@ -41,14 +46,14 @@ export default async function CareersPage() {
         {jobListings.data && jobListings.data.length > 0 && (
           <Subheading>Open Positions</Subheading>
         )}
-        <div className="mt-12">
+        <div className="mt-12 pb-8">
           {jobListings.data && jobListings.data.length > 0 ? (
             <div className="space-y-16">
               {jobCategories.data?.map((category: JobCategory) => (
                 <div key={category._id} className="space-y-8">
                   <div className="flex items-center gap-4">
                     <div
-                      className={`inline-flex items-center rounded-lg px-4 py-2 text-sm font-semibold text-white shadow-sm ${category.color}`}
+                      className={`inline-flex items-center rounded-lg px-4 py-2 text-sm font-semibold text-gray-900 shadow-sm ${category.color}`}
                     >
                       {category.name}
                     </div>
@@ -57,13 +62,17 @@ export default async function CareersPage() {
                       {jobListings.data?.filter(
                         (job: JobListingExpanded) =>
                           job.category._id === category._id,
-                      ).length || 0} position{jobListings.data?.filter(
+                      ).length || 0}{' '}
+                      position
+                      {jobListings.data?.filter(
                         (job: JobListingExpanded) =>
                           job.category._id === category._id,
-                      ).length === 1 ? '' : 's'}
+                      ).length === 1
+                        ? ''
+                        : 's'}
                     </span>
                   </div>
-                  
+
                   <div className="grid gap-6">
                     {jobListings.data
                       ?.filter(
@@ -78,32 +87,32 @@ export default async function CareersPage() {
                           <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
                             <div className="flex-1 space-y-3">
                               <div>
-                                <h3 className="text-xl font-semibold text-gray-900 group-hover:text-gray-700 transition-colors">
+                                <h3 className="text-xl font-semibold text-gray-900 transition-colors group-hover:text-gray-700">
                                   {job.title}
                                 </h3>
-                                <p className="mt-1 text-gray-600 leading-relaxed">
+                                <p className="mt-1 leading-relaxed text-gray-600">
                                   {job.shortDescription}
                                 </p>
                               </div>
-                              
+
                               <div className="flex flex-wrap gap-4 text-sm text-gray-500">
                                 <span className="flex items-center gap-2 rounded-full bg-gray-100 px-3 py-1">
-                                  <span className="text-blue-500">📍</span>
+                                  <MapPinIcon className="h-4 w-4 text-blue-500" />
                                   {job.location}
                                 </span>
                                 <span className="flex items-center gap-2 rounded-full bg-gray-100 px-3 py-1">
-                                  <span className="text-green-500">💼</span>
+                                  <BriefcaseIcon className="h-4 w-4 text-green-500" />
                                   {job.employmentType}
                                 </span>
                                 {job.salary && (
                                   <span className="flex items-center gap-2 rounded-full bg-gray-100 px-3 py-1">
-                                    <span className="text-yellow-500">💰</span>
+                                    <CurrencyDollarIcon className="h-4 w-4 text-yellow-500" />
                                     {job.salary}
                                   </span>
                                 )}
                               </div>
                             </div>
-                            
+
                             <Button
                               href={`/careers/${job.slug}`}
                               className="whitespace-nowrap transition-transform group-hover:scale-105"
@@ -124,16 +133,20 @@ export default async function CareersPage() {
                 <h2 className="mb-4 text-2xl font-semibold text-gray-900">
                   No Open Positions
                 </h2>
-                <p className="mb-8 text-gray-600 leading-relaxed">
+                <p className="mb-8 leading-relaxed text-gray-600">
                   We don&apos;t have any open positions at the moment, but
-                  we&apos;re always looking for talented people to join our team.
-                  Feel free to reach out and introduce yourself!
+                  we&apos;re always looking for talented people to join our
+                  team. Feel free to reach out and introduce yourself!
                 </p>
                 <div className="flex flex-col gap-3 sm:flex-row sm:justify-center">
                   <Button href="/contact" className="px-8 py-3">
                     Get in Touch
                   </Button>
-                  <Button href="/company" variant="outline" className="px-8 py-3">
+                  <Button
+                    href="/company"
+                    variant="outline"
+                    className="px-8 py-3"
+                  >
                     Learn About Us
                   </Button>
                 </div>

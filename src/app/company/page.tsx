@@ -21,6 +21,7 @@ import type { JobListingExpanded } from '@/sanity/types/jobListing'
 import type { TeamMember } from '@/sanity/types/teamMember'
 import type { TechnologyPartner } from '@/sanity/types/technologyPartner'
 import type { Metadata } from 'next'
+import React from 'react'
 
 export const metadata: Metadata = {
   title: 'About Us - Maxsoft AG',
@@ -267,7 +268,7 @@ async function Team() {
         </div>
       </div>
       {teamMembers.data && teamMembers.data.length > 0 && (
-        <>
+        <React.Fragment key="team-section">
           <Subheading as="h3" className="mt-24">
             The team
           </Subheading>
@@ -286,7 +287,7 @@ async function Team() {
               />
             ))}
           </ul>
-        </>
+        </React.Fragment>
       )}
     </Container>
   )
@@ -300,7 +301,7 @@ async function Partners() {
     <Container className="mt-32">
       {(technologyPartners.data && technologyPartners.data.length > 0) ||
       (industryPartners.data && industryPartners.data.length > 0) ? (
-        <>
+        <React.Fragment key="partners-section">
           <Subheading>Partners</Subheading>
           <Heading as="h3" className="mt-2">
             Strategic technology partnerships.
@@ -312,7 +313,7 @@ async function Partners() {
           </Lead>
 
           {technologyPartners.data && technologyPartners.data.length > 0 && (
-            <>
+            <React.Fragment key="technology-partners">
               <Subheading as="h3" className="mt-24">
                 Technology Partners
               </Subheading>
@@ -334,11 +335,11 @@ async function Partners() {
                   </li>
                 ))}
               </ul>
-            </>
+            </React.Fragment>
           )}
 
           {industryPartners.data && industryPartners.data.length > 0 && (
-            <>
+            <React.Fragment key="industry-partners">
               <Subheading as="h3" className="mt-24">
                 Industry partners
               </Subheading>
@@ -357,9 +358,9 @@ async function Partners() {
                   />
                 ))}
               </ul>
-            </>
+            </React.Fragment>
           )}
-        </>
+        </React.Fragment>
       ) : null}
     </Container>
   )
@@ -418,7 +419,7 @@ async function Careers() {
           {jobListings.data && jobListings.data.length > 0 && (
             <Subheading as="h3">Open positions</Subheading>
           )}
-          <div>
+          <div className="pb-8">
             {jobListings.data && jobListings.data.length > 0 ? (
               <table className="w-full text-left">
                 <colgroup>
@@ -435,15 +436,15 @@ async function Careers() {
                 </thead>
                 <tbody>
                   {jobCategories.data?.map((category: JobCategory) => (
-                    <>
-                      <tr key={`${category._id}-header`}>
+                    <React.Fragment key={category._id}>
+                      <tr>
                         <th
                           scope="colgroup"
                           colSpan={3}
                           className="px-0 pt-10 pb-0"
                         >
                           <div
-                            className={`-mx-4 rounded-lg ${category.color} px-4 py-3 text-sm/6 font-semibold`}
+                            className={`-mx-4 rounded-lg ${category.color} px-4 py-3 text-sm/6 font-semibold text-gray-900`}
                           >
                             {category.name}
                           </div>
@@ -473,7 +474,7 @@ async function Careers() {
                             </td>
                           </tr>
                         ))}
-                    </>
+                    </React.Fragment>
                   ))}
                 </tbody>
               </table>
