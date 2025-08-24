@@ -1,0 +1,133 @@
+import { defineType, defineField } from 'sanity'
+
+export const jobListingType = defineType({
+  name: 'jobListing',
+  title: 'Job Listing',
+  type: 'document',
+  fields: [
+    defineField({
+      name: 'title',
+      title: 'Job Title',
+      type: 'string',
+      validation: (Rule) => Rule.required(),
+    }),
+    defineField({
+      name: 'slug',
+      title: 'URL Slug',
+      type: 'slug',
+      options: {
+        source: 'title',
+        maxLength: 96,
+      },
+      validation: (Rule) => Rule.required(),
+    }),
+    defineField({
+      name: 'category',
+      title: 'Job Category',
+      type: 'reference',
+      to: [{ type: 'jobCategory' }],
+      validation: (Rule) => Rule.required(),
+    }),
+    defineField({
+      name: 'location',
+      title: 'Location',
+      type: 'string',
+      description: 'e.g., Zürich/Remote, Basel, Geneva',
+      validation: (Rule) => Rule.required(),
+    }),
+    defineField({
+      name: 'employmentType',
+      title: 'Employment Type',
+      type: 'string',
+      options: {
+        list: [
+          { title: 'Full-time', value: 'full-time' },
+          { title: 'Part-time', value: 'part-time' },
+          { title: 'Contract', value: 'contract' },
+          { title: 'Internship', value: 'internship' },
+          { title: 'Freelance', value: 'freelance' },
+        ],
+      },
+      validation: (Rule) => Rule.required(),
+    }),
+    defineField({
+      name: 'salary',
+      title: 'Salary Range',
+      type: 'string',
+      description: 'e.g., CHF 80,000 - 120,000, Competitive, Negotiable',
+    }),
+    defineField({
+      name: 'shortDescription',
+      title: 'Short Description',
+      type: 'text',
+      rows: 3,
+      description: 'Brief summary for job listings table',
+      validation: (Rule) => Rule.required(),
+    }),
+    defineField({
+      name: 'requirements',
+      title: 'Requirements',
+      type: 'array',
+      of: [{ type: 'string' }],
+      description: 'List of job requirements',
+      validation: (Rule) => Rule.required().min(1),
+    }),
+    defineField({
+      name: 'responsibilities',
+      title: 'Responsibilities',
+      type: 'array',
+      of: [{ type: 'string' }],
+      description: 'List of job responsibilities',
+      validation: (Rule) => Rule.required().min(1),
+    }),
+    defineField({
+      name: 'benefits',
+      title: 'Benefits',
+      type: 'array',
+      of: [{ type: 'string' }],
+      description: 'List of benefits offered',
+    }),
+    defineField({
+      name: 'aboutCompany',
+      title: 'About the Company',
+      type: 'text',
+      rows: 4,
+      description: 'Information about Maxsoft AG and the team',
+    }),
+    defineField({
+      name: 'howToApply',
+      title: 'How to Apply',
+      type: 'text',
+      rows: 3,
+      description: 'Instructions for applying to this position',
+    }),
+    defineField({
+      name: 'order',
+      title: 'Display Order',
+      type: 'number',
+      description: 'Order within the category (lower numbers appear first)',
+      validation: (Rule) => Rule.positive().integer(),
+    }),
+    defineField({
+      name: 'isActive',
+      title: 'Active',
+      type: 'boolean',
+      description: 'Whether this job listing should be displayed',
+      initialValue: true,
+    }),
+    defineField({
+      name: 'isFeatured',
+      title: 'Featured Job',
+      type: 'boolean',
+      description: 'Whether this job should be highlighted',
+      initialValue: false,
+    }),
+  ],
+  preview: {
+    select: {
+      title: 'title',
+      subtitle: 'location',
+      media: 'category',
+    },
+  },
+})

@@ -1,0 +1,208 @@
+import { Button } from '@/components/button'
+import { Container } from '@/components/container'
+import { Footer } from '@/components/footer'
+import { GradientBackground } from '@/components/gradient'
+import { NavbarServer } from '@/components/navbar-server'
+import { Heading, Lead, Subheading } from '@/components/text'
+import { getServiceCategories, getServicesByCategory } from '@/sanity/queries'
+import type { ServiceExpanded } from '@/sanity/types/service'
+import type { ServiceCategory } from '@/sanity/types/serviceCategory'
+import type { Metadata } from 'next'
+import Link from 'next/link'
+import { notFound } from 'next/navigation'
+
+interface CategoryPageProps {
+  params: Promise<{ slug: string }>
+}
+
+export async function generateMetadata({
+  params,
+}: CategoryPageProps): Promise<Metadata> {
+  const { slug } = await params
+  const categories = await getServiceCategories()
+  const category = categories.data?.find(
+    (cat: ServiceCategory) => cat.slug.current === slug,
+  )
+
+  if (!category) {
+    return {
+      title: 'Category Not Found - Maxsoft AG',
+    }
+  }
+
+  return {
+    title: `${category.name} Services - Maxsoft AG`,
+    description:
+      category.description ||
+      `Explore our ${category.name.toLowerCase()} services designed to transform your business.`,
+  }
+}
+
+export default async function ServiceCategoryPage({
+  params,
+}: CategoryPageProps) {
+  const { slug } = await params
+  const categories = await getServiceCategories()
+  const category = categories.data?.find(
+    (cat: ServiceCategory) => cat.slug.current === slug,
+  )
+
+  if (!category) {
+    notFound()
+  }
+
+  const services = await getServicesByCategory(slug)
+
+  return (
+    <main className="overflow-hidden">
+      <GradientBackground />
+      <Container>
+        <NavbarServer />
+      </Container>
+
+      <Container className="mt-16">
+        {/* Breadcrumb */}
+        <nav className="mb-8 flex items-center space-x-2 text-sm text-gray-500">
+          <Link href="/services" className="hover:text-gray-700">
+            Services
+          </Link>
+          <span>/</span>
+          <span className="text-gray-900">{category.name}</span>
+        </nav>
+
+        {/* Category Header */}
+        <div className="mb-6 flex items-center gap-4">
+          <div
+            className={`inline-flex h-16 w-16 items-center justify-center rounded-xl ${category.color}`}
+          >
+            <span className="text-2xl font-semibold">
+              {category.icon || category.name.charAt(0)}
+            </span>
+          </div>
+          <div>
+            <Heading as="h1">{category.name}</Heading>
+            {category.description && (
+              <Lead className="mt-4">{category.description}</Lead>
+            )}
+          </div>
+        </div>
+      </Container>
+
+      {/* Services Grid */}
+      <Container className="mt-16">
+        {services.data && services.data.length > 0 ? (
+          <>
+            <Subheading>Available Services</Subheading>
+            <div className="mt-8 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+              {services.data.map((service: ServiceExpanded) => (
+                <Link
+                  key={service._id}
+                  href={`/services/${service.slug.current}`}
+                  className="group block rounded-xl border border-gray-200 bg-white p-6 shadow-sm transition-all duration-200 hover:border-gray-300 hover:shadow-md"
+                >
+                  <div className="mb-4 flex items-center justify-between">
+                    <h3 className="text-lg font-semibold text-gray-900 transition-colors group-hover:text-gray-700">
+                      {service.title}
+                    </h3>
+                    {service.isFeatured && (
+                      <span className="inline-flex items-center rounded-full bg-blue-100 px-2 py-1 text-xs font-medium text-blue-800">
+                        Featured
+                      </span>
+                    )}
+                  </div>
+
+                  <p className="mb-4 line-clamp-3 text-sm text-gray-600">
+                    {service.shortDescription}
+                  </p>
+
+                  <div className="mb-4 flex flex-wrap gap-2">
+                    {service.duration && (
+                      <span className="inline-flex items-center rounded-full bg-gray-100 px-2 py-1 text-xs text-gray-800">
+                        ⏱️ {service.duration}
+                      </span>
+                    )}
+                    {service.deliveryMethod && (
+                      <span className="inline-flex items-center rounded-full bg-green-100 px-2 py-1 text-xs text-green-800">
+                        📍 {service.deliveryMethod}
+                      </span>
+                    )}
+                    {service.pricing && (
+                      <span className="inline-flex items-center rounded-full bg-yellow-100 px-2 py-1 text-xs text-yellow-800">
+                        💰 {service.pricing}
+                      </span>
+                    )}
+                  </div>
+
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center text-sm font-medium text-blue-600">
+                      Learn more
+                      <svg
+                        className="ml-1 h-4 w-4"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M9 5l7 7-7 7"
+                        />
+                      </svg>
+                    </div>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </>
+        ) : (
+          <div className="py-16 text-center">
+            <div className="mx-auto max-w-md">
+              <div
+                className={`inline-flex h-16 w-16 items-center justify-center rounded-xl ${category.color} mb-6`}
+              >
+                <span className="text-2xl font-semibold">
+                  {category.icon || category.name.charAt(0)}
+                </span>
+              </div>
+              <h2 className="mb-4 text-2xl font-semibold text-gray-900">
+                No Services Available
+              </h2>
+              <p className="mb-8 leading-relaxed text-gray-600">
+                We&apos;re currently developing services in this category. Check
+                back soon or contact us for custom solutions.
+              </p>
+              <div className="flex flex-col gap-3 sm:flex-row sm:justify-center">
+                <Button href="/contact">Contact Us</Button>
+                <Button href="/services" variant="outline">
+                  Browse All Services
+                </Button>
+              </div>
+            </div>
+          </div>
+        )}
+      </Container>
+
+      {/* Call to Action */}
+      <Container className="mt-24">
+        <div className="rounded-2xl bg-gray-50 px-6 py-16 text-center">
+          <h2 className="mb-4 text-2xl font-semibold text-gray-900">
+            Ready to Get Started?
+          </h2>
+          <p className="mx-auto mb-8 max-w-2xl text-gray-600">
+            Contact us today to discuss how our {category.name.toLowerCase()}{' '}
+            services can help transform your business and achieve your goals.
+          </p>
+          <div className="flex flex-col gap-3 sm:flex-row sm:justify-center">
+            <Button href="/contact">Get in Touch</Button>
+            <Button href="/services" variant="outline">
+              Explore More Services
+            </Button>
+          </div>
+        </div>
+      </Container>
+
+      <Footer />
+    </main>
+  )
+}
