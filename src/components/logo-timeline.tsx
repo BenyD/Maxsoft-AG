@@ -29,7 +29,14 @@ function Logo({
         '[--move-x-from:-100%] [--move-x-to:calc(100%+100cqw)] [animation-iteration-count:infinite] [animation-name:move-x] [animation-play-state:paused] [animation-timing-function:linear] group-hover:[animation-play-state:running]',
       )}
     >
-      <img alt="" src={src} className="size-4" />
+      <img 
+        alt="" 
+        src={src} 
+        className="size-4 object-contain" 
+        style={{
+          imageRendering: 'crisp-edges',
+        }}
+      />
       <span className="text-sm/6 font-medium text-white">{label}</span>
     </div>
   )
@@ -40,7 +47,7 @@ export function LogoTimeline() {
     <div aria-hidden="true" className="relative h-full overflow-hidden">
       <div className="absolute inset-0 top-8 z-10 flex items-center justify-center">
         <div
-          className="absolute inset-0 backdrop-blur-md"
+          className="absolute inset-0"
           style={{
             maskImage: `url('data:image/svg+xml,<svg width="96" height="96" viewBox="0 0 96 96" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="96" height="96" rx="12" fill="black"/></svg>')`,
             maskPosition: 'center',

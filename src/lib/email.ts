@@ -30,7 +30,7 @@ export const sendEmail = async (emailData: EmailData) => {
 export const sendApplicationConfirmation = async (
   candidateEmail: string,
   candidateName: string,
-  jobTitle: string
+  jobTitle: string,
 ) => {
   const html = `
     <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
@@ -55,7 +55,11 @@ export const sendApplicationConfirmation = async (
 export const sendApplicationNotification = async (
   jobTitle: string,
   candidateName: string,
-  candidateEmail: string
+  candidateEmail: string,
+  candidatePhone?: string,
+  candidateLinkedin?: string,
+  candidateGithub?: string,
+  candidateLocation?: string,
 ) => {
   const html = `
     <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
@@ -67,6 +71,10 @@ export const sendApplicationNotification = async (
         <li><strong>Name:</strong> ${candidateName}</li>
         <li><strong>Email:</strong> ${candidateEmail}</li>
         <li><strong>Position:</strong> ${jobTitle}</li>
+        ${candidatePhone ? `<li><strong>Phone:</strong> ${candidatePhone}</li>` : ''}
+        ${candidateLocation ? `<li><strong>Location:</strong> ${candidateLocation}</li>` : ''}
+        ${candidateLinkedin ? `<li><strong>LinkedIn:</strong> <a href="${candidateLinkedin}">${candidateLinkedin}</a></li>` : ''}
+        ${candidateGithub ? `<li><strong>GitHub:</strong> <a href="${candidateGithub}">${candidateGithub}</a></li>` : ''}
       </ul>
       <br>
       <p>Please review the application in your admin dashboard.</p>
@@ -75,7 +83,7 @@ export const sendApplicationNotification = async (
 
   // Send to admin email (you can configure this)
   const adminEmail = process.env.ADMIN_EMAIL || 'info@maxsoft.ch'
-  
+
   return sendEmail({
     to: adminEmail,
     subject: `New Application: ${jobTitle} - ${candidateName}`,

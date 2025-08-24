@@ -18,6 +18,7 @@ CREATE TABLE IF NOT EXISTS public.job_applications (
     candidate_email TEXT NOT NULL,
     candidate_phone TEXT,
     candidate_linkedin TEXT,
+    candidate_github TEXT,
     candidate_location TEXT,
     
     -- Application Content
@@ -51,6 +52,9 @@ CREATE TABLE IF NOT EXISTS public.job_applications (
     gdpr_consent BOOLEAN NOT NULL DEFAULT false,
     tags TEXT[] DEFAULT '{}'
 );
+
+-- Add candidate_github field to existing tables (if they don't have it)
+ALTER TABLE public.job_applications ADD COLUMN IF NOT EXISTS candidate_github TEXT;
 
 -- Create indexes for better performance
 CREATE INDEX IF NOT EXISTS idx_job_applications_job_listing_id ON public.job_applications(job_listing_id);

@@ -1,5 +1,6 @@
 'use client'
 
+import type { Post } from '@/sanity/types'
 import type { ServiceCategory } from '@/sanity/types/serviceCategory'
 import {
   Disclosure,
@@ -12,10 +13,10 @@ import {
 } from '@headlessui/react'
 import { Bars2Icon, ChevronDownIcon } from '@heroicons/react/24/solid'
 import { motion } from 'framer-motion'
+import React from 'react'
 import { Link } from './link'
 import { Logo } from './logo'
 import { PlusGrid, PlusGridItem, PlusGridRow } from './plus-grid'
-import React from 'react'
 
 const links = [
   { href: '/company', label: 'About Us' },
@@ -219,9 +220,11 @@ function MobileNav({
 export function Navbar({
   banner,
   serviceCategories = [],
+  mostRecentPost,
 }: {
   banner?: React.ReactNode
   serviceCategories?: ServiceCategory[]
+  mostRecentPost?: Post
 }) {
   return (
     <Disclosure as="header" className="pt-12 sm:pt-16">
@@ -229,9 +232,41 @@ export function Navbar({
         <PlusGridRow className="relative flex items-center justify-between">
           <div className="relative flex items-center gap-6">
             <PlusGridItem className="-mt-2 px-3 py-3">
-              <Link href="/" title="Home" className="flex items-center">
-                <Logo className="h-7 w-auto" />
-              </Link>
+              <Menu as="div" className="relative">
+                <MenuButton className="group flex items-center">
+                  <Link href="/" title="Home" className="flex items-center">
+                    <Logo className="h-7 w-auto transition-transform group-hover:scale-105" />
+                  </Link>
+                </MenuButton>
+                {mostRecentPost && (
+                  <MenuItems className="absolute left-0 z-50 mt-2 w-80 origin-top-left rounded-lg border border-gray-100 bg-white shadow-lg ring-1 ring-black/5 focus:outline-none">
+                    <div className="p-4">
+                      <div className="mb-3">
+                        <h3 className="text-sm font-medium text-gray-900">
+                          Latest Blog Post
+                        </h3>
+                        <p className="mt-1 text-xs text-gray-500">
+                          {new Date(
+                            mostRecentPost.publishedAt || '',
+                          ).toLocaleDateString('en-US', {
+                            year: 'numeric',
+                            month: 'long',
+                            day: 'numeric',
+                          })}
+                        </p>
+                      </div>
+                      <MenuItem>
+                        <Link
+                          href={`/blog/${mostRecentPost.slug?.current}`}
+                          className="block rounded-md px-3 py-2 text-sm font-medium text-gray-900 transition-colors hover:bg-gray-50 hover:text-blue-600"
+                        >
+                          {mostRecentPost.title}
+                        </Link>
+                      </MenuItem>
+                    </div>
+                  </MenuItems>
+                )}
+              </Menu>
             </PlusGridItem>
             {banner && (
               <div className="relative hidden items-center py-1 lg:flex">

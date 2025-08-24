@@ -1,16 +1,18 @@
-import { CalendarIcon } from '@heroicons/react/24/outline'
-import Link from 'next/link'
+import { formatDistanceToNow } from 'date-fns'
+import { StatusBadge } from './status-badge'
 
 interface Application {
   id: string
   candidate_name: string
   candidate_email: string
   status: string
+  priority?: string
+  rating?: number
   created_at: string
-  job_listings?: {
-    title: string
-    category: string
-  }
+  job_listing_id: string
+  experience_years?: number
+  current_position?: string
+  skills?: string[]
 }
 
 interface RecentApplicationsProps {
@@ -18,97 +20,83 @@ interface RecentApplicationsProps {
 }
 
 export function RecentApplications({ applications }: RecentApplicationsProps) {
-  const getStatusColor = (status: string) => {
-    switch (status) {
-      case 'pending':
-        return 'bg-yellow-100 text-yellow-800'
-      case 'reviewed':
-        return 'bg-blue-100 text-blue-800'
-      case 'shortlisted':
-        return 'bg-green-100 text-green-800'
-      case 'rejected':
-        return 'bg-red-100 text-red-800'
-      default:
-        return 'bg-gray-100 text-gray-800'
-    }
-  }
-
-  const formatDate = (dateString: string) => {
-    return new Date(dateString).toLocaleDateString('en-US', {
-      month: 'short',
-      day: 'numeric',
-      year: 'numeric',
-    })
-  }
-
-  if (applications.length === 0) {
+  if (!applications || applications.length === 0) {
     return (
-      <div className="rounded-lg bg-white p-6 shadow">
-        <h3 className="mb-4 text-lg font-medium text-gray-900">
-          Recent Applications
-        </h3>
-        <p className="py-8 text-center text-gray-500">No applications yet</p>
+      <div className="text-center py-12">
+        <div className="mx-auto w-24 h-24 bg-gray-100 rounded-full flex items-center justify-center mb-4">
+          <svg className="w-12 h-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+          </svg>
+        </div>
+        <h3 className="text-lg font-medium text-gray-900 mb-2">No applications yet</h3>
+        <p className="text-gray-500">When candidates apply for positions, they&apos;ll appear here.</p>
       </div>
     )
   }
 
   return (
-    <div className="rounded-lg bg-white shadow">
-      <div className="border-b border-gray-200 px-6 py-4">
-        <h3 className="text-lg font-medium text-gray-900">
-          Recent Applications
-        </h3>
-      </div>
-      <div className="divide-y divide-gray-200">
-        {applications.map((application) => (
-          <div key={application.id} className="px-6 py-4 hover:bg-gray-50">
-            <div className="flex items-center justify-between">
-              <div className="flex-1">
-                <div className="flex items-center space-x-3">
-                  <h4 className="text-sm font-medium text-gray-900">
-                    {application.candidate_name}
-                  </h4>
-                  <span
-                    className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium ${getStatusColor(
-                      application.status,
-                    )}`}
-                  >
-                    {application.status}
-                  </span>
-                </div>
-                <p className="text-sm text-gray-500">
-                  {application.candidate_email}
+    <div className="space-y-4">
+      {applications.map((application) => (
+        <div
+          key={application.id}
+          className="flex items-center justify-between p-4 bg-gray-50 rounded-xl hover:bg-gray-100 transition-colors duration-200 group"
+        >
+          <div className="flex items-center space-x-4">
+            {/* Avatar */}
+            <div className="flex-shrink-0">
+              <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center text-white font-semibold text-sm">
+                {application.candidate_name?.charAt(0)?.toUpperCase() || 'A'}
+              </div>
+            </div>
+            
+            {/* Application Info */}
+            <div className="flex-1 min-w-0">
+              <div className="flex items-center space-x-2 mb-1">
+                <p className="text-sm font-medium text-gray-900 truncate">
+                  {application.candidate_name}
                 </p>
-                {application.job_listings && (
-                  <p className="mt-1 text-sm text-gray-600">
-                    Applied for: {application.job_listings.title}
-                  </p>
+                <StatusBadge status={application.status} />
+              </div>
+              <div className="flex items-center space-x-4 text-xs text-gray-500">
+                <span className="flex items-center">
+                  <svg className="w-3 h-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2-2v2m8 0V6a2 2 0 012 2v6a2 2 0 01-2 2H8a2 2 0 01-2-2V8a2 2 0 012-2V6" />
+                  </svg>
+                  {application.job_listing_id || 'Unknown Position'}
+                </span>
+                <span className="flex items-center">
+                  <svg className="w-3 h-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                  </svg>
+                  {formatDistanceToNow(new Date(application.created_at), { addSuffix: true })}
+                </span>
+                {application.priority && (
+                  <span className={`px-2 py-1 rounded-full text-xs font-medium ${
+                    application.priority === 'high' ? 'bg-red-100 text-red-800' :
+                    application.priority === 'medium' ? 'bg-yellow-100 text-yellow-800' :
+                    'bg-green-100 text-green-800'
+                  }`}>
+                    {application.priority.charAt(0).toUpperCase() + application.priority.slice(1)} Priority
+                  </span>
                 )}
               </div>
-              <div className="flex items-center space-x-2 text-sm text-gray-500">
-                <CalendarIcon className="h-4 w-4" />
-                <span>{formatDate(application.created_at)}</span>
-              </div>
-            </div>
-            <div className="mt-3 flex justify-end">
-              <Link
-                href={`/admin/applications/${application.id}`}
-                className="text-sm font-medium text-blue-600 hover:text-blue-500"
-              >
-                View Details →
-              </Link>
             </div>
           </div>
-        ))}
-      </div>
-      <div className="border-t border-gray-200 px-6 py-4">
-        <Link
-          href="/admin/applications"
-          className="text-sm font-medium text-blue-600 hover:text-blue-500"
-        >
-          View All Applications →
-        </Link>
-      </div>
+          
+          {/* Action Button */}
+          <div className="flex-shrink-0 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+            <a
+              href={`/admin/applications/${application.id}`}
+              className="inline-flex items-center px-3 py-2 border border-gray-300 shadow-sm text-xs font-medium rounded-lg text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors duration-200"
+            >
+              View Details
+              <svg className="ml-1 w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+              </svg>
+            </a>
+          </div>
+        </div>
+      ))}
     </div>
   )
 }

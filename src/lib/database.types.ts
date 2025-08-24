@@ -11,6 +11,7 @@ export interface Database {
           candidate_email: string
           candidate_phone: string | null
           candidate_linkedin: string | null
+          candidate_github: string | null
           candidate_location: string | null
           cover_letter: string | null
           resume_url: string
@@ -64,6 +65,7 @@ export interface Database {
           candidate_email: string
           candidate_phone?: string | null
           candidate_linkedin?: string | null
+          candidate_github?: string | null
           candidate_location?: string | null
           cover_letter?: string | null
           resume_url: string
@@ -117,6 +119,7 @@ export interface Database {
           candidate_email?: string
           candidate_phone?: string | null
           candidate_linkedin?: string | null
+          candidate_github?: string | null
           candidate_location?: string | null
           cover_letter?: string | null
           resume_url?: string

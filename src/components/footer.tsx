@@ -76,13 +76,9 @@ function Sitemap() {
           <SitemapLink href="/terms">Terms of Service</SitemapLink>
           <SitemapLink href="/cookies">Cookie Policy</SitemapLink>
           <SitemapLink href="/impressum">Legal Notice</SitemapLink>
-          <a
-            href="/downloads/maxsoft-agb.pdf"
-            download
-            className="block text-sm/6 text-gray-600 data-hover:text-gray-950 data-hover:underline"
-          >
-            📄 Download AGB
-          </a>
+          <SitemapLink href="/downloads/maxsoft-agb.pdf" download>
+            Download AGB
+          </SitemapLink>
         </SitemapLinks>
       </div>
     </>
@@ -130,7 +126,7 @@ function SocialLinks() {
 function Copyright() {
   return (
     <div className="text-sm/6 text-gray-950">
-      &copy; {new Date().getFullYear()} Maxsoft AG.
+      &copy; {new Date().getFullYear()} Maxsoft AG. All rights reserved.
     </div>
   )
 }

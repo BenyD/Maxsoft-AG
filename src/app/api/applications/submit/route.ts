@@ -17,6 +17,7 @@ export async function POST(request: NextRequest) {
     const candidateEmail = formData.get('candidateEmail') as string
     const candidatePhone = formData.get('candidatePhone') as string
     const candidateLinkedin = formData.get('candidateLinkedin') as string
+    const candidateGithub = formData.get('candidateGithub') as string
     const candidateLocation = formData.get('candidateLocation') as string
     const coverLetter = formData.get('coverLetter') as string
     const resume = formData.get('resume') as File
@@ -113,6 +114,7 @@ export async function POST(request: NextRequest) {
       candidate_email: candidateEmail,
       candidate_phone: candidatePhone || null,
       candidate_linkedin: candidateLinkedin || null,
+      candidate_github: candidateGithub || null,
       candidate_location: candidateLocation || null,
       cover_letter: coverLetter || null,
       resume_url: resumeUrl,
@@ -158,7 +160,15 @@ export async function POST(request: NextRequest) {
 
     // Send notification email to admin
     try {
-      await sendApplicationNotification(jobTitle, candidateName, candidateEmail)
+      await sendApplicationNotification(
+        jobTitle, 
+        candidateName, 
+        candidateEmail,
+        candidatePhone || undefined,
+        candidateLinkedin || undefined,
+        candidateGithub || undefined,
+        candidateLocation || undefined
+      )
     } catch (emailError) {
       console.error('Notification email failed:', emailError)
       // Don't fail the application if email fails

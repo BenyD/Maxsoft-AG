@@ -16,13 +16,19 @@ export function CookieBanner() {
 
   useEffect(() => {
     // Check if user has already given consent
-    const hasConsent = localStorage.getItem('cookieConsent')
-    if (!hasConsent) {
-      // Show banner after a short delay for better UX
-      const timer = setTimeout(() => {
-        setShowBanner(true)
-      }, 1000)
-      return () => clearTimeout(timer)
+    try {
+      const hasConsent = localStorage.getItem('cookieConsent')
+      if (!hasConsent) {
+        // Show banner after a short delay for better UX
+        const timer = setTimeout(() => {
+          setShowBanner(true)
+        }, 1000)
+        return () => clearTimeout(timer)
+      }
+    } catch (error) {
+      console.error('Error accessing localStorage:', error)
+      // If localStorage is not available, show banner anyway
+      setShowBanner(true)
     }
   }, [])
 
@@ -34,17 +40,25 @@ export function CookieBanner() {
       functional: true,
     }
 
-    localStorage.setItem('cookiePreferences', JSON.stringify(allAccepted))
-    localStorage.setItem('cookieConsent', 'true')
+    try {
+      localStorage.setItem('cookiePreferences', JSON.stringify(allAccepted))
+      localStorage.setItem('cookieConsent', 'true')
 
-    // Dispatch event to notify other components
-    window.dispatchEvent(
-      new CustomEvent('cookiePreferencesUpdated', {
-        detail: allAccepted,
-      }),
-    )
+      console.log('✅ All cookies accepted and saved:', allAccepted)
 
-    setShowBanner(false)
+      // Dispatch event to notify other components
+      window.dispatchEvent(
+        new CustomEvent('cookiePreferencesUpdated', {
+          detail: allAccepted,
+        }),
+      )
+
+      setShowBanner(false)
+    } catch (error) {
+      console.error('❌ Error saving cookie preferences:', error)
+      // Still hide banner even if localStorage fails
+      setShowBanner(false)
+    }
   }
 
   const rejectAll = () => {
@@ -55,16 +69,24 @@ export function CookieBanner() {
       functional: false,
     }
 
-    localStorage.setItem('cookiePreferences', JSON.stringify(onlyNecessary))
-    localStorage.setItem('cookieConsent', 'true')
+    try {
+      localStorage.setItem('cookiePreferences', JSON.stringify(onlyNecessary))
+      localStorage.setItem('cookieConsent', 'true')
 
-    window.dispatchEvent(
-      new CustomEvent('cookiePreferencesUpdated', {
-        detail: onlyNecessary,
-      }),
-    )
+      console.log('✅ Only necessary cookies accepted:', onlyNecessary)
 
-    setShowBanner(false)
+      window.dispatchEvent(
+        new CustomEvent('cookiePreferencesUpdated', {
+          detail: onlyNecessary,
+        }),
+      )
+
+      setShowBanner(false)
+    } catch (error) {
+      console.error('❌ Error saving cookie preferences:', error)
+      // Still hide banner even if localStorage fails
+      setShowBanner(false)
+    }
   }
 
   const openCookieSettings = () => {
@@ -74,14 +96,11 @@ export function CookieBanner() {
   if (!showBanner) return null
 
   return (
-                <>
-        {/* Backdrop */}
-        <div className="fixed inset-0 z-40 bg-gray-900/20 backdrop-blur-sm transition-opacity duration-300" />
-
-        {/* Banner */}
-        <div className="fixed right-0 bottom-0 left-0 z-50 p-4 sm:p-6">
-          <div className="mx-auto max-w-4xl">
-            <div className="rounded-2xl border border-gray-200 bg-white/95 backdrop-blur-md p-6 shadow-xl transition-all duration-300 ease-out sm:p-8">
+    <>
+      {/* Banner */}
+      <div className="fixed right-0 bottom-0 left-0 z-50 p-4 sm:p-6">
+        <div className="mx-auto max-w-4xl">
+          <div className="rounded-2xl border border-gray-200 bg-white/95 p-6 shadow-xl backdrop-blur-md transition-all duration-300 ease-out sm:p-8">
             <div className="flex items-start gap-4">
               {/* Cookie Icon */}
               <div className="flex-shrink-0">

@@ -10,27 +10,20 @@ import {
 import {
   ArrowRightOnRectangleIcon,
   Bars3Icon,
-  ChartPieIcon,
-  Cog6ToothIcon,
   DocumentDuplicateIcon,
   HomeIcon,
-  UsersIcon,
   XMarkIcon,
 } from '@heroicons/react/24/outline'
 import { usePathname, useRouter } from 'next/navigation'
 import { useState } from 'react'
 
 const navigation = [
-  { name: 'Dashboard', href: '/admin', icon: HomeIcon },
+  { name: 'Dashboard', href: '/admin/dashboard', icon: HomeIcon },
   {
     name: 'Applications',
     href: '/admin/applications',
     icon: DocumentDuplicateIcon,
   },
-  { name: 'Job Listings', href: '/admin/jobs', icon: DocumentDuplicateIcon },
-  { name: 'Analytics', href: '/admin/analytics', icon: ChartPieIcon },
-  { name: 'Team', href: '/admin/team', icon: UsersIcon },
-  { name: 'Settings', href: '/admin/settings', icon: Cog6ToothIcon },
 ]
 
 function classNames(...classes: string[]) {

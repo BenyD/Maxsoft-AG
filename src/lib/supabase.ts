@@ -8,7 +8,7 @@ export const createClientComponentClient = () => {
   return createBrowserClient(supabaseUrl, supabaseAnonKey)
 }
 
-// Server-side Supabase client (for API routes and server components)
+// Server-side Supabase client (for server components)
 export const createServerComponentClient = () => {
   return createBrowserClient(supabaseUrl, supabaseAnonKey)
 }

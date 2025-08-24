@@ -116,6 +116,21 @@ export async function getPost(slug: string) {
   })
 }
 
+const MOST_RECENT_POST_QUERY = defineQuery(/* groq */ `*[
+  _type == "post"
+  && defined(slug.current)
+]|order(publishedAt desc)[0]{
+  title,
+  "slug": slug.current,
+  publishedAt,
+}`)
+
+export async function getMostRecentPost() {
+  return await sanityFetch({
+    query: MOST_RECENT_POST_QUERY,
+  })
+}
+
 const CATEGORIES_QUERY = defineQuery(/* groq */ `*[
   _type == "category"
   && count(*[_type == "post" && defined(slug.current) && ^._id in categories[]._ref]) > 0

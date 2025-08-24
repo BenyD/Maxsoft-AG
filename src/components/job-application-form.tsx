@@ -10,6 +10,7 @@ interface JobApplicationFormState {
   candidateEmail: string
   candidatePhone: string
   candidateLinkedin: string
+  candidateGithub: string
   candidateLocation: string
   coverLetter: string
   resume: File | null
@@ -43,6 +44,7 @@ export function JobApplicationForm({
     candidateEmail: '',
     candidatePhone: '',
     candidateLinkedin: '',
+    candidateGithub: '',
     candidateLocation: '',
     coverLetter: '',
     resume: null,
@@ -105,6 +107,7 @@ export function JobApplicationForm({
         'candidateLinkedin',
         formData.candidateLinkedin || '',
       )
+      submitFormData.append('candidateGithub', formData.candidateGithub || '')
       submitFormData.append(
         'candidateLocation',
         formData.candidateLocation || '',
@@ -205,7 +208,7 @@ export function JobApplicationForm({
                 <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                   <div>
                     <label className="block text-sm font-medium text-gray-700">
-                      First Name *
+                      Full Name *
                     </label>
                     <input
                       type="text"
@@ -255,6 +258,20 @@ export function JobApplicationForm({
                       value={formData.candidateLinkedin || ''}
                       onChange={(e) =>
                         handleInputChange('candidateLinkedin', e.target.value)
+                      }
+                      className="mt-1 block w-full rounded-lg border border-gray-300 px-3 py-2 shadow-sm focus:border-[#01A2EE] focus:ring-1 focus:ring-[#01A2EE] focus:outline-none"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700">
+                      GitHub Profile
+                    </label>
+                    <input
+                      type="url"
+                      placeholder="https://github.com/yourusername"
+                      value={formData.candidateGithub || ''}
+                      onChange={(e) =>
+                        handleInputChange('candidateGithub', e.target.value)
                       }
                       className="mt-1 block w-full rounded-lg border border-gray-300 px-3 py-2 shadow-sm focus:border-[#01A2EE] focus:ring-1 focus:ring-[#01A2EE] focus:outline-none"
                     />
@@ -416,25 +433,42 @@ export function JobApplicationForm({
                 <div className="space-y-6">
                   {/* Resume Upload */}
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                    <label className="mb-2 block text-sm font-medium text-gray-700">
                       Resume/CV *
                     </label>
-                    <p className="text-sm text-gray-500 mb-3">
+                    <p className="mb-3 text-sm text-gray-500">
                       Upload your resume in PDF, DOC, or DOCX format (max 10MB).
                     </p>
-                    
+
                     {formData.resume ? (
                       <div className="relative rounded-lg border-2 border-dashed border-green-300 bg-green-50 p-4">
                         <div className="flex items-center justify-between">
                           <div className="flex items-center space-x-3">
                             <div className="flex-shrink-0">
-                              <svg className="h-8 w-8 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                              <svg
+                                className="h-8 w-8 text-green-500"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke="currentColor"
+                              >
+                                <path
+                                  strokeLinecap="round"
+                                  strokeLinejoin="round"
+                                  strokeWidth={2}
+                                  d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                                />
                               </svg>
                             </div>
                             <div>
-                              <p className="text-sm font-medium text-green-800">{formData.resume.name}</p>
-                              <p className="text-xs text-green-600">{(formData.resume.size / 1024 / 1024).toFixed(2)} MB</p>
+                              <p className="text-sm font-medium text-green-800">
+                                {formData.resume.name}
+                              </p>
+                              <p className="text-xs text-green-600">
+                                {(formData.resume.size / 1024 / 1024).toFixed(
+                                  2,
+                                )}{' '}
+                                MB
+                              </p>
                             </div>
                           </div>
                           <button
@@ -442,23 +476,49 @@ export function JobApplicationForm({
                             onClick={() => handleFileChange('resume', null)}
                             className="rounded-full p-1 text-green-600 hover:bg-green-100"
                           >
-                            <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                            <svg
+                              className="h-5 w-5"
+                              fill="none"
+                              viewBox="0 0 24 24"
+                              stroke="currentColor"
+                            >
+                              <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth={2}
+                                d="M6 18L18 6M6 6l12 12"
+                              />
                             </svg>
                           </button>
                         </div>
                       </div>
                     ) : (
-                      <div className="relative rounded-lg border-2 border-dashed border-gray-300 bg-gray-50 p-6 text-center hover:border-[#01A2EE] hover:bg-blue-50 transition-colors">
-                        <svg className="mx-auto h-12 w-12 text-gray-400" stroke="currentColor" fill="none" viewBox="0 0 48 48">
-                          <path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" />
+                      <div className="relative rounded-lg border-2 border-dashed border-gray-300 bg-gray-50 p-6 text-center transition-colors hover:border-[#01A2EE] hover:bg-blue-50">
+                        <svg
+                          className="mx-auto h-12 w-12 text-gray-400"
+                          stroke="currentColor"
+                          fill="none"
+                          viewBox="0 0 48 48"
+                        >
+                          <path
+                            d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02"
+                            strokeWidth={2}
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                          />
                         </svg>
                         <div className="mt-4">
-                          <label htmlFor="resume-upload" className="cursor-pointer">
+                          <label
+                            htmlFor="resume-upload"
+                            className="cursor-pointer"
+                          >
                             <span className="text-sm font-medium text-[#01A2EE] hover:text-[#01A2EE]/80">
                               Click to upload
                             </span>
-                            <span className="text-gray-500"> or drag and drop</span>
+                            <span className="text-gray-500">
+                              {' '}
+                              or drag and drop
+                            </span>
                           </label>
                           <input
                             id="resume-upload"
@@ -466,90 +526,141 @@ export function JobApplicationForm({
                             required
                             accept=".pdf,.doc,.docx"
                             onChange={(e) =>
-                              handleFileChange('resume', e.target.files?.[0] || null)
+                              handleFileChange(
+                                'resume',
+                                e.target.files?.[0] || null,
+                              )
                             }
                             className="sr-only"
                           />
                         </div>
-                        <p className="text-xs text-gray-500 mt-2">PDF, DOC, or DOCX up to 10MB</p>
+                        <p className="mt-2 text-xs text-gray-500">
+                          PDF, DOC, or DOCX up to 10MB
+                        </p>
                       </div>
                     )}
                   </div>
 
                   {/* Additional Documents */}
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                    <label className="mb-2 block text-sm font-medium text-gray-700">
                       Additional Documents
                     </label>
-                    <p className="text-sm text-gray-500 mb-3">
-                      Upload additional files like portfolio, certificates, or references (optional, max 10MB each).
+                    <p className="mb-3 text-sm text-gray-500">
+                      Upload additional files like portfolio, certificates, or
+                      references (optional, max 10MB each).
                     </p>
-                    
+
                     <div className="space-y-3">
-                      {formData.additionalDocuments?.map((doc: File | null, index: number) => (
-                        <div key={index} className="flex items-center gap-3">
-                          {doc ? (
-                            <div className="flex-1 relative rounded-lg border-2 border-dashed border-blue-300 bg-blue-50 p-3">
-                              <div className="flex items-center justify-between">
-                                <div className="flex items-center space-x-3">
-                                  <div className="flex-shrink-0">
-                                    <svg className="h-6 w-6 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                      {formData.additionalDocuments?.map(
+                        (doc: File | null, index: number) => (
+                          <div key={index} className="flex items-center gap-3">
+                            {doc ? (
+                              <div className="relative flex-1 rounded-lg border-2 border-dashed border-blue-300 bg-blue-50 p-3">
+                                <div className="flex items-center justify-between">
+                                  <div className="flex items-center space-x-3">
+                                    <div className="flex-shrink-0">
+                                      <svg
+                                        className="h-6 w-6 text-blue-500"
+                                        fill="none"
+                                        viewBox="0 0 24 24"
+                                        stroke="currentColor"
+                                      >
+                                        <path
+                                          strokeLinecap="round"
+                                          strokeLinejoin="round"
+                                          strokeWidth={2}
+                                          d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                                        />
+                                      </svg>
+                                    </div>
+                                    <div>
+                                      <p className="text-sm font-medium text-blue-800">
+                                        {doc.name}
+                                      </p>
+                                      <p className="text-xs text-blue-600">
+                                        {(doc.size / 1024 / 1024).toFixed(2)} MB
+                                      </p>
+                                    </div>
+                                  </div>
+                                  <button
+                                    type="button"
+                                    onClick={() => {
+                                      const newDocs =
+                                        formData.additionalDocuments?.filter(
+                                          (_, i) => i !== index,
+                                        ) || []
+                                      setFormData((prev) => ({
+                                        ...prev,
+                                        additionalDocuments: newDocs,
+                                      }))
+                                    }}
+                                    className="rounded-full p-1 text-blue-600 hover:bg-blue-100"
+                                  >
+                                    <svg
+                                      className="h-4 w-4"
+                                      fill="none"
+                                      viewBox="0 0 24 24"
+                                      stroke="currentColor"
+                                    >
+                                      <path
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        strokeWidth={2}
+                                        d="M6 18L18 6M6 6l12 12"
+                                      />
                                     </svg>
-                                  </div>
-                                  <div>
-                                    <p className="text-sm font-medium text-blue-800">{doc.name}</p>
-                                    <p className="text-xs text-blue-600">{(doc.size / 1024 / 1024).toFixed(2)} MB</p>
-                                  </div>
+                                  </button>
                                 </div>
-                                <button
-                                  type="button"
-                                  onClick={() => {
-                                    const newDocs = formData.additionalDocuments?.filter((_, i) => i !== index) || []
-                                    setFormData((prev) => ({
-                                      ...prev,
-                                      additionalDocuments: newDocs,
-                                    }))
-                                  }}
-                                  className="rounded-full p-1 text-blue-600 hover:bg-blue-100"
-                                >
-                                  <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                                  </svg>
-                                </button>
                               </div>
-                            </div>
-                          ) : (
-                            <div className="flex-1 relative rounded-lg border-2 border-dashed border-gray-300 bg-gray-50 p-3 hover:border-[#01A2EE] hover:bg-blue-50 transition-colors">
-                              <div className="flex items-center justify-center">
-                                <label htmlFor={`doc-upload-${index}`} className="cursor-pointer text-center">
-                                  <svg className="mx-auto h-6 w-6 text-gray-400" stroke="currentColor" fill="none" viewBox="0 0 24 24">
-                                    <path d="M12 4v16m8-8H4" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" />
-                                  </svg>
-                                  <span className="text-xs text-[#01A2EE] hover:text-[#01A2EE]/80 block mt-1">
-                                    Click to upload
-                                  </span>
-                                </label>
-                                <input
-                                  id={`doc-upload-${index}`}
-                                  type="file"
-                                  accept=".pdf,.doc,.docx,.jpg,.jpeg,.png"
-                                  onChange={(e) => {
-                                    const newDocs = [...(formData.additionalDocuments || [])]
-                                    newDocs[index] = e.target.files?.[0] || null
-                                    setFormData((prev) => ({
-                                      ...prev,
-                                      additionalDocuments: newDocs,
-                                    }))
-                                  }}
-                                  className="sr-only"
-                                />
+                            ) : (
+                              <div className="relative flex-1 rounded-lg border-2 border-dashed border-gray-300 bg-gray-50 p-3 transition-colors hover:border-[#01A2EE] hover:bg-blue-50">
+                                <div className="flex items-center justify-center">
+                                  <label
+                                    htmlFor={`doc-upload-${index}`}
+                                    className="cursor-pointer text-center"
+                                  >
+                                    <svg
+                                      className="mx-auto h-6 w-6 text-gray-400"
+                                      stroke="currentColor"
+                                      fill="none"
+                                      viewBox="0 0 24 24"
+                                    >
+                                      <path
+                                        d="M12 4v16m8-8H4"
+                                        strokeWidth={2}
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                      />
+                                    </svg>
+                                    <span className="mt-1 block text-xs text-[#01A2EE] hover:text-[#01A2EE]/80">
+                                      Click to upload
+                                    </span>
+                                  </label>
+                                  <input
+                                    id={`doc-upload-${index}`}
+                                    type="file"
+                                    accept=".pdf,.doc,.docx,.jpg,.jpeg,.png"
+                                    onChange={(e) => {
+                                      const newDocs = [
+                                        ...(formData.additionalDocuments || []),
+                                      ]
+                                      newDocs[index] =
+                                        e.target.files?.[0] || null
+                                      setFormData((prev) => ({
+                                        ...prev,
+                                        additionalDocuments: newDocs,
+                                      }))
+                                    }}
+                                    className="sr-only"
+                                  />
+                                </div>
                               </div>
-                            </div>
-                          )}
-                        </div>
-                      ))}
-                      
+                            )}
+                          </div>
+                        ),
+                      )}
+
                       <button
                         type="button"
                         onClick={() => {
@@ -562,10 +673,20 @@ export function JobApplicationForm({
                             additionalDocuments: newDocs,
                           }))
                         }}
-                        className="inline-flex items-center space-x-2 rounded-lg border border-gray-300 bg-white px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:border-[#01A2EE] transition-colors"
+                        className="inline-flex items-center space-x-2 rounded-lg border border-gray-300 bg-white px-4 py-2 text-sm text-gray-700 transition-colors hover:border-[#01A2EE] hover:bg-gray-50"
                       >
-                        <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
+                        <svg
+                          className="h-4 w-4"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M12 4v16m8-8H4"
+                          />
                         </svg>
                         <span>Add Document</span>
                       </button>
