@@ -4,6 +4,7 @@ import { Footer } from '@/components/footer'
 import { GradientBackground } from '@/components/gradient'
 import { NavbarServer } from '@/components/navbar-server'
 import { Heading, Lead, Subheading } from '@/components/text'
+import { Icon } from '@/components/ui/icon'
 import { getServiceCategories, getServicesByCategory } from '@/sanity/queries'
 import type { ServiceExpanded } from '@/sanity/types/service'
 import type { ServiceCategory } from '@/sanity/types/serviceCategory'
@@ -76,9 +77,11 @@ export default async function ServiceCategoryPage({
           <div
             className={`inline-flex h-16 w-16 items-center justify-center rounded-xl ${category.color}`}
           >
-            <span className="text-2xl font-semibold">
-              {category.icon || category.name.charAt(0)}
-            </span>
+            <Icon
+              name={category.icon || ''}
+              className="h-8 w-8"
+              fallback={category.name.charAt(0)}
+            />
           </div>
           <div>
             <Heading as="h1">{category.name}</Heading>
@@ -162,9 +165,11 @@ export default async function ServiceCategoryPage({
               <div
                 className={`inline-flex h-16 w-16 items-center justify-center rounded-xl ${category.color} mb-6`}
               >
-                <span className="text-2xl font-semibold">
-                  {category.icon || category.name.charAt(0)}
-                </span>
+                <Icon
+                  name={category.icon || ''}
+                  className="h-8 w-8"
+                  fallback={category.name.charAt(0)}
+                />
               </div>
               <h2 className="mb-4 text-2xl font-semibold text-gray-900">
                 No Services Available

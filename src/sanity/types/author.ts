@@ -1,4 +1,4 @@
-import { UserIcon } from '@heroicons/react/16/solid'
+import { UserIcon } from '@sanity/icons'
 import { defineField, defineType } from 'sanity'
 
 export const authorType = defineType({

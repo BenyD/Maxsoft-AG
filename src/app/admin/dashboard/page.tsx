@@ -1,6 +1,7 @@
 import { AdminStats } from '@/components/admin/admin-stats'
 import { RecentApplications } from '@/components/admin/recent-applications'
 import { createServerComponentClient } from '@/lib/supabase'
+import Link from 'next/link'
 
 export default async function AdminDashboard() {
   const supabase = createServerComponentClient()
@@ -63,7 +64,7 @@ export default async function AdminDashboard() {
                   Latest job applications that need your attention
                 </p>
               </div>
-              <a
+              <Link
                 href="/admin/applications"
                 className="inline-flex items-center rounded-lg border border-transparent bg-blue-600 px-4 py-2 text-sm font-medium text-white transition-colors duration-200 hover:bg-blue-700 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:outline-none"
               >
@@ -81,7 +82,7 @@ export default async function AdminDashboard() {
                     d="M9 5l7 7-7 7"
                   />
                 </svg>
-              </a>
+              </Link>
             </div>
           </div>
           <div className="p-6">

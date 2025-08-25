@@ -1,11 +1,11 @@
-import { MapPinIcon } from '@heroicons/react/24/outline'
 import { defineField, defineType } from 'sanity'
+import { EnvelopeIcon } from '@sanity/icons'
 
 export const contactType = defineType({
   name: 'contact',
   title: 'Contact Information',
   type: 'document',
-  icon: MapPinIcon,
+  icon: EnvelopeIcon,
   fields: [
     defineField({
       name: 'title',
@@ -97,7 +97,7 @@ export const contactType = defineType({
       return {
         title: `${title}${!isActive ? ' (Inactive)' : ''}`,
         subtitle: contactType,
-        media: MapPinIcon,
+        media: EnvelopeIcon,
       }
     },
   },

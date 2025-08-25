@@ -1,9 +1,11 @@
+import { FolderIcon } from '@sanity/icons'
 import { defineField, defineType } from 'sanity'
 
 export const serviceCategoryType = defineType({
   name: 'serviceCategory',
   title: 'Service Category',
   type: 'document',
+  icon: FolderIcon,
   fields: [
     defineField({
       name: 'name',
@@ -31,7 +33,35 @@ export const serviceCategoryType = defineType({
       name: 'icon',
       title: 'Icon',
       type: 'string',
-      description: 'Heroicon name (e.g., "AcademicCapIcon", "CloudIcon")',
+      options: {
+        list: [
+          { title: 'Computer Desktop', value: 'ComputerDesktopIcon' },
+          { title: 'Cloud', value: 'CloudIcon' },
+          { title: 'Shield Check', value: 'ShieldCheckIcon' },
+          { title: 'Globe Alt', value: 'GlobeAltIcon' },
+          { title: 'Device Phone Mobile', value: 'DevicePhoneMobileIcon' },
+          { title: 'Circle Stack', value: 'CircleStackIcon' },
+          { title: 'Code Bracket', value: 'CodeBracketIcon' },
+          { title: 'Chart Bar', value: 'ChartBarIcon' },
+          { title: 'Cpu Chip', value: 'CpuChipIcon' },
+          { title: 'Arrow Path', value: 'ArrowPathIcon' },
+          { title: 'Light Bulb', value: 'LightBulbIcon' },
+          { title: 'Building Office', value: 'BuildingOfficeIcon' },
+          { title: 'Rocket Launch', value: 'RocketLaunchIcon' },
+          {
+            title: 'Clipboard Document List',
+            value: 'ClipboardDocumentListIcon',
+          },
+          { title: 'Users', value: 'UsersIcon' },
+          { title: 'Device Tablet', value: 'DeviceTabletIcon' },
+          { title: 'Map', value: 'MapIcon' },
+          { title: 'Bolt', value: 'BoltIcon' },
+          { title: 'Document Check', value: 'DocumentCheckIcon' },
+          { title: 'Eye', value: 'EyeIcon' },
+        ],
+      },
+      description: 'Select a Heroicon that represents this service category',
+      initialValue: 'ComputerDesktopIcon',
     }),
     defineField({
       name: 'color',

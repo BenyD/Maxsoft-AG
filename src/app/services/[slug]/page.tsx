@@ -4,14 +4,15 @@ import { Footer } from '@/components/footer'
 import { GradientBackground } from '@/components/gradient'
 import { NavbarServer } from '@/components/navbar-server'
 import { Heading, Lead, Subheading } from '@/components/text'
+import { Icon } from '@/components/ui/icon'
 import { getService, getServicesByCategory } from '@/sanity/queries'
 
 import { image } from '@/sanity/image'
+import type { Service } from '@/sanity/types/service'
 import { PortableText } from '@portabletext/react'
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
-import type { Service } from '@/sanity/types/service'
 
 interface ServicePageProps {
   params: Promise<{ slug: string }>
@@ -48,7 +49,8 @@ export default async function ServicePage({ params }: ServicePageProps) {
     service.data.category.slug.current,
   )
   const otherServices =
-    relatedServices.data?.filter((s: Service) => s._id !== service.data._id) || []
+    relatedServices.data?.filter((s: Service) => s._id !== service.data._id) ||
+    []
 
   return (
     <main className="overflow-hidden">
@@ -81,10 +83,11 @@ export default async function ServicePage({ params }: ServicePageProps) {
               <div
                 className={`inline-flex h-12 w-12 items-center justify-center rounded-lg ${service.data.category.color}`}
               >
-                <span className="text-lg font-semibold">
-                  {service.data.category.icon ||
-                    service.data.category.name.charAt(0)}
-                </span>
+                <Icon
+                  name={service.data.category.icon || ''}
+                  className="h-6 w-6"
+                  fallback={service.data.category.name.charAt(0)}
+                />
               </div>
               <span
                 className={`inline-flex items-center rounded-full px-3 py-1 text-sm font-medium ${service.data.category.color}`}
@@ -181,24 +184,26 @@ export default async function ServicePage({ params }: ServicePageProps) {
               <div>
                 <Subheading>Key Benefits</Subheading>
                 <ul className="mt-6 space-y-3">
-                  {service.data.benefits.map((benefit: string, index: number) => (
-                    <li key={index} className="flex items-start gap-3">
-                      <div className="mt-0.5 flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full bg-green-100">
-                        <svg
-                          className="h-3 w-3 text-green-600"
-                          fill="currentColor"
-                          viewBox="0 0 20 20"
-                        >
-                          <path
-                            fillRule="evenodd"
-                            d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                            clipRule="evenodd"
-                          />
-                        </svg>
-                      </div>
-                      <span className="text-gray-700">{benefit}</span>
-                    </li>
-                  ))}
+                  {service.data.benefits.map(
+                    (benefit: string, index: number) => (
+                      <li key={index} className="flex items-start gap-3">
+                        <div className="mt-0.5 flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full bg-green-100">
+                          <svg
+                            className="h-3 w-3 text-green-600"
+                            fill="currentColor"
+                            viewBox="0 0 20 20"
+                          >
+                            <path
+                              fillRule="evenodd"
+                              d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                              clipRule="evenodd"
+                            />
+                          </svg>
+                        </div>
+                        <span className="text-gray-700">{benefit}</span>
+                      </li>
+                    ),
+                  )}
                 </ul>
               </div>
             )}

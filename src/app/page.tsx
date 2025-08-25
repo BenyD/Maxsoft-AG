@@ -13,7 +13,7 @@ import { NavbarServer } from '@/components/navbar-server'
 import { Screenshot } from '@/components/screenshot'
 import { Testimonials } from '@/components/testimonials'
 import { Heading, Subheading } from '@/components/text'
-import { getTestimonials } from '@/sanity/queries'
+import { getMostRecentPost, getTestimonials } from '@/sanity/queries'
 import { ChevronRightIcon } from '@heroicons/react/16/solid'
 import type { Metadata } from 'next'
 
@@ -22,7 +22,9 @@ export const metadata: Metadata = {
     'Maxsoft AG - Leading IT Consultancy delivering innovative technology solutions for businesses worldwide.',
 }
 
-function Hero() {
+async function Hero() {
+  const mostRecentPost = await getMostRecentPost()
+
   return (
     <div className="relative">
       <div className="absolute inset-0 z-10">
@@ -31,13 +33,15 @@ function Hero() {
       <Container className="relative z-20">
         <NavbarServer
           banner={
-            <Link
-              href="/blog/maxsoft-ag-expands-global-it-consulting-services"
-              className="flex items-center gap-1 rounded-full bg-[#01A2EE]/35 px-3 py-0.5 text-sm/6 font-medium text-white data-hover:bg-[#01A2EE]/30"
-            >
-              Maxsoft AG expands global IT consulting services
-              <ChevronRightIcon className="size-4" />
-            </Link>
+            mostRecentPost?.data ? (
+              <Link
+                href={`/blog/${mostRecentPost.data.slug?.current}`}
+                className="flex items-center gap-1 rounded-full bg-[#01A2EE]/35 px-3 py-0.5 text-sm/6 font-medium text-white data-hover:bg-[#01A2EE]/30"
+              >
+                {mostRecentPost.data.title}
+                <ChevronRightIcon className="size-4" />
+              </Link>
+            ) : undefined
           }
         />
         <div className="pt-16 pb-24 sm:pt-24 sm:pb-32 md:pt-32 md:pb-48">

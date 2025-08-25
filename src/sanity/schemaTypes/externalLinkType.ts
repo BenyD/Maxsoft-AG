@@ -1,11 +1,11 @@
-import { GlobeAltIcon } from '@heroicons/react/24/outline'
 import { defineField, defineType } from 'sanity'
+import { LinkIcon } from '@sanity/icons'
 
 export const externalLinkType = defineType({
   name: 'externalLink',
   title: 'External Link',
   type: 'document',
-  icon: GlobeAltIcon,
+  icon: LinkIcon,
   fields: [
     defineField({
       name: 'title',
@@ -88,7 +88,7 @@ export const externalLinkType = defineType({
       return {
         title: `${title}${!isActive ? ' (Inactive)' : ''}`,
         subtitle: `${linkType} - ${url}`,
-        media: GlobeAltIcon,
+        media: LinkIcon,
       }
     },
   },

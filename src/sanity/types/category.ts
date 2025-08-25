@@ -1,8 +1,9 @@
-import { TagIcon } from '@heroicons/react/16/solid'
 import { defineField, defineType } from 'sanity'
+import { TagIcon } from '@sanity/icons'
 
 export const categoryType = defineType({
   name: 'category',
+  title: 'Category',
   type: 'document',
   icon: TagIcon,
   fields: [

@@ -1,9 +1,11 @@
-import { defineType, defineField } from 'sanity'
+import { UsersIcon } from '@sanity/icons'
+import { defineField, defineType } from 'sanity'
 
 export const teamMemberType = defineType({
   name: 'teamMember',
   title: 'Team Member',
   type: 'document',
+  icon: UsersIcon,
   fields: [
     defineField({
       name: 'name',
@@ -30,7 +32,8 @@ export const teamMemberType = defineType({
       name: 'linkedinUrl',
       title: 'LinkedIn Profile URL',
       type: 'url',
-      description: 'Full LinkedIn profile URL (e.g., https://linkedin.com/in/username)',
+      description:
+        'Full LinkedIn profile URL (e.g., https://linkedin.com/in/username)',
     }),
     defineField({
       name: 'department',
@@ -51,7 +54,8 @@ export const teamMemberType = defineType({
       name: 'order',
       title: 'Display Order',
       type: 'number',
-      description: 'Order in which this team member appears (lower numbers appear first)',
+      description:
+        'Order in which this team member appears (lower numbers appear first)',
       validation: (Rule) => Rule.positive().integer(),
     }),
     defineField({

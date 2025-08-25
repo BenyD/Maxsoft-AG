@@ -4,6 +4,7 @@ import { Footer } from '@/components/footer'
 import { GradientBackground } from '@/components/gradient'
 import { NavbarServer } from '@/components/navbar-server'
 import { Heading, Lead, Subheading } from '@/components/text'
+import { Icon } from '@/components/ui/icon'
 import { getServiceCategories, getServices } from '@/sanity/queries'
 import type { ServiceExpanded } from '@/sanity/types/service'
 import type { ServiceCategory } from '@/sanity/types/serviceCategory'
@@ -35,9 +36,11 @@ function ServiceCategoryCard({
         <div
           className={`inline-flex h-12 w-12 items-center justify-center rounded-lg ${category.color}`}
         >
-          <span className="text-xl font-semibold">
-            {category.icon || category.name.charAt(0)}
-          </span>
+          <Icon
+            name={category.icon || ''}
+            className="h-6 w-6"
+            fallback={category.name.charAt(0)}
+          />
         </div>
         <div>
           <h3 className="text-xl font-semibold text-gray-900 transition-colors group-hover:text-gray-700">
@@ -196,9 +199,11 @@ export default async function ServicesPage() {
                 <div
                   className={`inline-flex h-10 w-10 items-center justify-center rounded-lg ${service.category.color} mb-4`}
                 >
-                  <span className="text-sm font-semibold">
-                    {service.category.icon || service.category.name.charAt(0)}
-                  </span>
+                  <Icon
+                    name={service.category.icon || ''}
+                    className="h-5 w-5"
+                    fallback={service.category.name.charAt(0)}
+                  />
                 </div>
                 <h3 className="mb-2 text-lg font-semibold text-gray-900 transition-colors group-hover:text-gray-700">
                   {service.title}

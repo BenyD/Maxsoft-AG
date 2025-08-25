@@ -1,4 +1,4 @@
-import { DocumentIcon } from '@heroicons/react/16/solid'
+import { DocumentTextIcon } from '@sanity/icons'
 import { groq } from 'next-sanity'
 import { defineField, defineType } from 'sanity'
 import { apiVersion } from '../env'
@@ -7,7 +7,7 @@ export const postType = defineType({
   name: 'post',
   title: 'Post',
   type: 'document',
-  icon: DocumentIcon,
+  icon: DocumentTextIcon,
   fields: [
     defineField({
       name: 'title',

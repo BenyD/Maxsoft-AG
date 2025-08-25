@@ -1,6 +1,7 @@
 import { ApplicationsFilters } from '@/components/admin/applications-filters'
 import { ApplicationsTable } from '@/components/admin/applications-table'
 import { createServerComponentClient } from '@/lib/supabase'
+import Link from 'next/link'
 
 export default async function ApplicationsPage({
   searchParams,
@@ -189,12 +190,12 @@ export default async function ApplicationsPage({
               </ul>
             </div>
             <div className="mt-6">
-              <a
+              <Link
                 href="/admin/applications"
                 className="inline-flex items-center rounded-lg border border-transparent bg-red-600 px-4 py-2 text-sm font-medium text-white transition-colors duration-200 hover:bg-red-700 focus:ring-2 focus:ring-red-500 focus:ring-offset-2 focus:outline-none"
               >
                 Try Again
-              </a>
+              </Link>
             </div>
           </div>
         </div>

@@ -1,9 +1,11 @@
-import { defineType, defineField } from 'sanity'
+import { CogIcon } from '@sanity/icons'
+import { defineField, defineType } from 'sanity'
 
 export const technologyPartnerType = defineType({
   name: 'technologyPartner',
   title: 'Technology Partner',
   type: 'document',
+  icon: CogIcon,
   fields: [
     defineField({
       name: 'companyName',
@@ -54,7 +56,8 @@ export const technologyPartnerType = defineType({
       name: 'order',
       title: 'Display Order',
       type: 'number',
-      description: 'Order in which this partner appears (lower numbers appear first)',
+      description:
+        'Order in which this partner appears (lower numbers appear first)',
       validation: (Rule) => Rule.positive().integer(),
     }),
     defineField({

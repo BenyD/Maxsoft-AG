@@ -17,6 +17,7 @@ import React from 'react'
 import { Link } from './link'
 import { Logo } from './logo'
 import { PlusGrid, PlusGridItem, PlusGridRow } from './plus-grid'
+import { Icon } from './ui/icon'
 
 const links = [
   { href: '/company', label: 'About Us' },
@@ -61,9 +62,11 @@ function ServicesDropdown({
                       <div
                         className={`h-6 w-6 rounded ${category.color} mr-3 flex items-center justify-center`}
                       >
-                        <span className="text-xs font-semibold">
-                          {category.icon || category.name.charAt(0)}
-                        </span>
+                        <Icon
+                          name={category.icon || ''}
+                          className="h-4 w-4"
+                          fallback={category.name.charAt(0)}
+                        />
                       </div>
                       {category.name}
                     </div>
@@ -179,9 +182,11 @@ function MobileNav({
                       <div
                         className={`h-4 w-4 rounded ${category.color} mr-2 flex items-center justify-center`}
                       >
-                        <span className="text-xs font-semibold">
-                          {category.icon || category.name.charAt(0)}
-                        </span>
+                        <Icon
+                          name={category.icon || ''}
+                          className="h-3 w-3"
+                          fallback={category.name.charAt(0)}
+                        />
                       </div>
                       {category.name}
                     </div>

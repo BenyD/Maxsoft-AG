@@ -184,6 +184,7 @@ function Person({
   title,
   photo,
   linkedinUrl,
+  department,
 }: {
   name: string
   title: string
@@ -195,29 +196,55 @@ function Person({
     _type: 'image'
   }
   linkedinUrl?: string
+  department?: string
 }) {
   return (
-    <li className="flex items-center gap-4">
-      <img
-        alt={name}
-        src={image(photo).width(48).height(48).url()}
-        className="size-12 rounded-full object-cover"
-      />
-      <div className="flex-1 text-sm/6">
-        <h3 className="font-medium">{name}</h3>
-        <p className="text-gray-500">{title}</p>
+    <li className="group">
+      <div className="relative overflow-hidden rounded-2xl border border-gray-200 bg-white p-6 shadow-sm transition-all duration-200 hover:border-gray-300 hover:shadow-md">
+        {/* Photo Section */}
+        <div className="mb-6 flex justify-center">
+          <div className="relative">
+            <img
+              alt={name}
+              src={image(photo).width(120).height(120).url()}
+              className="size-24 rounded-full object-cover ring-4 ring-gray-100 transition-all duration-200 group-hover:ring-[#01A2EE]/20"
+            />
+            {department && (
+              <div className="absolute -bottom-2 left-1/2 -translate-x-1/2">
+                <span className="inline-flex items-center rounded-full bg-[#01A2EE]/10 px-3 py-1 text-xs font-medium text-[#01A2EE] ring-1 ring-[#01A2EE]/20 ring-inset">
+                  {department}
+                </span>
+              </div>
+            )}
+          </div>
+        </div>
+
+        {/* Content Section */}
+        <div className="text-center">
+          <h3 className="text-lg font-semibold text-gray-900 transition-colors group-hover:text-[#01A2EE]">
+            {name}
+          </h3>
+          <p className="mt-2 text-base leading-relaxed font-medium text-[#01A2EE]">
+            {title}
+          </p>
+        </div>
+
+        {/* LinkedIn Button */}
+        {linkedinUrl && (
+          <div className="mt-6 flex justify-center">
+            <a
+              href={linkedinUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 rounded-lg bg-gray-50 px-4 py-2 text-sm font-medium text-gray-700 transition-all duration-200 hover:bg-[#01A2EE] hover:text-white hover:shadow-sm"
+              aria-label={`View ${name}'s LinkedIn profile`}
+            >
+              <LinkedInIcon className="size-4" />
+              <span>LinkedIn</span>
+            </a>
+          </div>
+        )}
       </div>
-      {linkedinUrl && (
-        <a
-          href={linkedinUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-gray-400 transition-colors hover:text-[#01A2EE]"
-          aria-label={`View ${name}'s LinkedIn profile`}
-        >
-          <LinkedInIcon className="size-5" />
-        </a>
-      )}
     </li>
   )
 }
@@ -269,24 +296,39 @@ async function Team() {
       </div>
       {teamMembers.data && teamMembers.data.length > 0 && (
         <React.Fragment key="team-section">
-          <Subheading as="h3" className="mt-24">
-            The team
-          </Subheading>
-          <hr className="mt-6 border-t border-gray-200" />
-          <ul
-            role="list"
-            className="mx-auto mt-16 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3"
-          >
-            {teamMembers.data.map((member: TeamMember) => (
-              <Person
-                key={member._id}
-                name={member.name}
-                title={member.title}
-                photo={member.photo}
-                linkedinUrl={member.linkedinUrl}
-              />
-            ))}
-          </ul>
+          <div className="mt-32 text-center">
+            <Subheading as="h3">Meet Our Team</Subheading>
+            <Heading as="h3" className="mx-auto mt-2 max-w-3xl">
+              Experienced professionals dedicated to your success
+            </Heading>
+            <Lead className="mx-auto mt-6 max-w-2xl">
+              Our team of IT experts brings together decades of experience in
+              technology consulting, digital transformation, and enterprise
+              solutions.
+            </Lead>
+          </div>
+
+          {/* Team Members Grid */}
+          <div className="relative mt-16">
+            {/* Background Pattern */}
+            <div className="absolute inset-0 -m-8 rounded-3xl bg-gradient-to-br from-gray-50/50 to-white" />
+
+            <ul
+              role="list"
+              className="relative grid grid-cols-1 gap-6 p-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
+            >
+              {teamMembers.data.map((member: TeamMember) => (
+                <Person
+                  key={member._id}
+                  name={member.name}
+                  title={member.title}
+                  photo={member.photo}
+                  linkedinUrl={member.linkedinUrl}
+                  department={member.department}
+                />
+              ))}
+            </ul>
+          </div>
         </React.Fragment>
       )}
     </Container>

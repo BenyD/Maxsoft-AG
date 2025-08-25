@@ -1,9 +1,11 @@
-import { defineType, defineField } from 'sanity'
+import { HomeIcon } from '@sanity/icons'
+import { defineField, defineType } from 'sanity'
 
 export const industryPartnerType = defineType({
   name: 'industryPartner',
   title: 'Industry Partner',
   type: 'document',
+  icon: HomeIcon,
   fields: [
     defineField({
       name: 'companyName',
@@ -41,7 +43,10 @@ export const industryPartnerType = defineType({
           { title: 'Education', value: 'education' },
           { title: 'Government', value: 'government' },
           { title: 'Energy & Utilities', value: 'energy-utilities' },
-          { title: 'Transportation & Logistics', value: 'transportation-logistics' },
+          {
+            title: 'Transportation & Logistics',
+            value: 'transportation-logistics',
+          },
           { title: 'Media & Entertainment', value: 'media-entertainment' },
         ],
       },
@@ -57,7 +62,8 @@ export const industryPartnerType = defineType({
       name: 'order',
       title: 'Display Order',
       type: 'number',
-      description: 'Order in which this partner appears (lower numbers appear first)',
+      description:
+        'Order in which this partner appears (lower numbers appear first)',
       validation: (Rule) => Rule.positive().integer(),
     }),
     defineField({

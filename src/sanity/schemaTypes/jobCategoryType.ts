@@ -1,9 +1,11 @@
-import { defineType, defineField } from 'sanity'
+import { TagIcon } from '@sanity/icons'
+import { defineField, defineType } from 'sanity'
 
 export const jobCategoryType = defineType({
   name: 'jobCategory',
   title: 'Job Category',
   type: 'document',
+  icon: TagIcon,
   fields: [
     defineField({
       name: 'name',
@@ -38,7 +40,8 @@ export const jobCategoryType = defineType({
       name: 'order',
       title: 'Display Order',
       type: 'number',
-      description: 'Order in which this category appears (lower numbers appear first)',
+      description:
+        'Order in which this category appears (lower numbers appear first)',
       validation: (Rule) => Rule.positive().integer(),
     }),
     defineField({

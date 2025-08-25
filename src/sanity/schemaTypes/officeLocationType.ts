@@ -1,11 +1,11 @@
-import { MapPinIcon } from '@heroicons/react/24/outline'
 import { defineField, defineType } from 'sanity'
+import { PinIcon } from '@sanity/icons'
 
 export const officeLocationType = defineType({
   name: 'officeLocation',
   title: 'Office Location',
   type: 'document',
-  icon: MapPinIcon,
+  icon: PinIcon,
   fields: [
     defineField({
       name: 'title',
@@ -95,7 +95,7 @@ export const officeLocationType = defineType({
       return {
         title: `${title}${!isActive ? ' (Inactive)' : ''}`,
         subtitle: `${city}, ${country}`,
-        media: MapPinIcon,
+        media: PinIcon,
       }
     },
   },
