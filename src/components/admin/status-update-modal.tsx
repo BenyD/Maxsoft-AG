@@ -1,5 +1,6 @@
 'use client'
 
+import { Alert, AlertDescription } from '@/components/ui/alert'
 import { Dialog } from '@headlessui/react'
 import { EnvelopeIcon, StarIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import { useState } from 'react'
@@ -37,17 +38,23 @@ export function StatusUpdateModal({
   const [interviewTime, setInterviewTime] = useState('')
   const [sendEmail, setSendEmail] = useState(true)
   const [isSubmitting, setIsSubmitting] = useState(false)
+  const [error, setError] = useState<string | null>(null)
 
   const statusOptions = [
+    {
+      value: 'new',
+      label: 'New',
+      description: 'Application just received',
+    },
     {
       value: 'pending',
       label: 'Pending Review',
       description: 'Application received, awaiting review',
     },
     {
-      value: 'reviewed',
-      label: 'Reviewed',
-      description: 'Application has been reviewed by the team',
+      value: 'reviewing',
+      label: 'Under Review',
+      description: 'Application is currently being reviewed',
     },
     {
       value: 'shortlisted',
@@ -55,19 +62,19 @@ export function StatusUpdateModal({
       description: 'Candidate has been shortlisted for next round',
     },
     {
-      value: 'interview_scheduled',
-      label: 'Interview Scheduled',
-      description: 'Interview has been scheduled',
+      value: 'interviewing',
+      label: 'Interviewing',
+      description: 'Candidate is in interview process',
     },
     {
-      value: 'interviewed',
-      label: 'Interviewed',
-      description: 'Interview has been completed',
+      value: 'offered',
+      label: 'Offer Made',
+      description: 'Job offer has been made to candidate',
     },
     {
-      value: 'accepted',
-      label: 'Accepted',
-      description: 'Candidate has been accepted for the position',
+      value: 'hired',
+      label: 'Hired',
+      description: 'Candidate has been hired',
     },
     {
       value: 'rejected',
@@ -85,11 +92,13 @@ export function StatusUpdateModal({
     { value: 'low', label: 'Low' },
     { value: 'medium', label: 'Medium' },
     { value: 'high', label: 'High' },
+    { value: 'urgent', label: 'Urgent' },
   ]
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setIsSubmitting(true)
+    setError(null)
 
     try {
       const updateData: {
@@ -124,7 +133,7 @@ export function StatusUpdateModal({
       const response = await fetch(
         `/api/applications/${application.id}/status`,
         {
-          method: 'PATCH',
+          method: 'PUT',
           headers: {
             'Content-Type': 'application/json',
           },
@@ -159,7 +168,7 @@ export function StatusUpdateModal({
       window.location.reload()
     } catch (error) {
       console.error('Error updating application:', error)
-      alert('Failed to update application. Please try again.')
+      setError('Failed to update application. Please try again.')
     } finally {
       setIsSubmitting(false)
     }
@@ -217,6 +226,13 @@ export function StatusUpdateModal({
           </div>
 
           <form onSubmit={handleSubmit} className="px-6 py-4">
+            {/* Error Display */}
+            {error && (
+              <Alert className="mb-6 border-red-200 bg-red-50 text-red-800" onClose={onClose}>
+                <AlertDescription>{error}</AlertDescription>
+              </Alert>
+            )}
+
             {/* Application Info */}
             <div className="mb-6 rounded-lg bg-gray-50 p-4">
               <h3 className="mb-2 text-sm font-medium text-gray-900">
@@ -239,8 +255,13 @@ export function StatusUpdateModal({
                 </div>
                 <div>
                   <span className="text-gray-500">Current Status:</span>
-                  <p className="font-medium capitalize">
-                    {application.status.replace('_', ' ')}
+                  <p className="font-medium">
+                    {application.status
+                      .split('_')
+                      .map(
+                        (word) => word.charAt(0).toUpperCase() + word.slice(1),
+                      )
+                      .join(' ')}
                   </p>
                 </div>
               </div>

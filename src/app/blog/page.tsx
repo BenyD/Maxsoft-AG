@@ -18,7 +18,10 @@ import {
   ChevronLeftIcon,
   ChevronRightIcon,
   ChevronUpDownIcon,
+  DocumentTextIcon,
   RssIcon,
+  StarIcon,
+  TagIcon,
 } from '@heroicons/react/16/solid'
 import { clsx } from 'clsx'
 import dayjs from 'dayjs'
@@ -37,7 +40,27 @@ async function FeaturedPosts() {
   let { data: featuredPosts } = await getFeaturedPosts(3)
 
   if (featuredPosts.length === 0) {
-    return
+    return (
+      <div className="mt-16 bg-linear-to-t from-gray-100 pb-14">
+        <Container>
+          <h2 className="text-2xl font-medium tracking-tight">Featured</h2>
+          <div className="mt-6 text-center">
+            <div className="mx-auto max-w-md">
+              <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-white shadow-sm ring-1 ring-black/5">
+                <StarIcon className="h-8 w-8 text-gray-400" />
+              </div>
+              <h3 className="mt-4 text-lg font-medium text-gray-900">
+                No featured posts yet
+              </h3>
+              <p className="mt-2 text-sm text-gray-500">
+                We&apos;re working on some great featured content. Check back
+                soon for our latest insights and updates.
+              </p>
+            </div>
+          </div>
+        </Container>
+      </div>
+    )
   }
 
   return (
@@ -97,7 +120,18 @@ async function Categories({ selected }: { selected?: string }) {
   let { data: categories } = await getCategories()
 
   if (categories.length === 0) {
-    return
+    return (
+      <div className="flex flex-wrap items-center justify-between gap-2">
+        <div className="flex items-center gap-2 text-sm text-gray-500">
+          <TagIcon className="h-4 w-4 text-gray-400" />
+          No categories available
+        </div>
+        <Button variant="outline" href="/blog/feed.xml" className="gap-1">
+          <RssIcon className="size-4" />
+          RSS Feed
+        </Button>
+      </div>
+    )
   }
 
   return (
@@ -156,7 +190,30 @@ async function Posts({ page, category }: { page: number; category?: string }) {
   }
 
   if (posts.length === 0) {
-    return <p className="mt-6 text-gray-500">No posts found.</p>
+    return (
+      <div className="mt-16 text-center">
+        <div className="mx-auto max-w-md">
+          <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-gray-100">
+            <DocumentTextIcon className="h-8 w-8 text-gray-400" />
+          </div>
+          <h3 className="mt-4 text-lg font-medium text-gray-900">
+            {category ? `No posts in ${category}` : 'No blog posts yet'}
+          </h3>
+          <p className="mt-2 text-sm text-gray-500">
+            {category
+              ? `We haven't published any posts in this category yet. Check back soon for new content.`
+              : "We're working on some great content. Check back soon for our latest insights and updates."}
+          </p>
+          {category && (
+            <div className="mt-6">
+              <Button href="/blog" variant="outline">
+                View all posts
+              </Button>
+            </div>
+          )}
+        </div>
+      </div>
+    )
   }
 
   return (

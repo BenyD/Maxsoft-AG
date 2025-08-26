@@ -14,17 +14,23 @@ interface StatusBadgeProps {
 export function StatusBadge({ status }: StatusBadgeProps) {
   const getStatusConfig = (status: string) => {
     switch (status) {
+      case 'new':
+        return {
+          color: 'bg-blue-100 text-blue-800',
+          icon: ClockIcon,
+          label: 'New'
+        }
       case 'pending':
         return {
           color: 'bg-yellow-100 text-yellow-800',
           icon: ClockIcon,
           label: 'Pending Review'
         }
-      case 'reviewed':
+      case 'reviewing':
         return {
           color: 'bg-blue-100 text-blue-800',
           icon: EyeIcon,
-          label: 'Reviewed'
+          label: 'Under Review'
         }
       case 'shortlisted':
         return {
@@ -32,23 +38,23 @@ export function StatusBadge({ status }: StatusBadgeProps) {
           icon: CheckCircleIcon,
           label: 'Shortlisted'
         }
-      case 'interview_scheduled':
+      case 'interviewing':
         return {
           color: 'bg-purple-100 text-purple-800',
           icon: PhoneIcon,
-          label: 'Interview Scheduled'
+          label: 'Interviewing'
         }
-      case 'interviewed':
-        return {
-          color: 'bg-indigo-100 text-indigo-800',
-          icon: UserGroupIcon,
-          label: 'Interviewed'
-        }
-      case 'accepted':
+      case 'offered':
         return {
           color: 'bg-emerald-100 text-emerald-800',
           icon: CheckCircleIcon,
-          label: 'Accepted'
+          label: 'Offer Made'
+        }
+      case 'hired':
+        return {
+          color: 'bg-emerald-100 text-emerald-800',
+          icon: CheckCircleIcon,
+          label: 'Hired'
         }
       case 'rejected':
         return {
@@ -66,7 +72,7 @@ export function StatusBadge({ status }: StatusBadgeProps) {
         return {
           color: 'bg-gray-100 text-gray-800',
           icon: ClockIcon,
-          label: status || 'Unknown'
+          label: status ? status.charAt(0).toUpperCase() + status.slice(1).replace(/_/g, ' ') : 'Unknown'
         }
     }
   }

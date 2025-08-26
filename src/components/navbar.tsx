@@ -11,13 +11,23 @@ import {
   MenuItem,
   MenuItems,
 } from '@headlessui/react'
-import { Bars2Icon, ChevronDownIcon } from '@heroicons/react/24/solid'
+import {
+  ArrowRightIcon,
+  Bars2Icon,
+  BriefcaseIcon,
+  ChevronDownIcon,
+  CpuChipIcon,
+  DocumentTextIcon,
+  EnvelopeIcon,
+  LightBulbIcon,
+  UserGroupIcon,
+  WrenchScrewdriverIcon,
+} from '@heroicons/react/24/outline'
 import { motion } from 'framer-motion'
 import React from 'react'
 import { Link } from './link'
 import { Logo } from './logo'
 import { PlusGrid, PlusGridItem, PlusGridRow } from './plus-grid'
-import { Icon } from './ui/icon'
 
 const links = [
   { href: '/company', label: 'About Us' },
@@ -33,6 +43,23 @@ function ServicesDropdown({
 }: {
   serviceCategories: ServiceCategory[]
 }) {
+  // Map icon names to Heroicon components
+  const getIconComponent = (iconName: string) => {
+    const iconMap: { [key: string]: React.ComponentType<any> } = {
+      UserGroupIcon: UserGroupIcon,
+      WrenchScrewdriverIcon: WrenchScrewdriverIcon,
+      CpuChipIcon: CpuChipIcon,
+      LightBulbIcon: LightBulbIcon,
+      BriefcaseIcon: BriefcaseIcon,
+      EnvelopeIcon: EnvelopeIcon,
+      DocumentTextIcon: DocumentTextIcon,
+      ArrowRightIcon: ArrowRightIcon,
+      Bars2Icon: Bars2Icon,
+      ChevronDownIcon: ChevronDownIcon,
+    }
+    return iconMap[iconName] || UserGroupIcon
+  }
+
   return (
     <Menu as="div" className="relative">
       <MenuButton className="flex items-center px-4 py-3 text-base font-medium text-gray-950 bg-blend-multiply data-hover:bg-black/2.5">
@@ -52,27 +79,26 @@ function ServicesDropdown({
           {serviceCategories.length > 0 && (
             <React.Fragment key="service-categories">
               <div className="my-2 border-t border-gray-100" />
-              {serviceCategories.map((category) => (
-                <MenuItem key={category._id}>
-                  <Link
-                    href={`/services/category/${category.slug.current}`}
-                    className="block rounded-md px-3 py-2 text-sm text-gray-700 hover:bg-gray-50"
-                  >
-                    <div className="flex items-center">
-                      <div
-                        className={`h-6 w-6 rounded ${category.color} mr-3 flex items-center justify-center`}
-                      >
-                        <Icon
-                          name={category.icon || ''}
-                          className="h-4 w-4"
-                          fallback={category.name.charAt(0)}
-                        />
+              {serviceCategories.map((category) => {
+                const IconComponent = getIconComponent(category.icon || '')
+                return (
+                  <MenuItem key={category._id}>
+                    <Link
+                      href={`/services/category/${category.slug}`}
+                      className="block rounded-md px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
+                    >
+                      <div className="flex items-center">
+                        <div
+                          className={`h-6 w-6 rounded ${category.color} mr-3 flex items-center justify-center`}
+                        >
+                          <IconComponent className="h-4 w-4" />
+                        </div>
+                        {category.name}
                       </div>
-                      {category.name}
-                    </div>
-                  </Link>
-                </MenuItem>
-              ))}
+                    </Link>
+                  </MenuItem>
+                )
+              })}
             </React.Fragment>
           )}
         </div>
@@ -120,10 +146,10 @@ function DesktopNav({
 function MobileNavButton() {
   return (
     <DisclosureButton
-      className="flex size-12 items-center justify-center self-center rounded-lg data-hover:bg-black/5 lg:hidden"
+      className="flex size-12 items-center justify-center self-center rounded-xl bg-gray-50 transition-all duration-200 hover:scale-105 data-hover:bg-gray-100 lg:hidden"
       aria-label="Open main menu"
     >
-      <Bars2Icon className="size-6" />
+      <Bars2Icon className="size-6 text-gray-700" />
     </DisclosureButton>
   )
 }
@@ -133,90 +159,181 @@ function MobileNav({
 }: {
   serviceCategories: ServiceCategory[]
 }) {
+  // Map icon names to Heroicon components
+  const getIconComponent = (iconName: string) => {
+    const iconMap: { [key: string]: React.ComponentType<any> } = {
+      UserGroupIcon: UserGroupIcon,
+      WrenchScrewdriverIcon: WrenchScrewdriverIcon,
+      CpuChipIcon: CpuChipIcon,
+      LightBulbIcon: LightBulbIcon,
+      BriefcaseIcon: BriefcaseIcon,
+      EnvelopeIcon: EnvelopeIcon,
+      DocumentTextIcon: DocumentTextIcon,
+      ArrowRightIcon: ArrowRightIcon,
+      Bars2Icon: Bars2Icon,
+      ChevronDownIcon: ChevronDownIcon,
+    }
+    return iconMap[iconName] || UserGroupIcon
+  }
+
   return (
     <DisclosurePanel className="lg:hidden">
-      <div className="flex flex-col gap-6 py-4">
-        {links.slice(0, 1).map(({ href, label }, linkIndex) => (
-          <motion.div
-            initial={{ opacity: 0, rotateX: -90 }}
-            animate={{ opacity: 1, rotateX: 0 }}
-            transition={{
-              duration: 0.15,
-              ease: 'easeInOut',
-              rotateX: { duration: 0.3, delay: linkIndex * 0.1 },
-            }}
-            key={href}
-          >
-            <Link href={href} className="text-base font-medium text-gray-950">
-              {label}
-            </Link>
-          </motion.div>
-        ))}
-
-        {/* Services Section */}
-        <motion.div
-          initial={{ opacity: 0, rotateX: -90 }}
-          animate={{ opacity: 1, rotateX: 0 }}
-          transition={{
-            duration: 0.15,
-            ease: 'easeInOut',
-            rotateX: { duration: 0.3, delay: 0.1 },
-          }}
-        >
-          <div className="space-y-3">
-            <Link
-              href="/services"
-              className="text-base font-medium text-gray-950"
+      <div className="mx-4 rounded-2xl border border-gray-200 bg-white shadow-lg">
+        <div className="flex flex-col gap-1 p-4">
+          {/* About Us Section */}
+          {links.slice(0, 1).map(({ href, label }, linkIndex) => (
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{
+                duration: 0.2,
+                ease: 'easeOut',
+                delay: linkIndex * 0.1,
+              }}
+              key={href}
             >
-              Services
-            </Link>
-            {serviceCategories.length > 0 && (
-              <div className="ml-4 space-y-2">
-                {serviceCategories.map((category) => (
-                  <Link
-                    key={category._id}
-                    href={`/services/category/${category.slug.current}`}
-                    className="block text-sm text-gray-600 hover:text-gray-900"
-                  >
-                    <div className="flex items-center">
-                      <div
-                        className={`h-4 w-4 rounded ${category.color} mr-2 flex items-center justify-center`}
-                      >
-                        <Icon
-                          name={category.icon || ''}
-                          className="h-3 w-3"
-                          fallback={category.name.charAt(0)}
-                        />
-                      </div>
-                      {category.name}
-                    </div>
-                  </Link>
-                ))}
-              </div>
-            )}
-          </div>
-        </motion.div>
+              <Link
+                href={href}
+                className="group flex items-center rounded-xl px-4 py-3 text-base font-semibold text-gray-900 transition-all duration-200 hover:bg-blue-50 hover:text-blue-700"
+              >
+                <div className="mr-3 flex h-8 w-8 items-center justify-center rounded-lg bg-blue-100 transition-colors group-hover:bg-blue-200">
+                  <UserGroupIcon className="h-4 w-4 text-blue-600" />
+                </div>
+                {label}
+              </Link>
+            </motion.div>
+          ))}
 
-        {links.slice(1).map(({ href, label }, linkIndex) => (
+          {/* Services Section */}
           <motion.div
-            initial={{ opacity: 0, rotateX: -90 }}
-            animate={{ opacity: 1, rotateX: 0 }}
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
             transition={{
-              duration: 0.15,
-              ease: 'easeInOut',
-              rotateX: { duration: 0.3, delay: (linkIndex + 2) * 0.1 },
+              duration: 0.2,
+              ease: 'easeOut',
+              delay: 0.1,
             }}
-            key={href}
           >
-            <Link href={href} className="text-base font-medium text-gray-950">
-              {label}
-            </Link>
+            <div className="space-y-1">
+              <Link
+                href="/services"
+                className="group flex items-center rounded-xl px-4 py-3 text-base font-semibold text-gray-900 transition-all duration-200 hover:bg-purple-50 hover:text-purple-700"
+              >
+                <div className="mr-3 flex h-8 w-8 items-center justify-center rounded-lg bg-purple-100 transition-colors group-hover:bg-purple-200">
+                  <WrenchScrewdriverIcon className="h-4 w-4 text-purple-600" />
+                </div>
+                Services
+              </Link>
+              {serviceCategories.length > 0 && (
+                <div className="ml-8 space-y-1">
+                  {serviceCategories.map((category, index) => {
+                    const IconComponent = getIconComponent(category.icon || '')
+                    return (
+                      <motion.div
+                        key={category._id}
+                        initial={{ opacity: 0, x: -10 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{
+                          duration: 0.2,
+                          ease: 'easeOut',
+                          delay: 0.15 + index * 0.05,
+                        }}
+                      >
+                        <Link
+                          href={`/services/category/${category.slug}`}
+                          className="group flex items-center rounded-lg px-4 py-2 text-sm text-gray-600 transition-all duration-200 hover:bg-gray-50 hover:text-gray-900"
+                        >
+                          <div
+                            className={`h-3 w-3 rounded-full ${category.color} mr-3 flex items-center justify-center transition-transform group-hover:scale-110`}
+                          >
+                            <IconComponent className="h-2 w-2" />
+                          </div>
+                          {category.name}
+                        </Link>
+                      </motion.div>
+                    )
+                  })}
+                </div>
+              )}
+            </div>
           </motion.div>
-        ))}
+
+          {/* Other Navigation Links */}
+          {links.slice(1).map(({ href, label }, linkIndex) => {
+            const icons = {
+              '/#technologies': CpuChipIcon,
+              '/#competencies': LightBulbIcon,
+              '/careers': BriefcaseIcon,
+              '/contact': EnvelopeIcon,
+              '/blog': DocumentTextIcon,
+            }
+            const IconComponent =
+              icons[href as keyof typeof icons] || ArrowRightIcon
+            const colors = {
+              '/#technologies': 'bg-green-100 text-green-600',
+              '/#competencies': 'bg-yellow-100 text-yellow-600',
+              '/careers': 'bg-orange-100 text-orange-600',
+              '/contact': 'bg-blue-100 text-blue-600',
+              '/blog': 'bg-indigo-100 text-indigo-600',
+            }
+            const colorClass =
+              colors[href as keyof typeof colors] || 'bg-gray-100 text-gray-600'
+
+            return (
+              <motion.div
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{
+                  duration: 0.2,
+                  ease: 'easeOut',
+                  delay: (linkIndex + 2) * 0.1,
+                }}
+                key={href}
+              >
+                <Link
+                  href={href}
+                  className="group flex items-center rounded-xl px-4 py-3 text-base font-semibold text-gray-900 transition-all duration-200 hover:bg-gray-50"
+                >
+                  <div
+                    className={`h-8 w-8 rounded-lg ${colorClass} mr-3 flex items-center justify-center transition-transform group-hover:scale-110`}
+                  >
+                    <IconComponent className="h-4 w-4" />
+                  </div>
+                  {label}
+                </Link>
+              </motion.div>
+            )
+          })}
+        </div>
+
+        {/* Bottom Section with Contact Info */}
+        <div className="border-t border-gray-100 p-4">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{
+              duration: 0.3,
+              ease: 'easeOut',
+              delay: 0.4,
+            }}
+            className="text-center"
+          >
+            <p className="mb-2 text-sm text-gray-500">Need help? Contact us</p>
+            <a
+              href="mailto:info@maxsoft.ch"
+              className="inline-flex items-center rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-blue-700"
+            >
+              <EnvelopeIcon className="mr-2 h-4 w-4" />
+              Get in Touch
+            </a>
+          </motion.div>
+        </div>
       </div>
+
+      {/* Decorative Elements */}
       <div className="absolute left-1/2 w-screen -translate-x-1/2">
-        <div className="absolute inset-x-0 top-0 border-t border-black/5" />
-        <div className="absolute inset-x-0 top-2 border-t border-black/5" />
+        <div className="absolute inset-x-0 top-0 border-t border-gray-200" />
+        <div className="absolute inset-x-0 top-2 border-t border-gray-200" />
       </div>
     </DisclosurePanel>
   )

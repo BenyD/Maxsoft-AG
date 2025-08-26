@@ -1,4 +1,4 @@
-import { defineQuery } from 'next-sanity'
+import { defineQuery, groq } from 'next-sanity'
 import { sanityFetch } from './live'
 
 const TOTAL_POSTS_QUERY = defineQuery(/* groq */ `count(*[
@@ -145,18 +145,34 @@ export async function getCategories() {
   })
 }
 
-const CONTACT_INFO_QUERY = defineQuery(/* groq */ `*[
-  _type == "contact"
-  && isActive == true
-]|order(order asc){
-  title,
-  contactType,
-  icon,
-  address,
-  phone,
-  email,
-  description
-}`)
+export const CONTACT_INFO_QUERY = groq`
+  *[_type == "contact" && isActive == true] | order(order asc) {
+    _id,
+    companyName,
+    officeTitle,
+    address {
+      streetLine1,
+      streetLine2,
+      doorNumber,
+      postalCode,
+      city,
+      canton,
+      country
+    },
+    phone,
+    email,
+    googleMapsEmbed,
+    googleMapsDirections,
+    openingHours[] {
+      day,
+      hours,
+      isOpen
+    },
+    description,
+    isActive,
+    order
+  }[0]
+`
 
 export async function getContactInfo() {
   return await sanityFetch({
@@ -195,13 +211,25 @@ const EXTERNAL_LINKS_QUERY = defineQuery(/* groq */ `*[
   url,
   description,
   buttonText,
-  icon
+  icon,
+  embedContent,
+  embedHeight,
+  embedTitle
 }`)
 
 export async function getExternalLinks() {
-  return await sanityFetch({
-    query: EXTERNAL_LINKS_QUERY,
-  })
+  try {
+    const result = await sanityFetch({
+      query: EXTERNAL_LINKS_QUERY,
+    })
+
+    return result
+  } catch (error) {
+    console.error('Error fetching external links:', error)
+    const errorMessage =
+      error instanceof Error ? error.message : 'Unknown error'
+    return { data: [], error: errorMessage }
+  }
 }
 
 const TEAM_MEMBERS_QUERY = defineQuery(/* groq */ `*[
@@ -349,9 +377,15 @@ const SERVICE_CATEGORIES_QUERY = defineQuery(/* groq */ `*[
 }`)
 
 export async function getServiceCategories() {
-  return await sanityFetch({
-    query: SERVICE_CATEGORIES_QUERY,
-  })
+  try {
+    const result = await sanityFetch({
+      query: SERVICE_CATEGORIES_QUERY,
+    })
+    return result
+  } catch (error) {
+    console.error('Error fetching service categories:', error)
+    return { data: [], error: 'Failed to fetch service categories' }
+  }
 }
 
 // Services Queries
@@ -378,9 +412,15 @@ const SERVICES_QUERY = defineQuery(/* groq */ `*[
 }`)
 
 export async function getServices() {
-  return await sanityFetch({
-    query: SERVICES_QUERY,
-  })
+  try {
+    const result = await sanityFetch({
+      query: SERVICES_QUERY,
+    })
+    return result
+  } catch (error) {
+    console.error('Error fetching services:', error)
+    return { data: [], error: 'Failed to fetch services' }
+  }
 }
 
 const SERVICE_QUERY = defineQuery(/* groq */ `*[
@@ -412,10 +452,16 @@ const SERVICE_QUERY = defineQuery(/* groq */ `*[
 }`)
 
 export async function getService(slug: string) {
-  return await sanityFetch({
-    query: SERVICE_QUERY,
-    params: { slug },
-  })
+  try {
+    const result = await sanityFetch({
+      query: SERVICE_QUERY,
+      params: { slug },
+    })
+    return result
+  } catch (error) {
+    console.error('Error fetching service:', error)
+    return { data: null, error: 'Failed to fetch service' }
+  }
 }
 
 const SERVICES_BY_CATEGORY_QUERY = defineQuery(/* groq */ `*[
@@ -442,10 +488,34 @@ const SERVICES_BY_CATEGORY_QUERY = defineQuery(/* groq */ `*[
 }`)
 
 export async function getServicesByCategory(categorySlug: string) {
-  return await sanityFetch({
-    query: SERVICES_BY_CATEGORY_QUERY,
-    params: { categorySlug },
-  })
+  try {
+    const result = await sanityFetch({
+      query: SERVICES_BY_CATEGORY_QUERY,
+      params: { categorySlug },
+    })
+
+    // Debug logging
+    console.log(
+      'SERVICES_BY_CATEGORY_QUERY result for category:',
+      categorySlug,
+      result,
+    )
+
+    if (result.data) {
+      result.data.forEach((service: any, index: number) => {
+        if (!service.slug) {
+          console.error(
+            `Service "${service.title}" in category "${categorySlug}" is missing slug!`,
+          )
+        }
+      })
+    }
+
+    return result
+  } catch (error) {
+    console.error('Error fetching services by category:', error)
+    return { data: [], error: 'Failed to fetch services by category' }
+  }
 }
 
 // Testimonials Queries

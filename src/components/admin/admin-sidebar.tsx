@@ -96,9 +96,9 @@ export default function AdminSidebar() {
                               href={item.href}
                               className={classNames(
                                 isActive
-                                  ? 'bg-gray-50 text-[#01A2EE]'
-                                  : 'text-gray-700 hover:bg-gray-50 hover:text-[#01A2EE]',
-                                'group flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold',
+                                  ? 'bg-gradient-to-r from-[#01A2EE]/10 to-blue-50 text-[#01A2EE] shadow-sm'
+                                  : 'text-gray-700 hover:bg-gradient-to-r hover:from-gray-50 hover:to-blue-50 hover:text-[#01A2EE]',
+                                'group flex gap-x-3 rounded-xl p-3 text-sm font-semibold transition-all duration-200',
                               )}
                             >
                               <item.icon
@@ -107,7 +107,7 @@ export default function AdminSidebar() {
                                   isActive
                                     ? 'text-[#01A2EE]'
                                     : 'text-gray-400 group-hover:text-[#01A2EE]',
-                                  'size-6 shrink-0',
+                                  'size-6 shrink-0 transition-colors duration-200',
                                 )}
                               />
                               {item.name}
@@ -120,9 +120,9 @@ export default function AdminSidebar() {
                   <li className="-mx-6 mt-auto">
                     <button
                       onClick={handleSignOut}
-                      className="flex w-full items-center gap-x-4 px-6 py-3 text-sm/6 font-semibold text-gray-900 hover:bg-gray-50"
+                      className="flex w-full items-center gap-x-4 px-6 py-3 text-sm font-semibold text-gray-700 transition-all duration-200 hover:bg-red-50 hover:text-red-600"
                     >
-                      <ArrowRightOnRectangleIcon className="size-6 text-gray-400" />
+                      <ArrowRightOnRectangleIcon className="size-6 text-gray-400 transition-colors duration-200 group-hover:text-red-500" />
                       <span>Sign Out</span>
                     </button>
                   </li>
@@ -135,15 +135,18 @@ export default function AdminSidebar() {
 
       {/* Static sidebar for desktop */}
       <div className="hidden lg:fixed lg:inset-y-0 lg:z-50 lg:flex lg:w-72 lg:flex-col">
-        <div className="flex grow flex-col gap-y-5 overflow-y-auto border-r border-gray-200 bg-white px-6">
+        <div className="flex grow flex-col gap-y-5 overflow-y-auto border-r border-gray-200 bg-gradient-to-b from-white to-gray-50 px-6 shadow-lg">
           <div className="flex h-16 shrink-0 items-center">
             <div className="flex items-center space-x-3">
-              <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-[#01A2EE]">
-                <span className="text-lg font-bold text-white">M</span>
+              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-[#01A2EE] to-blue-600 shadow-lg">
+                <span className="text-xl font-bold text-white">M</span>
               </div>
-              <span className="text-xl font-bold text-gray-900">
-                Maxsoft Admin
-              </span>
+              <div>
+                <span className="text-xl font-bold text-gray-900">
+                  Maxsoft Admin
+                </span>
+                <p className="text-xs text-gray-500">Administration Panel</p>
+              </div>
             </div>
           </div>
           <nav className="flex flex-1 flex-col">

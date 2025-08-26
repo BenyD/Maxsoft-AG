@@ -1,15 +1,23 @@
 import {
+  CalendarIcon,
+  ClockIcon,
+  DocumentTextIcon,
   EnvelopeIcon,
-  GlobeAltIcon,
+  LinkIcon,
   MapPinIcon,
   PhoneIcon,
+  UserIcon,
 } from '@heroicons/react/24/outline'
 
 const iconMap = {
-  MapPinIcon: MapPinIcon,
-  PhoneIcon: PhoneIcon,
-  EnvelopeIcon: EnvelopeIcon,
-  GlobeIcon: GlobeAltIcon,
+  CalendarIcon,
+  DocumentTextIcon,
+  EnvelopeIcon,
+  LinkIcon,
+  MapPinIcon,
+  PhoneIcon,
+  UserIcon,
+  ClockIcon,
 }
 
 export function ContactIcon({

@@ -46,7 +46,7 @@ export default async function ServicePage({ params }: ServicePageProps) {
   }
 
   const relatedServices = await getServicesByCategory(
-    service.data.category.slug.current,
+    service.data.category.slug,
   )
   const otherServices =
     relatedServices.data?.filter((s: Service) => s._id !== service.data._id) ||
@@ -67,7 +67,7 @@ export default async function ServicePage({ params }: ServicePageProps) {
           </Link>
           <span>/</span>
           <Link
-            href={`/services/category/${service.data.category.slug.current}`}
+            href={`/services/category/${service.data.category.slug}`}
             className="hover:text-gray-700"
           >
             {service.data.category.name}
@@ -240,7 +240,7 @@ export default async function ServicePage({ params }: ServicePageProps) {
             {otherServices.slice(0, 3).map((relatedService: Service) => (
               <Link
                 key={relatedService._id}
-                href={`/services/${relatedService.slug.current}`}
+                href={`/services/${relatedService.slug}`}
                 className="group block rounded-xl border border-gray-200 bg-white p-6 shadow-sm transition-all duration-200 hover:border-gray-300 hover:shadow-md"
               >
                 <h3 className="mb-2 text-lg font-semibold text-gray-900 transition-colors group-hover:text-gray-700">

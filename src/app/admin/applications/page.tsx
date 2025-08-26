@@ -1,6 +1,8 @@
 import { ApplicationsFilters } from '@/components/admin/applications-filters'
+import type { Application } from '@/components/admin/applications-table'
 import { ApplicationsTable } from '@/components/admin/applications-table'
-import { createServerComponentClient } from '@/lib/supabase'
+import { createAdminClient } from '@/lib/supabase'
+import { getJobListings } from '@/sanity/queries'
 import Link from 'next/link'
 
 export default async function ApplicationsPage({
@@ -9,7 +11,7 @@ export default async function ApplicationsPage({
   searchParams: Promise<{ status?: string; search?: string; page?: string }>
 }) {
   try {
-    const supabase = createServerComponentClient()
+    const supabase = createAdminClient()
 
     // Await searchParams
     const params = await searchParams
@@ -58,10 +60,29 @@ export default async function ApplicationsPage({
       throw new Error(`Failed to fetch applications: ${queryError.message}`)
     }
 
+    // Fetch job listings from Sanity to get position titles
+    const jobListings = await getJobListings()
+    const jobListingsMap = new Map()
+
+    if (jobListings.data) {
+      jobListings.data.forEach((job: { _id: string }) => {
+        jobListingsMap.set(job._id, job)
+      })
+    }
+
+    // Enhance applications with job listing information
+    const enhancedApplications =
+      applications?.map(
+        (app: { job_listing_id: string; [key: string]: unknown }) => ({
+          ...app,
+          jobListing: jobListingsMap.get(app.job_listing_id) || null,
+        }),
+      ) || []
+
     // Debug logging
     console.log('Query results:', {
       totalApplications,
-      applicationsCount: applications?.length || 0,
+      applicationsCount: enhancedApplications?.length || 0,
       page,
       pageSize,
       from,
@@ -71,80 +92,74 @@ export default async function ApplicationsPage({
     const totalPages = Math.ceil((totalApplications || 0) / pageSize)
 
     return (
-      <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100">
-        <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
-          {/* Header */}
-          <div className="mb-8">
-            <div className="flex items-center justify-between">
+      <div className="space-y-8">
+        {/* Header */}
+        <div className="text-center lg:text-left">
+          <h1 className="mb-3 text-4xl font-bold text-gray-900">
+            Job Applications
+          </h1>
+          <p className="mx-auto max-w-2xl text-xl text-gray-600 lg:mx-0">
+            Manage and review all job applications in one place
+          </p>
+          <div className="mt-4 flex justify-center lg:justify-start">
+            <div className="rounded-xl border border-gray-200 bg-white px-6 py-3 shadow-sm">
+              <span className="text-lg font-semibold text-gray-900">
+                {totalApplications || 0} Total Applications
+              </span>
+            </div>
+          </div>
+        </div>
+
+        {/* Filters and Search */}
+        <div className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
+          <ApplicationsFilters
+            currentStatus={params.status || 'all'}
+            currentSearch={params.search || ''}
+          />
+        </div>
+
+        {/* Applications Table */}
+        <div className="overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-lg">
+          <div className="border-b border-gray-200 bg-gradient-to-r from-gray-50 to-blue-50 px-6 py-6">
+            <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
               <div>
-                <h1 className="mb-2 text-3xl font-bold text-gray-900">
-                  Job Applications
-                </h1>
-                <p className="text-lg text-gray-600">
-                  Manage and review all job applications in one place
+                <h2 className="text-2xl font-bold text-gray-900">
+                  All Applications
+                </h2>
+                <p className="mt-2 text-gray-600">
+                  Showing {enhancedApplications?.length || 0} of{' '}
+                  {totalApplications || 0} applications
                 </p>
               </div>
-              <div className="flex items-center space-x-3">
-                <div className="rounded-lg border border-gray-200 bg-white px-4 py-2">
-                  <span className="text-sm font-medium text-gray-900">
-                    {totalApplications || 0} Total Applications
-                  </span>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Filters and Search */}
-          <div className="mb-6 rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
-            <ApplicationsFilters
-              currentStatus={params.status || 'all'}
-              currentSearch={params.search || ''}
-            />
-          </div>
-
-          {/* Applications Table */}
-          <div className="overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm">
-            <div className="border-b border-gray-200 px-6 py-5">
-              <div className="flex items-center justify-between">
-                <div>
-                  <h2 className="text-xl font-semibold text-gray-900">
-                    All Applications
-                  </h2>
-                  <p className="mt-1 text-sm text-gray-500">
-                    Showing {applications?.length || 0} of{' '}
-                    {totalApplications || 0} applications
-                  </p>
-                </div>
-                <div className="flex items-center space-x-2">
-                  <span className="text-sm text-gray-500">
-                    Page {page} of {totalPages}
-                  </span>
-                </div>
-              </div>
-            </div>
-
-            <div className="overflow-x-auto">
-              <ApplicationsTable
-                applications={applications || []}
-                currentPage={page}
-                totalCount={totalApplications || 0}
-                pageSize={pageSize}
-              />
-            </div>
-          </div>
-
-          {/* Pagination Info */}
-          {totalPages > 1 && (
-            <div className="mt-6 text-center">
-              <div className="inline-flex items-center space-x-2 rounded-lg border border-gray-200 bg-white px-4 py-2">
-                <span className="text-sm text-gray-600">
-                  Page {page} of {totalPages} • {totalApplications || 0} total
-                  applications
+              <div className="flex items-center space-x-2">
+                <span className="text-sm font-medium text-gray-600">
+                  Page {page} of {totalPages}
                 </span>
               </div>
             </div>
-          )}
+          </div>
+
+          <div className="overflow-x-auto">
+            <ApplicationsTable
+              applications={enhancedApplications as Application[]}
+              currentPage={page}
+              totalCount={totalApplications || 0}
+              pageSize={pageSize}
+            />
+          </div>
         </div>
+
+        {/* Pagination Info */}
+        {totalPages > 1 && (
+          <div className="text-center">
+            <div className="inline-flex items-center space-x-2 rounded-lg border border-gray-200 bg-white px-4 py-2">
+              <span className="text-sm text-gray-600">
+                Page {page} of {totalPages} • {totalApplications || 0} total
+                applications
+              </span>
+            </div>
+          </div>
+        )}
       </div>
     )
   } catch (error) {

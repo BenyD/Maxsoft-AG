@@ -194,56 +194,73 @@ function Person({
       _type: 'reference'
     }
     _type: 'image'
+    hotspot?: {
+      x: number
+      y: number
+      height: number
+      width: number
+    }
+    crop?: {
+      top: number
+      bottom: number
+      left: number
+      right: number
+    }
   }
   linkedinUrl?: string
   department?: string
 }) {
   return (
     <li className="group">
-      <div className="relative overflow-hidden rounded-2xl border border-gray-200 bg-white p-6 shadow-sm transition-all duration-200 hover:border-gray-300 hover:shadow-md">
-        {/* Photo Section */}
-        <div className="mb-6 flex justify-center">
-          <div className="relative">
-            <img
-              alt={name}
-              src={image(photo).width(120).height(120).url()}
-              className="size-24 rounded-full object-cover ring-4 ring-gray-100 transition-all duration-200 group-hover:ring-[#01A2EE]/20"
-            />
-            {department && (
-              <div className="absolute -bottom-2 left-1/2 -translate-x-1/2">
-                <span className="inline-flex items-center rounded-full bg-[#01A2EE]/10 px-3 py-1 text-xs font-medium text-[#01A2EE] ring-1 ring-[#01A2EE]/20 ring-inset">
-                  {department}
-                </span>
-              </div>
-            )}
-          </div>
+      <div className="relative overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm transition-all duration-200 hover:border-gray-300 hover:shadow-md">
+        {/* Full-width Photo Section */}
+        <div className="relative w-full overflow-hidden">
+          <img
+            alt={name}
+            src={image(photo)
+              .width(800)
+              .height(800)
+              .fit('crop')
+              .crop('focalpoint')
+              .focalPoint(photo.hotspot?.x || 0.5, photo.hotspot?.y || 0.5)
+              .url()}
+            className="h-auto w-full object-cover"
+          />
+          {/* Department Badge */}
+          {department && (
+            <div className="absolute top-4 right-4">
+              <span className="inline-flex items-center rounded-full bg-[#01A2EE]/90 px-3 py-1 text-xs font-medium text-white shadow-sm ring-1 ring-white/20 ring-inset">
+                {department}
+              </span>
+            </div>
+          )}
         </div>
 
         {/* Content Section */}
-        <div className="text-center">
+        <div className="p-6 text-center">
           <h3 className="text-lg font-semibold text-gray-900 transition-colors group-hover:text-[#01A2EE]">
             {name}
           </h3>
           <p className="mt-2 text-base leading-relaxed font-medium text-[#01A2EE]">
             {title}
           </p>
-        </div>
 
-        {/* LinkedIn Button */}
-        {linkedinUrl && (
-          <div className="mt-6 flex justify-center">
-            <a
-              href={linkedinUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-lg bg-gray-50 px-4 py-2 text-sm font-medium text-gray-700 transition-all duration-200 hover:bg-[#01A2EE] hover:text-white hover:shadow-sm"
-              aria-label={`View ${name}'s LinkedIn profile`}
-            >
-              <LinkedInIcon className="size-4" />
-              <span>LinkedIn</span>
-            </a>
-          </div>
-        )}
+          {/* LinkedIn Button */}
+          {linkedinUrl && (
+            <div className="mt-4 flex justify-center">
+              <a
+                href={linkedinUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 rounded-lg bg-gray-50 px-4 py-2 text-sm font-medium text-gray-700 transition-all duration-200 hover:bg-[#01A2EE] hover:text-white hover:shadow-sm"
+                aria-label={`View ${name}'s LinkedIn profile`}
+              >
+                <LinkedInIcon className="size-4" />
+                <span>LinkedIn</span>
+              </a>
+            </div>
+          )}
+        </div>
       </div>
     </li>
   )
@@ -413,7 +430,7 @@ function Testimonial() {
     <div className="relative flex aspect-square flex-col justify-end overflow-hidden rounded-3xl sm:aspect-5/4 lg:aspect-3/4">
       <img
         alt=""
-        src="/testimonials/veronica-winton.jpg"
+        src="/testimonials/janar.jpg"
         className="absolute inset-0 object-cover"
       />
       <div
@@ -428,12 +445,10 @@ function Testimonial() {
           </p>
         </blockquote>
         <figcaption className="mt-6 border-t border-white/20 pt-6">
-          <p className="text-sm/6 font-medium text-white">
-            Thillipan Thiyagaraj
-          </p>
+          <p className="text-sm/6 font-medium text-white">Janar Thiyagarajah</p>
           <p className="text-sm/6 font-medium">
             <span className="bg-linear-to-r from-[#fff1be] from-28% via-[#ee87cb] via-70% to-[#b060ff] bg-clip-text text-transparent">
-              CEO, Maxsoft AG
+              Partner, Senior Business Advisor
             </span>
           </p>
         </figcaption>

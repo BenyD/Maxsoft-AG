@@ -24,9 +24,10 @@ function ServiceCategoryCard({
   category: ServiceCategory
   services: ServiceExpanded[]
 }) {
-  const categoryServices = services.filter(
-    (service) => service.category._id === category._id,
-  )
+  const categoryServices = services.filter((service) => {
+    const matches = service.category?._id === category._id
+    return matches
+  })
 
   if (categoryServices.length === 0) return null
 
@@ -53,66 +54,75 @@ function ServiceCategoryCard({
       </div>
 
       <div className="space-y-4">
-        {categoryServices.map((service) => (
-          <Link
-            key={service._id}
-            href={`/services/${service.slug.current}`}
-            className="block rounded-lg border border-gray-100 p-4 transition-colors hover:border-gray-200 hover:bg-gray-50"
-          >
-            <div className="flex items-center justify-between">
-              <div className="flex-1">
-                <h4 className="mb-1 font-medium text-gray-900">
-                  {service.title}
-                </h4>
-                <p className="mb-2 text-sm text-gray-600">
-                  {service.shortDescription}
-                </p>
-                <div className="flex flex-wrap gap-2 text-xs">
-                  {service.duration && (
-                    <span className="inline-flex items-center rounded-full bg-blue-100 px-2 py-1 text-blue-800">
-                      ⏱️ {service.duration}
-                    </span>
-                  )}
-                  {service.deliveryMethod && (
-                    <span className="inline-flex items-center rounded-full bg-green-100 px-2 py-1 text-green-800">
-                      📍 {service.deliveryMethod}
-                    </span>
-                  )}
-                  {service.pricing && (
-                    <span className="inline-flex items-center rounded-full bg-yellow-100 px-2 py-1 text-yellow-800">
-                      💰 {service.pricing}
-                    </span>
-                  )}
+        {categoryServices.map((service) => {
+          return (
+            <Link
+              key={service._id}
+              href={`/services/${service.slug}`}
+              className="block rounded-lg border border-gray-100 p-4 transition-colors hover:border-gray-200 hover:bg-gray-200"
+            >
+              <div className="flex items-center justify-between">
+                <div className="flex-1">
+                  <h4 className="mb-1 font-medium text-gray-900">
+                    {service.title}
+                  </h4>
+                  <p className="mb-2 text-sm text-gray-600">
+                    {service.shortDescription}
+                  </p>
+                  <div className="flex flex-wrap gap-2 text-xs">
+                    {service.duration && (
+                      <span className="inline-flex items-center rounded-full bg-blue-100 px-2 py-1 text-blue-800">
+                        ⏱️ {service.duration}
+                      </span>
+                    )}
+                    {service.deliveryMethod && (
+                      <span className="inline-flex items-center rounded-full bg-green-100 px-2 py-1 text-green-800">
+                        📍 {service.deliveryMethod}
+                      </span>
+                    )}
+                    {service.pricing && (
+                      <span className="inline-flex items-center rounded-full bg-yellow-100 px-2 py-1 text-yellow-800">
+                        💰 {service.pricing}
+                      </span>
+                    )}
+                  </div>
+                </div>
+                <div className="ml-4">
+                  <svg
+                    className="h-5 w-5 text-gray-400"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M9 5l7 7-7 7"
+                    />
+                  </svg>
                 </div>
               </div>
-              <div className="ml-4">
-                <svg
-                  className="h-5 w-5 text-gray-400"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M9 5l7 7-7 7"
-                  />
-                </svg>
-              </div>
-            </div>
-          </Link>
-        ))}
+            </Link>
+          )
+        })}
       </div>
 
       <div className="mt-6 border-t border-gray-100 pt-6">
-        <Button
-          href={`/services/category/${category.slug.current}`}
-          variant="outline"
-          className="w-full"
-        >
-          View All {category.name} Services
-        </Button>
+        {/* Only show View All button if category has a valid slug */}
+        {category.slug ? (
+          <Button
+            href={`/services/category/${category.slug}`}
+            variant="outline"
+            className="w-full"
+          >
+            View All {category.name} Services
+          </Button>
+        ) : (
+          <div className="py-2 text-center text-sm text-gray-500">
+            Category slug missing - cannot generate link
+          </div>
+        )}
       </div>
     </div>
   )
@@ -193,7 +203,7 @@ export default async function ServicesPage() {
             {featuredServices.map((service: ServiceExpanded) => (
               <Link
                 key={service._id}
-                href={`/services/${service.slug.current}`}
+                href={`/services/${service.slug}`}
                 className="group block rounded-xl border border-gray-200 bg-white p-6 shadow-sm transition-all duration-200 hover:border-gray-300 hover:shadow-md"
               >
                 <div
@@ -238,13 +248,15 @@ export default async function ServicesPage() {
         <Container className="mt-24">
           <Subheading>All Services</Subheading>
           <div className="mt-8 grid gap-8 lg:grid-cols-2">
-            {serviceCategories.data?.map((category: ServiceCategory) => (
-              <ServiceCategoryCard
-                key={category._id}
-                category={category}
-                services={services.data || []}
-              />
-            ))}
+            {serviceCategories.data?.map((category: ServiceCategory) => {
+              return (
+                <ServiceCategoryCard
+                  key={category._id}
+                  category={category}
+                  services={services.data || []}
+                />
+              )
+            })}
           </div>
         </Container>
       )}

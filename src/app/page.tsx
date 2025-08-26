@@ -85,7 +85,7 @@ function AboutSection() {
         <Screenshot
           width={1216}
           height={768}
-          src="/screenshots/app.png"
+          src="/pictures/meeting.jpg"
           className="mt-16 h-144 sm:h-auto sm:w-304"
         />
       </Container>

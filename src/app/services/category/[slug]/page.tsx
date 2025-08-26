@@ -23,7 +23,7 @@ export async function generateMetadata({
   const { slug } = await params
   const categories = await getServiceCategories()
   const category = categories.data?.find(
-    (cat: ServiceCategory) => cat.slug.current === slug,
+    (cat: ServiceCategory) => cat.slug === slug,
   )
 
   if (!category) {
@@ -46,7 +46,7 @@ export default async function ServiceCategoryPage({
   const { slug } = await params
   const categories = await getServiceCategories()
   const category = categories.data?.find(
-    (cat: ServiceCategory) => cat.slug.current === slug,
+    (cat: ServiceCategory) => cat.slug === slug,
   )
 
   if (!category) {
@@ -101,7 +101,7 @@ export default async function ServiceCategoryPage({
               {services.data.map((service: ServiceExpanded) => (
                 <Link
                   key={service._id}
-                  href={`/services/${service.slug.current}`}
+                  href={`/services/${service.slug}`}
                   className="group block rounded-xl border border-gray-200 bg-white p-6 shadow-sm transition-all duration-200 hover:border-gray-300 hover:shadow-md"
                 >
                   <div className="mb-4 flex items-center justify-between">

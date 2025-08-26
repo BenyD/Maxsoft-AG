@@ -9,6 +9,18 @@ export interface TeamMember {
       _type: 'reference'
     }
     _type: 'image'
+    hotspot?: {
+      x: number
+      y: number
+      height: number
+      width: number
+    }
+    crop?: {
+      top: number
+      bottom: number
+      left: number
+      right: number
+    }
   }
   linkedinUrl?: string
   department?: string

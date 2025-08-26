@@ -5,9 +5,7 @@ export interface Service {
   _id: string
   _type: 'service'
   title: string
-  slug: {
-    current: string
-  }
+  slug: string
   category: {
     _ref: string
     _type: 'reference'

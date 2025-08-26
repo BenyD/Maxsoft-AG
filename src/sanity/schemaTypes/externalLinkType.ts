@@ -1,7 +1,7 @@
-import { defineField, defineType } from 'sanity'
 import { LinkIcon } from '@sanity/icons'
+import { defineField, defineType } from 'sanity'
 
-export const externalLinkType = defineType({
+export default defineType({
   name: 'externalLink',
   title: 'External Link',
   type: 'document',
@@ -9,10 +9,9 @@ export const externalLinkType = defineType({
   fields: [
     defineField({
       name: 'title',
-      title: 'Link Title',
+      title: 'Title',
       type: 'string',
       validation: (Rule) => Rule.required(),
-      description: 'e.g., Microsoft 365 Booking, Support Portal',
     }),
     defineField({
       name: 'linkType',
@@ -20,10 +19,9 @@ export const externalLinkType = defineType({
       type: 'string',
       options: {
         list: [
-          { title: 'Booking Form', value: 'booking' },
-          { title: 'Support Portal', value: 'support' },
-          { title: 'Client Portal', value: 'client-portal' },
-          { title: 'Documentation', value: 'documentation' },
+          { title: 'Booking', value: 'booking' },
+          { title: 'Contact', value: 'contact' },
+          { title: 'Social', value: 'social' },
           { title: 'Other', value: 'other' },
         ],
       },
@@ -34,21 +32,18 @@ export const externalLinkType = defineType({
       title: 'URL',
       type: 'url',
       validation: (Rule) => Rule.required(),
-      description: 'Full URL including https://',
     }),
     defineField({
       name: 'description',
       title: 'Description',
       type: 'text',
-      rows: 2,
-      description: 'Brief description of what this link provides',
+      rows: 3,
     }),
     defineField({
       name: 'buttonText',
       title: 'Button Text',
       type: 'string',
       validation: (Rule) => Rule.required(),
-      description: 'e.g., Book Your Consultation, Access Portal',
     }),
     defineField({
       name: 'icon',
@@ -56,10 +51,13 @@ export const externalLinkType = defineType({
       type: 'string',
       options: {
         list: [
-          { title: 'Globe', value: 'GlobeAltIcon' },
+          { title: 'Globe Alt', value: 'GlobeAltIcon' },
           { title: 'Calendar', value: 'CalendarIcon' },
           { title: 'Document', value: 'DocumentIcon' },
           { title: 'User', value: 'UserIcon' },
+          { title: 'Map Pin', value: 'MapPinIcon' },
+          { title: 'Phone', value: 'PhoneIcon' },
+          { title: 'Envelope', value: 'EnvelopeIcon' },
         ],
       },
       validation: (Rule) => Rule.required(),
@@ -72,23 +70,48 @@ export const externalLinkType = defineType({
     }),
     defineField({
       name: 'order',
-      title: 'Display Order',
+      title: 'Order',
       type: 'number',
       initialValue: 0,
+    }),
+    defineField({
+      name: 'embedContent',
+      title: 'Embed Content',
+      type: 'boolean',
+      description:
+        'If checked, the content will be embedded directly on the page instead of redirecting to the external link.',
+      initialValue: false,
+    }),
+    defineField({
+      name: 'embedHeight',
+      title: 'Embed Height',
+      type: 'string',
+      description:
+        'Height for the embedded content (e.g., "600px", "100vh", "50rem")',
+      initialValue: '600px',
+      hidden: ({ document }) => !document?.embedContent,
+    }),
+    defineField({
+      name: 'embedTitle',
+      title: 'Embed Title',
+      type: 'string',
+      description: 'Optional title to display above the embedded content',
+      hidden: ({ document }) => !document?.embedContent,
     }),
   ],
   preview: {
     select: {
       title: 'title',
       linkType: 'linkType',
-      url: 'url',
       isActive: 'isActive',
+      embedContent: 'embedContent',
     },
-    prepare({ title, linkType, url, isActive }) {
+    prepare({ title, linkType, isActive, embedContent }) {
+      const status = isActive ? 'Active' : 'Inactive'
+      const embedStatus = embedContent ? ' (Embedded)' : ' (External)'
       return {
-        title: `${title}${!isActive ? ' (Inactive)' : ''}`,
-        subtitle: `${linkType} - ${url}`,
-        media: LinkIcon,
+        title: title,
+        subtitle: `${linkType} - ${status}${embedStatus}`,
       }
     },
   },

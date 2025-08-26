@@ -49,7 +49,7 @@ export default function TermsPage() {
           <div className="relative">
             <div className="aspect-[4/3] w-full">
               <iframe
-                src="/terms-embed"
+                src="https://app.privacybee.io/v/cm6sbsjhk0075125yaeol1nz1?lang=de&type=dsg"
                 className="h-full w-full border-0"
                 title="Terms of Service"
                 loading="lazy"

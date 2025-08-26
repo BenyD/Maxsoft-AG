@@ -3,6 +3,8 @@
 import { Button } from '@/components/button'
 import { JobApplicationForm } from '@/components/job-application-form'
 import { Heading, Lead, Subheading } from '@/components/text'
+import { Alert, AlertActions, AlertDescription, AlertTitle } from '@/components/ui/alert'
+import { Icon } from '@/components/ui/icon'
 import { MapPinIcon, BriefcaseIcon, CurrencyDollarIcon } from '@heroicons/react/24/solid'
 import { useState } from 'react'
 
@@ -48,6 +50,7 @@ interface JobPageClientProps {
 export function JobPageClient({ job }: JobPageClientProps) {
   const [showApplicationForm, setShowApplicationForm] = useState(false)
   const [applicationSubmitted, setApplicationSubmitted] = useState(false)
+  const [showSuccessAlert, setShowSuccessAlert] = useState(false)
 
   const handleApplicationSubmit = async (data: JobApplicationFormState) => {
     try {
@@ -58,9 +61,7 @@ export function JobPageClient({ job }: JobPageClientProps) {
       setShowApplicationForm(false)
 
       // Show success message
-      alert(
-        'Application submitted successfully! We will review your application and get back to you soon.',
-      )
+      setShowSuccessAlert(true)
     } catch (error) {
       console.error('Error handling application submission:', error)
       throw error
@@ -248,6 +249,25 @@ export function JobPageClient({ job }: JobPageClientProps) {
           onCancel={() => setShowApplicationForm(false)}
         />
       )}
+
+      {/* Success Alert */}
+      <Alert open={showSuccessAlert} onClose={() => setShowSuccessAlert(false)}>
+        <AlertTitle className="flex items-center gap-2">
+          <Icon name="DocumentCheckIcon" className="h-5 w-5 text-green-600" />
+          Application Submitted Successfully!
+        </AlertTitle>
+        <AlertDescription>
+          We will review your application and get back to you soon.
+        </AlertDescription>
+        <AlertActions>
+          <Button
+            onClick={() => setShowSuccessAlert(false)}
+            className="px-4 py-2"
+          >
+            OK
+          </Button>
+        </AlertActions>
+      </Alert>
     </>
   )
 }

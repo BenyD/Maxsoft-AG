@@ -2,7 +2,13 @@
 
 import { Button } from '@/components/button'
 import { Heading, Subheading } from '@/components/text'
-import { useState } from 'react'
+import {
+  Alert,
+  AlertActions,
+  AlertDescription,
+  AlertTitle,
+} from '@/components/ui/alert'
+import { useEffect, useState } from 'react'
 
 interface JobApplicationFormState {
   jobListingId: string
@@ -38,6 +44,8 @@ export function JobApplicationForm({
   onCancel,
 }: JobApplicationFormProps) {
   const [isSubmitting, setIsSubmitting] = useState(false)
+  const [showAlert, setShowAlert] = useState(false)
+  const [alertMessage, setAlertMessage] = useState('')
   const [formData, setFormData] = useState<Partial<JobApplicationFormState>>({
     jobListingId: jobId,
     candidateName: '',
@@ -68,8 +76,21 @@ export function JobApplicationForm({
     }))
   }
 
+  const [skillsInput, setSkillsInput] = useState('')
+
+  // Initialize skillsInput when formData.skills changes
+  useEffect(() => {
+    if (formData.skills && formData.skills.length > 0) {
+      setSkillsInput(formData.skills.join(', '))
+    }
+  }, [formData.skills])
+
   const handleSkillsChange = (skillsText: string) => {
-    const skills = skillsText
+    setSkillsInput(skillsText)
+  }
+
+  const handleSkillsBlur = () => {
+    const skills = skillsInput
       .split(',')
       .map((skill) => skill.trim())
       .filter((skill) => skill.length > 0)
@@ -89,7 +110,10 @@ export function JobApplicationForm({
     e.preventDefault()
 
     if (!formData.resume || !formData.gdprConsent) {
-      alert('Please fill in all required fields and accept the privacy policy.')
+      setAlertMessage(
+        'Please fill in all required fields and accept the privacy policy.',
+      )
+      setShowAlert(true)
       return
     }
 
@@ -353,8 +377,9 @@ export function JobApplicationForm({
                     </p>
                     <input
                       type="text"
-                      value={formData.skills?.join(', ') || ''}
+                      value={skillsInput || formData.skills?.join(', ') || ''}
                       onChange={(e) => handleSkillsChange(e.target.value)}
+                      onBlur={handleSkillsBlur}
                       className="mt-1 block w-full rounded-lg border border-gray-300 px-3 py-2 shadow-sm focus:border-[#01A2EE] focus:ring-1 focus:ring-[#01A2EE] focus:outline-none"
                       placeholder="JavaScript, React, Node.js, Project Management, Communication"
                     />
@@ -754,6 +779,17 @@ export function JobApplicationForm({
           </form>
         </div>
       </div>
+
+      {/* Alert Dialog */}
+      <Alert open={showAlert} onClose={() => setShowAlert(false)}>
+        <AlertTitle>Form Validation Error</AlertTitle>
+        <AlertDescription>{alertMessage}</AlertDescription>
+        <AlertActions>
+          <Button onClick={() => setShowAlert(false)} className="px-4 py-2">
+            OK
+          </Button>
+        </AlertActions>
+      </Alert>
     </div>
   )
 }
