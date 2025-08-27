@@ -30,12 +30,6 @@ import { Link } from './link'
 import { Logo } from './logo'
 import { PlusGrid, PlusGridItem, PlusGridRow } from './plus-grid'
 
-const links = [
-  { href: '/#technologies', label: 'Technologien' },
-  { href: '/#competencies', label: 'Kompetenzen' },
-  { href: '/contact', label: 'Kontakt' },
-]
-
 function ServicesDropdown({
   serviceCategories,
 }: {
@@ -146,18 +140,18 @@ function CompanyDropdown() {
           </MenuItem>
           <MenuItem>
             <Link
-              href="/company#partners"
+              href="/careers"
               className="block rounded-md px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
             >
-              Partner
+              Karriere (Jobs)
             </Link>
           </MenuItem>
           <MenuItem>
             <Link
-              href="/careers"
+              href="/company#partners"
               className="block rounded-md px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
             >
-              Karriere
+              Partner
             </Link>
           </MenuItem>
           <MenuItem>
@@ -181,35 +175,45 @@ function DesktopNav({
 }) {
   return (
     <nav className="relative hidden lg:flex">
-      {links.slice(0, 1).map(({ href, label }) => (
-        <PlusGridItem key={href} className="relative flex">
-          <Link
-            href={href}
-            className="flex items-center px-4 py-3 text-base font-medium text-gray-950 bg-blend-multiply data-hover:bg-black/2.5"
-          >
-            {label}
-          </Link>
-        </PlusGridItem>
-      ))}
-
+      {/* Dienstleistungen (Services) */}
       <PlusGridItem className="relative flex">
         <ServicesDropdown serviceCategories={serviceCategories} />
       </PlusGridItem>
 
+      {/* Kompetenzen */}
+      <PlusGridItem className="relative flex">
+        <Link
+          href="/#competencies"
+          className="flex items-center px-4 py-3 text-base font-medium text-gray-950 bg-blend-multiply data-hover:bg-black/2.5"
+        >
+          Kompetenzen
+        </Link>
+      </PlusGridItem>
+
+      {/* Technologien */}
+      <PlusGridItem className="relative flex">
+        <Link
+          href="/#technologies"
+          className="flex items-center px-4 py-3 text-base font-medium text-gray-950 bg-blend-multiply data-hover:bg-black/2.5"
+        >
+          Technologien
+        </Link>
+      </PlusGridItem>
+
+      {/* Unternehmen */}
       <PlusGridItem className="relative flex">
         <CompanyDropdown />
       </PlusGridItem>
 
-      {links.slice(1).map(({ href, label }) => (
-        <PlusGridItem key={href} className="relative flex">
-          <Link
-            href={href}
-            className="flex items-center px-4 py-3 text-base font-medium text-gray-950 bg-blend-multiply data-hover:bg-black/2.5"
-          >
-            {label}
-          </Link>
-        </PlusGridItem>
-      ))}
+      {/* Kontakt */}
+      <PlusGridItem className="relative flex">
+        <Link
+          href="/contact"
+          className="flex items-center px-4 py-3 text-base font-medium text-gray-950 bg-blend-multiply data-hover:bg-black/2.5"
+        >
+          Kontakt
+        </Link>
+      </PlusGridItem>
     </nav>
   )
 }
@@ -259,32 +263,7 @@ function MobileNav({
               },
             }}
           >
-            {/* About Us Section */}
-            {links.slice(0, 1).map(({ href, label }, linkIndex) => (
-              <motion.div
-                initial={{ opacity: 0, x: -50 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: -50 }}
-                transition={{
-                  duration: 0.3,
-                  ease: [0.25, 0.46, 0.45, 0.94],
-                  delay: linkIndex * 0.05,
-                }}
-                key={href}
-              >
-                <Link
-                  href={href}
-                  className="flex items-center rounded-2xl px-6 py-4 text-2xl font-bold text-gray-900 transition-all duration-300 hover:bg-blue-50 hover:text-blue-700"
-                >
-                  <div className="mr-4 flex h-8 w-8 items-center justify-center rounded-lg bg-blue-100">
-                    <span className="text-blue-600">-</span>
-                  </div>
-                  {label}
-                </Link>
-              </motion.div>
-            ))}
-
-            {/* Services Section with Categories */}
+            {/* Dienstleistungen (Services) */}
             <motion.div
               initial={{ opacity: 0, x: -50 }}
               animate={{ opacity: 1, x: 0 }}
@@ -334,7 +313,7 @@ function MobileNav({
               )}
             </motion.div>
 
-            {/* Company Section */}
+            {/* Kompetenzen */}
             <motion.div
               initial={{ opacity: 0, x: -50 }}
               animate={{ opacity: 1, x: 0 }}
@@ -343,6 +322,50 @@ function MobileNav({
                 duration: 0.3,
                 ease: [0.25, 0.46, 0.45, 0.94],
                 delay: 0.1,
+              }}
+            >
+              <Link
+                href="/#competencies"
+                className="flex items-center rounded-2xl px-6 py-4 text-2xl font-bold text-gray-900 transition-all duration-300 hover:bg-blue-50 hover:text-blue-700"
+              >
+                <div className="mr-4 flex h-8 w-8 items-center justify-center rounded-lg bg-blue-100">
+                  <span className="text-blue-600">-</span>
+                </div>
+                Kompetenzen
+              </Link>
+            </motion.div>
+
+            {/* Technologien */}
+            <motion.div
+              initial={{ opacity: 0, x: -50 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -50 }}
+              transition={{
+                duration: 0.3,
+                ease: [0.25, 0.46, 0.45, 0.94],
+                delay: 0.15,
+              }}
+            >
+              <Link
+                href="/#technologies"
+                className="flex items-center rounded-2xl px-6 py-4 text-2xl font-bold text-gray-900 transition-all duration-300 hover:bg-blue-50 hover:text-blue-700"
+              >
+                <div className="mr-4 flex h-8 w-8 items-center justify-center rounded-lg bg-blue-100">
+                  <span className="text-blue-600">-</span>
+                </div>
+                Technologien
+              </Link>
+            </motion.div>
+
+            {/* Unternehmen */}
+            <motion.div
+              initial={{ opacity: 0, x: -50 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -50 }}
+              transition={{
+                duration: 0.3,
+                ease: [0.25, 0.46, 0.45, 0.94],
+                delay: 0.2,
               }}
               className="space-y-4"
             >
@@ -359,6 +382,15 @@ function MobileNav({
               {/* Company Sub-links */}
               <div className="ml-8 space-y-3 border-l-2 border-gray-200 pl-6">
                 <Link
+                  href="/company"
+                  className="flex items-center rounded-xl px-6 py-3 text-lg font-semibold text-gray-700 transition-all duration-300 hover:bg-gray-50 hover:text-gray-900"
+                >
+                  <div className="mr-3 flex h-6 w-6 items-center justify-center rounded-md bg-gray-100">
+                    <span className="text-sm text-gray-500">•</span>
+                  </div>
+                  Über uns
+                </Link>
+                <Link
                   href="/company#team"
                   className="flex items-center rounded-xl px-6 py-3 text-lg font-semibold text-gray-700 transition-all duration-300 hover:bg-gray-50 hover:text-gray-900"
                 >
@@ -366,6 +398,15 @@ function MobileNav({
                     <span className="text-sm text-gray-500">•</span>
                   </div>
                   Team
+                </Link>
+                <Link
+                  href="/careers"
+                  className="flex items-center rounded-xl px-6 py-3 text-lg font-semibold text-gray-700 transition-all duration-300 hover:bg-gray-50 hover:text-gray-900"
+                >
+                  <div className="mr-3 flex h-6 w-6 items-center justify-center rounded-md bg-gray-100">
+                    <span className="text-sm text-gray-500">•</span>
+                  </div>
+                  Karriere (Jobs)
                 </Link>
                 <Link
                   href="/company#partners"
@@ -377,15 +418,6 @@ function MobileNav({
                   Partner
                 </Link>
                 <Link
-                  href="/careers"
-                  className="flex items-center rounded-xl px-6 py-3 text-lg font-semibold text-gray-700 transition-all duration-300 hover:bg-gray-50 hover:text-gray-900"
-                >
-                  <div className="mr-4 flex h-6 w-6 items-center justify-center rounded-md bg-gray-100">
-                    <span className="text-sm text-gray-500">•</span>
-                  </div>
-                  Karriere
-                </Link>
-                <Link
                   href="/blog"
                   className="flex items-center rounded-xl px-6 py-3 text-lg font-semibold text-gray-700 transition-all duration-300 hover:bg-gray-50 hover:text-gray-900"
                 >
@@ -395,6 +427,28 @@ function MobileNav({
                   Blog
                 </Link>
               </div>
+            </motion.div>
+
+            {/* Kontakt */}
+            <motion.div
+              initial={{ opacity: 0, x: -50 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -50 }}
+              transition={{
+                duration: 0.3,
+                ease: [0.25, 0.46, 0.45, 0.94],
+                delay: 0.25,
+              }}
+            >
+              <Link
+                href="/contact"
+                className="flex items-center rounded-2xl px-6 py-4 text-2xl font-bold text-gray-900 transition-all duration-300 hover:bg-blue-50 hover:text-blue-700"
+              >
+                <div className="mr-4 flex h-8 w-8 items-center justify-center rounded-lg bg-blue-100">
+                  <span className="text-blue-600">-</span>
+                </div>
+                Kontakt
+              </Link>
             </motion.div>
           </motion.div>
         </AnimatePresence>

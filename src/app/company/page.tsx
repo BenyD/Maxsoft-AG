@@ -132,7 +132,7 @@ function MissionSection() {
     <Container className="mt-32">
       <div className="max-w-3xl">
         <Subheading>Unsere Mission</Subheading>
-        <Heading as="h3" className="mt-2">
+        <Heading as="h5" className="mt-2">
           Wir unterstützen Unternehmen dabei, ihre IT zu modernisieren, die
           Effizienz zu steigern und das Wachstum zu fördern – mit innovativen
           und praktischen Lösungen.
