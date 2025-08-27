@@ -1,8 +1,10 @@
+import { Button } from '@/components/button'
 import { Container } from '@/components/container'
 import { Footer } from '@/components/footer'
 import { GradientBackground } from '@/components/gradient'
 import { JobPageClient } from '@/components/job-page-client'
-import { Navbar } from '@/components/navbar'
+import { NavbarServer } from '@/components/navbar-server'
+import { Heading, Lead, Subheading } from '@/components/text'
 import { getJobListing } from '@/sanity/queries'
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
@@ -43,7 +45,7 @@ export default async function JobPage({ params }: JobPageProps) {
     <main className="overflow-hidden">
       <GradientBackground />
       <Container>
-        <Navbar />
+        <NavbarServer />
       </Container>
 
       <Container className="mt-16 mb-16">

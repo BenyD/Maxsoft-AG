@@ -2,7 +2,7 @@ import { Button } from '@/components/button'
 import { Container } from '@/components/container'
 import { Footer } from '@/components/footer'
 import { GradientBackground } from '@/components/gradient'
-import { Navbar } from '@/components/navbar'
+import { NavbarServer } from '@/components/navbar-server'
 import { NoPositionsIcon } from '@/components/no-positions-icon'
 import { Heading, Lead, Subheading } from '@/components/text'
 import { getJobCategories, getJobListings } from '@/sanity/queries'
@@ -29,7 +29,7 @@ export default async function CareersPage() {
     <main className="overflow-hidden">
       <GradientBackground />
       <Container>
-        <Navbar />
+        <NavbarServer />
       </Container>
 
       <Container className="mt-16">

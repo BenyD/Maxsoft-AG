@@ -116,11 +116,11 @@ function ServiceCategoryCard({
             variant="outline"
             className="w-full"
           >
-            View All {category.name} Services
+            Alle {category.name} anzeigen
           </Button>
         ) : (
           <div className="py-2 text-center text-sm text-gray-500">
-            Category slug missing - cannot generate link
+            Kategorie-Slug fehlt - Link kann nicht generiert werden
           </div>
         )}
       </div>
@@ -147,12 +147,13 @@ export default async function ServicesPage() {
       </Container>
 
       <Container className="mt-16">
-        <Heading as="h1">Our Services</Heading>
+        <Heading as="h1">Unsere Dienstleistungen</Heading>
         <Lead className="mt-6 max-w-3xl">
-          Discover our comprehensive range of IT services designed to transform
-          your business. From hands-on training workshops to strategic
-          consulting, we provide the expertise you need to succeed in
-          today&apos;s digital landscape.
+          Entdecken Sie unser umfassendes Angebot an IT-Dienstleistungen, die
+          darauf ausgerichtet sind, Ihr Unternehmen zu transformieren. Von
+          praktischen Schulungsworkshops bis hin zu strategischer Beratung
+          bieten wir die Expertise, die Sie benötigen, um in der heutigen
+          digitalen Landschaft erfolgreich zu sein.
         </Lead>
       </Container>
 
@@ -177,17 +178,17 @@ export default async function ServicesPage() {
                 </svg>
               </div>
               <h2 className="mb-4 text-2xl font-semibold text-gray-900">
-                Services Coming Soon
+                Dienstleistungen kommen bald
               </h2>
               <p className="mb-8 leading-relaxed text-gray-600">
-                We&apos;re currently developing our service offerings. In the
-                meantime, contact us to discuss your specific IT needs and
-                custom solutions.
+                Wir entwickeln derzeit unser Dienstleistungsangebot.
+                Kontaktieren Sie uns in der Zwischenzeit, um Ihre spezifischen
+                IT-Bedürfnisse und maßgeschneiderte Lösungen zu besprechen.
               </p>
               <div className="flex flex-col gap-3 sm:flex-row sm:justify-center">
-                <Button href="/contact">Get in Touch</Button>
+                <Button href="/contact">Kontakt aufnehmen</Button>
                 <Button href="/company" variant="outline">
-                  Learn About Us
+                  Über uns erfahren
                 </Button>
               </div>
             </div>
@@ -198,7 +199,7 @@ export default async function ServicesPage() {
       {/* Featured Services */}
       {featuredServices.length > 0 && (
         <Container className="mt-24">
-          <Subheading>Featured Services</Subheading>
+          <Subheading>Empfohlene Dienstleistungen</Subheading>
           <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {featuredServices.map((service: ServiceExpanded) => (
               <Link

@@ -116,15 +116,16 @@ function CallToAction() {
   return (
     <div>
       <p className="max-w-sm text-sm/6 text-gray-600">
-        Join the leading companies that trust Maxsoft AG to transform their
-        technology and drive business growth.
+        Schließen Sie sich den führenden Unternehmen an, die Maxsoft AG
+        vertrauen, um ihre Technologie zu transformieren und das
+        Geschäftswachstum zu fördern.
       </p>
       <div className="mt-2">
         <Link
           href="#"
           className="inline-flex items-center gap-2 text-sm/6 font-medium text-[#01A2EE]"
         >
-          Get started
+          Loslegen
           <ArrowLongRightIcon className="size-5" />
         </Link>
       </div>
@@ -163,9 +164,9 @@ export function Testimonials({
     <div className="overflow-hidden py-32">
       <Container>
         <div ref={setReferenceWindowRef}>
-          <Subheading>What everyone is saying</Subheading>
+          <Subheading>Was alle sagen</Subheading>
           <Heading as="h3" className="mt-2">
-            Trusted by professionals.
+            Vertraut von Fachleuten.
           </Heading>
         </div>
       </Container>

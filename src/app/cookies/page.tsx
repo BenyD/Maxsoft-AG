@@ -4,7 +4,7 @@ import { Button } from '@/components/button'
 import { Container } from '@/components/container'
 import { Footer } from '@/components/footer'
 import { GradientBackground } from '@/components/gradient'
-import { Navbar } from '@/components/navbar'
+import { NavbarServer } from '@/components/navbar-server'
 import { Heading, Lead, Subheading } from '@/components/text'
 
 import { useEffect, useState } from 'react'
@@ -141,7 +141,7 @@ export default function CookiesPage() {
       <main className="overflow-hidden">
         <GradientBackground />
         <Container>
-          <Navbar />
+          <NavbarServer />
         </Container>
         <Container className="mt-16">
           <div className="animate-pulse">
@@ -157,7 +157,7 @@ export default function CookiesPage() {
     <main className="overflow-hidden">
       <GradientBackground />
       <Container>
-        <Navbar />
+        <NavbarServer />
       </Container>
 
       <Container className="mt-16">

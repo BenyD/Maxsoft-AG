@@ -26,7 +26,7 @@ export default async function AdminDashboard() {
     .gte('created_at', thisMonth.toISOString())
 
   // Fetch recent applications
-  const { data: recentApplications, error: applicationsError } = await supabase
+  const { data: recentApplications } = await supabase
     .from('job_applications')
     .select('*')
     .order('created_at', { ascending: false })
@@ -53,20 +53,8 @@ export default async function AdminDashboard() {
       }),
     ) || []
 
-  // Debug logging
-  console.log('Recent applications fetch result:', {
-    recentApplications: enhancedRecentApplications,
-    applicationsError,
-  })
-  console.log('Total applications count:', totalApplications)
-
-  // Test database connection
-  const { data: testData, error: testError } = await supabase
-    .from('job_applications')
-    .select('count')
-    .limit(1)
-
-  console.log('Database connection test:', { testData, testError })
+  // Test database connection - removed unused variables
+  await supabase.from('job_applications').select('count').limit(1)
 
   return (
     <div className="space-y-8">

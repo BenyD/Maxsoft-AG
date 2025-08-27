@@ -5,6 +5,9 @@ import { createAdminClient } from '@/lib/supabase'
 import { getJobListings } from '@/sanity/queries'
 import Link from 'next/link'
 
+// Force dynamic rendering for this page
+export const dynamic = 'force-dynamic'
+
 export default async function ApplicationsPage({
   searchParams,
 }: {
@@ -79,15 +82,7 @@ export default async function ApplicationsPage({
         }),
       ) || []
 
-    // Debug logging
-    console.log('Query results:', {
-      totalApplications,
-      applicationsCount: enhancedApplications?.length || 0,
-      page,
-      pageSize,
-      from,
-      to,
-    })
+    // Debug logging removed
 
     const totalPages = Math.ceil((totalApplications || 0) / pageSize)
 

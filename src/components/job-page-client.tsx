@@ -3,29 +3,19 @@
 import { Button } from '@/components/button'
 import { JobApplicationForm } from '@/components/job-application-form'
 import { Heading, Lead, Subheading } from '@/components/text'
-import { Alert, AlertActions, AlertDescription, AlertTitle } from '@/components/ui/alert'
+import {
+  Alert,
+  AlertActions,
+  AlertDescription,
+  AlertTitle,
+} from '@/components/ui/alert'
 import { Icon } from '@/components/ui/icon'
-import { MapPinIcon, BriefcaseIcon, CurrencyDollarIcon } from '@heroicons/react/24/solid'
+import {
+  BriefcaseIcon,
+  CurrencyDollarIcon,
+  MapPinIcon,
+} from '@heroicons/react/24/solid'
 import { useState } from 'react'
-
-interface JobApplicationFormState {
-  jobListingId: string
-  candidateName: string
-  candidateEmail: string
-  candidatePhone: string
-  candidateLinkedin: string
-  candidateLocation: string
-  coverLetter: string
-  resume: File | null
-  additionalDocuments: (File | null)[]
-  skills: string[]
-  experienceYears: number | null
-  currentCompany: string
-  currentPosition: string
-  expectedSalary: number | null
-  noticePeriod: string
-  gdprConsent: boolean
-}
 
 interface JobPageClientProps {
   job: {
@@ -52,10 +42,10 @@ export function JobPageClient({ job }: JobPageClientProps) {
   const [applicationSubmitted, setApplicationSubmitted] = useState(false)
   const [showSuccessAlert, setShowSuccessAlert] = useState(false)
 
-  const handleApplicationSubmit = async (data: JobApplicationFormState) => {
+  const handleApplicationSubmit = async () => {
     try {
       // The form already submits to the API, so we just need to handle the success
-      console.log('Application submitted successfully:', data)
+      // Application submission logging removed
 
       setApplicationSubmitted(true)
       setShowApplicationForm(false)
@@ -130,12 +120,14 @@ export function JobPageClient({ job }: JobPageClientProps) {
               </Subheading>
               <div className="rounded-lg bg-gray-50 p-6">
                 <ul className="space-y-3">
-                  {job.requirements.map((requirement: string, index: number) => (
-                    <li key={index} className="flex items-start gap-3">
-                      <div className="mt-2 h-2 w-2 flex-shrink-0 rounded-full bg-blue-500" />
-                      <span className="text-gray-700">{requirement}</span>
-                    </li>
-                  ))}
+                  {job.requirements.map(
+                    (requirement: string, index: number) => (
+                      <li key={index} className="flex items-start gap-3">
+                        <div className="mt-2 h-2 w-2 flex-shrink-0 rounded-full bg-blue-500" />
+                        <span className="text-gray-700">{requirement}</span>
+                      </li>
+                    ),
+                  )}
                 </ul>
               </div>
             </section>
@@ -185,7 +177,9 @@ export function JobPageClient({ job }: JobPageClientProps) {
                 About Maxsoft AG
               </Subheading>
               <div className="rounded-lg bg-gray-50 p-6">
-                <p className="text-gray-700 leading-relaxed">{job.aboutCompany}</p>
+                <p className="leading-relaxed text-gray-700">
+                  {job.aboutCompany}
+                </p>
               </div>
             </section>
           )}
@@ -196,7 +190,9 @@ export function JobPageClient({ job }: JobPageClientProps) {
                 How to Apply
               </Subheading>
               <div className="rounded-lg bg-gray-50 p-6">
-                <p className="text-gray-700 leading-relaxed">{job.howToApply}</p>
+                <p className="leading-relaxed text-gray-700">
+                  {job.howToApply}
+                </p>
               </div>
             </section>
           )}
@@ -206,7 +202,7 @@ export function JobPageClient({ job }: JobPageClientProps) {
             <Subheading as="h2" className="mb-4">
               Ready to Join Our Team?
             </Subheading>
-            <p className="mb-8 text-gray-600 max-w-2xl mx-auto">
+            <p className="mx-auto mb-8 max-w-2xl text-gray-600">
               {applicationSubmitted
                 ? "Thank you for your application! We'll review it and get back to you soon."
                 : "We're excited to hear from you! Click the button below to start your application."}
@@ -220,7 +216,7 @@ export function JobPageClient({ job }: JobPageClientProps) {
                   Apply Now
                 </Button>
               ) : (
-                <div className="font-medium text-green-600 text-lg">
+                <div className="text-lg font-medium text-green-600">
                   ✅ Application Submitted Successfully
                 </div>
               )}
@@ -229,7 +225,7 @@ export function JobPageClient({ job }: JobPageClientProps) {
               <p>For questions about this position, please contact us at</p>
               <a
                 href="mailto:info@maxsoft.ch"
-                className="text-blue-600 hover:text-blue-700 font-medium hover:underline"
+                className="font-medium text-blue-600 hover:text-blue-700 hover:underline"
               >
                 info@maxsoft.ch
               </a>

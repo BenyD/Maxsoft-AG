@@ -117,47 +117,53 @@ export default async function ServicePage({ params }: ServicePageProps) {
           {/* Service Details Sidebar */}
           <div className="lg:col-span-1">
             <div className="sticky top-8 space-y-6">
-              <div className="rounded-xl border border-gray-200 bg-white p-6">
-                <h3 className="mb-4 font-semibold text-gray-900">
-                  Service Details
-                </h3>
-                <dl className="space-y-3">
-                  {service.data.duration && (
-                    <div>
-                      <dt className="text-sm font-medium text-gray-500">
-                        Duration
-                      </dt>
-                      <dd className="text-sm text-gray-900">
-                        {service.data.duration}
-                      </dd>
-                    </div>
-                  )}
-                  {service.data.deliveryMethod && (
-                    <div>
-                      <dt className="text-sm font-medium text-gray-500">
-                        Delivery Method
-                      </dt>
-                      <dd className="text-sm text-gray-900 capitalize">
-                        {service.data.deliveryMethod}
-                      </dd>
-                    </div>
-                  )}
-                  {service.data.pricing && (
-                    <div>
-                      <dt className="text-sm font-medium text-gray-500">
-                        Pricing
-                      </dt>
-                      <dd className="text-sm text-gray-900">
-                        {service.data.pricing}
-                      </dd>
-                    </div>
-                  )}
-                </dl>
-              </div>
+              {/* Only show Service Details card if any of the details exist */}
+              {(service.data.duration ||
+                service.data.deliveryMethod ||
+                service.data.pricing) && (
+                <div className="rounded-xl border border-gray-200 bg-white p-6">
+                  <h3 className="mb-4 font-semibold text-gray-900">
+                    Service Details
+                  </h3>
+                  <dl className="space-y-3">
+                    {service.data.duration && (
+                      <div>
+                        <dt className="text-sm font-medium text-gray-500">
+                          Duration
+                        </dt>
+                        <dd className="text-sm text-gray-900">
+                          {service.data.duration}
+                        </dd>
+                      </div>
+                    )}
+                    {service.data.deliveryMethod && (
+                      <div>
+                        <dt className="text-sm font-medium text-gray-500">
+                          Delivery Method
+                        </dt>
+                        <dd className="text-sm text-gray-900 capitalize">
+                          {service.data.deliveryMethod}
+                        </dd>
+                      </div>
+                    )}
+                    {service.data.pricing && (
+                      <div>
+                        <dt className="text-sm font-medium text-gray-500">
+                          Pricing
+                        </dt>
+                        <dd className="text-sm text-gray-900">
+                          {service.data.pricing}
+                        </dd>
+                      </div>
+                    )}
+                  </dl>
+                </div>
+              )}
 
+              {/* Action Buttons */}
               <div className="rounded-xl border border-gray-200 bg-white p-6">
-                <Button href="/contact" className="mb-3 w-full">
-                  Get Started
+                <Button href="/contact#beratung-buchen" className="mb-3 w-full">
+                  Booking Form
                 </Button>
                 <Button href="/contact" variant="outline" className="w-full">
                   Request Quote

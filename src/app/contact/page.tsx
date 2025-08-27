@@ -5,7 +5,7 @@ import { Container } from '@/components/container'
 import { EmbeddedContent } from '@/components/embedded-content'
 import { Footer } from '@/components/footer'
 import { GradientBackground } from '@/components/gradient'
-import { Navbar } from '@/components/navbar'
+import { NavbarServer } from '@/components/navbar-server'
 import { Heading, Lead, Subheading } from '@/components/text'
 import {
   getContactInfo,
@@ -32,7 +32,7 @@ export default async function ContactPage() {
     return (
       <div className="overflow-hidden">
         <GradientBackground />
-        <Navbar />
+        <NavbarServer />
         <main>
           <Container className="pb-24">
             <Subheading>Kontaktinformationen</Subheading>
@@ -40,7 +40,8 @@ export default async function ContactPage() {
               Bürodetails
             </Heading>
             <Lead className="mt-6 max-w-3xl">
-              Kontaktinformationen werden bald verfügbar sein. Bitte schauen Sie später wieder vorbei.
+              Kontaktinformationen werden bald verfügbar sein. Bitte schauen Sie
+              später wieder vorbei.
             </Lead>
           </Container>
         </main>
@@ -55,7 +56,7 @@ export default async function ContactPage() {
   return (
     <div className="overflow-hidden">
       <GradientBackground />
-      <Navbar />
+      <NavbarServer />
       <main>
         <ContactHero />
         <ContactForm serviceCategories={serviceCategories.data || []} />
@@ -78,9 +79,10 @@ async function ContactHero() {
             Kontaktieren Sie unser Team
           </Heading>
           <Lead className="mt-6">
-            Bereit, Ihr Unternehmen mit modernsten IT-Lösungen zu transformieren?
-            Kontaktieren Sie uns heute, um Ihre Bedürfnisse zu besprechen und zu entdecken, wie wir Ihnen helfen können,
-            Ihre Ziele zu erreichen.
+            Bereit, Ihr Unternehmen mit modernsten IT-Lösungen zu
+            transformieren? Kontaktieren Sie uns heute, um Ihre Bedürfnisse zu
+            besprechen und zu entdecken, wie wir Ihnen helfen können, Ihre Ziele
+            zu erreichen.
           </Lead>
         </div>
       </Container>
@@ -310,7 +312,9 @@ async function BookingSection() {
           <Lead className="mt-6 max-w-3xl">
             {externalLinks && externalLinks.length > 0 ? (
               <>
-                Keine aktiven Buchungslinks gefunden. Bitte überprüfen Sie Ihr Sanity CMS, um sicherzustellen, dass mindestens ein Buchungslink als aktiv markiert ist.
+                Keine aktiven Buchungslinks gefunden. Bitte überprüfen Sie Ihr
+                Sanity CMS, um sicherzustellen, dass mindestens ein Buchungslink
+                als aktiv markiert ist.
               </>
             ) : (
               'Keine externen Links gefunden. Bitte überprüfen Sie Ihre Sanity CMS-Konfiguration.'
@@ -323,14 +327,15 @@ async function BookingSection() {
 
   return (
     <div className="overflow-hidden">
-      <Container className="pb-24">
+      <Container className="scroll-mt-20 pb-24" id="beratung-buchen">
         <Subheading>Beratung buchen</Subheading>
         <Heading as="h3" className="mt-2">
           Ihre kostenlose Beratung planen
         </Heading>
         <Lead className="mt-6 max-w-3xl">
-          Bereit loszulegen? Buchen Sie eine Beratung mit unseren Experten, um Ihre
-          IT-Bedürfnisse zu besprechen und maßgeschneiderte Lösungen für Ihr Unternehmen zu entdecken.
+          Bereit loszulegen? Buchen Sie eine Beratung mit unseren Experten, um
+          Ihre IT-Bedürfnisse zu besprechen und maßgeschneiderte Lösungen für
+          Ihr Unternehmen zu entdecken.
         </Lead>
 
         <div className="mt-16 rounded-xl border border-gray-200 bg-gray-50 p-6 sm:p-8">
@@ -388,8 +393,8 @@ async function ExternalLinksSection() {
           Greifen Sie auf unsere Plattformen zu
         </Heading>
         <Lead className="mt-6 max-w-3xl">
-          Verbinden Sie sich direkt von dieser Seite aus mit unseren verschiedenen
-          Dienstleistungen und Plattformen.
+          Verbinden Sie sich direkt von dieser Seite aus mit unseren
+          verschiedenen Dienstleistungen und Plattformen.
         </Lead>
 
         <div className="mt-16 space-y-8">

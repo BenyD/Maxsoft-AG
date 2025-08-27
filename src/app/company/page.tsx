@@ -4,7 +4,7 @@ import { Container } from '@/components/container'
 import { Footer } from '@/components/footer'
 import { GradientBackground } from '@/components/gradient'
 import { LinkedInIcon } from '@/components/linkedin-icon'
-import { Navbar } from '@/components/navbar'
+import { NavbarServer } from '@/components/navbar-server'
 import { NoPositionsIcon } from '@/components/no-positions-icon'
 import { Heading, Lead, Subheading } from '@/components/text'
 import { image } from '@/sanity/image'
@@ -49,7 +49,7 @@ function Header() {
           <h2 className="text-2xl font-medium tracking-tight">
             Warum Maxsoft?
           </h2>
-          <p className="mt-6 text-sm/6 text-gray-600">
+          <p className="mt-6 text-lg text-gray-600">
             Maxsoft unterscheidet sich durch unseren ganzheitlichen Ansatz. Wir
             navigieren dich durch alle Phasen der IT-Modernisierung – von der
             Analyse über das Design bis hin zur Implementierung und dem
@@ -283,7 +283,7 @@ async function Team() {
   const teamMembers = await getTeamMembers()
 
   return (
-    <Container className="mt-32">
+    <Container className="mt-32 scroll-mt-20" id="team">
       <Subheading>Unser Team</Subheading>
       <Heading as="h3" className="mt-2">
         Gegründet von Technologieexperten.
@@ -295,14 +295,14 @@ async function Team() {
       </Lead>
       <div className="mt-12 grid grid-cols-1 gap-12 lg:grid-cols-2">
         <div className="max-w-lg">
-          <p className="mt-6 text-sm/6 text-gray-600">
+          <p className="mt-6 text-lg text-gray-600">
             Vor Jahren, während sie als IT-Berater bei führenden
             Technologieunternehmen arbeiteten, erkannten unsere Gründer eine
             gemeinsame Herausforderung: Unternehmen kämpften darum, mit der
             technologischen Innovation Schritt zu halten und dabei die
             betriebliche Effizienz zu erhalten.
           </p>
-          <p className="mt-8 text-sm/6 text-gray-600">
+          <p className="mt-8 text-lg text-gray-600">
             Heute transformiert Maxsoft AG Unternehmen durch innovative
             Technologielösungen und hilft Organisationen dabei, die digitale
             Transformation zu bewältigen, die Cybersicherheit zu verbessern und
@@ -372,7 +372,7 @@ async function Partners() {
   const industryPartners = await getIndustryPartners()
 
   return (
-    <Container className="mt-32">
+    <Container className="mt-32 scroll-mt-20" id="partners">
       {(technologyPartners.data && technologyPartners.data.length > 0) ||
       (industryPartners.data && industryPartners.data.length > 0) ? (
         <React.Fragment key="partners-section">
@@ -477,7 +477,7 @@ async function Careers() {
   const jobListings = await getJobListings()
 
   return (
-    <Container className="my-32">
+    <Container className="my-32 scroll-mt-20" id="careers">
       <Subheading>Karriere</Subheading>
       <Heading as="h3" className="mt-2">
         Werde Teil unseres innovativen Teams.
@@ -590,29 +590,12 @@ async function Careers() {
   )
 }
 
-function CallToAction() {
-  return (
-    <Container className="mt-32">
-      <div className="rounded-2xl bg-gray-50 px-6 py-16 text-center">
-        <h2 className="mb-4 text-2xl font-semibold text-gray-900">
-          Starte noch heute deine digitale Reise mit Maxsoft.
-        </h2>
-        <div className="flex flex-col gap-3 sm:flex-row sm:justify-center">
-          <Button href="/contact" className="px-8 py-3">
-            Kontakt
-          </Button>
-        </div>
-      </div>
-    </Container>
-  )
-}
-
 export default function Company() {
   return (
     <main className="overflow-hidden">
       <GradientBackground />
       <Container>
-        <Navbar />
+        <NavbarServer />
       </Container>
       <Header />
       <MissionSection />
@@ -620,7 +603,6 @@ export default function Company() {
       <Team />
       <Partners />
       <Careers />
-      <CallToAction />
       <Footer />
     </main>
   )

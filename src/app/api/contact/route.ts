@@ -105,7 +105,7 @@ export async function POST(request: NextRequest) {
         html: userEmailHtml,
       })
 
-      console.log('Emails sent successfully')
+      // Email sending logging removed
     } catch (emailError) {
       console.error('Email sending failed:', emailError)
       // Continue with the response even if emails fail

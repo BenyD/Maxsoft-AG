@@ -44,8 +44,6 @@ export function CookieBanner() {
       localStorage.setItem('cookiePreferences', JSON.stringify(allAccepted))
       localStorage.setItem('cookieConsent', 'true')
 
-      console.log('✅ All cookies accepted and saved:', allAccepted)
-
       // Dispatch event to notify other components
       window.dispatchEvent(
         new CustomEvent('cookiePreferencesUpdated', {
@@ -72,8 +70,6 @@ export function CookieBanner() {
     try {
       localStorage.setItem('cookiePreferences', JSON.stringify(onlyNecessary))
       localStorage.setItem('cookieConsent', 'true')
-
-      console.log('✅ Only necessary cookies accepted:', onlyNecessary)
 
       window.dispatchEvent(
         new CustomEvent('cookiePreferencesUpdated', {

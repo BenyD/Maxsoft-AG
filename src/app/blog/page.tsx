@@ -3,7 +3,7 @@ import { Container } from '@/components/container'
 import { Footer } from '@/components/footer'
 import { GradientBackground } from '@/components/gradient'
 import { Link } from '@/components/link'
-import { Navbar } from '@/components/navbar'
+import { NavbarServer } from '@/components/navbar-server'
 import { Heading, Lead, Subheading } from '@/components/text'
 import { image } from '@/sanity/image'
 import {
@@ -346,7 +346,7 @@ export default async function Blog({
     <main className="overflow-hidden">
       <GradientBackground />
       <Container>
-        <Navbar />
+        <NavbarServer />
         <Subheading className="mt-16">Blog</Subheading>
         <Heading as="h1" className="mt-2">
           Was passiert bei Maxsoft AG.

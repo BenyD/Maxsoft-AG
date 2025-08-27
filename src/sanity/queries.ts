@@ -494,13 +494,6 @@ export async function getServicesByCategory(categorySlug: string) {
       params: { categorySlug },
     })
 
-    // Debug logging
-    console.log(
-      'SERVICES_BY_CATEGORY_QUERY result for category:',
-      categorySlug,
-      result,
-    )
-
     if (result.data) {
       result.data.forEach((service: { title?: string; slug?: string }) => {
         if (!service.slug) {
