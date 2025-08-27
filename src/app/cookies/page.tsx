@@ -4,8 +4,9 @@ import { Button } from '@/components/button'
 import { Container } from '@/components/container'
 import { Footer } from '@/components/footer'
 import { GradientBackground } from '@/components/gradient'
-import { NavbarServer } from '@/components/navbar-server'
+import { Navbar } from '@/components/navbar'
 import { Heading, Lead, Subheading } from '@/components/text'
+import { client } from '@/sanity/client'
 
 import { useEffect, useState } from 'react'
 
@@ -27,6 +28,7 @@ export default function CookiesPage() {
   const [preferences, setPreferences] =
     useState<CookiePreferences>(defaultPreferences)
   const [hasLoaded, setHasLoaded] = useState(false)
+  const [serviceCategories, setServiceCategories] = useState([])
 
   useEffect(() => {
     // Load saved preferences from localStorage
@@ -40,6 +42,25 @@ export default function CookiesPage() {
       }
     }
     setHasLoaded(true)
+
+    // Fetch service categories for navbar
+    const fetchServiceCategories = async () => {
+      try {
+        const query = `*[_type == "serviceCategory" && isActive == true] | order(order asc) {
+          _id,
+          name,
+          slug,
+          icon,
+          color
+        }`
+        const categories = await client.fetch(query)
+        setServiceCategories(categories)
+      } catch (error) {
+        console.error('Error fetching service categories:', error)
+      }
+    }
+
+    fetchServiceCategories()
   }, [])
 
   const handlePreferenceChange = (
@@ -141,7 +162,7 @@ export default function CookiesPage() {
       <main className="overflow-hidden">
         <GradientBackground />
         <Container>
-          <NavbarServer />
+          <Navbar serviceCategories={serviceCategories} />
         </Container>
         <Container className="mt-16">
           <div className="animate-pulse">
@@ -157,7 +178,7 @@ export default function CookiesPage() {
     <main className="overflow-hidden">
       <GradientBackground />
       <Container>
-        <NavbarServer />
+        <Navbar serviceCategories={serviceCategories} />
       </Container>
 
       <Container className="mt-16">
@@ -334,7 +355,7 @@ export default function CookiesPage() {
       </Container>
 
       {/* Cookie Information */}
-      <Container className="mt-16">
+      <Container className="mt-16 mb-16">
         <div className="rounded-2xl border border-gray-200 bg-white p-8 shadow-sm">
           <Subheading>Über Cookies</Subheading>
           <div className="prose prose-gray mt-6 max-w-none">
@@ -348,7 +369,7 @@ export default function CookiesPage() {
 
             <div className="mt-6 grid gap-6 md:grid-cols-2">
               <div>
-                <h4 className="mb-2 font-medium text-gray-900">
+                <h4 className="mb-2 font-medium text-gray-700">
                   Wofür wir Cookies verwenden
                 </h4>
                 <ul className="space-y-1 text-sm text-gray-700">
@@ -362,7 +383,7 @@ export default function CookiesPage() {
               </div>
 
               <div>
-                <h4 className="mb-2 font-medium text-gray-900">Ihre Rechte</h4>
+                <h4 className="mb-2 font-medium text-gray-700">Ihre Rechte</h4>
                 <ul className="space-y-1 text-sm text-gray-700">
                   <li>
                     • Sie können Cookie-Einstellungen jederzeit kontrollieren

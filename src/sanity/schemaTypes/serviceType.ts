@@ -1,5 +1,6 @@
 import { CogIcon } from '@sanity/icons'
 import { defineField, defineType } from 'sanity'
+import { createImageField } from './shared/imageField'
 
 export const serviceType = defineType({
   name: 'service',
@@ -45,21 +46,7 @@ export const serviceType = defineType({
       of: [{ type: 'block' }],
       description: 'Detailed description for the service page',
     }),
-    defineField({
-      name: 'featuredImage',
-      title: 'Featured Image',
-      type: 'image',
-      options: {
-        hotspot: true,
-      },
-      fields: [
-        {
-          name: 'alt',
-          type: 'string',
-          title: 'Alternative Text',
-        },
-      ],
-    }),
+    createImageField('featuredImage', 'Featured Image'),
     defineField({
       name: 'benefits',
       title: 'Key Benefits',

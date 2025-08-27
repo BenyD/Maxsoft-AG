@@ -279,6 +279,207 @@ function Person({
   )
 }
 
+function TechnologyPartnerCard({
+  companyName,
+  description,
+  logo,
+  websiteUrl,
+  partnershipType,
+}: {
+  companyName: string
+  description: string
+  logo: {
+    asset: {
+      _ref: string
+      _type: 'reference'
+    }
+    _type: 'image'
+    hotspot?: {
+      x: number
+      y: number
+      height: number
+      width: number
+    }
+    crop?: {
+      top: number
+      bottom: number
+      left: number
+      right: number
+    }
+  }
+  websiteUrl?: string
+  partnershipType?: string
+}) {
+  return (
+    <li className="group">
+      <div className="relative overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm transition-all duration-200 hover:border-gray-300 hover:shadow-md">
+        {/* Large Rectangular/Square Image Section */}
+        <div className="relative flex w-full items-center justify-center p-8">
+          <img
+            alt={companyName}
+            src={image(logo)
+              .width(600)
+              .height(400)
+              .fit('crop')
+              .crop('focalpoint')
+              .focalPoint(logo.hotspot?.x || 0.5, logo.hotspot?.y || 0.5)
+              .url()}
+            className="max-h-48 max-w-full object-contain"
+          />
+          {/* Partnership Type Badge */}
+          {partnershipType && (
+            <div className="absolute top-4 right-4">
+              <span className="inline-flex items-center rounded-full bg-green-600/90 px-3 py-1 text-xs font-medium text-white shadow-sm ring-1 ring-white/20 ring-inset">
+                {partnershipType
+                  .split('-')
+                  .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+                  .join(' ')}
+              </span>
+            </div>
+          )}
+        </div>
+
+        {/* Content Section Below Image */}
+        <div className="p-6 text-center">
+          <h3 className="text-xl font-semibold text-gray-900 transition-colors group-hover:text-green-600">
+            {companyName}
+          </h3>
+          <p className="mt-3 text-base leading-relaxed text-gray-700">
+            {description}
+          </p>
+
+          {/* Website Button */}
+          {websiteUrl && (
+            <div className="mt-4 flex justify-center">
+              <a
+                href={websiteUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 rounded-lg bg-gray-50 px-4 py-2 text-sm font-medium text-gray-700 transition-all duration-200 hover:bg-green-600 hover:text-white hover:shadow-sm"
+                aria-label={`Visit ${companyName} website`}
+              >
+                <span>Website besuchen</span>
+                <svg
+                  className="size-4"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                  />
+                </svg>
+              </a>
+            </div>
+          )}
+        </div>
+      </div>
+    </li>
+  )
+}
+
+function IndustryPartnerCard({
+  companyName,
+  description,
+  logo,
+  websiteUrl,
+  industry,
+}: {
+  companyName: string
+  description: string
+  logo: {
+    asset: {
+      _ref: string
+      _type: 'reference'
+    }
+    _type: 'image'
+    hotspot?: {
+      x: number
+      y: number
+      height: number
+      width: number
+    }
+    crop?: {
+      top: number
+      bottom: number
+      left: number
+      right: number
+    }
+  }
+  websiteUrl?: string
+  industry?: string
+}) {
+  return (
+    <li className="group">
+      <div className="relative overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm transition-all duration-200 hover:border-gray-300 hover:shadow-md">
+        {/* Large Rectangular/Square Image Section */}
+        <div className="relative flex w-full items-center justify-center p-8">
+          <img
+            alt={companyName}
+            src={image(logo)
+              .width(800)
+              .height(400)
+              .fit('crop')
+              .crop('focalpoint')
+              .focalPoint(logo.hotspot?.x || 0.5, logo.hotspot?.y || 0.5)
+              .url()}
+            className="max-h-48 max-w-full object-contain"
+          />
+          {/* Industry Badge */}
+          {industry && (
+            <div className="absolute top-4 right-4">
+              <span className="inline-flex items-center rounded-full bg-blue-600/90 px-3 py-1 text-xs font-medium text-white shadow-sm ring-1 ring-white/20 ring-inset">
+                {industry}
+              </span>
+            </div>
+          )}
+        </div>
+
+        {/* Content Section Below Image */}
+        <div className="p-6 text-center">
+          <h3 className="text-xl font-semibold text-gray-900 transition-colors group-hover:text-blue-600">
+            {companyName}
+          </h3>
+          <p className="mt-3 text-base leading-relaxed text-gray-700">
+            {description}
+          </p>
+
+          {/* Website Button */}
+          {websiteUrl && (
+            <div className="mt-4 flex justify-center">
+              <a
+                href={websiteUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 rounded-lg bg-gray-50 px-4 py-2 text-sm font-medium text-gray-700 transition-all duration-200 hover:bg-blue-600 hover:text-white hover:shadow-sm"
+                aria-label={`Visit ${companyName} website`}
+              >
+                <span>Website besuchen</span>
+                <svg
+                  className="size-4"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                  />
+                </svg>
+              </a>
+            </div>
+          )}
+        </div>
+      </div>
+    </li>
+  )
+}
+
 async function Team() {
   const teamMembers = await getTeamMembers()
 
@@ -394,19 +595,17 @@ async function Partners() {
               <hr className="mt-6 border-t border-gray-200" />
               <ul
                 role="list"
-                className="mx-auto mt-10 grid grid-cols-1 gap-8 lg:grid-cols-2"
+                className="mx-auto mt-10 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3"
               >
                 {technologyPartners.data.map((partner: TechnologyPartner) => (
-                  <li key={partner._id}>
-                    <img
-                      alt={partner.companyName}
-                      src={image(partner.logo).width(56).height(56).url()}
-                      className="h-14 object-contain"
-                    />
-                    <p className="mt-6 max-w-lg text-sm/6 text-gray-500">
-                      {partner.description}
-                    </p>
-                  </li>
+                  <TechnologyPartnerCard
+                    key={partner._id}
+                    companyName={partner.companyName}
+                    description={partner.description}
+                    logo={partner.logo}
+                    websiteUrl={partner.websiteUrl}
+                    partnershipType={partner.partnershipType}
+                  />
                 ))}
               </ul>
             </React.Fragment>
@@ -423,12 +622,13 @@ async function Partners() {
                 className="mx-auto mt-16 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3"
               >
                 {industryPartners.data.map((partner: IndustryPartner) => (
-                  <Person
+                  <IndustryPartnerCard
                     key={partner._id}
-                    name={partner.companyName}
-                    title={partner.description}
-                    photo={partner.logo}
-                    linkedinUrl={partner.websiteUrl}
+                    companyName={partner.companyName}
+                    description={partner.description}
+                    logo={partner.logo}
+                    websiteUrl={partner.websiteUrl}
+                    industry={partner.industry}
                   />
                 ))}
               </ul>

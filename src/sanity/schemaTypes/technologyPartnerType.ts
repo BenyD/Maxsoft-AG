@@ -1,5 +1,6 @@
 import { CogIcon } from '@sanity/icons'
 import { defineField, defineType } from 'sanity'
+import { createImageField } from './shared/imageField'
 
 export const technologyPartnerType = defineType({
   name: 'technologyPartner',
@@ -13,15 +14,7 @@ export const technologyPartnerType = defineType({
       type: 'string',
       validation: (Rule) => Rule.required(),
     }),
-    defineField({
-      name: 'logo',
-      title: 'Company Logo',
-      type: 'image',
-      options: {
-        hotspot: false,
-      },
-      validation: (Rule) => Rule.required(),
-    }),
+    createImageField('logo', 'Company Logo', true),
     defineField({
       name: 'description',
       title: 'Partnership Description',

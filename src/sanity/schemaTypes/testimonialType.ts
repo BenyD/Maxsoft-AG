@@ -1,5 +1,6 @@
 import { CommentIcon } from '@sanity/icons'
 import { defineField, defineType } from 'sanity'
+import { createImageField } from './shared/imageField'
 
 export const testimonialType = defineType({
   name: 'testimonial',
@@ -38,21 +39,7 @@ export const testimonialType = defineType({
           type: 'string',
           validation: (Rule) => Rule.required(),
         }),
-        defineField({
-          name: 'photo',
-          title: 'Photo',
-          type: 'image',
-          options: {
-            hotspot: true,
-          },
-          fields: [
-            {
-              name: 'alt',
-              type: 'string',
-              title: 'Alternative Text',
-            },
-          ],
-        }),
+        createImageField('photo', 'Photo'),
       ],
       validation: (Rule) => Rule.required(),
     }),

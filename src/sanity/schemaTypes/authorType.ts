@@ -1,5 +1,6 @@
-import {UserIcon} from '@sanity/icons'
-import {defineArrayMember, defineField, defineType} from 'sanity'
+import { UserIcon } from '@sanity/icons'
+import { defineArrayMember, defineField, defineType } from 'sanity'
+import { createImageField } from './shared/imageField'
 
 export const authorType = defineType({
   name: 'author',
@@ -18,20 +19,14 @@ export const authorType = defineType({
         source: 'name',
       },
     }),
-    defineField({
-      name: 'image',
-      type: 'image',
-      options: {
-        hotspot: true,
-      },
-    }),
+    createImageField('image', 'Profile Image'),
     defineField({
       name: 'bio',
       type: 'array',
       of: [
         defineArrayMember({
           type: 'block',
-          styles: [{title: 'Normal', value: 'normal'}],
+          styles: [{ title: 'Normal', value: 'normal' }],
           lists: [],
         }),
       ],

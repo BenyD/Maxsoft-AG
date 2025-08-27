@@ -1,5 +1,6 @@
 import { UsersIcon } from '@sanity/icons'
 import { defineField, defineType } from 'sanity'
+import { createImageField } from './shared/imageField'
 
 export const teamMemberType = defineType({
   name: 'teamMember',
@@ -19,15 +20,7 @@ export const teamMemberType = defineType({
       type: 'string',
       validation: (Rule) => Rule.required(),
     }),
-    defineField({
-      name: 'photo',
-      title: 'Profile Photo',
-      type: 'image',
-      options: {
-        hotspot: true,
-      },
-      validation: (Rule) => Rule.required(),
-    }),
+    createImageField('photo', 'Profile Photo', true),
     defineField({
       name: 'linkedinUrl',
       title: 'LinkedIn Profile URL',

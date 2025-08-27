@@ -93,9 +93,9 @@ function AboutSection() {
         </div>
         <Screenshot
           width={1216}
-          height={768}
+          height={1000}
           src="/pictures/meeting.jpg"
-          className="mt-16 h-144 sm:h-auto sm:w-304"
+          className="mx-auto mt-16 w-full max-w-4xl"
         />
       </Container>
     </div>
@@ -118,7 +118,7 @@ function BentoSection() {
             title="Microsoft Azure"
             description="Geschäftslösungen basierend auf Microsoft Azure Cloud Services für skalierbare, sichere und zuverlässige Cloud-Infrastruktur."
             graphic={
-              <div className="h-80 bg-[url(/pictures/azure.png)] bg-size-[1000px_560px] bg-position-[left_-109px_top_-112px] bg-no-repeat" />
+              <div className="h-80 bg-[url(/pictures/azure.png)] bg-cover bg-center bg-no-repeat" />
             }
             fade={['bottom']}
             className="max-lg:rounded-t-4xl lg:col-span-3 lg:rounded-tl-4xl"
@@ -128,7 +128,7 @@ function BentoSection() {
             title="Microsoft 365"
             description="Microsoft 365 ist eine umfassende Produktivitätssuite, während Microsoft Copilot ein KI-gestützter Coding-Assistent ist, der die Entwicklereffizienz steigert."
             graphic={
-              <div className="absolute inset-0 bg-[url(/screenshots/competitors.png)] bg-size-[1100px_650px] bg-position-[left_-38px_top_-73px] bg-no-repeat" />
+              <div className="absolute inset-0 bg-[url(/screenshots/competitors.png)] bg-cover bg-center bg-no-repeat" />
             }
             fade={['bottom']}
             className="lg:col-span-3 lg:rounded-tr-4xl"
@@ -163,7 +163,7 @@ function BentoSection() {
             title="Barracuda Networks"
             description="Der weltweit führende Anbieter von E-Mail-Schutz, Anwendungsschutz, Netzwerksicherheit und Datensicherheitslösungen für umfassenden Geschäftsschutz."
             graphic={
-              <div className="h-80 bg-[url(/pictures/barracuda.png)] bg-size-[1000px_560px] bg-position-[left_-109px_top_-112px] bg-no-repeat" />
+              <div className="h-80 bg-[url(/pictures/barracuda.png)] bg-cover bg-center bg-no-repeat" />
             }
             className="lg:col-span-2"
           />
@@ -172,7 +172,7 @@ function BentoSection() {
             title="Fortinet Group"
             description="Ein Cybersicherheitsunternehmen, das Netzwerksicherheitslösungen und -dienste für umfassenden Bedrohungsschutz und Unternehmenssicherheit bereitstellt."
             graphic={
-              <div className="h-80 bg-[url(/pictures/fortinet.png)] bg-size-[1000px_560px] bg-position-[left_-109px_top_-112px] bg-no-repeat" />
+              <div className="h-80 bg-[url(/pictures/fortinet.png)] bg-cover bg-center bg-no-repeat" />
             }
             className="lg:col-span-2"
           />
@@ -181,7 +181,7 @@ function BentoSection() {
             title="Framer & Figma"
             description="Professionelle Design- und Prototyping-Tools für die Erstellung beeindruckender Benutzeroberflächen, interaktiver Prototypen und kollaborativer Design-Workflows."
             graphic={
-              <div className="h-80 bg-[url(/pictures/framer-figma.png)] bg-size-[1000px_560px] bg-position-[left_-109px_top_-112px] bg-no-repeat" />
+              <div className="h-80 bg-[url(/pictures/framer-figma.png)] bg-cover bg-center bg-no-repeat" />
             }
             className="lg:col-span-2"
           />
@@ -207,7 +207,7 @@ function DarkBentoSection() {
             title="Microsoft Cloud"
             description="Nutzen Sie die volle Kraft der Microsoft Cloud. Mit integrierten Lösungen wie Azure, Microsoft 365 und Dynamics 365 optimieren wir Ihre Geschäftsprozesse. Skalierbare Technologien und höchste Sicherheitsstandards gewährleisten Effizienz und Zukunftssicherheit."
             graphic={
-              <div className="h-80 bg-[url(/screenshots/networking.png)] bg-size-[851px_344px] bg-no-repeat" />
+              <div className="h-80 bg-[url(/screenshots/networking.png)] bg-cover bg-center bg-no-repeat" />
             }
             fade={['top']}
             className="max-lg:rounded-t-4xl lg:col-span-3 lg:rounded-tl-4xl"
@@ -234,7 +234,7 @@ function DarkBentoSection() {
             title="Sanfte Migration"
             description="Wir begleiten Sie auf Ihrer Reise in die Cloud. Mit sorgfältiger Planung und Implementierung gewährleisten wir eine sanfte Migration. Durch maßgeschneiderte Lösungen und moderne Technologien maximieren wir die Effizienz, Sicherheit und Flexibilität Ihrer IT-Infrastruktur."
             graphic={
-              <div className="h-80 bg-[url(/screenshots/engagement.png)] bg-size-[851px_344px] bg-no-repeat" />
+              <div className="h-80 bg-[url(/screenshots/engagement.png)] bg-cover bg-center bg-no-repeat" />
             }
             fade={['top']}
             className="max-lg:rounded-b-4xl lg:col-span-4 lg:rounded-br-4xl"
