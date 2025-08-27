@@ -63,30 +63,10 @@ function Checkmark() {
   )
 }
 
-function Photos() {
-  return (
-    <div className="z-10 col-start-1 row-start-1">
-      <div className="mx-auto flex size-full max-w-md items-center justify-around">
-        <img
-          alt=""
-          src="/linked-avatars/customer.jpg"
-          className="size-20 rounded-full bg-white/15 ring-4 ring-white/10"
-        />
-        <img
-          alt=""
-          src="/linked-avatars/manager.jpg"
-          className="size-20 rounded-full bg-white/15 ring-4 ring-white/10"
-        />
-      </div>
-    </div>
-  )
-}
-
 export function LinkedAvatars() {
   return (
     <div aria-hidden="true" className="isolate mx-auto grid h-full grid-cols-1">
       <Rings />
-      <Photos />
       <Checkmark />
     </div>
   )

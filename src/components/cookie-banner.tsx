@@ -124,33 +124,33 @@ export function CookieBanner() {
               {/* Content */}
               <div className="min-w-0 flex-1">
                 <h3 className="mb-2 text-lg font-semibold text-gray-900">
-                  We use cookies to enhance your experience
+                  Wir verwenden Cookies, um Ihr Erlebnis zu verbessern
                 </h3>
 
                 {!showDetails ? (
                   <p className="mb-4 text-sm leading-relaxed text-gray-600">
-                    We use cookies to provide you with the best possible
-                    experience on our website. These include essential cookies
-                    for functionality and optional cookies for analytics and
-                    marketing purposes.
+                    Wir verwenden Cookies, um Ihnen das bestmögliche Erlebnis
+                    auf unserer Website zu bieten. Dazu gehören essentielle
+                    Cookies für die Funktionalität und optionale Cookies für
+                    Analyse- und Marketingzwecke.
                   </p>
                 ) : (
                   <div className="mb-4 space-y-2 text-sm text-gray-600">
                     <p className="leading-relaxed">
-                      <strong>Essential cookies:</strong> Required for basic
-                      website functionality (always active)
+                      <strong>Essentielle Cookies:</strong> Erforderlich für
+                      grundlegende Website-Funktionalität (immer aktiv)
                     </p>
                     <p className="leading-relaxed">
-                      <strong>Analytics cookies:</strong> Help us understand how
-                      you use our website
+                      <strong>Analyse-Cookies:</strong> Helfen uns zu verstehen,
+                      wie Sie unsere Website nutzen
                     </p>
                     <p className="leading-relaxed">
-                      <strong>Marketing cookies:</strong> Used to deliver
-                      relevant advertisements
+                      <strong>Marketing-Cookies:</strong> Werden verwendet, um
+                      relevante Werbung zu liefern
                     </p>
                     <p className="leading-relaxed">
-                      <strong>Functional cookies:</strong> Enable enhanced
-                      features and personalization
+                      <strong>Funktionale Cookies:</strong> Ermöglichen
+                      erweiterte Funktionen und Personalisierung
                     </p>
                   </div>
                 )}
@@ -159,20 +159,20 @@ export function CookieBanner() {
                 <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
                   <div className="flex flex-col gap-2 sm:flex-row sm:gap-3">
                     <Button onClick={acceptAll} className="px-4 py-2 text-sm">
-                      Accept All
+                      Alle akzeptieren
                     </Button>
                     <Button
                       onClick={rejectAll}
                       variant="outline"
                       className="px-4 py-2 text-sm"
                     >
-                      Reject All
+                      Alle ablehnen
                     </Button>
                     <button
                       onClick={openCookieSettings}
                       className="text-sm text-blue-600 underline hover:text-blue-700"
                     >
-                      Customize Settings
+                      Einstellungen anpassen
                     </button>
                   </div>
 
@@ -181,7 +181,7 @@ export function CookieBanner() {
                       onClick={() => setShowDetails(!showDetails)}
                       className="flex items-center gap-1 text-sm text-gray-500 hover:text-gray-700"
                     >
-                      {showDetails ? 'Show Less' : 'Learn More'}
+                      {showDetails ? 'Weniger anzeigen' : 'Mehr erfahren'}
                       <svg
                         className={`h-4 w-4 transition-transform ${showDetails ? 'rotate-180' : ''}`}
                         fill="none"
@@ -202,22 +202,22 @@ export function CookieBanner() {
                 {/* Privacy Policy Link */}
                 <div className="mt-4 border-t border-gray-200 pt-4">
                   <p className="text-xs text-gray-500">
-                    By continuing to use our website, you agree to our use of
-                    cookies. Read our{' '}
+                    Durch die weitere Nutzung unserer Website stimmen Sie der
+                    Verwendung von Cookies zu. Lesen Sie unsere{' '}
                     <a
                       href="/cookies"
                       className="text-blue-600 underline hover:text-blue-700"
                     >
-                      Cookie Policy
+                      Cookie-Richtlinie
                     </a>{' '}
-                    and{' '}
+                    und{' '}
                     <a
                       href="/terms"
                       className="text-blue-600 underline hover:text-blue-700"
                     >
-                      Terms of Service
+                      Nutzungsbedingungen
                     </a>{' '}
-                    for more information.
+                    für weitere Informationen.
                   </p>
                 </div>
               </div>
@@ -226,7 +226,7 @@ export function CookieBanner() {
               <button
                 onClick={() => setShowBanner(false)}
                 className="flex-shrink-0 p-1 text-gray-400 hover:text-gray-600"
-                aria-label="Close cookie banner"
+                aria-label="Cookie-Banner schließen"
               >
                 <svg
                   className="h-5 w-5"

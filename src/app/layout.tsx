@@ -7,36 +7,36 @@ import type { Metadata } from 'next'
 export const metadata: Metadata = {
   title: {
     template: '%s - Maxsoft AG',
-    default: 'Maxsoft AG - Your Partner for Innovative IT Solutions',
+    default: 'Maxsoft AG - Ihr Partner für innovative IT-Lösungen',
   },
   description:
-    'Maxsoft AG offers customized IT solutions for companies of all sizes. Instead of leaving you to deal with complex, incomprehensible technologies, we offer clear, actionable strategies that optimize your IT processes. We understand that technology is constantly evolving and help you keep pace with the latest innovations to increase your competitiveness. We offer you the flexibility to customize your IT.',
+    'Maxsoft AG bietet maßgeschneiderte IT-Lösungen für Unternehmen aller Größen. Anstatt Sie mit komplexen, unverständlichen Technologien allein zu lassen, bieten wir klare, umsetzbare Strategien, die Ihre IT-Prozesse optimieren. Wir verstehen, dass sich die Technologie ständig weiterentwickelt und helfen Ihnen, mit den neuesten Innovationen Schritt zu halten, um Ihre Wettbewerbsfähigkeit zu steigern. Wir bieten Ihnen die Flexibilität, Ihre IT individuell anzupassen.',
   keywords: [
-    'IT consultancy',
-    'digital transformation',
-    'technology consulting',
-    'cloud solutions',
-    'cybersecurity',
+    'IT-Beratung',
+    'digitale Transformation',
+    'Technologieberatung',
+    'Cloud-Lösungen',
+    'Cybersicherheit',
     'Maxsoft AG',
-    'innovative IT solutions',
-    'IT optimization',
+    'innovative IT-Lösungen',
+    'IT-Optimierung',
   ],
   authors: [{ name: 'Maxsoft AG' }],
   creator: 'Maxsoft AG',
   openGraph: {
     type: 'website',
-    locale: 'en_US',
+    locale: 'de_CH',
     url: 'https://maxsoft.ag',
-    title: 'Maxsoft AG - Your Partner for Innovative IT Solutions',
+    title: 'Maxsoft AG - Ihr Partner für innovative IT-Lösungen',
     description:
-      'Maxsoft AG offers customized IT solutions for companies of all sizes. Instead of leaving you to deal with complex, incomprehensible technologies, we offer clear, actionable strategies that optimize your IT processes.',
+      'Maxsoft AG bietet maßgeschneiderte IT-Lösungen für Unternehmen aller Größen. Anstatt Sie mit komplexen, unverständlichen Technologien allein zu lassen, bieten wir klare, umsetzbare Strategien, die Ihre IT-Prozesse optimieren.',
     siteName: 'Maxsoft AG',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Maxsoft AG - Your Partner for Innovative IT Solutions',
+    title: 'Maxsoft AG - Ihr Partner für innovative IT-Lösungen',
     description:
-      'Maxsoft AG offers customized IT solutions for companies of all sizes. Instead of leaving you to deal with complex, incomprehensible technologies, we offer clear, actionable strategies that optimize your IT processes.',
+      'Maxsoft AG bietet maßgeschneiderte IT-Lösungen für Unternehmen aller Größen. Anstatt Sie mit komplexen, unverständlichen Technologien allein zu lassen, bieten wir klare, umsetzbare Strategien, die Ihre IT-Prozesse optimieren.',
   },
   robots: {
     index: true,
@@ -60,7 +60,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className="scroll-smooth">
+    <html lang="de" className="scroll-smooth">
       <head>
         <link
           rel="stylesheet"
@@ -69,7 +69,7 @@ export default function RootLayout({
         <link
           rel="alternate"
           type="application/rss+xml"
-          title="The Maxsoft AG Blog"
+          title="Der Maxsoft AG Blog"
           href="/blog/feed.xml"
         />
       </head>

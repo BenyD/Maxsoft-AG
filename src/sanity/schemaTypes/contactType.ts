@@ -64,7 +64,7 @@ export default defineType({
           name: 'country',
           title: 'Country',
           type: 'string',
-          default: 'Switzerland',
+          initialValue: 'Switzerland',
           validation: (Rule) => Rule.required(),
         }),
       ],
@@ -97,7 +97,7 @@ export default defineType({
       title: 'Opening Hours',
       type: 'array',
       of: [
-        defineType({
+        defineField({
           type: 'object',
           name: 'openingHour',
           fields: [
@@ -133,19 +133,6 @@ export default defineType({
               initialValue: true,
             }),
           ],
-          preview: {
-            select: {
-              day: 'day',
-              hours: 'hours',
-              isOpen: 'isOpen',
-            },
-            prepare({ day, hours, isOpen }) {
-              return {
-                title: day,
-                subtitle: isOpen ? hours : 'Closed',
-              }
-            },
-          },
         }),
       ],
     }),

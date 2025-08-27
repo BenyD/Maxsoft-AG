@@ -31,7 +31,7 @@ import { notFound } from 'next/navigation'
 export const metadata: Metadata = {
   title: 'Blog',
   description:
-    'Stay informed with technology insights, company news, and expert advice on digital transformation and IT strategy.',
+    'Bleiben Sie informiert mit Technologie-Einblicken, Unternehmensnachrichten und Expertenratschlägen zu digitaler Transformation und IT-Strategie.',
 }
 
 const postsPerPage = 5
@@ -43,18 +43,18 @@ async function FeaturedPosts() {
     return (
       <div className="mt-16 bg-linear-to-t from-gray-100 pb-14">
         <Container>
-          <h2 className="text-2xl font-medium tracking-tight">Featured</h2>
+          <h2 className="text-2xl font-medium tracking-tight">Empfohlen</h2>
           <div className="mt-6 text-center">
             <div className="mx-auto max-w-md">
               <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-white shadow-sm ring-1 ring-black/5">
                 <StarIcon className="h-8 w-8 text-gray-400" />
               </div>
               <h3 className="mt-4 text-lg font-medium text-gray-900">
-                No featured posts yet
+                Noch keine empfohlenen Beiträge
               </h3>
               <p className="mt-2 text-sm text-gray-500">
-                We&apos;re working on some great featured content. Check back
-                soon for our latest insights and updates.
+                Wir arbeiten an großartigen empfohlenen Inhalten. Schauen Sie
+                bald wieder vorbei für unsere neuesten Einblicke und Updates.
               </p>
             </div>
           </div>
@@ -66,7 +66,7 @@ async function FeaturedPosts() {
   return (
     <div className="mt-16 bg-linear-to-t from-gray-100 pb-14">
       <Container>
-        <h2 className="text-2xl font-medium tracking-tight">Featured</h2>
+        <h2 className="text-2xl font-medium tracking-tight">Empfohlen</h2>
         <div className="mt-6 grid grid-cols-1 gap-8 lg:grid-cols-3">
           {featuredPosts.map((post) => (
             <div
@@ -124,11 +124,11 @@ async function Categories({ selected }: { selected?: string }) {
       <div className="flex flex-wrap items-center justify-between gap-2">
         <div className="flex items-center gap-2 text-sm text-gray-500">
           <TagIcon className="h-4 w-4 text-gray-400" />
-          No categories available
+          Keine Kategorien verfügbar
         </div>
         <Button variant="outline" href="/blog/feed.xml" className="gap-1">
           <RssIcon className="size-4" />
-          RSS Feed
+          RSS-Feed
         </Button>
       </div>
     )
@@ -139,7 +139,7 @@ async function Categories({ selected }: { selected?: string }) {
       <Menu>
         <MenuButton className="flex items-center justify-between gap-2 font-medium">
           {categories.find(({ slug }) => slug === selected)?.title ||
-            'All categories'}
+            'Alle Kategorien'}
           <ChevronUpDownIcon className="size-4 fill-gray-900" />
         </MenuButton>
         <MenuItems
@@ -153,7 +153,7 @@ async function Categories({ selected }: { selected?: string }) {
               className="group grid grid-cols-[1rem_1fr] items-center gap-2 rounded-md px-2 py-1 data-focus:bg-gray-950/5"
             >
               <CheckIcon className="hidden size-4 group-data-selected:block" />
-              <p className="col-start-2 text-sm/6">All categories</p>
+              <p className="col-start-2 text-sm/6">Alle Kategorien</p>
             </Link>
           </MenuItem>
           {categories.map((category) => (
@@ -172,7 +172,7 @@ async function Categories({ selected }: { selected?: string }) {
       </Menu>
       <Button variant="outline" href="/blog/feed.xml" className="gap-1">
         <RssIcon className="size-4" />
-        RSS Feed
+        RSS-Feed
       </Button>
     </div>
   )
@@ -197,17 +197,19 @@ async function Posts({ page, category }: { page: number; category?: string }) {
             <DocumentTextIcon className="h-8 w-8 text-gray-400" />
           </div>
           <h3 className="mt-4 text-lg font-medium text-gray-900">
-            {category ? `No posts in ${category}` : 'No blog posts yet'}
+            {category
+              ? `Keine Beiträge in ${category}`
+              : 'Noch keine Blog-Beiträge'}
           </h3>
           <p className="mt-2 text-sm text-gray-500">
             {category
-              ? `We haven't published any posts in this category yet. Check back soon for new content.`
-              : "We're working on some great content. Check back soon for our latest insights and updates."}
+              ? `Wir haben noch keine Beiträge in dieser Kategorie veröffentlicht. Schauen Sie bald wieder vorbei für neue Inhalte.`
+              : 'Wir arbeiten an großartigen Inhalten. Schauen Sie bald wieder vorbei für unsere neuesten Einblicke und Updates.'}
           </p>
           {category && (
             <div className="mt-6">
               <Button href="/blog" variant="outline">
-                View all posts
+                Alle Beiträge anzeigen
               </Button>
             </div>
           )}
@@ -251,7 +253,7 @@ async function Posts({ page, category }: { page: number; category?: string }) {
                 className="flex items-center gap-1 text-sm/5 font-medium"
               >
                 <span className="absolute inset-0" />
-                Read more
+                Weiterlesen
                 <ChevronRightIcon className="size-4 fill-gray-400" />
               </Link>
             </div>
@@ -297,7 +299,7 @@ async function Pagination({
         disabled={!previousPageUrl}
       >
         <ChevronLeftIcon className="size-4" />
-        Previous
+        Zurück
       </Button>
       <div className="flex gap-2 max-sm:hidden">
         {Array.from({ length: pageCount }, (_, i) => (
@@ -317,7 +319,7 @@ async function Pagination({
         ))}
       </div>
       <Button variant="outline" href={nextPageUrl} disabled={!nextPageUrl}>
-        Next
+        Weiter
         <ChevronRightIcon className="size-4" />
       </Button>
     </div>
@@ -347,11 +349,12 @@ export default async function Blog({
         <Navbar />
         <Subheading className="mt-16">Blog</Subheading>
         <Heading as="h1" className="mt-2">
-          What&apos;s happening at Maxsoft AG.
+          Was passiert bei Maxsoft AG.
         </Heading>
         <Lead className="mt-6 max-w-3xl">
-          Stay informed with technology insights, company news, and expert
-          advice on digital transformation and IT strategy.
+          Bleiben Sie informiert mit Technologie-Einblicken,
+          Unternehmensnachrichten und Expertenratschlägen zu digitaler
+          Transformation und IT-Strategie.
         </Lead>
       </Container>
       {page === 1 && !category && <FeaturedPosts />}

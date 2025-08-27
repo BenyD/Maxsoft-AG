@@ -11,20 +11,20 @@ function CallToAction() {
   return (
     <div className="relative pt-20 pb-16 text-center sm:py-24">
       <hgroup>
-        <Subheading>Get started</Subheading>
+        <Subheading>Loslegen</Subheading>
         <p className="mt-6 text-3xl font-medium tracking-tight text-gray-950 sm:text-5xl">
-          Ready to transform your business?
+          Bereit, Ihr Unternehmen zu transformieren?
           <br />
-          Let&apos;s discuss your IT needs.
+          Lassen Sie uns über Ihre IT-Bedürfnisse sprechen.
         </p>
       </hgroup>
       <p className="mx-auto mt-6 max-w-xs text-sm/6 text-gray-500">
-        Partner with Maxsoft AG to unlock your business potential through
-        innovative technology solutions.
+        Arbeiten Sie mit Maxsoft AG zusammen, um Ihr Geschäftspotenzial durch
+        innovative Technologielösungen freizusetzen.
       </p>
       <div className="mt-6">
         <Button className="w-full sm:w-auto" href="/contact">
-          Get started
+          Loslegen
         </Button>
       </div>
     </div>
@@ -54,30 +54,31 @@ function Sitemap() {
   return (
     <>
       <div>
-        <SitemapHeading>Company</SitemapHeading>
+        <SitemapHeading>Unternehmen</SitemapHeading>
         <SitemapLinks>
-          <SitemapLink href="/company">About Us</SitemapLink>
-          <SitemapLink href="/careers">Careers</SitemapLink>
-          <SitemapLink href="/contact">Contact</SitemapLink>
+          <SitemapLink href="/company">Über uns</SitemapLink>
+          <SitemapLink href="/careers">Karriere</SitemapLink>
+          <SitemapLink href="/contact">Kontakt</SitemapLink>
           <SitemapLink href="/blog">Blog</SitemapLink>
         </SitemapLinks>
       </div>
       <div>
-        <SitemapHeading>Services</SitemapHeading>
+        <SitemapHeading>Dienstleistungen</SitemapHeading>
         <SitemapLinks>
-          <SitemapLink href="/services">All Services</SitemapLink>
-          <SitemapLink href="/#technologies">Technologies</SitemapLink>
-          <SitemapLink href="/#competencies">Competencies</SitemapLink>
+          <SitemapLink href="/services">Alle Dienstleistungen</SitemapLink>
+          <SitemapLink href="/#branchen">Branchen</SitemapLink>
+          <SitemapLink href="/#technologies">Technologien</SitemapLink>
+          <SitemapLink href="/#competencies">Kompetenzen</SitemapLink>
         </SitemapLinks>
       </div>
       <div>
-        <SitemapHeading>Legal</SitemapHeading>
+        <SitemapHeading>Rechtliches</SitemapHeading>
         <SitemapLinks>
-          <SitemapLink href="/terms">Terms of Service</SitemapLink>
-          <SitemapLink href="/cookies">Cookie Policy</SitemapLink>
-          <SitemapLink href="/impressum">Legal Notice</SitemapLink>
+          <SitemapLink href="/terms">Datenschutz</SitemapLink>
+          <SitemapLink href="/cookies">Cookie-Richtlinie</SitemapLink>
+          <SitemapLink href="/impressum">Impressum</SitemapLink>
           <SitemapLink href="/downloads/maxsoft-agb.pdf" download>
-            Download AGB
+            AGB herunterladen
           </SitemapLink>
         </SitemapLinks>
       </div>
@@ -100,21 +101,21 @@ function SocialLinks() {
       <Link
         href="https://linkedin.com/company/maxsoft-ag"
         target="_blank"
-        aria-label="Visit us on LinkedIn"
+        aria-label="Besuchen Sie uns auf LinkedIn"
         className="text-gray-950 data-hover:text-gray-950/75"
       >
         <SocialIconLinkedIn className="size-4" />
       </Link>
       <Link
         href="tel:+41415111166"
-        aria-label="Call us"
+        aria-label="Rufen Sie uns an"
         className="text-gray-950 data-hover:text-gray-950/75"
       >
         <PhoneIcon className="size-4" />
       </Link>
       <Link
         href="mailto:info@maxsoft.ch"
-        aria-label="Email us"
+        aria-label="E-Mail an uns senden"
         className="text-gray-950 data-hover:text-gray-950/75"
       >
         <EnvelopeIcon className="size-4" />
@@ -126,7 +127,7 @@ function SocialLinks() {
 function Copyright() {
   return (
     <div className="text-sm/6 text-gray-950">
-      &copy; {new Date().getFullYear()} Maxsoft AG. All rights reserved.
+      &copy; {new Date().getFullYear()} Maxsoft AG. Alle Rechte vorbehalten.
     </div>
   )
 }
@@ -146,7 +147,7 @@ export function Footer() {
                     <Logo className="h-9" />
                     <div className="mt-6 space-y-2 text-sm text-gray-600">
                       <div>Birkenstrasse 49</div>
-                      <div>6343 Rotkreuz, Switzerland</div>
+                      <div>6343 Rotkreuz, Schweiz</div>
                       <div className="mt-4 space-y-1">
                         <div>
                           <a

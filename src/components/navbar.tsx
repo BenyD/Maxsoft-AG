@@ -30,11 +30,11 @@ import { Logo } from './logo'
 import { PlusGrid, PlusGridItem, PlusGridRow } from './plus-grid'
 
 const links = [
-  { href: '/company', label: 'About Us' },
-  { href: '/#technologies', label: 'Technologies' },
-  { href: '/#competencies', label: 'Competencies' },
-  { href: '/careers', label: 'Careers' },
-  { href: '/contact', label: 'Contact' },
+  { href: '/company', label: 'Über uns' },
+  { href: '/#technologies', label: 'Technologien' },
+  { href: '/#competencies', label: 'Kompetenzen' },
+  { href: '/careers', label: 'Karriere' },
+  { href: '/contact', label: 'Kontakt' },
   { href: '/blog', label: 'Blog' },
 ]
 
@@ -45,7 +45,9 @@ function ServicesDropdown({
 }) {
   // Map icon names to Heroicon components
   const getIconComponent = (iconName: string) => {
-    const iconMap: { [key: string]: React.ComponentType<any> } = {
+    const iconMap: {
+      [key: string]: React.ComponentType<React.SVGProps<SVGSVGElement>>
+    } = {
       UserGroupIcon: UserGroupIcon,
       WrenchScrewdriverIcon: WrenchScrewdriverIcon,
       CpuChipIcon: CpuChipIcon,
@@ -63,7 +65,7 @@ function ServicesDropdown({
   return (
     <Menu as="div" className="relative">
       <MenuButton className="flex items-center px-4 py-3 text-base font-medium text-gray-950 bg-blend-multiply data-hover:bg-black/2.5">
-        Services
+        Dienstleistungen
         <ChevronDownIcon className="ml-1 h-4 w-4" />
       </MenuButton>
       <MenuItems className="absolute left-0 z-50 mt-2 w-64 origin-top-left rounded-lg bg-white shadow-lg ring-1 ring-black/5 focus:outline-none">
@@ -73,7 +75,7 @@ function ServicesDropdown({
               href="/services"
               className="block rounded-md px-3 py-2 text-sm font-medium text-gray-900 hover:bg-gray-50"
             >
-              All Services
+              Alle Dienstleistungen
             </Link>
           </MenuItem>
           {serviceCategories.length > 0 && (
@@ -147,7 +149,7 @@ function MobileNavButton() {
   return (
     <DisclosureButton
       className="flex size-12 items-center justify-center self-center rounded-xl bg-gray-50 transition-all duration-200 hover:scale-105 data-hover:bg-gray-100 lg:hidden"
-      aria-label="Open main menu"
+      aria-label="Hauptmenü öffnen"
     >
       <Bars2Icon className="size-6 text-gray-700" />
     </DisclosureButton>
@@ -161,7 +163,9 @@ function MobileNav({
 }) {
   // Map icon names to Heroicon components
   const getIconComponent = (iconName: string) => {
-    const iconMap: { [key: string]: React.ComponentType<any> } = {
+    const iconMap: {
+      [key: string]: React.ComponentType<React.SVGProps<SVGSVGElement>>
+    } = {
       UserGroupIcon: UserGroupIcon,
       WrenchScrewdriverIcon: WrenchScrewdriverIcon,
       CpuChipIcon: CpuChipIcon,
@@ -318,13 +322,15 @@ function MobileNav({
             }}
             className="text-center"
           >
-            <p className="mb-2 text-sm text-gray-500">Need help? Contact us</p>
+            <p className="mb-2 text-sm text-gray-500">
+              Brauchen Sie Hilfe? Kontaktieren Sie uns
+            </p>
             <a
               href="mailto:info@maxsoft.ch"
               className="inline-flex items-center rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-blue-700"
             >
               <EnvelopeIcon className="mr-2 h-4 w-4" />
-              Get in Touch
+              Kontakt aufnehmen
             </a>
           </motion.div>
         </div>
@@ -365,12 +371,12 @@ export function Navbar({
                     <div className="p-4">
                       <div className="mb-3">
                         <h3 className="text-sm font-medium text-gray-900">
-                          Latest Blog Post
+                          Neuester Blog-Beitrag
                         </h3>
                         <p className="mt-1 text-xs text-gray-500">
                           {new Date(
                             mostRecentPost.publishedAt || '',
-                          ).toLocaleDateString('en-US', {
+                          ).toLocaleDateString('de-CH', {
                             year: 'numeric',
                             month: 'long',
                             day: 'numeric',

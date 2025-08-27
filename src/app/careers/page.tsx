@@ -16,9 +16,9 @@ import {
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Careers - Maxsoft AG',
+  title: 'Karriere - Maxsoft AG',
   description:
-    'Join our innovative team at Maxsoft AG. Explore exciting career opportunities in IT consulting, engineering, and digital transformation.',
+    'Werden Sie Teil unseres innovativen Teams bei Maxsoft AG. Entdecken Sie spannende Karrieremöglichkeiten in der IT-Beratung, im Engineering und in der digitalen Transformation.',
 }
 
 export default async function CareersPage() {
@@ -33,18 +33,19 @@ export default async function CareersPage() {
       </Container>
 
       <Container className="mt-16">
-        <Heading as="h1">Careers at Maxsoft AG</Heading>
+        <Heading as="h1">Karriere bei Maxsoft AG</Heading>
         <Lead className="mt-6 max-w-3xl">
-          Join our innovative team and help transform businesses through
-          cutting-edge technology solutions. We work together from our offices
-          in Switzerland and remotely, fostering a collaborative environment
-          that values innovation and excellence.
+          Werden Sie Teil unseres innovativen Teams und helfen Sie dabei,
+          Unternehmen durch modernste Technologielösungen zu transformieren. Wir
+          arbeiten zusammen von unseren Büros in der Schweiz aus und remote,
+          fördern eine kollaborative Umgebung, die Innovation und Exzellenz
+          schätzt.
         </Lead>
       </Container>
 
       <Container className="mt-24">
         {jobListings.data && jobListings.data.length > 0 && (
-          <Subheading>Open Positions</Subheading>
+          <Subheading>Offene Stellen</Subheading>
         )}
         <div className="mt-12 pb-8">
           {jobListings.data && jobListings.data.length > 0 ? (
@@ -63,13 +64,13 @@ export default async function CareersPage() {
                         (job: JobListingExpanded) =>
                           job.category._id === category._id,
                       ).length || 0}{' '}
-                      position
+                      Stelle
                       {jobListings.data?.filter(
                         (job: JobListingExpanded) =>
                           job.category._id === category._id,
                       ).length === 1
                         ? ''
-                        : 's'}
+                        : 'n'}
                     </span>
                   </div>
 
@@ -117,7 +118,7 @@ export default async function CareersPage() {
                               href={`/careers/${job.slug}`}
                               className="whitespace-nowrap transition-transform group-hover:scale-105"
                             >
-                              View Details
+                              Details anzeigen
                             </Button>
                           </div>
                         </div>
@@ -131,23 +132,23 @@ export default async function CareersPage() {
               <div className="mx-auto max-w-md">
                 <NoPositionsIcon className="mx-auto mb-8 h-24 w-24 text-gray-300" />
                 <h2 className="mb-4 text-2xl font-semibold text-gray-900">
-                  No Open Positions
+                  Keine offenen Stellen
                 </h2>
                 <p className="mb-8 leading-relaxed text-gray-600">
-                  We don&apos;t have any open positions at the moment, but
-                  we&apos;re always looking for talented people to join our
-                  team. Feel free to reach out and introduce yourself!
+                  Wir haben derzeit keine offenen Stellen, aber wir suchen immer
+                  nach talentierten Menschen, die unserem Team beitreten
+                  möchten. Kontaktieren Sie uns gerne und stellen Sie sich vor!
                 </p>
                 <div className="flex flex-col gap-3 sm:flex-row sm:justify-center">
                   <Button href="/contact" className="px-8 py-3">
-                    Get in Touch
+                    Kontakt aufnehmen
                   </Button>
                   <Button
                     href="/company"
                     variant="outline"
                     className="px-8 py-3"
                   >
-                    Learn About Us
+                    Über uns erfahren
                   </Button>
                 </div>
               </div>

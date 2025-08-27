@@ -64,7 +64,7 @@ export default function CookiesPage() {
     )
 
     // Show success message
-    alert('Cookie preferences saved successfully!')
+    alert('Cookie-Einstellungen erfolgreich gespeichert!')
   }
 
   const acceptAll = () => {
@@ -84,7 +84,7 @@ export default function CookiesPage() {
       }),
     )
 
-    alert('All cookies accepted!')
+    alert('Alle Cookies akzeptiert!')
   }
 
   const rejectAll = () => {
@@ -104,13 +104,13 @@ export default function CookiesPage() {
       }),
     )
 
-    alert('Only necessary cookies will be used!')
+    alert('Nur notwendige Cookies werden verwendet!')
   }
 
   const clearAllCookies = () => {
     if (
       confirm(
-        'Are you sure you want to clear all cookies? This will reset your preferences and may log you out of services.',
+        'Sind Sie sicher, dass Sie alle Cookies löschen möchten? Dies wird Ihre Einstellungen zurücksetzen und Sie möglicherweise aus Diensten abmelden.',
       )
     ) {
       // Clear all cookies
@@ -132,7 +132,7 @@ export default function CookiesPage() {
       // Reset preferences
       setPreferences(defaultPreferences)
 
-      alert('All cookies have been cleared!')
+      alert('Alle Cookies wurden gelöscht!')
     }
   }
 
@@ -161,11 +161,12 @@ export default function CookiesPage() {
       </Container>
 
       <Container className="mt-16">
-        <Heading as="h1">Cookie Settings</Heading>
+        <Heading as="h1">Cookie-Einstellungen</Heading>
         <Lead className="mt-6 max-w-3xl">
-          Manage your cookie preferences and learn about how we use cookies to
-          improve your experience on our website. You can customize your
-          settings or accept/reject all cookies.
+          Verwalten Sie Ihre Cookie-Einstellungen und erfahren Sie, wie wir
+          Cookies verwenden, um Ihr Erlebnis auf unserer Website zu verbessern.
+          Sie können Ihre Einstellungen anpassen oder alle Cookies
+          akzeptieren/ablehnen.
         </Lead>
       </Container>
 
@@ -177,10 +178,10 @@ export default function CookiesPage() {
             <div className="mb-4 flex items-center justify-between">
               <div>
                 <h3 className="text-lg font-semibold text-gray-900">
-                  Necessary Cookies
+                  Notwendige Cookies
                 </h3>
                 <p className="mt-1 text-sm text-gray-600">
-                  Essential for the website to function properly
+                  Essentiell für die ordnungsgemäße Funktionalität der Website
                 </p>
               </div>
               <div className="flex items-center">
@@ -190,16 +191,14 @@ export default function CookiesPage() {
                   disabled
                   className="h-4 w-4 cursor-not-allowed rounded border-gray-300 text-blue-600 opacity-50"
                 />
-                <span className="ml-2 text-sm text-gray-500">
-                  Always Active
-                </span>
+                <span className="ml-2 text-sm text-gray-500">Immer aktiv</span>
               </div>
             </div>
             <p className="text-sm text-gray-700">
-              These cookies are essential for the proper functioning of our
-              website. They enable basic functions like page navigation and
-              access to secure areas. The website cannot function properly
-              without these cookies.
+              Diese Cookies sind für die ordnungsgemäße Funktionalität unserer
+              Website unerlässlich. Sie ermöglichen grundlegende Funktionen wie
+              Seitennavigation und Zugang zu sicheren Bereichen. Die Website
+              kann ohne diese Cookies nicht ordnungsgemäß funktionieren.
             </p>
           </div>
 
@@ -208,10 +207,11 @@ export default function CookiesPage() {
             <div className="mb-4 flex items-center justify-between">
               <div>
                 <h3 className="text-lg font-semibold text-gray-900">
-                  Analytics Cookies
+                  Analyse-Cookies
                 </h3>
                 <p className="mt-1 text-sm text-gray-600">
-                  Help us understand how visitors interact with our website
+                  Helfen uns zu verstehen, wie Besucher mit unserer Website
+                  interagieren
                 </p>
               </div>
               <label className="relative inline-flex cursor-pointer items-center">
@@ -227,10 +227,10 @@ export default function CookiesPage() {
               </label>
             </div>
             <p className="text-sm text-gray-700">
-              These cookies collect information about how you use our website,
-              such as which pages you visit most often. This data helps us
-              improve our website and user experience. All information is
-              aggregated and anonymous.
+              Diese Cookies sammeln Informationen darüber, wie Sie unsere
+              Website nutzen, z.B. welche Seiten Sie am häufigsten besuchen.
+              Diese Daten helfen uns, unsere Website und Benutzererfahrung zu
+              verbessern. Alle Informationen sind aggregiert und anonym.
             </p>
           </div>
 
@@ -239,10 +239,10 @@ export default function CookiesPage() {
             <div className="mb-4 flex items-center justify-between">
               <div>
                 <h3 className="text-lg font-semibold text-gray-900">
-                  Marketing Cookies
+                  Marketing-Cookies
                 </h3>
                 <p className="mt-1 text-sm text-gray-600">
-                  Used to deliver personalized advertisements
+                  Werden verwendet, um personalisierte Werbung zu liefern
                 </p>
               </div>
               <label className="relative inline-flex cursor-pointer items-center">
@@ -258,9 +258,11 @@ export default function CookiesPage() {
               </label>
             </div>
             <p className="text-sm text-gray-700">
-              These cookies are used to make advertising messages more relevant
-              to you. They perform functions like preventing the same ad from
-              continuously reappearing and ensuring ads are properly displayed.
+              Diese Cookies werden verwendet, um Werbenachrichten für Sie
+              relevanter zu machen. Sie erfüllen Funktionen wie die
+              Verhinderung, dass dieselbe Anzeige kontinuierlich wieder
+              erscheint, und stellen sicher, dass Anzeigen ordnungsgemäß
+              angezeigt werden.
             </p>
           </div>
 
@@ -269,10 +271,10 @@ export default function CookiesPage() {
             <div className="mb-4 flex items-center justify-between">
               <div>
                 <h3 className="text-lg font-semibold text-gray-900">
-                  Functional Cookies
+                  Funktionale Cookies
                 </h3>
                 <p className="mt-1 text-sm text-gray-600">
-                  Enable enhanced functionality and personalization
+                  Ermöglichen erweiterte Funktionalität und Personalisierung
                 </p>
               </div>
               <label className="relative inline-flex cursor-pointer items-center">
@@ -288,9 +290,10 @@ export default function CookiesPage() {
               </label>
             </div>
             <p className="text-sm text-gray-700">
-              These cookies enable the website to provide enhanced functionality
-              and personalization. They may be set by us or by third-party
-              providers whose services we have added to our pages.
+              Diese Cookies ermöglichen es der Website, erweiterte
+              Funktionalität und Personalisierung zu bieten. Sie können von uns
+              oder von Drittanbietern gesetzt werden, deren Dienste wir zu
+              unseren Seiten hinzugefügt haben.
             </p>
           </div>
         </div>
@@ -301,21 +304,21 @@ export default function CookiesPage() {
         <div className="rounded-2xl bg-gray-50 px-6 py-8">
           <div className="mb-6 text-center">
             <h2 className="mb-2 text-xl font-semibold text-gray-900">
-              Cookie Preferences
+              Cookie-Einstellungen
             </h2>
             <p className="text-gray-600">
-              Choose your preferred cookie settings or use the quick options
-              below.
+              Wählen Sie Ihre bevorzugten Cookie-Einstellungen oder verwenden
+              Sie die schnellen Optionen unten.
             </p>
           </div>
 
           <div className="flex flex-col gap-3 sm:flex-row sm:justify-center">
-            <Button onClick={acceptAll}>Accept All Cookies</Button>
+            <Button onClick={acceptAll}>Alle Cookies akzeptieren</Button>
             <Button onClick={savePreferences} variant="secondary">
-              Save My Preferences
+              Meine Einstellungen speichern
             </Button>
             <Button onClick={rejectAll} variant="outline">
-              Reject All (Except Necessary)
+              Alle ablehnen (außer notwendige)
             </Button>
           </div>
 
@@ -324,7 +327,7 @@ export default function CookiesPage() {
               onClick={clearAllCookies}
               className="text-sm text-red-600 underline hover:text-red-700"
             >
-              Clear All Cookies & Reset Preferences
+              Alle Cookies löschen & Einstellungen zurücksetzen
             </button>
           </div>
         </div>
@@ -333,35 +336,42 @@ export default function CookiesPage() {
       {/* Cookie Information */}
       <Container className="mt-16">
         <div className="rounded-2xl border border-gray-200 bg-white p-8 shadow-sm">
-          <Subheading>About Cookies</Subheading>
+          <Subheading>Über Cookies</Subheading>
           <div className="prose prose-gray mt-6 max-w-none">
             <p className="leading-relaxed text-gray-700">
-              Cookies are small text files that are stored on your computer or
-              mobile device when you visit our website. They help us provide you
-              with a better experience by remembering your preferences and
-              understanding how you use our site.
+              Cookies sind kleine Textdateien, die auf Ihrem Computer oder
+              Mobilgerät gespeichert werden, wenn Sie unsere Website besuchen.
+              Sie helfen uns, Ihnen eine bessere Erfahrung zu bieten, indem sie
+              Ihre Präferenzen merken und verstehen, wie Sie unsere Website
+              nutzen.
             </p>
 
             <div className="mt-6 grid gap-6 md:grid-cols-2">
               <div>
                 <h4 className="mb-2 font-medium text-gray-900">
-                  What We Use Cookies For
+                  Wofür wir Cookies verwenden
                 </h4>
                 <ul className="space-y-1 text-sm text-gray-700">
-                  <li>• Remembering your preferences and settings</li>
-                  <li>• Analyzing website traffic and usage patterns</li>
-                  <li>• Improving website functionality and performance</li>
-                  <li>• Providing personalized content and experiences</li>
+                  <li>• Ihre Präferenzen und Einstellungen merken</li>
+                  <li>• Website-Traffic und Nutzungsmuster analysieren</li>
+                  <li>• Website-Funktionalität und -Leistung verbessern</li>
+                  <li>
+                    • Personalisierte Inhalte und Erfahrungen bereitstellen
+                  </li>
                 </ul>
               </div>
 
               <div>
-                <h4 className="mb-2 font-medium text-gray-900">Your Rights</h4>
+                <h4 className="mb-2 font-medium text-gray-900">Ihre Rechte</h4>
                 <ul className="space-y-1 text-sm text-gray-700">
-                  <li>• You can control cookie settings at any time</li>
-                  <li>• You can delete cookies from your browser</li>
-                  <li>• You can opt out of non-essential cookies</li>
-                  <li>• You can request information about stored data</li>
+                  <li>
+                    • Sie können Cookie-Einstellungen jederzeit kontrollieren
+                  </li>
+                  <li>• Sie können Cookies aus Ihrem Browser löschen</li>
+                  <li>• Sie können nicht-essentielle Cookies ablehnen</li>
+                  <li>
+                    • Sie können Informationen über gespeicherte Daten anfordern
+                  </li>
                 </ul>
               </div>
             </div>

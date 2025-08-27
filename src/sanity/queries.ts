@@ -502,7 +502,7 @@ export async function getServicesByCategory(categorySlug: string) {
     )
 
     if (result.data) {
-      result.data.forEach((service: any, index: number) => {
+      result.data.forEach((service: { title?: string; slug?: string }) => {
         if (!service.slug) {
           console.error(
             `Service "${service.title}" in category "${categorySlug}" is missing slug!`,

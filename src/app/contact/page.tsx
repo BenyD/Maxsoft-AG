@@ -14,6 +14,13 @@ import {
 } from '@/sanity/queries'
 import type { Contact } from '@/sanity/types/contact'
 import type { ExternalLink } from '@/sanity/types/externalLink'
+import type { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: 'Kontakt - Maxsoft AG',
+  description:
+    'Kontaktieren Sie Maxsoft AG für maßgeschneiderte IT-Lösungen. Unser Team von Experten steht bereit, um Ihre IT-Herausforderungen zu besprechen und innovative Lösungen anzubieten.',
+}
 
 export default async function ContactPage() {
   const [contactInfo, serviceCategories] = await Promise.all([
@@ -28,13 +35,12 @@ export default async function ContactPage() {
         <Navbar />
         <main>
           <Container className="pb-24">
-            <Subheading>Contact Information</Subheading>
+            <Subheading>Kontaktinformationen</Subheading>
             <Heading as="h3" className="mt-2">
-              Office details
+              Bürodetails
             </Heading>
             <Lead className="mt-6 max-w-3xl">
-              Contact information will be available soon. Please check back
-              later.
+              Kontaktinformationen werden bald verfügbar sein. Bitte schauen Sie später wieder vorbei.
             </Lead>
           </Container>
         </main>
@@ -65,16 +71,16 @@ export default async function ContactPage() {
 async function ContactHero() {
   return (
     <div className="overflow-hidden">
-      <Container className="pt-16 pb-24">
-        <div className="mx-auto max-w-2xl text-center">
-          <Subheading>Contact Us</Subheading>
+      <Container className="pt-16 pb-16">
+        <div className="max-w-3xl">
+          <Subheading>Kontakt</Subheading>
           <Heading as="h1" className="mt-2">
-            Get in touch with our team
+            Kontaktieren Sie unser Team
           </Heading>
           <Lead className="mt-6">
-            Ready to transform your business with cutting-edge IT solutions?
-            Contact us today to discuss your needs and discover how we can help
-            you achieve your goals.
+            Bereit, Ihr Unternehmen mit modernsten IT-Lösungen zu transformieren?
+            Kontaktieren Sie uns heute, um Ihre Bedürfnisse zu besprechen und zu entdecken, wie wir Ihnen helfen können,
+            Ihre Ziele zu erreichen.
           </Lead>
         </div>
       </Container>
@@ -96,14 +102,14 @@ async function ContactInformation({ mainContact }: { mainContact: Contact }) {
   return (
     <div className="overflow-hidden">
       <Container className="pb-24">
-        <Subheading>Contact Information</Subheading>
+        <Subheading>Kontaktinformationen</Subheading>
         <Heading as="h3" className="mt-2">
-          Visit our office
+          Besuchen Sie unser Büro
         </Heading>
         <Lead className="mt-6 max-w-3xl">
           {mainContact.address?.city
-            ? `Located in the heart of ${mainContact.address.city}, our office is easily accessible by public transport and car.`
-            : 'Our office is easily accessible by public transport and car.'}
+            ? `Im Herzen von ${mainContact.address.city} gelegen, ist unser Büro leicht mit öffentlichen Verkehrsmitteln und dem Auto erreichbar.`
+            : 'Unser Büro ist leicht mit öffentlichen Verkehrsmitteln und dem Auto erreichbar.'}
         </Lead>
 
         <div className="mt-16 grid grid-cols-1 gap-12 lg:grid-cols-2">
@@ -133,7 +139,7 @@ async function ContactInformation({ mainContact }: { mainContact: Contact }) {
                     className="mt-1 h-5 w-5 text-[#01A2EE]"
                   />
                   <div>
-                    <p className="font-medium text-gray-900">Address</p>
+                    <p className="font-medium text-gray-900">Adresse</p>
                     <div className="mt-1 space-y-1 text-gray-600">
                       {mainContact.address?.streetLine1 && (
                         <p>{mainContact.address.streetLine1}</p>
@@ -168,7 +174,7 @@ async function ContactInformation({ mainContact }: { mainContact: Contact }) {
                           target="_blank"
                           className="w-full sm:w-auto"
                         >
-                          Get Directions
+                          Route abrufen
                         </Button>
                       </div>
                     )}
@@ -186,7 +192,7 @@ async function ContactInformation({ mainContact }: { mainContact: Contact }) {
                     className="mt-1 h-5 w-5 text-[#01A2EE]"
                   />
                   <div>
-                    <p className="font-medium text-gray-900">Phone</p>
+                    <p className="font-medium text-gray-900">Telefon</p>
                     <p className="text-gray-600">{mainContact.phone}</p>
                   </div>
                 </div>
@@ -197,7 +203,7 @@ async function ContactInformation({ mainContact }: { mainContact: Contact }) {
                       className="mt-1 h-5 w-5 text-[#01A2EE]"
                     />
                     <div>
-                      <p className="font-medium text-gray-900">Email</p>
+                      <p className="font-medium text-gray-900">E-Mail</p>
                       <p className="text-gray-600">{mainContact.email}</p>
                     </div>
                   </div>
@@ -209,7 +215,7 @@ async function ContactInformation({ mainContact }: { mainContact: Contact }) {
             {hasOpeningHours && (
               <div>
                 <h5 className="mb-3 font-medium text-gray-900">
-                  Opening Hours
+                  Öffnungszeiten
                 </h5>
                 <div className="space-y-2">
                   {mainContact.openingHours?.map((schedule, index) => (
@@ -247,10 +253,10 @@ async function ContactInformation({ mainContact }: { mainContact: Contact }) {
                   </div>
                   <div className="min-w-0 flex-1">
                     <h5 className="text-lg font-semibold text-gray-900">
-                      Find Us
+                      Finden Sie uns
                     </h5>
                     <p className="mt-1 text-sm text-gray-600">
-                      Interactive map showing our location
+                      Interaktive Karte mit unserem Standort
                     </p>
                   </div>
                 </div>
@@ -258,7 +264,7 @@ async function ContactInformation({ mainContact }: { mainContact: Contact }) {
                   <iframe
                     src={mainContact.googleMapsEmbed}
                     className="h-80 w-full rounded-lg border border-gray-200"
-                    title={`Map showing location of ${mainContact.companyName}`}
+                    title={`Karte mit dem Standort von ${mainContact.companyName}`}
                     loading="lazy"
                     referrerPolicy="no-referrer-when-downgrade"
                   />
@@ -272,7 +278,7 @@ async function ContactInformation({ mainContact }: { mainContact: Contact }) {
                       iconName="MapPinIcon"
                       className="mx-auto h-12 w-12 text-gray-400"
                     />
-                    <p className="mt-2 text-gray-500">Map not available</p>
+                    <p className="mt-2 text-gray-500">Karte nicht verfügbar</p>
                   </div>
                 </div>
               </div>
@@ -297,18 +303,17 @@ async function BookingSection() {
     return (
       <div className="overflow-hidden">
         <Container className="pb-24">
-          <Subheading>Book a Consultation</Subheading>
+          <Subheading>Beratung buchen</Subheading>
           <Heading as="h3" className="mt-2">
-            Schedule your free consultation
+            Ihre kostenlose Beratung planen
           </Heading>
           <Lead className="mt-6 max-w-3xl">
             {externalLinks && externalLinks.length > 0 ? (
               <>
-                No active booking links found. Please check your Sanity CMS to
-                ensure at least one booking link is marked as active.
+                Keine aktiven Buchungslinks gefunden. Bitte überprüfen Sie Ihr Sanity CMS, um sicherzustellen, dass mindestens ein Buchungslink als aktiv markiert ist.
               </>
             ) : (
-              'No external links found. Please check your Sanity CMS configuration.'
+              'Keine externen Links gefunden. Bitte überprüfen Sie Ihre Sanity CMS-Konfiguration.'
             )}
           </Lead>
         </Container>
@@ -319,13 +324,13 @@ async function BookingSection() {
   return (
     <div className="overflow-hidden">
       <Container className="pb-24">
-        <Subheading>Book a Consultation</Subheading>
+        <Subheading>Beratung buchen</Subheading>
         <Heading as="h3" className="mt-2">
-          Schedule your free consultation
+          Ihre kostenlose Beratung planen
         </Heading>
         <Lead className="mt-6 max-w-3xl">
-          Ready to get started? Book a consultation with our experts to discuss
-          your IT needs and discover tailored solutions for your business.
+          Bereit loszulegen? Buchen Sie eine Beratung mit unseren Experten, um Ihre
+          IT-Bedürfnisse zu besprechen und maßgeschneiderte Lösungen für Ihr Unternehmen zu entdecken.
         </Lead>
 
         <div className="mt-16 rounded-xl border border-gray-200 bg-gray-50 p-6 sm:p-8">
@@ -337,7 +342,7 @@ async function BookingSection() {
             <h4 className="mt-4 text-xl font-semibold">{bookingLink.title}</h4>
             <p className="mt-2 text-sm/6 text-gray-600">
               {bookingLink.description ||
-                'Use our integrated booking system to schedule a consultation at your convenience.'}
+                'Nutzen Sie unser integriertes Buchungssystem, um eine Beratung nach Ihren Wünschen zu planen.'}
             </p>
 
             {bookingLink.embedContent ? (
@@ -378,13 +383,13 @@ async function ExternalLinksSection() {
   return (
     <div className="overflow-hidden">
       <Container className="pb-24">
-        <Subheading>Additional Services</Subheading>
+        <Subheading>Zusätzliche Dienstleistungen</Subheading>
         <Heading as="h3" className="mt-2">
-          Access our platforms
+          Greifen Sie auf unsere Plattformen zu
         </Heading>
         <Lead className="mt-6 max-w-3xl">
-          Connect with our various services and platforms directly from this
-          page.
+          Verbinden Sie sich direkt von dieser Seite aus mit unseren verschiedenen
+          Dienstleistungen und Plattformen.
         </Lead>
 
         <div className="mt-16 space-y-8">
@@ -401,7 +406,7 @@ async function ExternalLinksSection() {
                 <h4 className="mt-4 text-xl font-semibold">{link.title}</h4>
                 <p className="mt-2 text-sm/6 text-gray-600">
                   {link.description ||
-                    'Access this service directly from our website.'}
+                    'Greifen Sie direkt von unserer Website aus auf diesen Dienst zu.'}
                 </p>
 
                 {link.embedContent ? (

@@ -15,11 +15,19 @@ import { Testimonials } from '@/components/testimonials'
 import { Heading, Subheading } from '@/components/text'
 import { getMostRecentPost, getTestimonials } from '@/sanity/queries'
 import { ChevronRightIcon } from '@heroicons/react/16/solid'
+import {
+  AcademicCapIcon,
+  BanknotesIcon,
+  BeakerIcon,
+  BuildingLibraryIcon,
+  BuildingOfficeIcon,
+  ShoppingBagIcon,
+} from '@heroicons/react/24/solid'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
   description:
-    'Maxsoft AG - Leading IT Consultancy delivering innovative technology solutions for businesses worldwide.',
+    'Maxsoft AG - Führende IT-Beratung, die innovative Technologielösungen für Unternehmen weltweit bereitstellt.',
 }
 
 async function Hero() {
@@ -46,16 +54,16 @@ async function Hero() {
         />
         <div className="pt-16 pb-24 sm:pt-24 sm:pb-32 md:pt-32 md:pb-48">
           <h1 className="font-display text-6xl/[0.9] font-medium tracking-tight text-balance text-gray-950 sm:text-8xl/[0.8] md:text-9xl/[0.8]">
-            Your Partner for Innovative IT Solutions
+            Ihr Partner für innovative IT-Lösungen
           </h1>
           <p className="mt-8 max-w-lg text-xl/7 font-medium text-gray-950/75 sm:text-2xl/8">
-            Maxsoft AG helps businesses innovate and grow through cutting-edge
-            IT solutions and strategic technology consulting.
+            Maxsoft AG hilft Unternehmen dabei, durch modernste IT-Lösungen und
+            strategische Technologieberatung zu innovieren und zu wachsen.
           </p>
           <div className="mt-12 flex flex-col gap-x-6 gap-y-4 sm:flex-row">
-            <Button href="/contact">Get started</Button>
+            <Button href="/contact">Loslegen</Button>
             <Button variant="secondary" href="/company">
-              Learn more
+              Mehr erfahren
             </Button>
           </div>
         </div>
@@ -69,17 +77,18 @@ function AboutSection() {
     <div className="overflow-hidden">
       <Container className="pb-24">
         <Heading as="h2" className="max-w-3xl">
-          About Maxsoft AG
+          Über Maxsoft AG
         </Heading>
         <p className="mt-6 max-w-2xl text-lg text-gray-600">
-          Based in Switzerland, we are a leading IT consultancy dedicated to
-          helping businesses navigate the complex world of technology. Our team
-          of experts provides customized solutions that drive innovation and
-          growth, serving clients globally with Swiss precision and reliability.
+          Mit Sitz in der Schweiz sind wir eine führende IT-Beratung, die sich
+          darauf konzentriert, Unternehmen durch die komplexe Welt der
+          Technologie zu führen. Unser Team von Experten bietet maßgeschneiderte
+          Lösungen, die Innovation und Wachstum fördern und Kunden weltweit mit
+          Schweizer Präzision und Zuverlässigkeit bedienen.
         </p>
         <div className="mt-8">
           <Button href="/company" variant="secondary">
-            Learn more about us
+            Mehr über uns erfahren
           </Button>
         </div>
         <Screenshot
@@ -97,26 +106,27 @@ function BentoSection() {
   return (
     <Container>
       <div id="technologies">
-        <Subheading>Technologies</Subheading>
+        <Subheading>Technologien</Subheading>
         <Heading as="h3" className="mt-2 max-w-3xl">
-          The tools we use to deliver exceptional results.
+          Die Werkzeuge, die wir einsetzen, um außergewöhnliche Ergebnisse zu
+          erzielen.
         </Heading>
 
         <div className="mt-10 grid grid-cols-1 gap-4 sm:mt-16 lg:grid-cols-6 lg:grid-rows-2">
           <BentoCard
-            eyebrow="Cloud Platform"
+            eyebrow="Cloud-Plattform"
             title="Microsoft Azure"
-            description="Business solutions based on Microsoft Azure Cloud Services for scalable, secure, and reliable cloud infrastructure."
+            description="Geschäftslösungen basierend auf Microsoft Azure Cloud Services für skalierbare, sichere und zuverlässige Cloud-Infrastruktur."
             graphic={
-              <div className="h-80 bg-[url(/screenshots/profile.png)] bg-size-[1000px_560px] bg-position-[left_-109px_top_-112px] bg-no-repeat" />
+              <div className="h-80 bg-[url(/pictures/azure.png)] bg-size-[1000px_560px] bg-position-[left_-109px_top_-112px] bg-no-repeat" />
             }
             fade={['bottom']}
             className="max-lg:rounded-t-4xl lg:col-span-3 lg:rounded-tl-4xl"
           />
           <BentoCard
-            eyebrow="Productivity Suite"
+            eyebrow="Produktivitätssuite"
             title="Microsoft 365"
-            description="Microsoft 365 is a comprehensive productivity suite, while Microsoft Copilot is an AI-powered coding assistant that increases developer efficiency."
+            description="Microsoft 365 ist eine umfassende Produktivitätssuite, während Microsoft Copilot ein KI-gestützter Coding-Assistent ist, der die Entwicklereffizienz steigert."
             graphic={
               <div className="absolute inset-0 bg-[url(/screenshots/competitors.png)] bg-size-[1100px_650px] bg-position-[left_-38px_top_-73px] bg-no-repeat" />
             }
@@ -124,9 +134,9 @@ function BentoSection() {
             className="lg:col-span-3 lg:rounded-tr-4xl"
           />
           <BentoCard
-            eyebrow="Security"
-            title="Barracuda Networks"
-            description="The world's leading provider of email protection, application protection, network security, and data security solutions."
+            eyebrow="Frontend-Entwicklung"
+            title="NextJS, React, React Native, TailwindCSS, ShadcnUI"
+            description="Neueste Technologie-Frameworks für den Bau moderner, skalierbarer Web- und Mobile-Anwendungen mit neuesten Funktionen und optimaler Leistung."
             graphic={
               <div className="flex size-full pt-10 pl-10">
                 <Keyboard highlighted={['LeftCommand', 'LeftShift', 'D']} />
@@ -135,18 +145,45 @@ function BentoSection() {
             className="lg:col-span-2 lg:rounded-bl-4xl"
           />
           <BentoCard
-            eyebrow="Cybersecurity"
-            title="Fortinet Group"
-            description="A cybersecurity company that provides network security solutions and services for comprehensive threat protection."
+            eyebrow="DevOps & Infrastruktur"
+            title="DevOps-Technologien"
+            description="Umfassende DevOps-Lösungen einschließlich Supabase, Vercel, GitHub, Docker, HuggingFace und Ollama für moderne Entwicklungs-Workflows und KI-Integration."
             graphic={<LogoCluster />}
             className="lg:col-span-2"
           />
           <BentoCard
             eyebrow="Open Source"
             title="Red Hat & HashiCorp"
-            description="Leading open source solutions for cloud, Linux, Kubernetes, and multi-cloud infrastructure automation with Terraform, Vault and Consul."
+            description="Führende Open-Source-Lösungen für Cloud, Linux, Kubernetes und Multi-Cloud-Infrastrukturautomatisierung mit Terraform, Vault und Consul."
             graphic={<Map />}
             className="max-lg:rounded-b-4xl lg:col-span-2 lg:rounded-br-4xl"
+          />
+          <BentoCard
+            eyebrow="Sicherheitslösungen"
+            title="Barracuda Networks"
+            description="Der weltweit führende Anbieter von E-Mail-Schutz, Anwendungsschutz, Netzwerksicherheit und Datensicherheitslösungen für umfassenden Geschäftsschutz."
+            graphic={
+              <div className="h-80 bg-[url(/pictures/barracuda.png)] bg-size-[1000px_560px] bg-position-[left_-109px_top_-112px] bg-no-repeat" />
+            }
+            className="lg:col-span-2"
+          />
+          <BentoCard
+            eyebrow="Cybersicherheit"
+            title="Fortinet Group"
+            description="Ein Cybersicherheitsunternehmen, das Netzwerksicherheitslösungen und -dienste für umfassenden Bedrohungsschutz und Unternehmenssicherheit bereitstellt."
+            graphic={
+              <div className="h-80 bg-[url(/pictures/fortinet.png)] bg-size-[1000px_560px] bg-position-[left_-109px_top_-112px] bg-no-repeat" />
+            }
+            className="lg:col-span-2"
+          />
+          <BentoCard
+            eyebrow="Design & Prototyping"
+            title="Framer & Figma"
+            description="Professionelle Design- und Prototyping-Tools für die Erstellung beeindruckender Benutzeroberflächen, interaktiver Prototypen und kollaborativer Design-Workflows."
+            graphic={
+              <div className="h-80 bg-[url(/pictures/framer-figma.png)] bg-size-[1000px_560px] bg-position-[left_-109px_top_-112px] bg-no-repeat" />
+            }
+            className="lg:col-span-2"
           />
         </div>
       </div>
@@ -158,17 +195,17 @@ function DarkBentoSection() {
   return (
     <div className="mx-2 mt-2 rounded-4xl bg-gray-900 py-32" id="competencies">
       <Container>
-        <Subheading dark>Competencies</Subheading>
+        <Subheading dark>Kompetenzen</Subheading>
         <Heading as="h3" dark className="mt-2 max-w-3xl">
-          Customer focus through innovative, high-quality solutions.
+          Kundenfokus durch innovative, hochwertige Lösungen.
         </Heading>
 
         <div className="mt-10 grid grid-cols-1 gap-4 sm:mt-16 lg:grid-cols-6 lg:grid-rows-2">
           <BentoCard
             dark
-            eyebrow="Cloud Journey"
+            eyebrow="Cloud-Reise"
             title="Microsoft Cloud"
-            description="Harness the full power of the Microsoft Cloud. With integrated solutions like Azure, Microsoft 365, and Dynamics 365, we optimize your business processes. Scalable technologies and the highest security standards ensure efficiency and future security."
+            description="Nutzen Sie die volle Kraft der Microsoft Cloud. Mit integrierten Lösungen wie Azure, Microsoft 365 und Dynamics 365 optimieren wir Ihre Geschäftsprozesse. Skalierbare Technologien und höchste Sicherheitsstandards gewährleisten Effizienz und Zukunftssicherheit."
             graphic={
               <div className="h-80 bg-[url(/screenshots/networking.png)] bg-size-[851px_344px] bg-no-repeat" />
             }
@@ -177,25 +214,25 @@ function DarkBentoSection() {
           />
           <BentoCard
             dark
-            eyebrow="IT Security"
-            title="Digital Threat Protection"
-            description="We protect your systems from digital threats. With customized security solutions and state-of-the-art technology, we ensure the integrity of your data. Prevention, monitoring, and rapid response are the focus of our strategies."
+            eyebrow="IT-Sicherheit"
+            title="Digitaler Bedrohungsschutz"
+            description="Wir schützen Ihre Systeme vor digitalen Bedrohungen. Mit maßgeschneiderten Sicherheitslösungen und modernster Technologie gewährleisten wir die Integrität Ihrer Daten. Prävention, Überwachung und schnelle Reaktion stehen im Mittelpunkt unserer Strategien."
             graphic={<LogoTimeline />}
             className="lg:col-span-3 lg:rounded-tr-4xl"
           />
           <BentoCard
             dark
-            eyebrow="Enterprise Architecture"
-            title="Business-IT Alignment"
-            description="We support and accompany you in establishing the enterprise architecture in your company in order to optimize the collaboration between business and IT."
+            eyebrow="Unternehmensarchitektur"
+            title="Business-IT-Ausrichtung"
+            description="Wir unterstützen und begleiten Sie beim Aufbau der Unternehmensarchitektur in Ihrem Unternehmen, um die Zusammenarbeit zwischen Business und IT zu optimieren."
             graphic={<LinkedAvatars />}
             className="lg:col-span-2 lg:rounded-bl-4xl"
           />
           <BentoCard
             dark
-            eyebrow="Cloud Journey"
-            title="Smooth Migration"
-            description="We accompany you on your journey to the cloud. With careful planning and implementation, we ensure a smooth migration. Through customized solutions and modern technologies, we maximize the efficiency, security, and flexibility of your IT infrastructure."
+            eyebrow="Cloud-Reise"
+            title="Sanfte Migration"
+            description="Wir begleiten Sie auf Ihrer Reise in die Cloud. Mit sorgfältiger Planung und Implementierung gewährleisten wir eine sanfte Migration. Durch maßgeschneiderte Lösungen und moderne Technologien maximieren wir die Effizienz, Sicherheit und Flexibilität Ihrer IT-Infrastruktur."
             graphic={
               <div className="h-80 bg-[url(/screenshots/engagement.png)] bg-size-[851px_344px] bg-no-repeat" />
             }
@@ -205,6 +242,118 @@ function DarkBentoSection() {
         </div>
       </Container>
     </div>
+  )
+}
+
+function BranchenSection() {
+  return (
+    <Container className="py-32">
+      <div id="branchen">
+        <Subheading>Branchen</Subheading>
+        <Heading as="h3" className="mt-2 max-w-3xl">
+          Branchen, die wir erfolgreich unterstützen.
+        </Heading>
+
+        <div className="mt-10 grid grid-cols-1 gap-6 sm:mt-16 lg:grid-cols-3">
+          <BentoCard
+            eyebrow="Finanzwesen"
+            title="Banken und Versicherungen"
+            description="Sicher und digital – mit IT-Lösungen für eine moderne Finanzwelt."
+            graphic={
+              <div className="flex h-64 items-center justify-center">
+                <div className="relative">
+                  <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-blue-500/20 to-blue-600/20 backdrop-blur-sm"></div>
+                  <div className="relative rounded-2xl bg-white/80 p-8 shadow-lg ring-1 ring-white/20 backdrop-blur-sm">
+                    <BanknotesIcon className="h-16 w-16 text-blue-600" />
+                  </div>
+                </div>
+              </div>
+            }
+            className="lg:col-span-1"
+          />
+          <BentoCard
+            eyebrow="Industrie"
+            title="Produktion"
+            description="Effizientere Produktionsprozesse durch stabile und moderne IT-Systeme."
+            graphic={
+              <div className="flex h-64 items-center justify-center">
+                <div className="relative">
+                  <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-green-500/20 to-green-600/20 backdrop-blur-sm"></div>
+                  <div className="relative rounded-2xl bg-white/80 p-8 shadow-lg ring-1 ring-white/20 backdrop-blur-sm">
+                    <BuildingOfficeIcon className="h-16 w-16 text-green-600" />
+                  </div>
+                </div>
+              </div>
+            }
+            className="lg:col-span-1"
+          />
+          <BentoCard
+            eyebrow="Gesundheit"
+            title="Gesundheitswesen"
+            description="IT für eine bessere Patientenversorgung und optimierte Prozesse."
+            graphic={
+              <div className="flex h-64 items-center justify-center">
+                <div className="relative">
+                  <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-red-500/20 to-red-600/20 backdrop-blur-sm"></div>
+                  <div className="relative rounded-2xl bg-white/80 p-8 shadow-lg ring-1 ring-white/20 backdrop-blur-sm">
+                    <BeakerIcon className="h-16 w-16 text-red-600" />
+                  </div>
+                </div>
+              </div>
+            }
+            className="lg:col-span-1"
+          />
+          <BentoCard
+            eyebrow="Bildung"
+            title="Bildung"
+            description="Stärkere Bildung durch digitale Tools für E-Learning und Verwaltung."
+            graphic={
+              <div className="flex h-64 items-center justify-center">
+                <div className="relative">
+                  <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-purple-500/20 to-purple-600/20 backdrop-blur-sm"></div>
+                  <div className="relative rounded-2xl bg-white/80 p-8 shadow-lg ring-1 ring-white/20 backdrop-blur-sm">
+                    <AcademicCapIcon className="h-16 w-16 text-purple-600" />
+                  </div>
+                </div>
+              </div>
+            }
+            className="lg:col-span-1"
+          />
+          <BentoCard
+            eyebrow="Handel"
+            title="Retail"
+            description="Wachstum durch IT-Lösungen für eine bessere Lieferkette und stärkere Kundenbindung."
+            graphic={
+              <div className="flex h-64 items-center justify-center">
+                <div className="relative">
+                  <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-orange-500/20 to-orange-600/20 backdrop-blur-sm"></div>
+                  <div className="relative rounded-2xl bg-white/80 p-8 shadow-lg ring-1 ring-white/20 backdrop-blur-sm">
+                    <ShoppingBagIcon className="h-16 w-16 text-orange-600" />
+                  </div>
+                </div>
+              </div>
+            }
+            className="lg:col-span-1"
+          />
+          <BentoCard
+            eyebrow="Öffentlicher Sektor"
+            title="Öffentliche Verwaltung"
+            description="Sichere und moderne IT-Lösungen für öffentliche Einrichtungen."
+            graphic={
+              <div className="flex h-64 items-center justify-center">
+                <div className="relative">
+                  <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-gray-500/20 to-gray-600/20 backdrop-blur-sm"></div>
+                  <div className="relative rounded-2xl bg-white/80 p-8 shadow-lg ring-1 ring-white/20 backdrop-blur-sm">
+                    <BuildingLibraryIcon className="h-16 w-16 text-gray-600" />
+                  </div>
+                </div>
+              </div>
+            }
+            className="lg:col-span-1"
+          />
+        </div>
+      </div>
+    </Container>
   )
 }
 
@@ -225,6 +374,7 @@ export default async function Home() {
           <BentoSection />
         </div>
         <DarkBentoSection />
+        <BranchenSection />
       </main>
       {testimonials.data && testimonials.data.length > 0 && (
         <Testimonials testimonials={testimonials.data} />

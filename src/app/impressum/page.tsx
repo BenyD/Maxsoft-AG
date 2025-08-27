@@ -6,9 +6,9 @@ import { Heading, Lead, Subheading } from '@/components/text'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Legal Notice - Maxsoft AG',
+  title: 'Impressum - Maxsoft AG',
   description:
-    'Legal notice and company information for Maxsoft AG, Swiss IT consulting company.',
+    'Impressum und Unternehmensinformationen für Maxsoft AG, Schweizer IT-Beratungsunternehmen.',
 }
 
 export default function ImpressumPage() {
@@ -20,10 +20,11 @@ export default function ImpressumPage() {
       </Container>
 
       <Container className="mt-16">
-        <Heading as="h1">Legal Notice</Heading>
+        <Heading as="h1">Impressum</Heading>
         <Lead className="mt-6 max-w-3xl">
-          Legal information and company details in accordance with Swiss law and
-          European regulations for transparency and legal compliance.
+          Rechtliche Informationen und Unternehmensdetails gemäß Schweizer Recht
+          und europäischen Vorschriften für Transparenz und rechtliche
+          Compliance.
         </Lead>
       </Container>
 
@@ -32,7 +33,7 @@ export default function ImpressumPage() {
         <div className="grid gap-8 lg:grid-cols-2">
           {/* Main Company Details */}
           <div className="rounded-2xl border border-gray-200 bg-white p-8 shadow-sm">
-            <Subheading>Company Information</Subheading>
+            <Subheading>Unternehmensinformationen</Subheading>
             <div className="mt-6 space-y-6">
               <div>
                 <h3 className="mb-3 text-lg font-semibold text-gray-900">
@@ -64,7 +65,7 @@ export default function ImpressumPage() {
                       <br />
                       6343 Rotkreuz
                       <br />
-                      Switzerland
+                      Schweiz
                     </span>
                   </p>
                 </div>
@@ -72,7 +73,7 @@ export default function ImpressumPage() {
 
               <div>
                 <h4 className="mb-2 font-medium text-gray-900">
-                  Contact Information
+                  Kontaktinformationen
                 </h4>
                 <div className="space-y-2">
                   <p className="flex items-center gap-3 text-gray-700">
@@ -121,7 +122,7 @@ export default function ImpressumPage() {
 
           {/* Legal Representatives */}
           <div className="rounded-2xl border border-gray-200 bg-white p-8 shadow-sm">
-            <Subheading>Authorized Representatives</Subheading>
+            <Subheading>Bevollmächtigte Vertreter</Subheading>
             <div className="mt-6 space-y-6">
               <div className="grid gap-4 sm:grid-cols-2">
                 <div className="rounded-lg bg-gray-50 p-4 text-center">
@@ -143,7 +144,7 @@ export default function ImpressumPage() {
                   <h4 className="font-semibold text-gray-900">
                     Janar Thiyagarajah
                   </h4>
-                  <p className="text-sm text-gray-600">Managing Director</p>
+                  <p className="text-sm text-gray-600">Geschäftsführer</p>
                 </div>
 
                 <div className="rounded-lg bg-gray-50 p-4 text-center">
@@ -165,13 +166,13 @@ export default function ImpressumPage() {
                   <h4 className="font-semibold text-gray-900">
                     Nisanth M. Rajah
                   </h4>
-                  <p className="text-sm text-gray-600">Managing Director</p>
+                  <p className="text-sm text-gray-600">Geschäftsführer</p>
                 </div>
               </div>
 
               <div className="border-t border-gray-200 pt-4">
                 <h4 className="mb-2 font-medium text-gray-900">
-                  Commercial Register
+                  Handelsregister
                 </h4>
                 <p className="text-gray-700">
                   <span className="font-medium">UID:</span> CHE-396.015.553
@@ -185,49 +186,50 @@ export default function ImpressumPage() {
       {/* Legal Information */}
       <Container className="mt-16">
         <div className="rounded-2xl border border-gray-200 bg-white p-8 shadow-sm">
-          <Subheading>Legal Information</Subheading>
+          <Subheading>Rechtliche Informationen</Subheading>
           <div className="prose prose-gray mt-6 max-w-none">
             <div className="grid gap-8 md:grid-cols-2">
               <div>
                 <h4 className="mb-3 font-medium text-gray-900">
-                  Liability Disclaimer
+                  Haftungsausschluss
                 </h4>
                 <p className="text-sm leading-relaxed text-gray-700">
-                  The information on this website has been compiled with care.
-                  However, we cannot guarantee the accuracy, completeness, or
-                  timeliness of the information. We reserve the right to make
-                  changes to the content at any time.
+                  Die Informationen auf dieser Website wurden sorgfältig
+                  zusammengestellt. Wir können jedoch nicht für die Richtigkeit,
+                  Vollständigkeit oder Aktualität der Informationen garantieren.
+                  Wir behalten uns das Recht vor, den Inhalt jederzeit zu
+                  ändern.
                 </p>
               </div>
 
               <div>
-                <h4 className="mb-3 font-medium text-gray-900">Copyright</h4>
+                <h4 className="mb-3 font-medium text-gray-900">Urheberrecht</h4>
                 <p className="text-sm leading-relaxed text-gray-700">
-                  All content on this website, including text, images, graphics,
-                  and code, is protected by copyright law. Reproduction or
-                  distribution without written permission is prohibited.
+                  Alle Inhalte auf dieser Website, einschließlich Text, Bilder,
+                  Grafiken und Code, sind durch das Urheberrecht geschützt.
+                  Vervielfältigung oder Verbreitung ohne schriftliche
+                  Genehmigung ist untersagt.
+                </p>
+              </div>
+
+              <div>
+                <h4 className="mb-3 font-medium text-gray-900">Datenschutz</h4>
+                <p className="text-sm leading-relaxed text-gray-700">
+                  Wir nehmen den Datenschutz ernst. Persönliche Daten werden
+                  gemäß dem Schweizer Datenschutzgesetz und der EU-DSGVO
+                  verarbeitet. Einzelheiten finden Sie in unserer
+                  Datenschutzerklärung.
                 </p>
               </div>
 
               <div>
                 <h4 className="mb-3 font-medium text-gray-900">
-                  Data Protection
+                  Anwendbares Recht
                 </h4>
                 <p className="text-sm leading-relaxed text-gray-700">
-                  We take data protection seriously. Personal data is processed
-                  in accordance with Swiss data protection law and the EU GDPR.
-                  For details, see our Privacy Policy.
-                </p>
-              </div>
-
-              <div>
-                <h4 className="mb-3 font-medium text-gray-900">
-                  Applicable Law
-                </h4>
-                <p className="text-sm leading-relaxed text-gray-700">
-                  This website and all legal relationships arising from it are
-                  subject to Swiss law. The place of jurisdiction is Rotkreuz,
-                  Switzerland.
+                  Diese Website und alle daraus resultierenden Rechtsbeziehungen
+                  unterliegen dem Schweizer Recht. Der Gerichtsstand ist
+                  Rotkreuz, Schweiz.
                 </p>
               </div>
             </div>
@@ -239,24 +241,25 @@ export default function ImpressumPage() {
       <Container className="mt-16">
         <div className="rounded-2xl bg-gray-50 px-6 py-12 text-center">
           <h2 className="mb-4 text-xl font-semibold text-gray-900">
-            Questions or Legal Inquiries?
+            Fragen oder rechtliche Anfragen?
           </h2>
           <p className="mx-auto mb-6 max-w-2xl text-gray-600">
-            For legal questions, business inquiries, or general information,
-            please contact us using the information provided above.
+            Für rechtliche Fragen, Geschäftsanfragen oder allgemeine
+            Informationen kontaktieren Sie uns bitte über die oben angegebenen
+            Kontaktdaten.
           </p>
           <div className="flex flex-col gap-3 sm:flex-row sm:justify-center">
             <a
               href="mailto:info@maxsoft.ch"
               className="inline-flex items-center rounded-md border border-transparent bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700"
             >
-              Email Us
+              E-Mail senden
             </a>
             <a
               href="/contact"
               className="inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
             >
-              Contact Page
+              Kontaktseite
             </a>
           </div>
         </div>

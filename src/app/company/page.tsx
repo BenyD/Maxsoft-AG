@@ -24,65 +24,66 @@ import type { Metadata } from 'next'
 import React from 'react'
 
 export const metadata: Metadata = {
-  title: 'About Us - Maxsoft AG',
+  title: 'Über uns - Maxsoft AG',
   description:
-    'Maxsoft AG is a leading Swiss IT consultancy with over 20 years of experience, based in Rotkreuz, Canton of Zurich. We offer customized IT solutions for companies of all sizes and industries.',
+    'Maxsoft AG ist eine führende Schweizer IT-Beratung mit über 20 Jahren Erfahrung, mit Sitz in Rotkreuz, Kanton Zug. Wir bieten maßgeschneiderte IT-Lösungen für Unternehmen aller Größen und Branchen.',
 }
 
 function Header() {
   return (
     <Container className="mt-16">
-      <Heading as="h1">Your Reliable IT Partner for Over 20 Years</Heading>
+      <Heading as="h1">
+        Maxsoft – Dein zuverlässiger IT-Partner seit über 20 Jahren
+      </Heading>
       <Lead className="mt-6 max-w-3xl">
-        Maxsoft is a Swiss IT company based in Rotkreuz, Canton of Zurich. We
-        offer customized IT solutions for companies of all sizes and across all
-        industries. Our team of experienced IT architects and engineers will
-        help you optimize your IT processes and transform your IT department
-        into a true business partner.
+        Maxsoft ist ein Schweizer IT-Unternehmen mit Sitz in Rotkreuz ZG. Wir
+        bieten massgeschneiderte IT-Lösungen für Unternehmen jeder Grösse und
+        Branche. Unser Team aus erfahrenen IT-Architekten und Ingenieuren hilft
+        dir, deine IT-Prozesse zu optimieren und deine IT-Abteilung zu einem
+        echten Business-Partner zu machen. Dank unserer langjährigen Expertise
+        verstehen wir deine Herausforderungen und begleiten dich bei der
+        Umsetzung zukunftsfähiger IT-Lösungen.
       </Lead>
       <section className="mt-16 grid grid-cols-1 lg:grid-cols-2 lg:gap-12">
         <div className="max-w-lg">
-          <h2 className="text-2xl font-medium tracking-tight">Our Mission</h2>
+          <h2 className="text-2xl font-medium tracking-tight">
+            Warum Maxsoft?
+          </h2>
           <p className="mt-6 text-sm/6 text-gray-600">
-            We help companies modernize their IT, increase efficiency, and drive
-            growth with innovative and practical solutions. Thanks to our many
-            years of expertise, we understand your challenges and support you in
-            implementing future-proof IT solutions.
-          </p>
-          <p className="mt-8 text-sm/6 text-gray-600">
-            Maxsoft differentiates itself through our holistic approach. We
-            guide you through all phases of IT modernization – from analysis and
-            design to implementation and ongoing operations. With our experience
-            across various industries, we offer solutions that perfectly match
-            your specific requirements.
+            Maxsoft unterscheidet sich durch unseren ganzheitlichen Ansatz. Wir
+            navigieren dich durch alle Phasen der IT-Modernisierung – von der
+            Analyse über das Design bis hin zur Implementierung und dem
+            laufenden Betrieb. Mit unserer Erfahrung in verschiedenen Branchen
+            bieten wir dir Lösungen, die perfekt zu deinen spezifischen
+            Anforderungen passen.
           </p>
         </div>
         <div className="pt-20 lg:row-span-2 lg:-mr-16 xl:mr-auto">
           <div className="-mx-8 grid grid-cols-2 gap-4 sm:-mx-16 sm:grid-cols-4 lg:mx-0 lg:grid-cols-2 lg:gap-4 xl:gap-8">
             <div className="aspect-square overflow-hidden rounded-xl shadow-xl outline-1 -outline-offset-1 outline-black/10">
               <img
-                alt="Professional working environment"
+                alt="Professional working"
                 src="/company/1.jpg"
                 className="block size-full object-cover"
               />
             </div>
             <div className="-mt-8 aspect-square overflow-hidden rounded-xl shadow-xl outline-1 -outline-offset-1 outline-black/10 lg:-mt-32">
               <img
-                alt="Team discussion and collaboration"
+                alt="Team discussion"
                 src="/company/2.jpg"
                 className="block size-full object-cover"
               />
             </div>
             <div className="aspect-square overflow-hidden rounded-xl shadow-xl outline-1 -outline-offset-1 outline-black/10">
               <img
-                alt="Working in office environment"
+                alt="Working in office"
                 src="/company/3.jpg"
                 className="block size-full object-cover"
               />
             </div>
             <div className="-mt-8 aspect-square overflow-hidden rounded-xl shadow-xl outline-1 -outline-offset-1 outline-black/10 lg:-mt-32">
               <img
-                alt="Team collaboration and success"
+                alt="Team collaboration"
                 src="/company/4.jpg"
                 className="block size-full object-cover"
               />
@@ -90,29 +91,31 @@ function Header() {
           </div>
         </div>
         <div className="max-lg:mt-16 lg:col-span-1">
-          <Subheading>Our Journey</Subheading>
+          <Subheading>Unser Weg</Subheading>
           <hr className="mt-6 border-t border-gray-200" />
           <dl className="mt-6 grid grid-cols-1 gap-x-8 gap-y-4 sm:grid-cols-2">
             <div className="flex flex-col gap-y-2 border-b border-dotted border-gray-200 pb-4">
-              <dt className="text-sm/6 text-gray-600">Founding</dt>
+              <dt className="text-sm/6 text-gray-600">Gründung</dt>
               <dd className="order-first text-6xl font-medium tracking-tight">
-                2018
+                2020
               </dd>
             </div>
             <div className="flex flex-col gap-y-2 border-b border-dotted border-gray-200 pb-4">
-              <dt className="text-sm/6 text-gray-600">Employees</dt>
+              <dt className="text-sm/6 text-gray-600">Mitarbeiter</dt>
               <dd className="order-first text-6xl font-medium tracking-tight">
-                <AnimatedNumber start={1} end={1} />+
+                <AnimatedNumber start={1} end={3} />+
               </dd>
             </div>
             <div className="flex flex-col gap-y-2 border-b border-dotted border-gray-200 pb-4">
-              <dt className="text-sm/6 text-gray-600">New Customers</dt>
+              <dt className="text-sm/6 text-gray-600">Neue Kunden</dt>
               <dd className="order-first text-6xl font-medium tracking-tight">
                 <AnimatedNumber start={8} end={10} />+
               </dd>
             </div>
             <div className="flex flex-col gap-y-2 border-b border-dotted border-gray-200 pb-4">
-              <dt className="text-sm/6 text-gray-600">Projects Done</dt>
+              <dt className="text-sm/6 text-gray-600">
+                Projekte abgeschlossen
+              </dt>
               <dd className="order-first text-6xl font-medium tracking-tight">
                 <AnimatedNumber start={12} end={15} />+
               </dd>
@@ -124,51 +127,61 @@ function Header() {
   )
 }
 
+function MissionSection() {
+  return (
+    <Container className="mt-32">
+      <div className="max-w-3xl">
+        <Subheading>Unsere Mission</Subheading>
+        <Heading as="h3" className="mt-2">
+          Wir unterstützen Unternehmen dabei, ihre IT zu modernisieren, die
+          Effizienz zu steigern und das Wachstum zu fördern – mit innovativen
+          und praktischen Lösungen.
+        </Heading>
+      </div>
+    </Container>
+  )
+}
+
 function VisionValues() {
   return (
     <Container className="mt-32">
       <div className="grid grid-cols-1 gap-16 lg:grid-cols-2">
         <div>
-          <Subheading>Our Vision</Subheading>
-          <Heading as="h3" className="mt-2">
-            Creating a Future of Informed Decisions
+          <Subheading>Unsere Vision</Subheading>
+          <Heading as="h3" className="mt-2 text-xl">
+            Wir möchten eine Zukunft schaffen, in der Unternehmen ihre IT
+            optimal nutzen, um fundierte Entscheidungen zu treffen und
+            Herausforderungen in Chancen zu verwandeln.
           </Heading>
-          <p className="mt-6 text-sm/6 text-gray-600">
-            We want to create a future where companies leverage their IT to make
-            informed decisions and turn challenges into opportunities. Our
-            forward-thinking approach ensures your business stays ahead of
-            technological advancements.
-          </p>
         </div>
         <div>
-          <Subheading>Our Values</Subheading>
+          <Subheading>Unsere Werte</Subheading>
           <div className="mt-6 space-y-4">
             <div className="flex items-start gap-3">
               <div className="mt-1 h-2 w-2 rounded-full bg-[#01A2EE]"></div>
               <div>
-                <h4 className="font-medium text-gray-900">Transparency</h4>
+                <h4 className="font-medium text-gray-900">Transparenz</h4>
                 <p className="text-sm text-gray-600">
-                  We communicate openly and honestly in all our interactions.
+                  Wir kommunizieren offen und ehrlich.
                 </p>
               </div>
             </div>
             <div className="flex items-start gap-3">
               <div className="mt-1 h-2 w-2 rounded-full bg-[#7FBA02]"></div>
               <div>
-                <h4 className="font-medium text-gray-900">Partnership</h4>
+                <h4 className="font-medium text-gray-900">Partnerschaft</h4>
                 <p className="text-sm text-gray-600">
-                  We work closely with you and are always at your side
-                  throughout the journey.
+                  Wir arbeiten eng mit dir zusammen und sind immer an deiner
+                  Seite.
                 </p>
               </div>
             </div>
             <div className="flex items-start gap-3">
               <div className="mt-1 h-2 w-2 rounded-full bg-[#FDB800]"></div>
               <div>
-                <h4 className="font-medium text-gray-900">Sustainability</h4>
+                <h4 className="font-medium text-gray-900">Nachhaltigkeit</h4>
                 <p className="text-sm text-gray-600">
-                  We think long-term and sustainably in all our solutions and
-                  recommendations.
+                  Wir denken langfristig und nachhaltig in allen Lösungen.
                 </p>
               </div>
             </div>
@@ -271,33 +284,35 @@ async function Team() {
 
   return (
     <Container className="mt-32">
-      <Subheading>Meet the team</Subheading>
+      <Subheading>Unser Team</Subheading>
       <Heading as="h3" className="mt-2">
-        Founded by technology experts.
+        Gegründet von Technologieexperten.
       </Heading>
       <Lead className="mt-6 max-w-3xl">
-        Maxsoft AG is founded by experienced IT professionals who understand the
-        challenges businesses face in today&apos;s rapidly evolving technology
-        landscape.
+        Maxsoft AG wurde von erfahrenen IT-Profis gegründet, die die
+        Herausforderungen verstehen, vor denen Unternehmen in der heutigen sich
+        schnell entwickelnden Technologielandschaft stehen.
       </Lead>
       <div className="mt-12 grid grid-cols-1 gap-12 lg:grid-cols-2">
         <div className="max-w-lg">
           <p className="mt-6 text-sm/6 text-gray-600">
-            Years ago, while working as IT consultants at leading technology
-            companies, our founders recognized a common challenge: businesses
-            were struggling to keep pace with technological innovation while
-            maintaining operational efficiency.
+            Vor Jahren, während sie als IT-Berater bei führenden
+            Technologieunternehmen arbeiteten, erkannten unsere Gründer eine
+            gemeinsame Herausforderung: Unternehmen kämpften darum, mit der
+            technologischen Innovation Schritt zu halten und dabei die
+            betriebliche Effizienz zu erhalten.
           </p>
           <p className="mt-8 text-sm/6 text-gray-600">
-            Today, Maxsoft AG transforms businesses through innovative
-            technology solutions, helping organizations navigate digital
-            transformation, enhance cybersecurity, and optimize their IT
-            infrastructure. More than 200 companies trust us to deliver
-            reliable, scalable technology solutions.
+            Heute transformiert Maxsoft AG Unternehmen durch innovative
+            Technologielösungen und hilft Organisationen dabei, die digitale
+            Transformation zu bewältigen, die Cybersicherheit zu verbessern und
+            ihre IT-Infrastruktur zu optimieren. Mehr als 200 Unternehmen
+            vertrauen uns bei der Bereitstellung zuverlässiger, skalierbarer
+            Technologielösungen.
           </p>
           <div className="mt-6">
             <Button className="w-full sm:w-auto" href="/contact">
-              Get in touch
+              Kontakt aufnehmen
             </Button>
           </div>
         </div>
@@ -314,14 +329,14 @@ async function Team() {
       {teamMembers.data && teamMembers.data.length > 0 && (
         <React.Fragment key="team-section">
           <div className="mt-32 text-center">
-            <Subheading as="h3">Meet Our Team</Subheading>
+            <Subheading as="h3">Lerne unser Team kennen</Subheading>
             <Heading as="h3" className="mx-auto mt-2 max-w-3xl">
-              Experienced professionals dedicated to your success
+              Erfahrene Fachkräfte, die sich deinem Erfolg widmen
             </Heading>
             <Lead className="mx-auto mt-6 max-w-2xl">
-              Our team of IT experts brings together decades of experience in
-              technology consulting, digital transformation, and enterprise
-              solutions.
+              Unser Team von IT-Experten bringt jahrzehntelange Erfahrung in der
+              Technologieberatung, digitalen Transformation und
+              Unternehmenslösungen zusammen.
             </Lead>
           </div>
 
@@ -361,20 +376,20 @@ async function Partners() {
       {(technologyPartners.data && technologyPartners.data.length > 0) ||
       (industryPartners.data && industryPartners.data.length > 0) ? (
         <React.Fragment key="partners-section">
-          <Subheading>Partners</Subheading>
+          <Subheading>Partner</Subheading>
           <Heading as="h3" className="mt-2">
-            Strategic technology partnerships.
+            Strategische Technologiepartnerschaften.
           </Heading>
           <Lead className="mt-6 max-w-3xl">
-            We collaborate with leading technology providers to deliver the best
-            solutions for our clients, ensuring access to cutting-edge tools and
-            platforms.
+            Wir arbeiten mit führenden Technologieanbietern zusammen, um die
+            besten Lösungen für unsere Kunden zu liefern und den Zugang zu
+            modernsten Tools und Plattformen zu gewährleisten.
           </Lead>
 
           {technologyPartners.data && technologyPartners.data.length > 0 && (
             <React.Fragment key="technology-partners">
               <Subheading as="h3" className="mt-24">
-                Technology Partners
+                Technologiepartner
               </Subheading>
               <hr className="mt-6 border-t border-gray-200" />
               <ul
@@ -400,7 +415,7 @@ async function Partners() {
           {industryPartners.data && industryPartners.data.length > 0 && (
             <React.Fragment key="industry-partners">
               <Subheading as="h3" className="mt-24">
-                Industry partners
+                Branchenpartner
               </Subheading>
               <hr className="mt-6 border-t border-gray-200" />
               <ul
@@ -463,18 +478,19 @@ async function Careers() {
 
   return (
     <Container className="my-32">
-      <Subheading>Careers</Subheading>
+      <Subheading>Karriere</Subheading>
       <Heading as="h3" className="mt-2">
-        Join our innovative team.
+        Werde Teil unseres innovativen Teams.
       </Heading>
       <Lead className="mt-6 max-w-3xl">
-        We work together from our offices in Switzerland and remotely, fostering
-        a collaborative environment that values innovation and excellence.
+        Wir arbeiten zusammen von unseren Büros in der Schweiz und remote und
+        fördern eine kollaborative Umgebung, die Innovation und Exzellenz
+        schätzt.
       </Lead>
       <div className="mt-24 grid grid-cols-1 gap-16 lg:grid-cols-[1fr_24rem]">
         <div className="lg:max-w-2xl">
           {jobListings.data && jobListings.data.length > 0 && (
-            <Subheading as="h3">Open positions</Subheading>
+            <Subheading as="h3">Offene Stellen</Subheading>
           )}
           <div className="pb-8">
             {jobListings.data && jobListings.data.length > 0 ? (
@@ -486,8 +502,8 @@ async function Careers() {
                 </colgroup>
                 <thead className="sr-only">
                   <tr>
-                    <th scope="col">Title</th>
-                    <th scope="col">Location</th>
+                    <th scope="col">Titel</th>
+                    <th scope="col">Standort</th>
                     <th scope="col"></th>
                   </tr>
                 </thead>
@@ -526,7 +542,7 @@ async function Careers() {
                                 variant="outline"
                                 href={`/careers/${job.slug}`}
                               >
-                                View listing
+                                Stellenanzeige anzeigen
                               </Button>
                             </td>
                           </tr>
@@ -540,12 +556,12 @@ async function Careers() {
                 <div className="mx-auto max-w-md">
                   <NoPositionsIcon className="mx-auto mb-6 h-16 w-16 text-gray-300" />
                   <h3 className="mb-3 text-lg font-medium text-gray-900">
-                    No Open Positions
+                    Keine offenen Stellen
                   </h3>
                   <p className="mb-6 leading-relaxed text-gray-600">
-                    We don&apos;t have any open positions at the moment, but
-                    we&apos;re always looking for talented people to join our
-                    team.
+                    Wir haben derzeit keine offenen Stellen, aber wir suchen
+                    immer nach talentierten Menschen, die unserem Team beitreten
+                    möchten.
                   </p>
                   <div className="flex flex-col gap-3 sm:flex-row sm:justify-center">
                     <Button
@@ -553,14 +569,14 @@ async function Careers() {
                       variant="outline"
                       className="px-6 py-2"
                     >
-                      Get in Touch
+                      Kontakt aufnehmen
                     </Button>
                     <Button
                       href="/careers"
                       variant="outline"
                       className="px-6 py-2"
                     >
-                      View All Careers
+                      Alle Karrieremöglichkeiten anzeigen
                     </Button>
                   </div>
                 </div>
@@ -574,6 +590,23 @@ async function Careers() {
   )
 }
 
+function CallToAction() {
+  return (
+    <Container className="mt-32">
+      <div className="rounded-2xl bg-gray-50 px-6 py-16 text-center">
+        <h2 className="mb-4 text-2xl font-semibold text-gray-900">
+          Starte noch heute deine digitale Reise mit Maxsoft.
+        </h2>
+        <div className="flex flex-col gap-3 sm:flex-row sm:justify-center">
+          <Button href="/contact" className="px-8 py-3">
+            Kontakt
+          </Button>
+        </div>
+      </div>
+    </Container>
+  )
+}
+
 export default function Company() {
   return (
     <main className="overflow-hidden">
@@ -582,10 +615,12 @@ export default function Company() {
         <Navbar />
       </Container>
       <Header />
+      <MissionSection />
       <VisionValues />
       <Team />
       <Partners />
       <Careers />
+      <CallToAction />
       <Footer />
     </main>
   )
