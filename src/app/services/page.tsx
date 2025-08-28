@@ -142,7 +142,7 @@ export default async function ServicesPage() {
   return (
     <main className="overflow-hidden">
       <GradientBackground />
-      <Container>
+      <Container className="relative z-20">
         <NavbarServer />
       </Container>
 

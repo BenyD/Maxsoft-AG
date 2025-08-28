@@ -55,7 +55,7 @@ export default async function ServicePage({ params }: ServicePageProps) {
   return (
     <main className="overflow-hidden">
       <GradientBackground />
-      <Container>
+      <Container className="relative z-20">
         <NavbarServer />
       </Container>
 

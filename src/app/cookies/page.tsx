@@ -161,7 +161,7 @@ export default function CookiesPage() {
     return (
       <main className="overflow-hidden">
         <GradientBackground />
-        <Container>
+        <Container className="relative z-20">
           <Navbar serviceCategories={serviceCategories} />
         </Container>
         <Container className="mt-16">
@@ -177,7 +177,7 @@ export default function CookiesPage() {
   return (
     <main className="overflow-hidden">
       <GradientBackground />
-      <Container>
+      <Container className="relative z-20">
         <Navbar serviceCategories={serviceCategories} />
       </Container>
 

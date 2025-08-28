@@ -26,7 +26,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     locale: 'de_CH',
-    url: 'https://maxsoft.ag',
+    url: 'https://maxsoft.ch',
     title: 'Maxsoft AG - Ihr Partner für innovative IT-Lösungen',
     description:
       'Maxsoft AG bietet maßgeschneiderte IT-Lösungen für Unternehmen aller Größen. Anstatt Sie mit komplexen, unverständlichen Technologien allein zu lassen, bieten wir klare, umsetzbare Strategien, die Ihre IT-Prozesse optimieren.',
@@ -73,7 +73,7 @@ export default function RootLayout({
           href="/blog/feed.xml"
         />
       </head>
-      <body className="text-gray-950 antialiased">
+      <body className="pt-20 text-gray-950 antialiased sm:pt-24">
         {children}
         <SanityLive revalidateSyncTags={revalidateSyncTags} />
         <CookieBanner />

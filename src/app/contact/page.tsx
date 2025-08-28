@@ -32,7 +32,9 @@ export default async function ContactPage() {
     return (
       <div className="overflow-hidden">
         <GradientBackground />
-        <NavbarServer />
+        <Container className="relative z-20">
+          <NavbarServer />
+        </Container>
         <main>
           <Container className="pb-24">
             <Subheading>Kontaktinformationen</Subheading>
@@ -56,7 +58,9 @@ export default async function ContactPage() {
   return (
     <div className="overflow-hidden">
       <GradientBackground />
-      <NavbarServer />
+      <Container className="relative z-20">
+        <NavbarServer />
+      </Container>
       <main>
         <ContactHero />
         <ContactForm serviceCategories={serviceCategories.data || []} />

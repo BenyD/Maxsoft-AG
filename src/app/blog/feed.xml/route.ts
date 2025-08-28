@@ -12,7 +12,7 @@ export async function GET(req: Request) {
       'Stay informed with technology insights, company news, and expert advice on digital transformation and IT strategy.',
     author: {
       name: 'Maxsoft AG',
-      email: 'info@maxsoft.ag',
+      email: 'info@maxsoft.ch',
     },
     id: siteUrl,
     link: siteUrl,

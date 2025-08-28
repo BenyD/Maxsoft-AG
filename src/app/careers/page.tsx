@@ -28,7 +28,7 @@ export default async function CareersPage() {
   return (
     <main className="overflow-hidden">
       <GradientBackground />
-      <Container>
+      <Container className="relative z-20">
         <NavbarServer />
       </Container>
 

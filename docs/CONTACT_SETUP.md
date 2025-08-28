@@ -45,7 +45,7 @@ Create entries for each contact method:
 - **Title**: General Inquiries
 - **Contact Type**: Email
 - **Icon**: Envelope
-- **Email**: info@maxsoft.ag
+- **Email**: info@maxsoft.ch
 - **Description**: For general questions and support
 - **Order**: 3
 - **Active**: ✓
@@ -86,7 +86,7 @@ Set up your booking forms and other integrations:
 
 - **Link Title**: Microsoft 365 Booking
 - **Link Type**: Booking
-- **URL**: https://outlook.office365.com/owa/calendar/MaxsoftAG@maxsoft.ag/bookings/
+- **URL**: https://outlook.office365.com/owa/calendar/MaxsoftAG@maxsoft.ch/bookings/
 - **Description**: Use our integrated booking system to schedule a consultation at your convenience.
 - **Button Text**: Book Your Consultation
 - **Icon**: Globe
@@ -97,7 +97,7 @@ Set up your booking forms and other integrations:
 
 - **Link Title**: Client Support Portal
 - **Link Type**: Support
-- **URL**: https://support.maxsoft.ag
+- **URL**: https://support.maxsoft.ch
 - **Description**: Access our comprehensive support system and knowledge base.
 - **Button Text**: Access Support
 - **Icon**: Document

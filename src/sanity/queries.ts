@@ -674,3 +674,39 @@ export async function getJobApplicationsByJob(jobId: string) {
     params: { jobId },
   })
 }
+
+const COMPETENCIES_QUERY = defineQuery(/* groq */ `*[
+  _type == "competency"
+  && isActive == true
+]|order(order asc){
+  _id,
+  title,
+  eyebrow,
+  description,
+  image,
+  order,
+}`)
+
+export async function getCompetencies() {
+  return await sanityFetch({
+    query: COMPETENCIES_QUERY,
+  })
+}
+
+const TECHNOLOGIES_QUERY = defineQuery(/* groq */ `*[
+  _type == "technology"
+  && isActive == true
+]|order(order asc){
+  _id,
+  title,
+  eyebrow,
+  description,
+  image,
+  order,
+}`)
+
+export async function getTechnologies() {
+  return await sanityFetch({
+    query: TECHNOLOGIES_QUERY,
+  })
+}

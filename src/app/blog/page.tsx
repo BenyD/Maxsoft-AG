@@ -345,8 +345,10 @@ export default async function Blog({
   return (
     <main className="overflow-hidden">
       <GradientBackground />
-      <Container>
+      <Container className="relative z-20">
         <NavbarServer />
+      </Container>
+      <Container>
         <Subheading className="mt-16">Blog</Subheading>
         <Heading as="h1" className="mt-2">
           Was passiert bei Maxsoft AG.

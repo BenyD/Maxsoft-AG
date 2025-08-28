@@ -34,8 +34,10 @@ export default async function BlogPost({
   return (
     <main className="overflow-hidden">
       <GradientBackground />
-      <Container>
+      <Container className="relative z-20">
         <NavbarServer />
+      </Container>
+      <Container>
         <Subheading className="mt-16">
           {dayjs(post.publishedAt).format('dddd, MMMM D, YYYY')}
         </Subheading>
