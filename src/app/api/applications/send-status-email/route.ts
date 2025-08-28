@@ -129,9 +129,9 @@ function generateStatusEmail(
       `
       break
 
-    case 'interview_scheduled':
+    case 'interviewing':
       subject = 'Interview Scheduled - Next Steps'
-      const formattedDate = new Date(interviewDate!).toLocaleDateString(
+      const formattedDate = interviewDate ? new Date(interviewDate).toLocaleDateString(
         'en-US',
         {
           weekday: 'long',
@@ -139,12 +139,13 @@ function generateStatusEmail(
           month: 'long',
           day: 'numeric',
         },
-      )
+      ) : 'TBD'
       html = `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
           <h2 style="color: #01A2EE;">Interview Scheduled</h2>
           <p>Dear ${candidateName},</p>
           <p>Great news! We would like to schedule an interview for the <strong>${position}</strong> position.</p>
+          ${interviewDate && interviewTime ? `
           <p><strong>Interview Details:</strong></p>
           <ul>
             <li><strong>Date:</strong> ${formattedDate}</li>
@@ -152,13 +153,16 @@ function generateStatusEmail(
             <li><strong>Position:</strong> ${position}</li>
           </ul>
           <p>Please confirm this time works for you by replying to this email. If you need to reschedule, please let us know at least 24 hours in advance.</p>
+          ` : `
+          <p>We will be in touch shortly to schedule a convenient interview time.</p>
+          `}
           <p>We look forward to meeting you!</p>
           <p>Best regards,<br>The ${companyName} Team</p>
         </div>
       `
       break
 
-    case 'accepted':
+    case 'offered':
       subject = 'Welcome to Maxsoft AG!'
       html = `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
@@ -182,6 +186,34 @@ function generateStatusEmail(
           <p>Thank you for your interest in the <strong>${position}</strong> position at ${companyName} and for taking the time to apply.</p>
           <p>After careful consideration, we regret to inform you that we have decided to move forward with other candidates whose qualifications more closely match our current needs.</p>
           <p>We appreciate your interest in joining our team and wish you the very best in your future endeavors.</p>
+          <p>Best regards,<br>The ${companyName} Team</p>
+        </div>
+      `
+      break
+
+    case 'hired':
+      subject = 'Welcome to Maxsoft AG!'
+      html = `
+        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+          <h2 style="color: #01A2EE;">Welcome to the Team!</h2>
+          <p>Dear ${candidateName},</p>
+          <p>Congratulations! We are thrilled to confirm that you have been hired for the <strong>${position}</strong> position at ${companyName}!</p>
+          <p>Our HR team will be in touch shortly with all the necessary paperwork and onboarding details.</p>
+          <p>Welcome aboard!</p>
+          <p>Best regards,<br>The ${companyName} Team</p>
+        </div>
+      `
+      break
+
+    case 'withdrawn':
+      subject = 'Application Withdrawal Confirmed'
+      html = `
+        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+          <h2 style="color: #01A2EE;">Application Withdrawal Confirmed</h2>
+          <p>Dear ${candidateName},</p>
+          <p>We have received your request to withdraw your application for the <strong>${position}</strong> position at ${companyName}.</p>
+          <p>Your application has been withdrawn from our system. We wish you the best in your future endeavors.</p>
+          <p>If you change your mind and would like to reapply in the future, we would be happy to consider your application again.</p>
           <p>Best regards,<br>The ${companyName} Team</p>
         </div>
       `

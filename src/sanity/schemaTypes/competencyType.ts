@@ -1,10 +1,12 @@
 import { defineField, defineType } from 'sanity'
+import { CubeIcon } from '@sanity/icons'
 import { createImageField } from './shared/imageField'
 
 export const competencyType = defineType({
   name: 'competency',
   title: 'Competency',
   type: 'document',
+  icon: CubeIcon,
   fields: [
     defineField({
       name: 'title',

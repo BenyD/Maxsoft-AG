@@ -1,5 +1,6 @@
 import type { SchemaTypeDefinition } from 'sanity'
 
+import { competencyType } from './schemaTypes/competencyType'
 import contactType from './schemaTypes/contactType'
 import externalLinkType from './schemaTypes/externalLinkType'
 import { industryPartnerType } from './schemaTypes/industryPartnerType'
@@ -9,6 +10,7 @@ import { serviceCategoryType } from './schemaTypes/serviceCategoryType'
 import { serviceType } from './schemaTypes/serviceType'
 import { teamMemberType } from './schemaTypes/teamMemberType'
 import { technologyPartnerType } from './schemaTypes/technologyPartnerType'
+import { technologyType } from './schemaTypes/technologyType'
 import { testimonialType } from './schemaTypes/testimonialType'
 import { authorType } from './types/author'
 import { blockContentType } from './types/block-content'
@@ -22,8 +24,10 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     categoryType,
     authorType,
     contactType,
+    competencyType,
     externalLinkType,
     teamMemberType,
+    technologyType,
     technologyPartnerType,
     industryPartnerType,
     jobCategoryType,

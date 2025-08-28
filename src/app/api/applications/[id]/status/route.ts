@@ -1,10 +1,9 @@
-import { NextRequest, NextResponse } from 'next/server'
 import { createAdminClient } from '@/lib/supabase'
-import type { JobApplicationUpdate } from '@/lib/database.types'
+import { NextRequest, NextResponse } from 'next/server'
 
 export async function PUT(
   request: NextRequest,
-  { params }: { params: Promise<{ id: string }> }
+  { params }: { params: Promise<{ id: string }> },
 ) {
   try {
     const { id } = await params
@@ -13,7 +12,7 @@ export async function PUT(
     if (!id) {
       return NextResponse.json(
         { error: 'Application ID is required' },
-        { status: 400 }
+        { status: 400 },
       )
     }
 
@@ -21,26 +20,35 @@ export async function PUT(
       status,
       priority,
       rating,
-      assignedTo,
       internalNotes,
       interviewSchedule,
-      communications
+      updated_at,
     } = body
 
     const supabase = createAdminClient()
 
     // Prepare update data
-    const updateData: JobApplicationUpdate = {
-      updated_at: new Date().toISOString()
+    const updateData: {
+      updated_at: string
+      status?: string
+      priority?: string
+      rating?: number
+      internal_notes?: string
+      interview_schedule?: {
+        date: string
+        time: string
+        scheduled_at: string
+      }
+    } = {
+      updated_at: updated_at || new Date().toISOString(),
     }
 
     if (status) updateData.status = status
     if (priority) updateData.priority = priority
     if (rating !== undefined) updateData.rating = rating
-    if (assignedTo !== undefined) updateData.assigned_to = assignedTo
     if (internalNotes !== undefined) updateData.internal_notes = internalNotes
-    if (interviewSchedule !== undefined) updateData.interview_schedule = interviewSchedule
-    if (communications !== undefined) updateData.communications = communications
+    if (interviewSchedule !== undefined)
+      updateData.interview_schedule = interviewSchedule
 
     // Update application
     const { data: application, error } = await supabase
@@ -54,28 +62,27 @@ export async function PUT(
       if (error.code === 'PGRST116') {
         return NextResponse.json(
           { error: 'Application not found' },
-          { status: 400 }
+          { status: 400 },
         )
       }
-      
+
       console.error('Error updating application:', error)
       return NextResponse.json(
         { error: 'Failed to update application' },
-        { status: 500 }
+        { status: 500 },
       )
     }
 
     return NextResponse.json({
       success: true,
       application,
-      message: 'Application updated successfully'
+      message: 'Application updated successfully',
     })
-
   } catch (error) {
     console.error('Application update error:', error)
     return NextResponse.json(
       { error: 'Internal server error' },
-      { status: 500 }
+      { status: 500 },
     )
   }
 }

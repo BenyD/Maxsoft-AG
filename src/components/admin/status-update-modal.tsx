@@ -1,8 +1,12 @@
 'use client'
 
-import { Alert, AlertDescription } from '@/components/ui/alert'
 import { Dialog } from '@headlessui/react'
-import { EnvelopeIcon, StarIcon, XMarkIcon } from '@heroicons/react/24/outline'
+import {
+  CheckCircleIcon,
+  EnvelopeIcon,
+  StarIcon,
+  XMarkIcon,
+} from '@heroicons/react/24/outline'
 import { useState } from 'react'
 
 interface Application {
@@ -39,6 +43,7 @@ export function StatusUpdateModal({
   const [sendEmail, setSendEmail] = useState(true)
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [error, setError] = useState<string | null>(null)
+  const [success, setSuccess] = useState(false)
 
   const statusOptions = [
     {
@@ -99,15 +104,16 @@ export function StatusUpdateModal({
     e.preventDefault()
     setIsSubmitting(true)
     setError(null)
+    setSuccess(false)
 
     try {
       const updateData: {
         status: string
         priority: string
         rating: number
-        internal_notes: string
+        internalNotes: string
         updated_at: string
-        interview_schedule?: {
+        interviewSchedule?: {
           date: string
           time: string
           scheduled_at: string
@@ -116,13 +122,13 @@ export function StatusUpdateModal({
         status,
         priority,
         rating,
-        internal_notes: notes,
+        internalNotes: notes,
         updated_at: new Date().toISOString(),
       }
 
-      // Add interview schedule if status is interview_scheduled
-      if (status === 'interview_scheduled' && interviewDate && interviewTime) {
-        updateData.interview_schedule = {
+      // Add interview schedule if status is interviewing
+      if (status === 'interviewing' && interviewDate && interviewTime) {
+        updateData.interviewSchedule = {
           date: interviewDate,
           time: interviewTime,
           scheduled_at: new Date().toISOString(),
@@ -156,9 +162,9 @@ export function StatusUpdateModal({
             applicationId: application.id,
             newStatus: status,
             interviewDate:
-              status === 'interview_scheduled' ? interviewDate : undefined,
+              status === 'interviewing' ? interviewDate : undefined,
             interviewTime:
-              status === 'interview_scheduled' ? interviewTime : undefined,
+              status === 'interviewing' ? interviewTime : undefined,
           }),
         })
       }
@@ -166,6 +172,7 @@ export function StatusUpdateModal({
       // Close modal and refresh
       onClose()
       window.location.reload()
+      setSuccess(true)
     } catch (error) {
       console.error('Error updating application:', error)
       setError('Failed to update application. Please try again.')
@@ -182,12 +189,12 @@ export function StatusUpdateModal({
           preview:
             'We are pleased to inform you that your application has been shortlisted...',
         }
-      case 'interview_scheduled':
+      case 'interviewing':
         return {
           subject: 'Interview Scheduled - Next Steps',
           preview: `Your interview has been scheduled for ${interviewDate} at ${interviewTime}...`,
         }
-      case 'accepted':
+      case 'offered':
         return {
           subject: 'Welcome to Maxsoft AG!',
           preview: 'We are delighted to offer you the position...',
@@ -228,9 +235,22 @@ export function StatusUpdateModal({
           <form onSubmit={handleSubmit} className="px-6 py-4">
             {/* Error Display */}
             {error && (
-              <Alert className="mb-6 border-red-200 bg-red-50 text-red-800" onClose={onClose}>
-                <AlertDescription>{error}</AlertDescription>
-              </Alert>
+              <div className="mb-6 rounded-lg border border-red-200 bg-red-50 p-4">
+                <p className="text-sm text-red-800">{error}</p>
+              </div>
+            )}
+
+            {/* Success Display */}
+            {success && (
+              <div className="mb-6 rounded-lg border border-green-200 bg-green-50 p-4">
+                <div className="flex items-center gap-3">
+                  <CheckCircleIcon className="h-4 w-4 text-green-600" />
+                  <p className="text-sm text-green-800">
+                    Application status updated successfully!{' '}
+                    {sendEmail && 'Email notification sent.'}
+                  </p>
+                </div>
+              </div>
             )}
 
             {/* Application Info */}
@@ -334,7 +354,7 @@ export function StatusUpdateModal({
               </div>
 
               {/* Interview Schedule */}
-              {status === 'interview_scheduled' && (
+              {status === 'interviewing' && (
                 <div>
                   <label className="mb-2 block text-sm font-medium text-gray-700">
                     Interview Date & Time

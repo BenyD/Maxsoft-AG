@@ -2,6 +2,8 @@ import { CookieBanner } from '@/components/cookie-banner'
 import { SanityLive } from '@/sanity/live'
 import { revalidateSyncTags } from '@/sanity/revalidateSyncTags'
 import '@/styles/tailwind.css'
+import { Analytics } from '@vercel/analytics/react'
+import { SpeedInsights } from '@vercel/speed-insights/next'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
@@ -77,6 +79,8 @@ export default function RootLayout({
         {children}
         <SanityLive revalidateSyncTags={revalidateSyncTags} />
         <CookieBanner />
+        <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   )
