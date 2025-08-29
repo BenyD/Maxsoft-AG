@@ -10,21 +10,13 @@ import { Subheading } from './text'
 function CallToAction() {
   return (
     <div className="relative pt-20 pb-16 text-center sm:py-24">
-      <hgroup>
-        <Subheading>Loslegen</Subheading>
-        <p className="mt-6 text-3xl font-medium tracking-tight text-gray-950 sm:text-5xl">
-          Bereit, Ihr Unternehmen zu transformieren?
-          <br />
-          Lassen Sie uns über Ihre IT-Bedürfnisse sprechen.
-        </p>
-      </hgroup>
-      <p className="mx-auto mt-6 max-w-xs text-sm/6 text-gray-500">
-        Arbeiten Sie mit Maxsoft AG zusammen, um Ihr Geschäftspotenzial durch
-        innovative Technologielösungen freizusetzen.
+      <Subheading>Loslegen</Subheading>
+      <p className="mt-6 text-3xl font-medium tracking-tight text-gray-950 sm:text-5xl">
+        Starte noch heute deine digitale Reise mit Maxsoft.
       </p>
       <div className="mt-6">
-        <Button className="w-full sm:w-auto" href="/contact">
-          Loslegen
+        <Button className="w-full sm:w-auto" href="/contact#booking">
+          Jetzt buche
         </Button>
       </div>
     </div>
@@ -57,6 +49,8 @@ function Sitemap() {
         <SitemapHeading>Unternehmen</SitemapHeading>
         <SitemapLinks>
           <SitemapLink href="/company">Über uns</SitemapLink>
+          <SitemapLink href="/team">Team</SitemapLink>
+          <SitemapLink href="/partners">Partner</SitemapLink>
           <SitemapLink href="/careers">Karriere</SitemapLink>
           <SitemapLink href="/contact">Kontakt</SitemapLink>
           <SitemapLink href="/blog">Blog</SitemapLink>
@@ -78,7 +72,7 @@ function Sitemap() {
           <SitemapLink href="/cookies">Cookie-Richtlinie</SitemapLink>
           <SitemapLink href="/impressum">Impressum</SitemapLink>
           <SitemapLink href="/downloads/maxsoft-agb.pdf" download>
-            AGB herunterladen
+            Download AGB
           </SitemapLink>
         </SitemapLinks>
       </div>
@@ -136,10 +130,10 @@ export function Footer() {
                 <div className="col-span-2 flex flex-col">
                   <PlusGridItem className="pt-6 lg:pb-6">
                     <Logo className="h-9" />
-                    <div className="mt-6 space-y-2 text-sm text-gray-600">
+                    <div className="mt-6 text-sm text-gray-600">
                       <div>Birkenstrasse 49</div>
                       <div>6343 Rotkreuz, Schweiz</div>
-                      <div className="mt-4 space-y-1">
+                      <div className="mt-4">
                         <div>
                           <a
                             href="mailto:info@maxsoft.ch"

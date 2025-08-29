@@ -54,12 +54,12 @@ export default async function CareersPage() {
                 <div key={category._id} className="space-y-8">
                   <div className="flex items-center gap-4">
                     <div
-                      className={`inline-flex items-center rounded-lg px-4 py-2 text-sm font-semibold text-gray-900 shadow-sm ${category.color}`}
+                      className={`inline-flex items-center rounded-lg px-4 py-2 text-lg/[1.6] font-semibold text-gray-900 shadow-sm ${category.color}`}
                     >
-                      {category.name}
+                      {category.name.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()).join(' ')}
                     </div>
                     <div className="h-px flex-1 bg-gray-200" />
-                    <span className="text-sm text-gray-500">
+                    <span className="text-lg/[1.6] text-gray-500">
                       {jobListings.data?.filter(
                         (job: JobListingExpanded) =>
                           job.category._id === category._id,
@@ -88,27 +88,27 @@ export default async function CareersPage() {
                           <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
                             <div className="flex-1 space-y-3">
                               <div>
-                                <h3 className="text-xl font-semibold text-gray-900 transition-colors group-hover:text-gray-700">
+                                <h3 className="text-lg/[1.6] font-semibold text-gray-900 transition-colors group-hover:text-gray-700">
                                   {job.title}
                                 </h3>
-                                <p className="mt-1 leading-relaxed text-gray-600">
+                                <p className="mt-1 text-lg/[1.6] text-gray-600">
                                   {job.shortDescription}
                                 </p>
                               </div>
 
-                              <div className="flex flex-wrap gap-4 text-sm text-gray-500">
+                              <div className="flex flex-wrap gap-4 text-lg/[1.6] text-gray-500">
                                 <span className="flex items-center gap-2 rounded-full bg-gray-100 px-3 py-1">
                                   <MapPinIcon className="h-4 w-4 text-blue-500" />
-                                  {job.location}
+                                  {job.location.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()).join(' ')}
                                 </span>
                                 <span className="flex items-center gap-2 rounded-full bg-gray-100 px-3 py-1">
                                   <BriefcaseIcon className="h-4 w-4 text-green-500" />
-                                  {job.employmentType}
+                                  {job.employmentType.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()).join(' ')}
                                 </span>
                                 {job.salary && (
                                   <span className="flex items-center gap-2 rounded-full bg-gray-100 px-3 py-1">
                                     <CurrencyDollarIcon className="h-4 w-4 text-yellow-500" />
-                                    {job.salary}
+                                    {job.salary.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()).join(' ')}
                                   </span>
                                 )}
                               </div>
@@ -131,10 +131,10 @@ export default async function CareersPage() {
             <div className="py-20 text-center">
               <div className="mx-auto max-w-md">
                 <NoPositionsIcon className="mx-auto mb-8 h-24 w-24 text-gray-300" />
-                <h2 className="mb-4 text-2xl font-semibold text-gray-900">
+                <h2 className="mb-4 text-lg/[1.6] font-semibold text-gray-900">
                   Keine offenen Stellen
                 </h2>
-                <p className="mb-8 leading-relaxed text-gray-600">
+                <p className="mb-8 text-lg/[1.6] text-gray-600">
                   Wir haben derzeit keine offenen Stellen, aber wir suchen immer
                   nach talentierten Menschen, die unserem Team beitreten
                   möchten. Kontaktieren Sie uns gerne und stellen Sie sich vor!

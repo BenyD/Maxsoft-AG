@@ -186,8 +186,8 @@ export default function CookiesPage() {
         <Lead className="mt-6 max-w-3xl">
           Verwalten Sie Ihre Cookie-Einstellungen und erfahren Sie, wie wir
           Cookies verwenden, um Ihr Erlebnis auf unserer Website zu verbessern.
-          Sie können Ihre Einstellungen anpassen oder alle Cookies
-          akzeptieren/ablehnen.
+          Sie können Ihre Einstellungen anpassen oder alle Cookies akzeptieren
+          oder ablehnen.
         </Lead>
       </Container>
 
@@ -216,10 +216,10 @@ export default function CookiesPage() {
               </div>
             </div>
             <p className="text-sm text-gray-700">
-              Diese Cookies sind für die ordnungsgemäße Funktionalität unserer
+              Diese Cookies sind für die ordnungsgemässe Funktionalität unserer
               Website unerlässlich. Sie ermöglichen grundlegende Funktionen wie
               Seitennavigation und Zugang zu sicheren Bereichen. Die Website
-              kann ohne diese Cookies nicht ordnungsgemäß funktionieren.
+              kann ohne diese Cookies nicht ordnungsgemäss funktionieren.
             </p>
           </div>
 
@@ -251,7 +251,7 @@ export default function CookiesPage() {
               Diese Cookies sammeln Informationen darüber, wie Sie unsere
               Website nutzen, z.B. welche Seiten Sie am häufigsten besuchen.
               Diese Daten helfen uns, unsere Website und Benutzererfahrung zu
-              verbessern. Alle Informationen sind aggregiert und anonym.
+              verbessern. Alle Informationen sind zusammengefasst und anonym.
             </p>
           </div>
 
@@ -282,7 +282,7 @@ export default function CookiesPage() {
               Diese Cookies werden verwendet, um Werbenachrichten für Sie
               relevanter zu machen. Sie erfüllen Funktionen wie die
               Verhinderung, dass dieselbe Anzeige kontinuierlich wieder
-              erscheint, und stellen sicher, dass Anzeigen ordnungsgemäß
+              erscheint, und stellen sicher, dass Anzeigen ordnungsgemäss
               angezeigt werden.
             </p>
           </div>

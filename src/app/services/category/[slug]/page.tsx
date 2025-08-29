@@ -189,26 +189,6 @@ export default async function ServiceCategoryPage({
         )}
       </Container>
 
-      {/* Call to Action */}
-      <Container className="mt-24 mb-16">
-        <div className="rounded-2xl bg-gray-50 px-6 py-16 text-center">
-          <h2 className="mb-4 text-2xl font-semibold text-gray-900">
-            Bereit loszulegen?
-          </h2>
-          <p className="mx-auto mb-8 max-w-2xl text-gray-600">
-            Kontaktieren Sie uns heute, um zu besprechen, wie unsere{' '}
-            {category.name.toLowerCase()} Dienstleistungen Ihr Unternehmen
-            transformieren und Ihre Ziele erreichen können.
-          </p>
-          <div className="flex flex-col gap-3 sm:flex-row sm:justify-center">
-            <Button href="/contact">Kontakt aufnehmen</Button>
-            <Button href="/services" variant="outline">
-              Weitere Dienstleistungen erkunden
-            </Button>
-          </div>
-        </div>
-      </Container>
-
       <Footer />
     </main>
   )

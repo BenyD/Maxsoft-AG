@@ -29,7 +29,7 @@ import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 
 export const metadata: Metadata = {
-  title: 'Blog',
+  title: 'Blog - Maxsoft AG',
   description:
     'Bleiben Sie informiert mit Technologie-Einblicken, Unternehmensnachrichten und Expertenratschlägen zu digitaler Transformation und IT-Strategie.',
 }
@@ -43,17 +43,19 @@ async function FeaturedPosts() {
     return (
       <div className="mt-16 bg-linear-to-t from-gray-100 pb-14">
         <Container>
-          <h2 className="text-2xl font-medium tracking-tight">Empfohlen</h2>
+          <h2 className="text-lg/[1.6] font-medium tracking-tight">
+            Empfohlen
+          </h2>
           <div className="mt-6 text-center">
             <div className="mx-auto max-w-md">
               <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-white shadow-sm ring-1 ring-black/5">
                 <StarIcon className="h-8 w-8 text-gray-400" />
               </div>
-              <h3 className="mt-4 text-lg font-medium text-gray-900">
+              <h3 className="mt-4 text-lg/[1.6] font-medium text-gray-900">
                 Noch keine empfohlenen Beiträge
               </h3>
-              <p className="mt-2 text-sm text-gray-500">
-                Wir arbeiten an großartigen empfohlenen Inhalten. Schauen Sie
+              <p className="mt-2 text-lg/[1.6] text-gray-500">
+                Wir arbeiten an grossartigen empfohlenen Inhalten. Schauen Sie
                 bald wieder vorbei für unsere neuesten Einblicke und Updates.
               </p>
             </div>
@@ -66,7 +68,7 @@ async function FeaturedPosts() {
   return (
     <div className="mt-16 bg-linear-to-t from-gray-100 pb-14">
       <Container>
-        <h2 className="text-2xl font-medium tracking-tight">Empfohlen</h2>
+        <h2 className="text-lg/[1.6] font-medium tracking-tight">Empfohlen</h2>
         <div className="mt-6 grid grid-cols-1 gap-8 lg:grid-cols-3">
           {featuredPosts.map((post) => (
             <div
@@ -81,16 +83,16 @@ async function FeaturedPosts() {
                 />
               )}
               <div className="flex flex-1 flex-col p-8">
-                <div className="text-sm/5 text-gray-700">
+                <div className="text-lg/[1.6] text-gray-700">
                   {dayjs(post.publishedAt).format('dddd, MMMM D, YYYY')}
                 </div>
-                <div className="mt-2 text-base/7 font-medium">
+                <div className="mt-2 text-lg/[1.6] font-medium">
                   <Link href={`/blog/${post.slug}`}>
                     <span className="absolute inset-0" />
                     {post.title}
                   </Link>
                 </div>
-                <div className="mt-2 flex-1 text-sm/6 text-gray-500">
+                <div className="mt-2 flex-1 text-lg/[1.6] text-gray-500">
                   {post.excerpt}
                 </div>
                 {post.author && (
@@ -102,7 +104,7 @@ async function FeaturedPosts() {
                         className="aspect-square size-6 rounded-full object-cover"
                       />
                     )}
-                    <div className="text-sm/5 text-gray-700">
+                    <div className="text-lg/[1.6] text-gray-700">
                       {post.author.name}
                     </div>
                   </div>
@@ -122,7 +124,7 @@ async function Categories({ selected }: { selected?: string }) {
   if (categories.length === 0) {
     return (
       <div className="flex flex-wrap items-center justify-between gap-2">
-        <div className="flex items-center gap-2 text-sm text-gray-500">
+        <div className="flex items-center gap-2 text-lg/[1.6] text-gray-500">
           <TagIcon className="h-4 w-4 text-gray-400" />
           Keine Kategorien verfügbar
         </div>
@@ -153,7 +155,7 @@ async function Categories({ selected }: { selected?: string }) {
               className="group grid grid-cols-[1rem_1fr] items-center gap-2 rounded-md px-2 py-1 data-focus:bg-gray-950/5"
             >
               <CheckIcon className="hidden size-4 group-data-selected:block" />
-              <p className="col-start-2 text-sm/6">Alle Kategorien</p>
+              <p className="col-start-2 text-lg/[1.6]">Alle Kategorien</p>
             </Link>
           </MenuItem>
           {categories.map((category) => (
@@ -164,7 +166,7 @@ async function Categories({ selected }: { selected?: string }) {
                 className="group grid grid-cols-[16px_1fr] items-center gap-2 rounded-md px-2 py-1 data-focus:bg-gray-950/5"
               >
                 <CheckIcon className="hidden size-4 group-data-selected:block" />
-                <p className="col-start-2 text-sm/6">{category.title}</p>
+                <p className="col-start-2 text-lg/[1.6]">{category.title}</p>
               </Link>
             </MenuItem>
           ))}
@@ -196,15 +198,15 @@ async function Posts({ page, category }: { page: number; category?: string }) {
           <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-gray-100">
             <DocumentTextIcon className="h-8 w-8 text-gray-400" />
           </div>
-          <h3 className="mt-4 text-lg font-medium text-gray-900">
+          <h3 className="mt-4 text-lg/[1.6] font-medium text-gray-900">
             {category
               ? `Keine Beiträge in ${category}`
               : 'Noch keine Blog-Beiträge'}
           </h3>
-          <p className="mt-2 text-sm text-gray-500">
+          <p className="mt-2 text-lg/[1.6] text-gray-500">
             {category
               ? `Wir haben noch keine Beiträge in dieser Kategorie veröffentlicht. Schauen Sie bald wieder vorbei für neue Inhalte.`
-              : 'Wir arbeiten an großartigen Inhalten. Schauen Sie bald wieder vorbei für unsere neuesten Einblicke und Updates.'}
+              : 'Wir arbeiten an grossartigen Inhalten. Schauen Sie bald wieder vorbei für unsere neuesten Einblicke und Updates.'}
           </p>
           {category && (
             <div className="mt-6">
@@ -226,7 +228,7 @@ async function Posts({ page, category }: { page: number; category?: string }) {
           className="relative grid grid-cols-1 border-b border-b-gray-100 py-10 first:border-t first:border-t-gray-200 max-sm:gap-3 sm:grid-cols-3"
         >
           <div>
-            <div className="text-sm/5 max-sm:text-gray-700 sm:font-medium">
+            <div className="text-lg/[1.6] max-sm:text-gray-700 sm:font-medium">
               {dayjs(post.publishedAt).format('dddd, MMMM D, YYYY')}
             </div>
             {post.author && (
@@ -238,19 +240,19 @@ async function Posts({ page, category }: { page: number; category?: string }) {
                     className="aspect-square size-6 rounded-full object-cover"
                   />
                 )}
-                <div className="text-sm/5 text-gray-700">
+                <div className="text-lg/[1.6] text-gray-700">
                   {post.author.name}
                 </div>
               </div>
             )}
           </div>
           <div className="sm:col-span-2 sm:max-w-2xl">
-            <h2 className="text-sm/5 font-medium">{post.title}</h2>
-            <p className="mt-3 text-sm/6 text-gray-500">{post.excerpt}</p>
+            <h2 className="text-lg/[1.6] font-medium">{post.title}</h2>
+            <p className="mt-3 text-lg/[1.6] text-gray-500">{post.excerpt}</p>
             <div className="mt-4">
               <Link
                 href={`/blog/${post.slug}`}
-                className="flex items-center gap-1 text-sm/5 font-medium"
+                className="flex items-center gap-1 text-lg/[1.6] font-medium"
               >
                 <span className="absolute inset-0" />
                 Weiterlesen
@@ -308,7 +310,7 @@ async function Pagination({
             href={url(i + 1)}
             data-active={i + 1 === page ? true : undefined}
             className={clsx(
-              'size-7 rounded-lg text-center text-sm/7 font-medium',
+              'size-7 rounded-lg text-center text-lg/[1.6] font-medium',
               'data-hover:bg-gray-100',
               'data-active:shadow-sm data-active:ring-1 data-active:ring-black/10',
               'data-active:data-hover:bg-gray-50',
@@ -351,7 +353,7 @@ export default async function Blog({
       <Container>
         <Subheading className="mt-16">Blog</Subheading>
         <Heading as="h1" className="mt-2">
-          Was passiert bei Maxsoft AG.
+          Was passiert bei Maxsoft AG
         </Heading>
         <Lead className="mt-6 max-w-3xl">
           Bleiben Sie informiert mit Technologie-Einblicken,
@@ -360,7 +362,7 @@ export default async function Blog({
         </Lead>
       </Container>
       {page === 1 && !category && <FeaturedPosts />}
-      <Container className="mt-16 pb-24">
+      <Container className="mt-16 mb-16 pb-24">
         <Categories selected={category} />
         <Posts page={page} category={category} />
         <Pagination page={page} category={category} />

@@ -1,7 +1,7 @@
 'use client'
 
-import { useState, useEffect } from 'react'
 import type { ExternalLink } from '@/sanity/types/externalLink'
+import { useEffect, useState } from 'react'
 
 interface EmbeddedContentProps {
   link: ExternalLink
@@ -22,7 +22,7 @@ export function EmbeddedContent({ link }: EmbeddedContentProps) {
 
   const handleError = () => {
     setIsLoading(false)
-    setError('Failed to load embedded content')
+    setError('Fehler beim Laden des eingebetteten Inhalts')
   }
 
   if (error) {
@@ -43,10 +43,10 @@ export function EmbeddedContent({ link }: EmbeddedContentProps) {
             </svg>
           </div>
           <div className="ml-3">
-            <h3 className="text-sm font-medium text-red-800">
-              Error loading content
+            <h3 className="text-lg/[1.6] font-medium text-red-800">
+              Fehler beim Laden des Inhalts
             </h3>
-            <p className="mt-1 text-sm text-red-700">{error}</p>
+            <p className="mt-1 text-lg/[1.6] text-red-700">{error}</p>
           </div>
         </div>
       </div>
@@ -68,7 +68,9 @@ export function EmbeddedContent({ link }: EmbeddedContentProps) {
           <div className="absolute inset-0 flex items-center justify-center rounded-lg bg-gray-50">
             <div className="flex items-center space-x-2">
               <div className="h-6 w-6 animate-spin rounded-full border-b-2 border-blue-600"></div>
-              <span className="text-sm text-gray-600">Loading...</span>
+              <span className="text-lg/[1.6] text-gray-600">
+                Wird geladen...
+              </span>
             </div>
           </div>
         )}
@@ -86,15 +88,15 @@ export function EmbeddedContent({ link }: EmbeddedContentProps) {
       </div>
 
       <div className="text-center">
-        <p className="text-sm text-gray-500">
-          Having trouble viewing this content?{' '}
+        <p className="text-lg/[1.6] text-gray-500">
+          Haben Sie Probleme beim Anzeigen dieses Inhalts?{' '}
           <a
             href={link.url}
             target="_blank"
             rel="noopener noreferrer"
             className="text-blue-600 underline hover:text-blue-800"
           >
-            Open in new tab
+            In neuem Tab öffnen
           </a>
         </p>
       </div>

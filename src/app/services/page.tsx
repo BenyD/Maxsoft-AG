@@ -246,7 +246,7 @@ export default async function ServicesPage() {
 
       {/* Service Categories */}
       {hasCategories && (
-        <Container className="mt-24">
+        <Container className="mt-24 mb-16">
           <Subheading>Alle Dienstleistungen</Subheading>
           <div className="mt-8 grid gap-8 lg:grid-cols-2">
             {serviceCategories.data?.map((category: ServiceCategory) => {
@@ -258,28 +258,6 @@ export default async function ServicesPage() {
                 />
               )
             })}
-          </div>
-        </Container>
-      )}
-
-      {/* Call to Action - Only show if there are services */}
-      {(hasServices || hasCategories) && (
-        <Container className="mt-32">
-          <div className="rounded-2xl bg-gray-50 px-6 py-16 text-center">
-            <h2 className="mb-4 text-2xl font-semibold text-gray-900">
-              Benötigen Sie eine maßgeschneiderte Lösung?
-            </h2>
-            <p className="mx-auto mb-8 max-w-2xl text-gray-600">
-              Finden Sie nicht genau das, wonach Sie suchen? Wir sind darauf
-              spezialisiert, maßgeschneiderte IT-Lösungen zu erstellen, die
-              Ihren einzigartigen Geschäftsanforderungen entsprechen.
-            </p>
-            <div className="flex flex-col gap-3 sm:flex-row sm:justify-center">
-              <Button href="/contact">Kontaktieren Sie uns</Button>
-              <Button href="/company" variant="outline">
-                Über uns erfahren
-              </Button>
-            </div>
           </div>
         </Container>
       )}

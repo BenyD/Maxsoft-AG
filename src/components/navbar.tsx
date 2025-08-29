@@ -133,7 +133,7 @@ function CompanyDropdown() {
           </MenuItem>
           <MenuItem>
             <Link
-              href="/company#team"
+              href="/team"
               className="block rounded-md px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
             >
               Team
@@ -144,12 +144,12 @@ function CompanyDropdown() {
               href="/careers"
               className="block rounded-md px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
             >
-              Karriere (Jobs)
+              Karriere
             </Link>
           </MenuItem>
           <MenuItem>
             <Link
-              href="/company#partners"
+              href="/partners"
               className="block rounded-md px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
             >
               Partner
@@ -413,7 +413,7 @@ function MobileNav({
                     Über uns
                   </Link>
                   <Link
-                    href="/company#team"
+                    href="/team"
                     className="flex items-center rounded-xl px-6 py-3 text-lg font-semibold text-gray-700 transition-all duration-300 hover:bg-gray-50 hover:text-gray-900"
                   >
                     <div className="mr-3 flex h-6 w-6 items-center justify-center rounded-md bg-gray-100">
@@ -428,10 +428,10 @@ function MobileNav({
                     <div className="mr-3 flex h-6 w-6 items-center justify-center rounded-md bg-gray-100">
                       <span className="text-sm text-gray-500">•</span>
                     </div>
-                    Karriere (Jobs)
+                    Karriere
                   </Link>
                   <Link
-                    href="/company#partners"
+                    href="/partners"
                     className="flex items-center rounded-xl px-6 py-3 text-lg font-semibold text-gray-700 transition-all duration-300 hover:bg-gray-50 hover:text-gray-900"
                   >
                     <div className="mr-3 flex h-6 w-6 items-center justify-center rounded-md bg-gray-100">

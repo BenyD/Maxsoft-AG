@@ -22,14 +22,14 @@ export default function ImpressumPage() {
       <Container className="mt-16">
         <Heading as="h1">Impressum</Heading>
         <Lead className="mt-6 max-w-3xl">
-          Rechtliche Informationen und Unternehmensdetails gemäß Schweizer Recht
-          und europäischen Vorschriften für Transparenz und rechtliche
+          Rechtliche Informationen und Unternehmensdetails gemäss Schweizer
+          Recht und europäischen Vorschriften für Transparenz und rechtliche
           Compliance.
         </Lead>
       </Container>
 
       {/* Company Information */}
-      <Container className="mt-16">
+      <Container className="mt-16 mb-16">
         <div className="grid gap-8 lg:grid-cols-2">
           {/* Main Company Details */}
           <div className="rounded-2xl border border-gray-200 bg-white p-8 shadow-sm">
@@ -179,88 +179,6 @@ export default function ImpressumPage() {
                 </p>
               </div>
             </div>
-          </div>
-        </div>
-      </Container>
-
-      {/* Legal Information */}
-      <Container className="mt-16">
-        <div className="rounded-2xl border border-gray-200 bg-white p-8 shadow-sm">
-          <Subheading>Rechtliche Informationen</Subheading>
-          <div className="prose prose-gray mt-6 max-w-none">
-            <div className="grid gap-8 md:grid-cols-2">
-              <div>
-                <h4 className="mb-3 font-medium text-gray-900">
-                  Haftungsausschluss
-                </h4>
-                <p className="text-sm leading-relaxed text-gray-700">
-                  Die Informationen auf dieser Website wurden sorgfältig
-                  zusammengestellt. Wir können jedoch nicht für die Richtigkeit,
-                  Vollständigkeit oder Aktualität der Informationen garantieren.
-                  Wir behalten uns das Recht vor, den Inhalt jederzeit zu
-                  ändern.
-                </p>
-              </div>
-
-              <div>
-                <h4 className="mb-3 font-medium text-gray-900">Urheberrecht</h4>
-                <p className="text-sm leading-relaxed text-gray-700">
-                  Alle Inhalte auf dieser Website, einschließlich Text, Bilder,
-                  Grafiken und Code, sind durch das Urheberrecht geschützt.
-                  Vervielfältigung oder Verbreitung ohne schriftliche
-                  Genehmigung ist untersagt.
-                </p>
-              </div>
-
-              <div>
-                <h4 className="mb-3 font-medium text-gray-900">Datenschutz</h4>
-                <p className="text-sm leading-relaxed text-gray-700">
-                  Wir nehmen den Datenschutz ernst. Persönliche Daten werden
-                  gemäß dem Schweizer Datenschutzgesetz und der EU-DSGVO
-                  verarbeitet. Einzelheiten finden Sie in unserer
-                  Datenschutzerklärung.
-                </p>
-              </div>
-
-              <div>
-                <h4 className="mb-3 font-medium text-gray-900">
-                  Anwendbares Recht
-                </h4>
-                <p className="text-sm leading-relaxed text-gray-700">
-                  Diese Website und alle daraus resultierenden Rechtsbeziehungen
-                  unterliegen dem Schweizer Recht. Der Gerichtsstand ist
-                  Rotkreuz, Schweiz.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </Container>
-
-      {/* Contact CTA */}
-      <Container className="mt-16">
-        <div className="rounded-2xl bg-gray-50 px-6 py-12 text-center">
-          <h2 className="mb-4 text-xl font-semibold text-gray-900">
-            Fragen oder rechtliche Anfragen?
-          </h2>
-          <p className="mx-auto mb-6 max-w-2xl text-gray-600">
-            Für rechtliche Fragen, Geschäftsanfragen oder allgemeine
-            Informationen kontaktieren Sie uns bitte über die oben angegebenen
-            Kontaktdaten.
-          </p>
-          <div className="flex flex-col gap-3 sm:flex-row sm:justify-center">
-            <a
-              href="mailto:info@maxsoft.ch"
-              className="inline-flex items-center rounded-md border border-transparent bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700"
-            >
-              E-Mail senden
-            </a>
-            <a
-              href="/contact"
-              className="inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
-            >
-              Kontaktseite
-            </a>
           </div>
         </div>
       </Container>

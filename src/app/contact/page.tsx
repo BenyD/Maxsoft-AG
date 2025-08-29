@@ -1,6 +1,5 @@
 import { Button } from '@/components/button'
 import { ContactForm } from '@/components/contact-form'
-import { ContactIcon } from '@/components/contact-icons'
 import { Container } from '@/components/container'
 import { EmbeddedContent } from '@/components/embedded-content'
 import { Footer } from '@/components/footer'
@@ -14,12 +13,17 @@ import {
 } from '@/sanity/queries'
 import type { Contact } from '@/sanity/types/contact'
 import type { ExternalLink } from '@/sanity/types/externalLink'
+import {
+  EnvelopeIcon,
+  MapPinIcon,
+  PhoneIcon,
+} from '@heroicons/react/24/outline'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
   title: 'Kontakt - Maxsoft AG',
   description:
-    'Kontaktieren Sie Maxsoft AG für maßgeschneiderte IT-Lösungen. Unser Team von Experten steht bereit, um Ihre IT-Herausforderungen zu besprechen und innovative Lösungen anzubieten.',
+    'Kontaktieren Sie Maxsoft AG für massgeschneiderte IT-Lösungen. Unser Team von Experten steht bereit, um Ihre IT-Herausforderungen zu besprechen und innovative Lösungen anzubieten.',
 }
 
 export default async function ContactPage() {
@@ -123,16 +127,18 @@ async function ContactInformation({ mainContact }: { mainContact: Contact }) {
           <div className="space-y-8">
             {/* Company Header */}
             <div>
-              <h4 className="text-xl font-semibold text-gray-900">
+              <h4 className="text-lg/[1.6] font-semibold text-gray-900">
                 {mainContact.companyName}
               </h4>
               {mainContact.officeTitle && (
-                <p className="mt-2 text-lg text-gray-600">
+                <p className="mt-2 text-lg/[1.6] text-gray-600">
                   {mainContact.officeTitle}
                 </p>
               )}
               {mainContact.description && (
-                <p className="mt-4 text-gray-600">{mainContact.description}</p>
+                <p className="mt-4 text-lg/[1.6] text-gray-600">
+                  {mainContact.description}
+                </p>
               )}
             </div>
 
@@ -140,13 +146,12 @@ async function ContactInformation({ mainContact }: { mainContact: Contact }) {
             {hasAddress && (
               <div>
                 <div className="flex items-start space-x-3">
-                  <ContactIcon
-                    iconName="MapPinIcon"
-                    className="mt-1 h-5 w-5 text-[#01A2EE]"
-                  />
+                  <MapPinIcon className="mt-1 h-5 w-5 text-[#01A2EE]" />
                   <div>
-                    <p className="font-medium text-gray-900">Adresse</p>
-                    <div className="mt-1 space-y-1 text-gray-600">
+                    <p className="text-lg/[1.6] font-medium text-gray-900">
+                      Adresse
+                    </p>
+                    <div className="mt-1 space-y-1 text-lg/[1.6] text-gray-600">
                       {mainContact.address?.streetLine1 && (
                         <p>{mainContact.address.streetLine1}</p>
                       )}
@@ -168,7 +173,7 @@ async function ContactInformation({ mainContact }: { mainContact: Contact }) {
                         <p>{mainContact.address.canton}</p>
                       )}
                       {mainContact.address?.country && (
-                        <p className="font-medium text-gray-900">
+                        <p className="text-lg/[1.6] font-medium text-gray-900">
                           {mainContact.address.country}
                         </p>
                       )}
@@ -193,24 +198,26 @@ async function ContactInformation({ mainContact }: { mainContact: Contact }) {
             {hasContactInfo && (
               <div>
                 <div className="flex items-start space-x-3">
-                  <ContactIcon
-                    iconName="PhoneIcon"
-                    className="mt-1 h-5 w-5 text-[#01A2EE]"
-                  />
+                  <PhoneIcon className="mt-1 h-5 w-5 text-[#01A2EE]" />
                   <div>
-                    <p className="font-medium text-gray-900">Telefon</p>
-                    <p className="text-gray-600">{mainContact.phone}</p>
+                    <p className="text-lg/[1.6] font-medium text-gray-900">
+                      Telefon
+                    </p>
+                    <p className="text-lg/[1.6] text-gray-600">
+                      {mainContact.phone}
+                    </p>
                   </div>
                 </div>
                 {mainContact.email && (
                   <div className="mt-4 flex items-start space-x-3">
-                    <ContactIcon
-                      iconName="EnvelopeIcon"
-                      className="mt-1 h-5 w-5 text-[#01A2EE]"
-                    />
+                    <EnvelopeIcon className="mt-1 h-5 w-5 text-[#01A2EE]" />
                     <div>
-                      <p className="font-medium text-gray-900">E-Mail</p>
-                      <p className="text-gray-600">{mainContact.email}</p>
+                      <p className="text-lg/[1.6] font-medium text-gray-900">
+                        E-Mail
+                      </p>
+                      <p className="text-lg/[1.6] text-gray-600">
+                        {mainContact.email}
+                      </p>
                     </div>
                   </div>
                 )}
@@ -220,7 +227,7 @@ async function ContactInformation({ mainContact }: { mainContact: Contact }) {
             {/* Opening Hours */}
             {hasOpeningHours && (
               <div>
-                <h5 className="mb-3 font-medium text-gray-900">
+                <h5 className="mb-3 text-lg/[1.6] font-medium text-gray-900">
                   Öffnungszeiten
                 </h5>
                 <div className="space-y-2">
@@ -229,11 +236,11 @@ async function ContactInformation({ mainContact }: { mainContact: Contact }) {
                       key={index}
                       className="flex items-center justify-between"
                     >
-                      <span className="font-medium text-gray-600">
+                      <span className="text-lg/[1.6] font-medium text-gray-600">
                         {schedule.day}
                       </span>
                       <span
-                        className={`text-sm ${schedule.isOpen ? 'text-gray-900' : 'text-red-600'}`}
+                        className={`text-lg/[1.6] ${schedule.isOpen ? 'text-gray-900' : 'text-red-600'}`}
                       >
                         {schedule.hours}
                       </span>
@@ -251,17 +258,14 @@ async function ContactInformation({ mainContact }: { mainContact: Contact }) {
                 <div className="mb-4 flex items-start space-x-3">
                   <div className="flex-shrink-0">
                     <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-red-100">
-                      <ContactIcon
-                        iconName="MapPinIcon"
-                        className="h-5 w-5 text-red-600"
-                      />
+                      <MapPinIcon className="h-5 w-5 text-red-600" />
                     </div>
                   </div>
                   <div className="min-w-0 flex-1">
-                    <h5 className="text-lg font-semibold text-gray-900">
+                    <h5 className="text-lg/[1.6] font-semibold text-gray-900">
                       Finden Sie uns
                     </h5>
-                    <p className="mt-1 text-sm text-gray-600">
+                    <p className="mt-1 text-lg/[1.6] text-gray-600">
                       Interaktive Karte mit unserem Standort
                     </p>
                   </div>
@@ -280,11 +284,10 @@ async function ContactInformation({ mainContact }: { mainContact: Contact }) {
               <div className="rounded-xl border border-gray-200 bg-white p-6 shadow-sm ring-1 ring-gray-900/5">
                 <div className="flex h-80 items-center justify-center">
                   <div className="text-center">
-                    <ContactIcon
-                      iconName="MapPinIcon"
-                      className="mx-auto h-12 w-12 text-gray-400"
-                    />
-                    <p className="mt-2 text-gray-500">Karte nicht verfügbar</p>
+                    <MapPinIcon className="mx-auto h-12 w-12 text-gray-400" />
+                    <p className="mt-2 text-lg/[1.6] text-gray-500">
+                      Karte nicht verfügbar
+                    </p>
                   </div>
                 </div>
               </div>
@@ -344,12 +347,11 @@ async function BookingSection() {
 
         <div className="mt-16 rounded-xl border border-gray-200 bg-gray-50 p-6 sm:p-8">
           <div className="text-center">
-            <ContactIcon
-              iconName={bookingLink.icon}
-              className="mx-auto h-12 w-12 text-[#01A2EE]"
-            />
-            <h4 className="mt-4 text-xl font-semibold">{bookingLink.title}</h4>
-            <p className="mt-2 text-sm/6 text-gray-600">
+            <MapPinIcon className="mx-auto h-12 w-12 text-[#01A2EE]" />
+            <h4 className="mt-4 text-lg/[1.6] font-semibold">
+              {bookingLink.title}
+            </h4>
+            <p className="mt-2 text-lg/[1.6] text-gray-600">
               {bookingLink.description ||
                 'Nutzen Sie unser integriertes Buchungssystem, um eine Beratung nach Ihren Wünschen zu planen.'}
             </p>
@@ -391,7 +393,7 @@ async function ExternalLinksSection() {
 
   return (
     <div className="overflow-hidden">
-      <Container className="pb-24">
+      <Container className="mb-16 pb-24">
         <Subheading>Zusätzliche Dienstleistungen</Subheading>
         <Heading as="h3" className="mt-2">
           Greifen Sie auf unsere Plattformen zu
@@ -408,12 +410,11 @@ async function ExternalLinksSection() {
               className="rounded-xl border border-gray-200 bg-gray-50 p-6 sm:p-8"
             >
               <div className="text-center">
-                <ContactIcon
-                  iconName={link.icon}
-                  className="mx-auto h-12 w-12 text-[#01A2EE]"
-                />
-                <h4 className="mt-4 text-xl font-semibold">{link.title}</h4>
-                <p className="mt-2 text-sm/6 text-gray-600">
+                <MapPinIcon className="mx-auto h-12 w-12 text-[#01A2EE]" />
+                <h4 className="mt-4 text-lg/[1.6] font-semibold">
+                  {link.title}
+                </h4>
+                <p className="mt-2 text-lg/[1.6] text-gray-600">
                   {link.description ||
                     'Greifen Sie direkt von unserer Website aus auf diesen Dienst zu.'}
                 </p>

@@ -27,7 +27,8 @@ export function AnimatedNumber({
 
   useEffect(() => {
     value.set(isInView ? end : start)
-  }, [start, end, isInView, value])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [start, end, isInView])
 
   return <motion.span ref={ref}>{display}</motion.span>
 }

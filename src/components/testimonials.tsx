@@ -116,13 +116,13 @@ function CallToAction() {
   return (
     <div>
       <p className="max-w-sm text-sm/6 text-gray-600">
-        Schließen Sie sich den führenden Unternehmen an, die Maxsoft AG
+        Schliessen Sie sich den führenden Unternehmen an, die Maxsoft AG
         vertrauen, um ihre Technologie zu transformieren und das
         Geschäftswachstum zu fördern.
       </p>
       <div className="mt-2">
         <Link
-          href="#"
+          href="/contact#booking"
           className="inline-flex items-center gap-2 text-sm/6 font-medium text-[#01A2EE]"
         >
           Loslegen
@@ -166,7 +166,7 @@ export function Testimonials({
         <div ref={setReferenceWindowRef}>
           <Subheading>Was alle sagen</Subheading>
           <Heading as="h3" className="mt-2">
-            Vertraut von Fachleuten.
+            Vertraut von Fachleuten
           </Heading>
         </div>
       </Container>

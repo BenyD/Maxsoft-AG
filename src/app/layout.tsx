@@ -8,37 +8,36 @@ import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
   title: {
-    template: '%s - Maxsoft AG',
-    default: 'Maxsoft AG - Ihr Partner für innovative IT-Lösungen',
+    template: '%s - Maxsoft IT Solutions',
+    default: 'Maxsoft IT Solutions - Dein Partner für innovative IT-Lösungen',
   },
-  description:
-    'Maxsoft AG bietet maßgeschneiderte IT-Lösungen für Unternehmen aller Größen. Anstatt Sie mit komplexen, unverständlichen Technologien allein zu lassen, bieten wir klare, umsetzbare Strategien, die Ihre IT-Prozesse optimieren. Wir verstehen, dass sich die Technologie ständig weiterentwickelt und helfen Ihnen, mit den neuesten Innovationen Schritt zu halten, um Ihre Wettbewerbsfähigkeit zu steigern. Wir bieten Ihnen die Flexibilität, Ihre IT individuell anzupassen.',
+  description: 'Maxsoft IT Solutions - Dein Partner für innovative IT-Lösungen',
   keywords: [
     'IT-Beratung',
     'digitale Transformation',
     'Technologieberatung',
     'Cloud-Lösungen',
     'Cybersicherheit',
-    'Maxsoft AG',
+    'Maxsoft IT Solutions',
     'innovative IT-Lösungen',
     'IT-Optimierung',
   ],
-  authors: [{ name: 'Maxsoft AG' }],
-  creator: 'Maxsoft AG',
+  authors: [{ name: 'Maxsoft IT Solutions' }],
+  creator: 'Maxsoft IT Solutions',
   openGraph: {
     type: 'website',
     locale: 'de_CH',
     url: 'https://maxsoft.ch',
-    title: 'Maxsoft AG - Ihr Partner für innovative IT-Lösungen',
+    title: 'Maxsoft IT Solutions - Dein Partner für innovative IT-Lösungen',
     description:
-      'Maxsoft AG bietet maßgeschneiderte IT-Lösungen für Unternehmen aller Größen. Anstatt Sie mit komplexen, unverständlichen Technologien allein zu lassen, bieten wir klare, umsetzbare Strategien, die Ihre IT-Prozesse optimieren.',
-    siteName: 'Maxsoft AG',
+      'Maxsoft IT Solutions - Dein Partner für innovative IT-Lösungen',
+    siteName: 'Maxsoft IT Solutions',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Maxsoft AG - Ihr Partner für innovative IT-Lösungen',
+    title: 'Maxsoft IT Solutions - Dein Partner für innovative IT-Lösungen',
     description:
-      'Maxsoft AG bietet maßgeschneiderte IT-Lösungen für Unternehmen aller Größen. Anstatt Sie mit komplexen, unverständlichen Technologien allein zu lassen, bieten wir klare, umsetzbare Strategien, die Ihre IT-Prozesse optimieren.',
+      'Maxsoft IT Solutions - Dein Partner für innovative IT-Lösungen',
   },
   robots: {
     index: true,
@@ -71,7 +70,7 @@ export default function RootLayout({
         <link
           rel="alternate"
           type="application/rss+xml"
-          title="Der Maxsoft AG Blog"
+          title="Der Maxsoft IT Solutions Blog"
           href="/blog/feed.xml"
         />
       </head>

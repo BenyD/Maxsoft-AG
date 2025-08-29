@@ -8,12 +8,14 @@ import { z } from 'zod'
 
 // Zod validation schema
 const contactFormSchema = z.object({
-  name: z.string().min(2, 'Name must be at least 2 characters long'),
-  email: z.string().email('Please enter a valid email address'),
+  name: z.string().min(2, 'Der Name muss mindestens 2 Zeichen lang sein'),
+  email: z.string().email('Bitte geben Sie eine gültige E-Mail-Adresse ein'),
   company: z.string().optional(),
   phone: z.string().optional(),
   service: z.string().optional(),
-  message: z.string().min(10, 'Message must be at least 10 characters long'),
+  message: z
+    .string()
+    .min(10, 'Die Nachricht muss mindestens 10 Zeichen lang sein'),
 })
 
 type ContactFormData = z.infer<typeof contactFormSchema>
@@ -113,9 +115,9 @@ export function ContactForm({
             <div>
               <label
                 htmlFor="name"
-                className="mb-2 block text-sm font-medium text-gray-700"
+                className="mb-2 block text-lg/[1.6] font-medium text-gray-700"
               >
-                Full Name *
+                Vollständiger Name *
               </label>
               <input
                 type="text"
@@ -129,7 +131,7 @@ export function ContactForm({
                     ? 'border-red-300 focus:border-red-500'
                     : 'border-gray-300 focus:border-blue-500'
                 }`}
-                placeholder="Enter your full name"
+                placeholder="Geben Sie Ihren vollständigen Namen ein"
               />
               {validationErrors.name && (
                 <p className="mt-1 text-sm text-red-600">
@@ -141,9 +143,9 @@ export function ContactForm({
             <div>
               <label
                 htmlFor="email"
-                className="mb-2 block text-sm font-medium text-gray-700"
+                className="mb-2 block text-lg/[1.6] font-medium text-gray-700"
               >
-                Email Address *
+                E-Mail-Adresse *
               </label>
               <input
                 type="email"
@@ -157,7 +159,7 @@ export function ContactForm({
                     ? 'border-red-300 focus:border-red-500'
                     : 'border-gray-300 focus:border-blue-500'
                 }`}
-                placeholder="Enter your email address"
+                placeholder="Geben Sie Ihre E-Mail-Adresse ein"
               />
               {validationErrors.email && (
                 <p className="mt-1 text-sm text-red-600">
@@ -171,9 +173,9 @@ export function ContactForm({
             <div>
               <label
                 htmlFor="company"
-                className="mb-2 block text-sm font-medium text-gray-700"
+                className="mb-2 block text-lg/[1.6] font-medium text-gray-700"
               >
-                Company
+                Unternehmen
               </label>
               <input
                 type="text"
@@ -182,16 +184,16 @@ export function ContactForm({
                 value={formData.company}
                 onChange={handleChange}
                 className="w-full rounded-lg border border-gray-300 px-4 py-3 transition-colors focus:border-blue-500 focus:ring-2 focus:ring-blue-500"
-                placeholder="Enter your company name"
+                placeholder="Geben Sie Ihren Unternehmensnamen ein"
               />
             </div>
 
             <div>
               <label
                 htmlFor="phone"
-                className="mb-2 block text-sm font-medium text-gray-700"
+                className="mb-2 block text-lg/[1.6] font-medium text-gray-700"
               >
-                Phone Number
+                Telefonnummer
               </label>
               <input
                 type="tel"
@@ -200,7 +202,7 @@ export function ContactForm({
                 value={formData.phone}
                 onChange={handleChange}
                 className="w-full rounded-lg border border-gray-300 px-4 py-3 transition-colors focus:border-blue-500 focus:ring-2 focus:ring-blue-500"
-                placeholder="Enter your phone number"
+                placeholder="Geben Sie Ihre Telefonnummer ein"
               />
             </div>
           </div>
@@ -208,9 +210,9 @@ export function ContactForm({
           <div>
             <label
               htmlFor="service"
-              className="mb-2 block text-sm font-medium text-gray-700"
+              className="mb-2 block text-lg/[1.6] font-medium text-gray-700"
             >
-              Service of Interest
+              Gewünschter Service
             </label>
             <select
               id="service"
@@ -219,7 +221,7 @@ export function ContactForm({
               onChange={handleChange}
               className="w-full rounded-lg border border-gray-300 px-4 py-3 transition-colors focus:border-blue-500 focus:ring-2 focus:ring-blue-500"
             >
-              <option value="">Select a service</option>
+              <option value="">Wählen Sie einen Service</option>
               {serviceCategories && serviceCategories.length > 0 ? (
                 serviceCategories.map((category) => (
                   <option key={category._id} value={category.slug}>
@@ -227,7 +229,7 @@ export function ContactForm({
                   </option>
                 ))
               ) : (
-                <option value="general">General Inquiry</option>
+                <option value="general">Allgemeine Anfrage</option>
               )}
             </select>
           </div>
@@ -235,9 +237,9 @@ export function ContactForm({
           <div>
             <label
               htmlFor="message"
-              className="mb-2 block text-sm font-medium text-gray-700"
+              className="mb-2 block text-lg/[1.6] font-medium text-gray-700"
             >
-              Message *
+              Nachricht *
             </label>
             <textarea
               id="message"
@@ -249,9 +251,9 @@ export function ContactForm({
               className={`w-full resize-none rounded-lg border px-4 py-3 transition-colors focus:ring-2 focus:ring-blue-500 ${
                 validationErrors.message
                   ? 'border-red-300 focus:border-red-500'
-                  : 'border-gray-300 focus:border-blue-500'
+                  : 'border-blue-500 focus:ring-2 focus:ring-blue-500'
               }`}
-              placeholder="Tell us about your project, requirements, or any questions you have..."
+              placeholder="Erzählen Sie uns von Ihrem Projekt, Ihren Anforderungen oder stellen Sie uns Ihre Fragen..."
             />
             {validationErrors.message && (
               <p className="mt-1 text-sm text-red-600">
@@ -266,25 +268,26 @@ export function ContactForm({
               disabled={isSubmitting}
               className="w-full px-8 py-3 sm:w-auto"
             >
-              {isSubmitting ? 'Sending...' : 'Send Message'}
+              {isSubmitting ? 'Wird gesendet...' : 'Nachricht senden'}
             </Button>
           </div>
 
           {/* Status Messages */}
           {submitStatus === 'success' && (
             <div className="mt-4 rounded-lg border border-green-200 bg-green-50 p-4">
-              <p className="text-sm text-green-800">
-                Thank you! Your message has been sent successfully. We&apos;ll
-                get back to you within 24 hours.
+              <p className="text-lg/[1.6] text-green-800">
+                Vielen Dank! Ihre Nachricht wurde erfolgreich gesendet. Wir
+                melden uns innerhalb von 24 Stunden bei Ihnen.
               </p>
             </div>
           )}
 
           {submitStatus === 'error' && (
             <div className="mt-4 rounded-lg border border-red-200 bg-red-50 p-4">
-              <p className="text-sm text-red-800">
-                Sorry, there was an error sending your message. Please try again
-                or contact us directly at info@maxsoft.ch
+              <p className="text-lg/[1.6] text-red-800">
+                Entschuldigung, beim Senden Ihrer Nachricht ist ein Fehler
+                aufgetreten. Bitte versuchen Sie es erneut oder kontaktieren Sie
+                uns direkt unter info@maxsoft.ch
               </p>
             </div>
           )}

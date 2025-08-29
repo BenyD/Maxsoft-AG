@@ -200,12 +200,12 @@ export function JobPageClient({ job }: JobPageClientProps) {
           {/* Apply Now Section */}
           <section className="rounded-2xl bg-gradient-to-br from-blue-50 to-indigo-50 p-8 text-center">
             <Subheading as="h2" className="mb-4">
-              Ready to Join Our Team?
+              Bereit, unserem Team beizutreten?
             </Subheading>
             <p className="mx-auto mb-8 max-w-2xl text-gray-600">
               {applicationSubmitted
-                ? "Thank you for your application! We'll review it and get back to you soon."
-                : "We're excited to hear from you! Click the button below to start your application."}
+                ? 'Vielen Dank für Ihre Bewerbung! Wir werden sie prüfen und uns bald bei Ihnen melden.'
+                : 'Wir freuen uns darauf, von Ihnen zu hören! Klicken Sie auf den Button unten, um Ihre Bewerbung zu starten.'}
             </p>
             <div className="flex justify-center">
               {!applicationSubmitted ? (
@@ -213,16 +213,18 @@ export function JobPageClient({ job }: JobPageClientProps) {
                   onClick={() => setShowApplicationForm(true)}
                   className="px-8 py-3 text-lg"
                 >
-                  Apply Now
+                  Jetzt bewerben
                 </Button>
               ) : (
                 <div className="text-lg font-medium text-green-600">
-                  ✅ Application Submitted Successfully
+                  ✅ Bewerbung erfolgreich eingereicht
                 </div>
               )}
             </div>
             <div className="mt-6 text-sm text-gray-500">
-              <p>For questions about this position, please contact us at</p>
+              <p>
+                Bei Fragen zu dieser Position kontaktieren Sie uns bitte unter
+              </p>
               <a
                 href="mailto:info@maxsoft.ch"
                 className="font-medium text-blue-600 hover:text-blue-700 hover:underline"
@@ -250,10 +252,10 @@ export function JobPageClient({ job }: JobPageClientProps) {
       <Alert open={showSuccessAlert} onClose={() => setShowSuccessAlert(false)}>
         <AlertTitle className="flex items-center gap-2">
           <Icon name="DocumentCheckIcon" className="h-5 w-5 text-green-600" />
-          Application Submitted Successfully!
+          Bewerbung erfolgreich eingereicht!
         </AlertTitle>
         <AlertDescription>
-          We will review your application and get back to you soon.
+          Wir werden Ihre Bewerbung prüfen und uns bald bei Ihnen melden.
         </AlertDescription>
         <AlertActions>
           <Button

@@ -6,9 +6,9 @@ import { Heading, Lead } from '@/components/text'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Nutzungsbedingungen - Maxsoft AG',
+  title: 'Datenschutzerklärung - Maxsoft AG',
   description:
-    'Nutzungsbedingungen und Allgemeine Geschäftsbedingungen für Maxsoft AG IT-Beratungsdienstleistungen.',
+    'Datenschutzerklärung und Datenschutzrichtlinien für Maxsoft AG IT-Beratungsdienstleistungen.',
 }
 
 export default function TermsPage() {
@@ -20,21 +20,21 @@ export default function TermsPage() {
       </Container>
 
       <Container className="mt-16">
-        <Heading as="h1">Datenschutz</Heading>
+        <Heading as="h1">Datenschutzerklärung</Heading>
         <Lead className="mt-6 max-w-3xl">
-          Bitte überprüfen Sie unsere Nutzungsbedingungen und Allgemeinen
-          Geschäftsbedingungen unten. Diese Bedingungen regeln Ihre Nutzung
-          unserer Dienstleistungen und stellen den rechtlichen Rahmen für unsere
-          Geschäftsbeziehung dar.
+          Bitte überprüfen Sie unsere Datenschutzerklärung und
+          Datenschutzrichtlinien unten. Diese Richtlinien regeln die
+          Verarbeitung Ihrer personenbezogenen Daten und stellen den rechtlichen
+          Rahmen für den Datenschutz dar.
         </Lead>
       </Container>
 
       {/* Terms Content */}
-      <Container className="mt-16">
+      <Container className="mt-16 mb-16">
         <div className="rounded-2xl border border-gray-200 bg-white shadow-sm">
           <div className="border-b border-gray-200 p-6">
             <h2 className="text-lg font-semibold text-gray-900">
-              Allgemeine Geschäftsbedingungen (AGB)
+              Datenschutzerklärung
             </h2>
             <p className="mt-2 text-sm text-gray-600">
               Zuletzt aktualisiert:{' '}
@@ -52,7 +52,7 @@ export default function TermsPage() {
               <iframe
                 src="https://app.privacybee.io/v/cm6sbsjhk0075125yaeol1nz1?lang=de&type=dsg"
                 className="h-full w-full border-0"
-                title="Nutzungsbedingungen"
+                title="Datenschutzerklärung"
                 loading="lazy"
                 sandbox="allow-scripts allow-same-origin"
               />
@@ -77,12 +77,12 @@ export default function TermsPage() {
                   </svg>
                 </div>
                 <h3 className="mb-2 text-lg font-medium text-gray-900">
-                  Dokument der Nutzungsbedingungen
+                  Datenschutzerklärung Dokument
                 </h3>
                 <p className="mb-4 text-gray-600">
-                  Falls die eingebetteten Nutzungsbedingungen nicht geladen
-                  werden, können Sie unser vollständiges Dokument der
-                  Nutzungsbedingungen und AGB herunterladen.
+                  Falls die eingebettete Datenschutzerklärung nicht geladen
+                  wird, können Sie unser vollständiges Datenschutzdokument
+                  herunterladen.
                 </p>
                 <a
                   href="/downloads/maxsoft-agb.pdf"
@@ -102,38 +102,10 @@ export default function TermsPage() {
                       d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
                     />
                   </svg>
-                  Nutzungsbedingungen herunterladen (PDF)
+                  Datenschutzerklärung herunterladen (PDF)
                 </a>
               </div>
             </div>
-          </div>
-        </div>
-      </Container>
-
-      {/* Contact Section */}
-      <Container className="mt-16">
-        <div className="rounded-2xl bg-gray-50 px-6 py-12 text-center">
-          <h2 className="mb-4 text-xl font-semibold text-gray-900">
-            Fragen zu unseren Nutzungsbedingungen?
-          </h2>
-          <p className="mx-auto mb-6 max-w-2xl text-gray-600">
-            Falls Sie Fragen zu unseren Nutzungsbedingungen haben oder Klärung
-            zu bestimmten Punkten benötigen, zögern Sie bitte nicht, uns zu
-            kontaktieren.
-          </p>
-          <div className="flex flex-col gap-3 sm:flex-row sm:justify-center">
-            <a
-              href="mailto:info@maxsoft.ch"
-              className="inline-flex items-center rounded-md border border-transparent bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700"
-            >
-              Kontaktieren Sie uns
-            </a>
-            <a
-              href="/contact"
-              className="inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
-            >
-              Kontaktseite besuchen
-            </a>
           </div>
         </div>
       </Container>
