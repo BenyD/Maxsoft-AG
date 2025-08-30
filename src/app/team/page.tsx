@@ -1,5 +1,4 @@
 import { AnimationWrapper } from '@/components/animation-wrapper'
-import { Button } from '@/components/button'
 import { Container } from '@/components/container'
 import { Footer } from '@/components/footer'
 import { GradientBackground } from '@/components/gradient'
@@ -33,73 +32,81 @@ function Person({
       _type: 'reference'
     }
     _type: 'image'
-    hotspot?: {
-      x: number
-      y: number
-      height: number
-      width: number
-    }
-    crop?: {
-      top: number
-      bottom: number
-      left: number
-      right: number
-    }
   }
   linkedinUrl?: string
   department?: string
 }) {
   return (
-    <li className="group hover:scale-105 transition-transform duration-300">
-      <div className="relative overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm transition-all duration-200 hover:border-gray-300 hover:shadow-md">
-        {/* Full-width Photo Section */}
+    <li className="group">
+      <div className="relative overflow-hidden rounded-3xl bg-white shadow-lg transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl">
+        {/* Gradient Overlay on Hover */}
+        <div className="absolute inset-0 z-10 bg-gradient-to-br from-[#01A2EE]/0 via-[#01A2EE]/0 to-[#01A2EE]/0 transition-all duration-500 group-hover:from-[#01A2EE]/5 group-hover:via-[#01A2EE]/10 group-hover:to-[#01A2EE]/15" />
+
+        {/* Photo Section with Enhanced Styling */}
         <div className="relative w-full overflow-hidden">
           <img
             alt={name}
-            src={image(photo)
-              .width(800)
-              .height(800)
-              .fit('crop')
-              .crop('focalpoint')
-              .focalPoint(photo.hotspot?.x || 0.5, photo.hotspot?.y || 0.5)
-              .url()}
-            className="h-auto w-full object-cover"
+            src={image(photo).url()}
+            className="h-80 w-full object-cover object-center transition-transform duration-700 group-hover:scale-110"
           />
-          {/* Department Badge */}
+
+          {/* Department Badge with Enhanced Styling */}
           {department && (
-            <div className="absolute top-4 right-4">
-              <span className="inline-flex items-center rounded-full bg-[#01A2EE]/90 px-3 py-1 text-xs font-medium text-white shadow-sm ring-1 ring-white/20 ring-inset">
+            <div className="absolute top-4 right-4 z-20">
+              <span className="inline-flex items-center rounded-full bg-gradient-to-r from-[#01A2EE] to-[#01A2EE]/80 px-4 py-2 text-xs font-semibold text-white shadow-lg ring-1 ring-white/30 backdrop-blur-sm">
                 {department}
               </span>
             </div>
           )}
+
+          {/* LinkedIn Icon Overlay */}
+          {linkedinUrl && (
+            <div className="absolute inset-0 z-20 flex items-center justify-center bg-black/0 transition-all duration-300 group-hover:bg-black/20">
+              <div className="translate-y-4 transform opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100">
+                <a
+                  href={linkedinUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex h-12 w-12 items-center justify-center rounded-full bg-white/90 shadow-lg backdrop-blur-sm transition-all duration-300 hover:scale-110 hover:bg-[#01A2EE]"
+                  aria-label={`View ${name}'s LinkedIn profile`}
+                >
+                  <LinkedInIcon className="size-5 text-gray-700 transition-colors duration-300 group-hover:text-white" />
+                </a>
+              </div>
+            </div>
+          )}
         </div>
 
-        {/* Content Section */}
-        <div className="p-6 text-center">
-          <h3 className="text-lg/[1.6] font-semibold text-gray-900 transition-colors group-hover:text-[#01A2EE]">
-            {name}
-          </h3>
-          <p className="mt-2 text-lg/[1.6] font-medium text-[#01A2EE]">
-            {title}
-          </p>
+        {/* Content Section with Enhanced Typography */}
+        <div className="relative z-20 p-6">
+          <div className="text-center">
+            <h3 className="text-xl font-bold text-gray-900 transition-colors duration-300 group-hover:text-[#01A2EE]">
+              {name}
+            </h3>
+            <p className="mt-3 text-base leading-relaxed font-medium text-[#01A2EE]">
+              {title}
+            </p>
+          </div>
 
-          {/* LinkedIn Button */}
+          {/* Enhanced LinkedIn Button */}
           {linkedinUrl && (
-            <div className="mt-4 flex justify-center">
+            <div className="mt-6 flex justify-center">
               <a
                 href={linkedinUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 rounded-lg bg-gray-50 px-4 py-2 text-sm font-medium text-gray-700 transition-all duration-200 hover:bg-[#01A2EE] hover:text-white hover:shadow-sm"
+                className="inline-flex items-center gap-3 rounded-xl border border-gray-200 bg-gradient-to-r from-gray-50 to-gray-100 px-6 py-3 text-sm font-semibold text-gray-700 transition-all duration-300 hover:scale-105 hover:border-[#01A2EE]/20 hover:from-[#01A2EE] hover:to-[#01A2EE]/90 hover:text-white hover:shadow-lg"
                 aria-label={`View ${name}'s LinkedIn profile`}
               >
                 <LinkedInIcon className="size-4" />
-                <span className="text-lg/[1.6]">LinkedIn</span>
+                <span>LinkedIn</span>
               </a>
             </div>
           )}
         </div>
+
+        {/* Subtle Border Accent */}
+        <div className="absolute right-0 bottom-0 left-0 h-1 bg-gradient-to-r from-transparent via-[#01A2EE]/30 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
       </div>
     </li>
   )
@@ -110,78 +117,25 @@ async function Team() {
 
   return (
     <Container className="mt-32 scroll-mt-20" id="team">
-      <AnimationWrapper animation="slideUp" delay={0.2}>
-        <Subheading>Unser Team</Subheading>
-      </AnimationWrapper>
-      <AnimationWrapper animation="slideUp" delay={0.4}>
-        <Heading as="h3" className="mt-2">
-          Lass uns zusammenarbeiten!
-        </Heading>
-      </AnimationWrapper>
-      <AnimationWrapper animation="slideUp" delay={0.6}>
-        <Lead className="mt-6 max-w-3xl">
-          Kompetent, neugierig, lösungsorientiert – und immer auf deiner Seite.
-          Wir sind ein interdisziplinäres Team aus Technik-, Architektur- und
-          Beratungsexperten. Gemeinsam entwickeln wir Lösungen, die nicht nur
-          technisch funktionieren, sondern im Alltag wirklich weiterhelfen.
-        </Lead>
-      </AnimationWrapper>
-      <div className="mt-12 grid grid-cols-1 gap-12 lg:grid-cols-2">
-        <AnimationWrapper animation="slideIn" direction="left" delay={0.8}>
-          <div className="max-w-lg">
-            <p className="mt-6 text-lg/[1.6] text-gray-600">
-              Vor Jahren, während sie als IT-Berater bei führenden
-              Technologieunternehmen arbeiteten, erkannten unsere Gründer eine
-              gemeinsame Herausforderung: Unternehmen kämpften darum, mit der
-              technologischen Innovation Schritt zu halten und dabei die
-              betriebliche Effizienz zu erhalten.
-            </p>
-            <p className="mt-8 text-lg/[1.6] text-gray-600">
-              Heute transformiert Maxsoft AG Unternehmen durch innovative
-              Technologielösungen und hilft Organisationen dabei, die digitale
-              Transformation zu bewältigen, die Cybersicherheit zu verbessern
-              und ihre IT-Infrastruktur zu optimieren. Mehr als 200 Unternehmen
-              vertrauen uns bei der Bereitstellung zuverlässiger, skalierbarer
-              Technologielösungen.
-            </p>
-            <div className="mt-6">
-              <Button className="w-full sm:w-auto" href="/contact">
-                Kontakt aufnehmen
-              </Button>
-            </div>
-          </div>
-        </AnimationWrapper>
-        <AnimationWrapper animation="slideIn" direction="right" delay={0.8}>
-          <div className="max-lg:order-first max-lg:max-w-lg">
-            <div className="aspect-3/2 overflow-hidden rounded-xl shadow-xl outline-1 -outline-offset-1 outline-black/10">
-              <img
-                alt=""
-                src="/company/5.jpg"
-                className="block size-full object-cover"
-              />
-            </div>
-          </div>
-        </AnimationWrapper>
-      </div>
       {teamMembers.data && teamMembers.data.length > 0 && (
         <React.Fragment key="team-section">
-          <AnimationWrapper animation="slideUp" delay={1.0}>
-            <div className="mt-32">
-              <Subheading as="h3">Lerne unser Team kennen</Subheading>
+          <AnimationWrapper animation="slideUp" delay={0.2}>
+            <div>
+              <Subheading as="h3">Unser Team</Subheading>
             </div>
           </AnimationWrapper>
-          <AnimationWrapper animation="slideUp" delay={1.2}>
+          <AnimationWrapper animation="slideUp" delay={0.4}>
             <div>
               <Heading as="h3" className="mt-2 max-w-3xl">
                 Erfahrene Fachkräfte, die sich deinem Erfolg widmen
               </Heading>
             </div>
           </AnimationWrapper>
-          <AnimationWrapper animation="slideUp" delay={1.4}>
+          <AnimationWrapper animation="slideUp" delay={0.6}>
             <div>
               <Lead className="mt-6 max-w-2xl">
-                Unser Team von IT-Experten bringt jahrzehntelange Erfahrung in der
-                Technologieberatung, digitalen Transformation und
+                Unser Team von IT-Experten bringt jahrzehntelange Erfahrung in
+                der Technologieberatung, digitalen Transformation und
                 Unternehmenslösungen zusammen.
               </Lead>
             </div>
@@ -200,7 +154,7 @@ async function Team() {
                 <AnimationWrapper
                   key={member._id}
                   animation="scaleIn"
-                  delay={1.6 + index * 0.1}
+                  delay={0.8 + index * 0.1}
                 >
                   <Person
                     name={member.name}

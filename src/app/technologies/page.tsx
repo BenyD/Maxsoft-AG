@@ -2,6 +2,7 @@ import { AnimationWrapper } from '@/components/animation-wrapper'
 import { Container } from '@/components/container'
 import { EmptyState } from '@/components/empty-state'
 import { Footer } from '@/components/footer'
+import { GradientBackground } from '@/components/gradient'
 import { NavbarServer } from '@/components/navbar-server'
 import { Heading, Subheading } from '@/components/text'
 import { image } from '@/sanity/image'
@@ -62,6 +63,7 @@ export default async function TechnologiesPage() {
 
   return (
     <div className="overflow-hidden">
+      <GradientBackground />
       <Container className="relative z-20">
         <NavbarServer />
       </Container>
