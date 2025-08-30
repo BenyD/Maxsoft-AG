@@ -5,6 +5,7 @@ import { GradientBackground } from '@/components/gradient'
 import { Link } from '@/components/link'
 import { NavbarServer } from '@/components/navbar-server'
 import { Heading, Lead, Subheading } from '@/components/text'
+import { AnimationWrapper } from '@/components/animation-wrapper'
 import { image } from '@/sanity/image'
 import {
   getCategories,
@@ -68,49 +69,56 @@ async function FeaturedPosts() {
   return (
     <div className="mt-16 bg-linear-to-t from-gray-100 pb-14">
       <Container>
-        <h2 className="text-lg/[1.6] font-medium tracking-tight">Empfohlen</h2>
+        <AnimationWrapper animation="slideUp" delay={0.8}>
+          <h2 className="text-lg/[1.6] font-medium tracking-tight">
+            Empfohlen
+          </h2>
+        </AnimationWrapper>
         <div className="mt-6 grid grid-cols-1 gap-8 lg:grid-cols-3">
-          {featuredPosts.map((post) => (
-            <div
+          {featuredPosts.map((post, index) => (
+            <AnimationWrapper
               key={post.slug}
-              className="relative flex flex-col rounded-3xl bg-white p-2 shadow-md ring-1 shadow-black/5 ring-black/5"
+              animation="scaleIn"
+              delay={1.0 + index * 0.2}
             >
-              {post.mainImage && (
-                <img
-                  alt={post.mainImage.alt || ''}
-                  src={image(post.mainImage).size(1170, 780).url()}
-                  className="aspect-3/2 w-full rounded-2xl object-cover"
-                />
-              )}
-              <div className="flex flex-1 flex-col p-8">
-                <div className="text-lg/[1.6] text-gray-700">
-                  {dayjs(post.publishedAt).format('dddd, MMMM D, YYYY')}
-                </div>
-                <div className="mt-2 text-lg/[1.6] font-medium">
-                  <Link href={`/blog/${post.slug}`}>
-                    <span className="absolute inset-0" />
-                    {post.title}
-                  </Link>
-                </div>
-                <div className="mt-2 flex-1 text-lg/[1.6] text-gray-500">
-                  {post.excerpt}
-                </div>
-                {post.author && (
-                  <div className="mt-6 flex items-center gap-3">
-                    {post.author.image && (
-                      <img
-                        alt=""
-                        src={image(post.author.image).size(64, 64).url()}
-                        className="aspect-square size-6 rounded-full object-cover"
-                      />
-                    )}
-                    <div className="text-lg/[1.6] text-gray-700">
-                      {post.author.name}
-                    </div>
-                  </div>
+              <div className="relative flex flex-col rounded-3xl bg-white p-2 shadow-md ring-1 shadow-black/5 ring-black/5 hover:scale-105 transition-transform duration-300">
+                {post.mainImage && (
+                  <img
+                    alt={post.mainImage.alt || ''}
+                    src={image(post.mainImage).size(1170, 780).url()}
+                    className="aspect-3/2 w-full rounded-2xl object-cover"
+                  />
                 )}
+                <div className="flex flex-1 flex-col p-8">
+                  <div className="text-lg/[1.6] text-gray-700">
+                    {dayjs(post.publishedAt).format('dddd, MMMM D, YYYY')}
+                  </div>
+                  <div className="mt-2 text-lg/[1.6] font-medium">
+                    <Link href={`/blog/${post.slug}`}>
+                      <span className="absolute inset-0" />
+                      {post.title}
+                    </Link>
+                  </div>
+                  <div className="mt-2 flex-1 text-lg/[1.6] text-gray-500">
+                    {post.excerpt}
+                  </div>
+                  {post.author && (
+                    <div className="mt-6 flex items-center gap-3">
+                      {post.author.image && (
+                        <img
+                          alt=""
+                          src={image(post.author.image).size(64, 64).url()}
+                          className="aspect-square size-6 rounded-full object-cover"
+                        />
+                      )}
+                      <div className="text-lg/[1.6] text-gray-700">
+                        {post.author.name}
+                      </div>
+                    </div>
+                  )}
+                </div>
               </div>
-            </div>
+            </AnimationWrapper>
           ))}
         </div>
       </Container>
@@ -222,45 +230,48 @@ async function Posts({ page, category }: { page: number; category?: string }) {
 
   return (
     <div className="mt-6">
-      {posts.map((post) => (
-        <div
+      {posts.map((post, index) => (
+        <AnimationWrapper
           key={post.slug}
-          className="relative grid grid-cols-1 border-b border-b-gray-100 py-10 first:border-t first:border-t-gray-200 max-sm:gap-3 sm:grid-cols-3"
+          animation="slideUp"
+          delay={1.4 + index * 0.1}
         >
-          <div>
-            <div className="text-lg/[1.6] max-sm:text-gray-700 sm:font-medium">
-              {dayjs(post.publishedAt).format('dddd, MMMM D, YYYY')}
-            </div>
-            {post.author && (
-              <div className="mt-2.5 flex items-center gap-3">
-                {post.author.image && (
-                  <img
-                    alt=""
-                    src={image(post.author.image).width(64).height(64).url()}
-                    className="aspect-square size-6 rounded-full object-cover"
-                  />
-                )}
-                <div className="text-lg/[1.6] text-gray-700">
-                  {post.author.name}
-                </div>
+          <div className="relative grid grid-cols-1 border-b border-b-gray-100 py-10 first:border-t first:border-t-gray-200 max-sm:gap-3 sm:grid-cols-3">
+            <div>
+              <div className="text-lg/[1.6] max-sm:text-gray-700 sm:font-medium">
+                {dayjs(post.publishedAt).format('dddd, MMMM D, YYYY')}
               </div>
-            )}
-          </div>
-          <div className="sm:col-span-2 sm:max-w-2xl">
-            <h2 className="text-lg/[1.6] font-medium">{post.title}</h2>
-            <p className="mt-3 text-lg/[1.6] text-gray-500">{post.excerpt}</p>
-            <div className="mt-4">
-              <Link
-                href={`/blog/${post.slug}`}
-                className="flex items-center gap-1 text-lg/[1.6] font-medium"
-              >
-                <span className="absolute inset-0" />
-                Weiterlesen
-                <ChevronRightIcon className="size-4 fill-gray-400" />
-              </Link>
+              {post.author && (
+                <div className="mt-2.5 flex items-center gap-3">
+                  {post.author.image && (
+                    <img
+                      alt=""
+                      src={image(post.author.image).width(64).height(64).url()}
+                      className="aspect-square size-6 rounded-full object-cover"
+                    />
+                  )}
+                  <div className="text-lg/[1.6] text-gray-700">
+                    {post.author.name}
+                  </div>
+                </div>
+              )}
+            </div>
+            <div className="sm:col-span-2 sm:max-w-2xl">
+              <h2 className="text-lg/[1.6] font-medium">{post.title}</h2>
+              <p className="mt-3 text-lg/[1.6] text-gray-500">{post.excerpt}</p>
+              <div className="mt-4">
+                <Link
+                  href={`/blog/${post.slug}`}
+                  className="flex items-center gap-1 text-lg/[1.6] font-medium"
+                >
+                  <span className="absolute inset-0" />
+                  Weiterlesen
+                  <ChevronRightIcon className="size-4 fill-gray-400" />
+                </Link>
+              </div>
             </div>
           </div>
-        </div>
+        </AnimationWrapper>
       ))}
     </div>
   )
@@ -351,21 +362,31 @@ export default async function Blog({
         <NavbarServer />
       </Container>
       <Container>
-        <Subheading className="mt-16">Blog</Subheading>
-        <Heading as="h1" className="mt-2">
-          Was passiert bei Maxsoft AG
-        </Heading>
-        <Lead className="mt-6 max-w-3xl">
-          Bleiben Sie informiert mit Technologie-Einblicken,
-          Unternehmensnachrichten und Expertenratschlägen zu digitaler
-          Transformation und IT-Strategie.
-        </Lead>
+        <AnimationWrapper animation="slideUp" delay={0.2}>
+          <Subheading className="mt-16">Blog</Subheading>
+        </AnimationWrapper>
+        <AnimationWrapper animation="slideUp" delay={0.4}>
+          <Heading as="h1" className="mt-2">
+            Was passiert bei Maxsoft AG
+          </Heading>
+        </AnimationWrapper>
+        <AnimationWrapper animation="slideUp" delay={0.6}>
+          <Lead className="mt-6 max-w-3xl">
+            Bleiben Sie informiert mit Technologie-Einblicken,
+            Unternehmensnachrichten und Expertenratschlägen zu digitaler
+            Transformation und IT-Strategie.
+          </Lead>
+        </AnimationWrapper>
       </Container>
       {page === 1 && !category && <FeaturedPosts />}
       <Container className="mt-16 mb-16 pb-24">
-        <Categories selected={category} />
+        <AnimationWrapper animation="slideUp" delay={1.2}>
+          <Categories selected={category} />
+        </AnimationWrapper>
         <Posts page={page} category={category} />
-        <Pagination page={page} category={category} />
+        <AnimationWrapper animation="slideUp" delay={1.6}>
+          <Pagination page={page} category={category} />
+        </AnimationWrapper>
       </Container>
       <Footer />
     </main>

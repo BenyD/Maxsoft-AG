@@ -1,3 +1,4 @@
+import { AnimationWrapper } from '@/components/animation-wrapper'
 import { Container } from '@/components/container'
 import { Footer } from '@/components/footer'
 import { GradientBackground } from '@/components/gradient'
@@ -48,7 +49,7 @@ function TechnologyPartnerCard({
 }) {
   return (
     <li className="group">
-      <div className="relative flex h-full flex-col overflow-hidden rounded-xl bg-white p-6 shadow-md ring-1 ring-gray-200 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:ring-gray-300">
+      <div className="relative flex h-full flex-col overflow-hidden rounded-xl bg-white p-6 shadow-md ring-1 ring-gray-200 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:ring-gray-300 hover:scale-105">
         {/* Image Section */}
         <div className="mb-4 h-56 w-full flex-shrink-0 overflow-hidden rounded-lg">
           <img
@@ -131,7 +132,7 @@ function IndustryPartnerCard({
 }) {
   return (
     <li className="group">
-      <div className="relative flex h-full flex-col overflow-hidden rounded-xl bg-white p-6 shadow-md ring-1 ring-gray-200 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:ring-gray-300">
+      <div className="relative flex h-full flex-col overflow-hidden rounded-xl bg-white p-6 shadow-md ring-1 ring-gray-200 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:ring-gray-300 hover:scale-105">
         {/* Image Section */}
         <div className="mb-4 h-56 w-full flex-shrink-0 overflow-hidden rounded-lg">
           <img
@@ -198,62 +199,82 @@ async function Partners() {
       {(technologyPartners.data && technologyPartners.data.length > 0) ||
       (industryPartners.data && industryPartners.data.length > 0) ? (
         <React.Fragment key="partners-section">
-          <Subheading>Partner</Subheading>
-          <Heading as="h3" className="mt-2">
-            Strategische Technologiepartnerschaften
-          </Heading>
-          <Lead className="mt-6 max-w-3xl">
-            Wir arbeiten mit führenden Technologieanbietern zusammen, um die
-            besten Lösungen für unsere Kunden zu liefern und den Zugang zu
-            modernsten Tools und Plattformen zu gewährleisten.
-          </Lead>
+          <AnimationWrapper animation="slideUp" delay={0.2}>
+            <Subheading>Partner</Subheading>
+          </AnimationWrapper>
+          <AnimationWrapper animation="slideUp" delay={0.4}>
+            <Heading as="h3" className="mt-2">
+              Strategische Technologiepartnerschaften
+            </Heading>
+          </AnimationWrapper>
+          <AnimationWrapper animation="slideUp" delay={0.6}>
+            <Lead className="mt-6 max-w-3xl">
+              Wir arbeiten mit führenden Technologieanbietern zusammen, um die
+              besten Lösungen für unsere Kunden zu liefern und den Zugang zu
+              modernsten Tools und Plattformen zu gewährleisten.
+            </Lead>
+          </AnimationWrapper>
 
           {technologyPartners.data && technologyPartners.data.length > 0 && (
-            <React.Fragment key="technology-partners">
-              <Subheading as="h3" className="mt-24">
-                Technologiepartner
-              </Subheading>
-              <hr className="mt-6 border-t border-gray-200" />
-              <ul
-                role="list"
-                className="mx-auto mt-10 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3"
-              >
-                {technologyPartners.data.map((partner: TechnologyPartner) => (
-                  <TechnologyPartnerCard
-                    key={partner._id}
-                    companyName={partner.companyName}
-                    description={partner.description}
-                    logo={partner.logo}
-                    websiteUrl={partner.websiteUrl}
-                    partnershipType={partner.partnershipType}
-                  />
-                ))}
-              </ul>
-            </React.Fragment>
+            <AnimationWrapper animation="slideUp" delay={0.8}>
+              <React.Fragment key="technology-partners">
+                <Subheading as="h3" className="mt-24">
+                  Technologiepartner
+                </Subheading>
+                <hr className="mt-6 border-t border-gray-200" />
+                <ul
+                  role="list"
+                  className="mx-auto mt-10 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3"
+                >
+                  {technologyPartners.data.map((partner: TechnologyPartner, index: number) => (
+                    <AnimationWrapper
+                      key={partner._id}
+                      animation="scaleIn"
+                      delay={1.0 + index * 0.1}
+                    >
+                      <TechnologyPartnerCard
+                        companyName={partner.companyName}
+                        description={partner.description}
+                        logo={partner.logo}
+                        websiteUrl={partner.websiteUrl}
+                        partnershipType={partner.partnershipType}
+                      />
+                    </AnimationWrapper>
+                  ))}
+                </ul>
+              </React.Fragment>
+            </AnimationWrapper>
           )}
 
           {industryPartners.data && industryPartners.data.length > 0 && (
-            <React.Fragment key="industry-partners">
-              <Subheading as="h3" className="mt-24">
-                Branchenpartner
-              </Subheading>
-              <hr className="mt-6 border-t border-gray-200" />
-              <ul
-                role="list"
-                className="mx-auto mt-16 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3"
-              >
-                {industryPartners.data.map((partner: IndustryPartner) => (
-                  <IndustryPartnerCard
-                    key={partner._id}
-                    companyName={partner.companyName}
-                    description={partner.description}
-                    logo={partner.logo}
-                    websiteUrl={partner.websiteUrl}
-                    industry={partner.industry}
-                  />
-                ))}
-              </ul>
-            </React.Fragment>
+            <AnimationWrapper animation="slideUp" delay={1.2}>
+              <React.Fragment key="industry-partners">
+                <Subheading as="h3" className="mt-24">
+                  Branchenpartner
+                </Subheading>
+                <hr className="mt-6 border-t border-gray-200" />
+                <ul
+                  role="list"
+                  className="mx-auto mt-16 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3"
+                >
+                  {industryPartners.data.map((partner: IndustryPartner, index: number) => (
+                    <AnimationWrapper
+                      key={partner._id}
+                      animation="scaleIn"
+                      delay={1.4 + index * 0.1}
+                    >
+                      <IndustryPartnerCard
+                        companyName={partner.companyName}
+                        description={partner.description}
+                        logo={partner.logo}
+                        websiteUrl={partner.websiteUrl}
+                        industry={partner.industry}
+                      />
+                    </AnimationWrapper>
+                  ))}
+                </ul>
+              </React.Fragment>
+            </AnimationWrapper>
           )}
         </React.Fragment>
       ) : null}

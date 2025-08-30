@@ -1,3 +1,4 @@
+import { AnimationWrapper } from '@/components/animation-wrapper'
 import { Container } from '@/components/container'
 import { EmptyState } from '@/components/empty-state'
 import { Footer } from '@/components/footer'
@@ -72,15 +73,21 @@ export default async function CompetenciesPage() {
       </Container>
       <Container className="mt-16">
         <div className="mb-16">
-          <Subheading>Kompetenzen</Subheading>
-          <Heading as="h1" className="mt-1 max-w-4xl">
-            Kundenfokus durch innovative, hochwertige Lösungen
-          </Heading>
-          <p className="mt-3 max-w-2xl text-lg text-gray-600">
-            Unsere Expertise liegt in der Entwicklung massgeschneiderter
-            IT-Lösungen, die Unternehmen dabei unterstützen, ihre digitalen
-            Ziele zu erreichen und nachhaltig zu wachsen.
-          </p>
+          <AnimationWrapper animation="slideUp" delay={0.2}>
+            <Subheading>Kompetenzen</Subheading>
+          </AnimationWrapper>
+          <AnimationWrapper animation="slideUp" delay={0.4}>
+            <Heading as="h1" className="mt-1 max-w-4xl">
+              Kundenfokus durch innovative, hochwertige Lösungen
+            </Heading>
+          </AnimationWrapper>
+          <AnimationWrapper animation="slideUp" delay={0.6}>
+            <p className="mt-3 max-w-2xl text-lg text-gray-600">
+              Unsere Expertise liegt in der Entwicklung massgeschneiderter
+              IT-Lösungen, die Unternehmen dabei unterstützen, ihre digitalen
+              Ziele zu erreichen und nachhaltig zu wachsen.
+            </p>
+          </AnimationWrapper>
         </div>
       </Container>
 
@@ -97,15 +104,24 @@ export default async function CompetenciesPage() {
         <Container className="mb-16">
           <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
             {sortedCompetencies.map(
-              (competency: {
-                _id: string
-                title: string
-                eyebrow: string
-                description: string
-                image: { asset: { _ref: string; _type: string } }
-                order: number
-              }) => (
-                <CompetencyCard key={competency._id} competency={competency} />
+              (
+                competency: {
+                  _id: string
+                  title: string
+                  eyebrow: string
+                  description: string
+                  image: { asset: { _ref: string; _type: string } }
+                  order: number
+                },
+                index: number,
+              ) => (
+                <AnimationWrapper
+                  key={competency._id}
+                  animation="scaleIn"
+                  delay={0.8 + index * 0.2}
+                >
+                  <CompetencyCard competency={competency} />
+                </AnimationWrapper>
               ),
             )}
           </div>

@@ -1,3 +1,4 @@
+import { AnimationWrapper } from '@/components/animation-wrapper'
 import { Container } from '@/components/container'
 import { EmptyState } from '@/components/empty-state'
 import { Footer } from '@/components/footer'
@@ -66,16 +67,22 @@ export default async function TechnologiesPage() {
       </Container>
       <Container className="mt-16">
         <div className="mb-16">
-          <Subheading>Technologien</Subheading>
-          <Heading as="h1" className="mt-1 max-w-4xl">
-            Die Werkzeuge, die wir einsetzen, um aussergewöhnliche Ergebnisse zu
-            erzielen
-          </Heading>
-          <p className="mt-3 max-w-2xl text-lg text-gray-600">
-            Unsere Expertise umfasst die neuesten Technologien und Plattformen,
-            die es uns ermöglichen, innovative und skalierbare Lösungen für
-            unsere Kunden zu entwickeln.
-          </p>
+          <AnimationWrapper animation="slideUp" delay={0.2}>
+            <Subheading>Technologien</Subheading>
+          </AnimationWrapper>
+          <AnimationWrapper animation="slideUp" delay={0.4}>
+            <Heading as="h1" className="mt-1 max-w-4xl">
+              Die Werkzeuge, die wir einsetzen, um aussergewöhnliche Ergebnisse
+              zu erzielen
+            </Heading>
+          </AnimationWrapper>
+          <AnimationWrapper animation="slideUp" delay={0.6}>
+            <p className="mt-3 max-w-2xl text-lg text-gray-600">
+              Unsere Expertise umfasst die neuesten Technologien und
+              Plattformen, die es uns ermöglichen, innovative und skalierbare
+              Lösungen für unsere Kunden zu entwickeln.
+            </p>
+          </AnimationWrapper>
         </div>
       </Container>
 
@@ -97,18 +104,27 @@ export default async function TechnologiesPage() {
                   (a.order || 0) - (b.order || 0),
               )
               .map(
-                (technology: {
-                  _id: string
-                  title: string
-                  eyebrow: string
-                  description: string
-                  image: { asset: { _ref: string; _type: string } }
-                  order: number
-                }) => (
-                  <TechnologyCard
+                (
+                  technology: {
+                    _id: string
+                    title: string
+                    eyebrow: string
+                    description: string
+                    image: { asset: { _ref: string; _type: string } }
+                    order: number
+                  },
+                  index: number,
+                ) => (
+                  <AnimationWrapper
                     key={technology._id}
-                    technology={technology}
-                  />
+                    animation="scaleIn"
+                    delay={0.8 + index * 0.2}
+                  >
+                    <TechnologyCard
+                      key={technology._id}
+                      technology={technology}
+                    />
+                  </AnimationWrapper>
                 ),
               )}
           </div>

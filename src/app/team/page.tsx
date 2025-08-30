@@ -1,3 +1,4 @@
+import { AnimationWrapper } from '@/components/animation-wrapper'
 import { Button } from '@/components/button'
 import { Container } from '@/components/container'
 import { Footer } from '@/components/footer'
@@ -49,7 +50,7 @@ function Person({
   department?: string
 }) {
   return (
-    <li className="group">
+    <li className="group hover:scale-105 transition-transform duration-300">
       <div className="relative overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm transition-all duration-200 hover:border-gray-300 hover:shadow-md">
         {/* Full-width Photo Section */}
         <div className="relative w-full overflow-hidden">
@@ -109,62 +110,82 @@ async function Team() {
 
   return (
     <Container className="mt-32 scroll-mt-20" id="team">
-      <Subheading>Unser Team</Subheading>
-      <Heading as="h3" className="mt-2">
-        Lass uns zusammenarbeiten!
-      </Heading>
-      <Lead className="mt-6 max-w-3xl">
-        Kompetent, neugierig, lösungsorientiert – und immer auf deiner Seite.
-        Wir sind ein interdisziplinäres Team aus Technik-, Architektur- und
-        Beratungsexperten. Gemeinsam entwickeln wir Lösungen, die nicht nur
-        technisch funktionieren, sondern im Alltag wirklich weiterhelfen.
-      </Lead>
+      <AnimationWrapper animation="slideUp" delay={0.2}>
+        <Subheading>Unser Team</Subheading>
+      </AnimationWrapper>
+      <AnimationWrapper animation="slideUp" delay={0.4}>
+        <Heading as="h3" className="mt-2">
+          Lass uns zusammenarbeiten!
+        </Heading>
+      </AnimationWrapper>
+      <AnimationWrapper animation="slideUp" delay={0.6}>
+        <Lead className="mt-6 max-w-3xl">
+          Kompetent, neugierig, lösungsorientiert – und immer auf deiner Seite.
+          Wir sind ein interdisziplinäres Team aus Technik-, Architektur- und
+          Beratungsexperten. Gemeinsam entwickeln wir Lösungen, die nicht nur
+          technisch funktionieren, sondern im Alltag wirklich weiterhelfen.
+        </Lead>
+      </AnimationWrapper>
       <div className="mt-12 grid grid-cols-1 gap-12 lg:grid-cols-2">
-        <div className="max-w-lg">
-          <p className="mt-6 text-lg/[1.6] text-gray-600">
-            Vor Jahren, während sie als IT-Berater bei führenden
-            Technologieunternehmen arbeiteten, erkannten unsere Gründer eine
-            gemeinsame Herausforderung: Unternehmen kämpften darum, mit der
-            technologischen Innovation Schritt zu halten und dabei die
-            betriebliche Effizienz zu erhalten.
-          </p>
-          <p className="mt-8 text-lg/[1.6] text-gray-600">
-            Heute transformiert Maxsoft AG Unternehmen durch innovative
-            Technologielösungen und hilft Organisationen dabei, die digitale
-            Transformation zu bewältigen, die Cybersicherheit zu verbessern und
-            ihre IT-Infrastruktur zu optimieren. Mehr als 200 Unternehmen
-            vertrauen uns bei der Bereitstellung zuverlässiger, skalierbarer
-            Technologielösungen.
-          </p>
-          <div className="mt-6">
-            <Button className="w-full sm:w-auto" href="/contact">
-              Kontakt aufnehmen
-            </Button>
+        <AnimationWrapper animation="slideIn" direction="left" delay={0.8}>
+          <div className="max-w-lg">
+            <p className="mt-6 text-lg/[1.6] text-gray-600">
+              Vor Jahren, während sie als IT-Berater bei führenden
+              Technologieunternehmen arbeiteten, erkannten unsere Gründer eine
+              gemeinsame Herausforderung: Unternehmen kämpften darum, mit der
+              technologischen Innovation Schritt zu halten und dabei die
+              betriebliche Effizienz zu erhalten.
+            </p>
+            <p className="mt-8 text-lg/[1.6] text-gray-600">
+              Heute transformiert Maxsoft AG Unternehmen durch innovative
+              Technologielösungen und hilft Organisationen dabei, die digitale
+              Transformation zu bewältigen, die Cybersicherheit zu verbessern
+              und ihre IT-Infrastruktur zu optimieren. Mehr als 200 Unternehmen
+              vertrauen uns bei der Bereitstellung zuverlässiger, skalierbarer
+              Technologielösungen.
+            </p>
+            <div className="mt-6">
+              <Button className="w-full sm:w-auto" href="/contact">
+                Kontakt aufnehmen
+              </Button>
+            </div>
           </div>
-        </div>
-        <div className="max-lg:order-first max-lg:max-w-lg">
-          <div className="aspect-3/2 overflow-hidden rounded-xl shadow-xl outline-1 -outline-offset-1 outline-black/10">
-            <img
-              alt=""
-              src="/company/5.jpg"
-              className="block size-full object-cover"
-            />
+        </AnimationWrapper>
+        <AnimationWrapper animation="slideIn" direction="right" delay={0.8}>
+          <div className="max-lg:order-first max-lg:max-w-lg">
+            <div className="aspect-3/2 overflow-hidden rounded-xl shadow-xl outline-1 -outline-offset-1 outline-black/10">
+              <img
+                alt=""
+                src="/company/5.jpg"
+                className="block size-full object-cover"
+              />
+            </div>
           </div>
-        </div>
+        </AnimationWrapper>
       </div>
       {teamMembers.data && teamMembers.data.length > 0 && (
         <React.Fragment key="team-section">
-          <div className="mt-32">
-            <Subheading as="h3">Lerne unser Team kennen</Subheading>
-            <Heading as="h3" className="mt-2 max-w-3xl">
-              Erfahrene Fachkräfte, die sich deinem Erfolg widmen
-            </Heading>
-            <Lead className="mt-6 max-w-2xl">
-              Unser Team von IT-Experten bringt jahrzehntelange Erfahrung in der
-              Technologieberatung, digitalen Transformation und
-              Unternehmenslösungen zusammen.
-            </Lead>
-          </div>
+          <AnimationWrapper animation="slideUp" delay={1.0}>
+            <div className="mt-32">
+              <Subheading as="h3">Lerne unser Team kennen</Subheading>
+            </div>
+          </AnimationWrapper>
+          <AnimationWrapper animation="slideUp" delay={1.2}>
+            <div>
+              <Heading as="h3" className="mt-2 max-w-3xl">
+                Erfahrene Fachkräfte, die sich deinem Erfolg widmen
+              </Heading>
+            </div>
+          </AnimationWrapper>
+          <AnimationWrapper animation="slideUp" delay={1.4}>
+            <div>
+              <Lead className="mt-6 max-w-2xl">
+                Unser Team von IT-Experten bringt jahrzehntelange Erfahrung in der
+                Technologieberatung, digitalen Transformation und
+                Unternehmenslösungen zusammen.
+              </Lead>
+            </div>
+          </AnimationWrapper>
 
           {/* Team Members Grid */}
           <div className="relative mt-16">
@@ -175,15 +196,20 @@ async function Team() {
               role="list"
               className="relative grid grid-cols-1 gap-6 p-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
             >
-              {teamMembers.data.map((member: TeamMember) => (
-                <Person
+              {teamMembers.data.map((member: TeamMember, index: number) => (
+                <AnimationWrapper
                   key={member._id}
-                  name={member.name}
-                  title={member.title}
-                  photo={member.photo}
-                  linkedinUrl={member.linkedinUrl}
-                  department={member.department}
-                />
+                  animation="scaleIn"
+                  delay={1.6 + index * 0.1}
+                >
+                  <Person
+                    name={member.name}
+                    title={member.title}
+                    photo={member.photo}
+                    linkedinUrl={member.linkedinUrl}
+                    department={member.department}
+                  />
+                </AnimationWrapper>
               ))}
             </ul>
           </div>

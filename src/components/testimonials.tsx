@@ -15,6 +15,7 @@ import {
 } from 'framer-motion'
 import { useCallback, useLayoutEffect, useRef, useState } from 'react'
 import useMeasure, { type RectReadOnly } from 'react-use-measure'
+import { AnimationWrapper } from './animation-wrapper'
 import { Container } from './container'
 import { Link } from './link'
 import { Heading, Subheading } from './text'
@@ -164,10 +165,14 @@ export function Testimonials({
     <div className="overflow-hidden py-32">
       <Container>
         <div ref={setReferenceWindowRef}>
-          <Subheading>Was alle sagen</Subheading>
-          <Heading as="h3" className="mt-2">
-            Vertraut von Fachleuten
-          </Heading>
+          <AnimationWrapper animation="slideUp" delay={0.2}>
+            <Subheading>Was alle sagen</Subheading>
+          </AnimationWrapper>
+          <AnimationWrapper animation="slideUp" delay={0.4}>
+            <Heading as="h3" className="mt-2">
+              Vertraut von Fachleuten
+            </Heading>
+          </AnimationWrapper>
         </div>
       </Container>
       <div
@@ -192,7 +197,9 @@ export function Testimonials({
       </div>
       <Container className="mt-16">
         <div className="flex justify-between">
-          <CallToAction />
+          <AnimationWrapper animation="slideUp" delay={0.6}>
+            <CallToAction />
+          </AnimationWrapper>
           <div className="hidden sm:flex sm:gap-2">
             {testimonials.map((testimonial, testimonialIndex) => (
               <Headless.Button

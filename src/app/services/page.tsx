@@ -1,3 +1,4 @@
+import { AnimationWrapper } from '@/components/animation-wrapper'
 import { Button } from '@/components/button'
 import { Container } from '@/components/container'
 import { Footer } from '@/components/footer'
@@ -147,14 +148,18 @@ export default async function ServicesPage() {
       </Container>
 
       <Container className="mt-16">
-        <Heading as="h1">Unsere Dienstleistungen</Heading>
-        <Lead className="mt-6 max-w-3xl">
-          Entdecken Sie unser umfassendes Angebot an IT-Dienstleistungen, die
-          darauf ausgerichtet sind, Ihr Unternehmen zu transformieren. Von
-          praktischen Schulungsworkshops bis hin zu strategischer Beratung
-          bieten wir die Expertise, die Sie benötigen, um in der heutigen
-          digitalen Landschaft erfolgreich zu sein.
-        </Lead>
+        <AnimationWrapper animation="slideUp" delay={0.2}>
+          <Heading as="h1">Unsere Dienstleistungen</Heading>
+        </AnimationWrapper>
+        <AnimationWrapper animation="slideUp" delay={0.4}>
+          <Lead className="mt-6 max-w-3xl">
+            Entdecken Sie unser umfassendes Angebot an IT-Dienstleistungen, die
+            darauf ausgerichtet sind, Ihr Unternehmen zu transformieren. Von
+            praktischen Schulungsworkshops bis hin zu strategischer Beratung
+            bieten wir die Expertise, die Sie benötigen, um in der heutigen
+            digitalen Landschaft erfolgreich zu sein.
+          </Lead>
+        </AnimationWrapper>
       </Container>
 
       {/* No Services State */}
@@ -199,46 +204,53 @@ export default async function ServicesPage() {
       {/* Featured Services */}
       {featuredServices.length > 0 && (
         <Container className="mt-24">
-          <Subheading>Empfohlene Dienstleistungen</Subheading>
+          <AnimationWrapper animation="slideUp" delay={0.6}>
+            <Subheading>Empfohlene Dienstleistungen</Subheading>
+          </AnimationWrapper>
           <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {featuredServices.map((service: ServiceExpanded) => (
-              <Link
+            {featuredServices.map((service: ServiceExpanded, index: number) => (
+              <AnimationWrapper
                 key={service._id}
-                href={`/services/${service.slug}`}
-                className="group block rounded-xl border border-gray-200 bg-white p-6 shadow-sm transition-all duration-200 hover:border-gray-300 hover:shadow-md"
+                animation="scaleIn"
+                delay={0.8 + index * 0.2}
               >
-                <div
-                  className={`inline-flex h-10 w-10 items-center justify-center rounded-lg ${service.category.color} mb-4`}
+                <Link
+                  href={`/services/${service.slug}`}
+                  className="group block rounded-xl border border-gray-200 bg-white p-6 shadow-sm transition-all duration-200 hover:border-gray-300 hover:shadow-md"
                 >
-                  <Icon
-                    name={service.category.icon || ''}
-                    className="h-5 w-5"
-                    fallback={service.category.name.charAt(0)}
-                  />
-                </div>
-                <h3 className="mb-2 text-lg font-semibold text-gray-900 transition-colors group-hover:text-gray-700">
-                  {service.title}
-                </h3>
-                <p className="mb-4 text-sm text-gray-600">
-                  {service.shortDescription}
-                </p>
-                <div className="flex items-center text-sm font-medium text-blue-600">
-                  Mehr erfahren
-                  <svg
-                    className="ml-1 h-4 w-4"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
+                  <div
+                    className={`inline-flex h-10 w-10 items-center justify-center rounded-lg ${service.category.color} mb-4`}
                   >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M9 5l7 7-7 7"
+                    <Icon
+                      name={service.category.icon || ''}
+                      className="h-5 w-5"
+                      fallback={service.category.name.charAt(0)}
                     />
-                  </svg>
-                </div>
-              </Link>
+                  </div>
+                  <h3 className="mb-2 text-lg font-semibold text-gray-900 transition-colors group-hover:text-gray-700">
+                    {service.title}
+                  </h3>
+                  <p className="mb-4 text-sm text-gray-600">
+                    {service.shortDescription}
+                  </p>
+                  <div className="flex items-center text-sm font-medium text-blue-600">
+                    Mehr erfahren
+                    <svg
+                      className="ml-1 h-4 w-4"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M9 5l7 7-7 7"
+                      />
+                    </svg>
+                  </div>
+                </Link>
+              </AnimationWrapper>
             ))}
           </div>
         </Container>
@@ -247,17 +259,26 @@ export default async function ServicesPage() {
       {/* Service Categories */}
       {hasCategories && (
         <Container className="mt-24 mb-16">
-          <Subheading>Alle Dienstleistungen</Subheading>
+          <AnimationWrapper animation="slideUp" delay={1.0}>
+            <Subheading>Alle Dienstleistungen</Subheading>
+          </AnimationWrapper>
           <div className="mt-8 grid gap-8 lg:grid-cols-2">
-            {serviceCategories.data?.map((category: ServiceCategory) => {
-              return (
-                <ServiceCategoryCard
-                  key={category._id}
-                  category={category}
-                  services={services.data || []}
-                />
-              )
-            })}
+            {serviceCategories.data?.map(
+              (category: ServiceCategory, index: number) => {
+                return (
+                  <AnimationWrapper
+                    key={category._id}
+                    animation="scaleIn"
+                    delay={1.2 + index * 0.2}
+                  >
+                    <ServiceCategoryCard
+                      category={category}
+                      services={services.data || []}
+                    />
+                  </AnimationWrapper>
+                )
+              },
+            )}
           </div>
         </Container>
       )}

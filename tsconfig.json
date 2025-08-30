@@ -19,7 +19,8 @@
       }
     ],
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*"],
+      "Backgrounds": ["./src/components"]
     },
     "target": "ES2017"
   },

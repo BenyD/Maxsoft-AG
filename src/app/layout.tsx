@@ -1,4 +1,5 @@
 import { CookieBanner } from '@/components/cookie-banner'
+import { PageTransition } from '@/components/page-transition'
 import { SanityLive } from '@/sanity/live'
 import { revalidateSyncTags } from '@/sanity/revalidateSyncTags'
 import '@/styles/tailwind.css'
@@ -75,7 +76,7 @@ export default function RootLayout({
         />
       </head>
       <body className="pt-20 text-gray-950 antialiased sm:pt-24">
-        {children}
+        <PageTransition type="fade">{children}</PageTransition>
         <SanityLive revalidateSyncTags={revalidateSyncTags} />
         <CookieBanner />
         <Analytics />

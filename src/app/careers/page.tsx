@@ -1,3 +1,4 @@
+import { AnimationWrapper } from '@/components/animation-wrapper'
 import { Button } from '@/components/button'
 import { Container } from '@/components/container'
 import { Footer } from '@/components/footer'
@@ -33,19 +34,25 @@ export default async function CareersPage() {
       </Container>
 
       <Container className="mt-16">
-        <Heading as="h1">Karriere bei Maxsoft AG</Heading>
-        <Lead className="mt-6 max-w-3xl">
-          Werden Sie Teil unseres innovativen Teams und helfen Sie dabei,
-          Unternehmen durch modernste Technologielösungen zu transformieren. Wir
-          arbeiten zusammen von unseren Büros in der Schweiz aus und remote,
-          fördern eine kollaborative Umgebung, die Innovation und Exzellenz
-          schätzt.
-        </Lead>
+        <AnimationWrapper animation="slideUp" delay={0.2}>
+          <Heading as="h1">Karriere bei Maxsoft AG</Heading>
+        </AnimationWrapper>
+        <AnimationWrapper animation="slideUp" delay={0.4}>
+          <Lead className="mt-6 max-w-3xl">
+            Werden Sie Teil unseres innovativen Teams und helfen Sie dabei,
+            Unternehmen durch modernste Technologielösungen zu transformieren.
+            Wir arbeiten zusammen von unseren Büros in der Schweiz aus und
+            remote, fördern eine kollaborative Umgebung, die Innovation und
+            Exzellenz schätzt.
+          </Lead>
+        </AnimationWrapper>
       </Container>
 
       <Container className="mt-24">
         {jobListings.data && jobListings.data.length > 0 && (
-          <Subheading>Offene Stellen</Subheading>
+          <AnimationWrapper animation="slideUp" delay={0.6}>
+            <Subheading>Offene Stellen</Subheading>
+          </AnimationWrapper>
         )}
         <div className="mt-12 pb-8">
           {jobListings.data && jobListings.data.length > 0 ? (
@@ -56,7 +63,14 @@ export default async function CareersPage() {
                     <div
                       className={`inline-flex items-center rounded-lg px-4 py-2 text-lg/[1.6] font-semibold text-gray-900 shadow-sm ${category.color}`}
                     >
-                      {category.name.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()).join(' ')}
+                      {category.name
+                        .split(' ')
+                        .map(
+                          (word) =>
+                            word.charAt(0).toUpperCase() +
+                            word.slice(1).toLowerCase(),
+                        )
+                        .join(' ')}
                     </div>
                     <div className="h-px flex-1 bg-gray-200" />
                     <span className="text-lg/[1.6] text-gray-500">
@@ -99,16 +113,37 @@ export default async function CareersPage() {
                               <div className="flex flex-wrap gap-4 text-lg/[1.6] text-gray-500">
                                 <span className="flex items-center gap-2 rounded-full bg-gray-100 px-3 py-1">
                                   <MapPinIcon className="h-4 w-4 text-blue-500" />
-                                  {job.location.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()).join(' ')}
+                                  {job.location
+                                    .split(' ')
+                                    .map(
+                                      (word) =>
+                                        word.charAt(0).toUpperCase() +
+                                        word.slice(1).toLowerCase(),
+                                    )
+                                    .join(' ')}
                                 </span>
                                 <span className="flex items-center gap-2 rounded-full bg-gray-100 px-3 py-1">
                                   <BriefcaseIcon className="h-4 w-4 text-green-500" />
-                                  {job.employmentType.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()).join(' ')}
+                                  {job.employmentType
+                                    .split(' ')
+                                    .map(
+                                      (word) =>
+                                        word.charAt(0).toUpperCase() +
+                                        word.slice(1).toLowerCase(),
+                                    )
+                                    .join(' ')}
                                 </span>
                                 {job.salary && (
                                   <span className="flex items-center gap-2 rounded-full bg-gray-100 px-3 py-1">
                                     <CurrencyDollarIcon className="h-4 w-4 text-yellow-500" />
-                                    {job.salary.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()).join(' ')}
+                                    {job.salary
+                                      .split(' ')
+                                      .map(
+                                        (word) =>
+                                          word.charAt(0).toUpperCase() +
+                                          word.slice(1).toLowerCase(),
+                                      )
+                                      .join(' ')}
                                   </span>
                                 )}
                               </div>
@@ -128,31 +163,34 @@ export default async function CareersPage() {
               ))}
             </div>
           ) : (
-            <div className="py-20 text-center">
-              <div className="mx-auto max-w-md">
-                <NoPositionsIcon className="mx-auto mb-8 h-24 w-24 text-gray-300" />
-                <h2 className="mb-4 text-lg/[1.6] font-semibold text-gray-900">
-                  Keine offenen Stellen
-                </h2>
-                <p className="mb-8 text-lg/[1.6] text-gray-600">
-                  Wir haben derzeit keine offenen Stellen, aber wir suchen immer
-                  nach talentierten Menschen, die unserem Team beitreten
-                  möchten. Kontaktieren Sie uns gerne und stellen Sie sich vor!
-                </p>
-                <div className="flex flex-col gap-3 sm:flex-row sm:justify-center">
-                  <Button href="/contact" className="px-8 py-3">
-                    Kontakt aufnehmen
-                  </Button>
-                  <Button
-                    href="/company"
-                    variant="outline"
-                    className="px-8 py-3"
-                  >
-                    Über uns erfahren
-                  </Button>
+            <AnimationWrapper animation="scaleIn" delay={0.8}>
+              <div className="py-20 text-center">
+                <div className="mx-auto max-w-md">
+                  <NoPositionsIcon className="mx-auto mb-8 h-24 w-24 text-gray-300" />
+                  <h2 className="mb-4 text-lg/[1.6] font-semibold text-gray-900">
+                    Keine offenen Stellen
+                  </h2>
+                  <p className="mb-8 text-lg/[1.6] text-gray-600">
+                    Wir haben derzeit keine offenen Stellen, aber wir suchen
+                    immer nach talentierten Menschen, die unserem Team beitreten
+                    möchten. Kontaktieren Sie uns gerne und stellen Sie sich
+                    vor!
+                  </p>
+                  <div className="flex flex-col gap-3 sm:flex-row sm:justify-center">
+                    <Button href="/contact" className="px-8 py-3">
+                      Kontakt aufnehmen
+                    </Button>
+                    <Button
+                      href="/company"
+                      variant="outline"
+                      className="px-8 py-3"
+                    >
+                      Über uns erfahren
+                    </Button>
+                  </div>
                 </div>
               </div>
-            </div>
+            </AnimationWrapper>
           )}
         </div>
       </Container>
