@@ -562,6 +562,43 @@ export function Navbar({
   const [isScrolled, setIsScrolled] = React.useState(false)
   const [scrollProgress, setScrollProgress] = React.useState(0)
 
+  // Global effect to handle dropdown scrollbar issues in Edge browser
+  React.useEffect(() => {
+    const handleDropdownStateChange = () => {
+      // Check if any dropdown is open by looking for Menu components with open state
+      const openDropdowns = document.querySelectorAll('[data-headlessui-state="open"]')
+      if (openDropdowns.length > 0) {
+        document.body.classList.add('dropdown-open')
+      } else {
+        document.body.classList.remove('dropdown-open')
+      }
+    }
+
+    // Use MutationObserver to watch for dropdown state changes
+    const observer = new MutationObserver((mutations) => {
+      mutations.forEach((mutation) => {
+        if (
+          mutation.type === 'attributes' &&
+          mutation.attributeName === 'data-headlessui-state'
+        ) {
+          handleDropdownStateChange()
+        }
+      })
+    })
+
+    // Observe the entire document for attribute changes
+    observer.observe(document.body, {
+      attributes: true,
+      attributeFilter: ['data-headlessui-state'],
+      subtree: true,
+    })
+
+    return () => {
+      observer.disconnect()
+      document.body.classList.remove('dropdown-open')
+    }
+  }, [])
+
   React.useEffect(() => {
     const handleScroll = () => {
       const scrollTop = window.scrollY
@@ -604,6 +641,14 @@ export function Navbar({
     return () => {
       observer.disconnect()
       document.body.style.overflow = ''
+      document.body.classList.remove('dropdown-open')
+    }
+  }, [])
+
+  // Cleanup effect when component unmounts
+  React.useEffect(() => {
+    return () => {
+      document.body.classList.remove('dropdown-open')
     }
   }, [])
 
