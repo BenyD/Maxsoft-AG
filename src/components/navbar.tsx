@@ -26,6 +26,7 @@ import {
   XMarkIcon,
 } from '@heroicons/react/24/outline'
 import { AnimatePresence, motion } from 'framer-motion'
+import { usePathname } from 'next/navigation'
 import React from 'react'
 import { Link } from './link'
 import { Logo } from './logo'
@@ -33,8 +34,10 @@ import { PlusGrid, PlusGridItem, PlusGridRow } from './plus-grid'
 
 function ServicesDropdown({
   serviceCategories,
+  isActive,
 }: {
   serviceCategories: ServiceCategory[]
+  isActive: (path: string) => boolean
 }) {
   // Map icon names to Heroicon components
   const getIconComponent = (iconName: string) => {
@@ -57,7 +60,11 @@ function ServicesDropdown({
 
   return (
     <Menu as="div" className="relative">
-      <MenuButton className="flex items-center px-4 py-3 text-base font-medium text-gray-950 bg-blend-multiply data-hover:bg-black/2.5">
+      <MenuButton
+        className={`flex items-center px-4 py-3 text-base font-medium text-gray-950 bg-blend-multiply transition-colors hover:bg-black/2.5 hover:text-black ${
+          isActive('/services') ? 'bg-black/5 text-black' : ''
+        }`}
+      >
         Dienstleistungen
         <ChevronDownIcon className="ml-1 h-4 w-4" />
       </MenuButton>
@@ -114,10 +121,24 @@ function ServicesDropdown({
   )
 }
 
-function CompanyDropdown() {
+function CompanyDropdown({
+  isActive,
+}: {
+  isActive: (path: string) => boolean
+}) {
   return (
     <Menu as="div" className="relative">
-      <MenuButton className="flex items-center px-4 py-3 text-base font-medium text-gray-950 bg-blend-multiply data-hover:bg-black/2.5">
+      <MenuButton
+        className={`flex items-center px-4 py-3 text-base font-medium text-gray-950 bg-blend-multiply transition-colors hover:bg-black/2.5 hover:text-black ${
+          isActive('/company') ||
+          isActive('/team') ||
+          isActive('/careers') ||
+          isActive('/partners') ||
+          isActive('/blog')
+            ? 'bg-black/5 text-black'
+            : ''
+        }`}
+      >
         Unternehmen
         <ChevronDownIcon className="ml-1 h-4 w-4" />
       </MenuButton>
@@ -174,18 +195,32 @@ function DesktopNav({
 }: {
   serviceCategories: ServiceCategory[]
 }) {
+  const pathname = usePathname()
+
+  const isActive = (path: string) => {
+    if (path === '/') {
+      return pathname === '/'
+    }
+    return pathname.startsWith(path)
+  }
+
   return (
     <nav className="relative hidden lg:flex">
       {/* Dienstleistungen (Services) */}
       <PlusGridItem className="relative flex">
-        <ServicesDropdown serviceCategories={serviceCategories} />
+        <ServicesDropdown
+          serviceCategories={serviceCategories}
+          isActive={isActive}
+        />
       </PlusGridItem>
 
       {/* Kompetenzen */}
       <PlusGridItem className="relative flex">
         <Link
           href="/competencies"
-          className="flex items-center px-4 py-3 text-base font-medium text-gray-950 bg-blend-multiply data-hover:bg-black/2.5"
+          className={`flex items-center px-4 py-3 text-base font-medium text-gray-950 bg-blend-multiply transition-colors hover:bg-black/2.5 hover:text-black ${
+            isActive('/competencies') ? 'bg-black/5 text-black' : ''
+          }`}
         >
           Kompetenzen
         </Link>
@@ -195,7 +230,9 @@ function DesktopNav({
       <PlusGridItem className="relative flex">
         <Link
           href="/technologies"
-          className="flex items-center px-4 py-3 text-base font-medium text-gray-950 bg-blend-multiply data-hover:bg-black/2.5"
+          className={`flex items-center px-4 py-3 text-base font-medium text-gray-950 bg-blend-multiply transition-colors hover:bg-black/2.5 hover:text-black ${
+            isActive('/technologies') ? 'bg-black/5 text-black' : ''
+          }`}
         >
           Technologien
         </Link>
@@ -203,14 +240,16 @@ function DesktopNav({
 
       {/* Unternehmen */}
       <PlusGridItem className="relative flex">
-        <CompanyDropdown />
+        <CompanyDropdown isActive={isActive} />
       </PlusGridItem>
 
       {/* Kontakt */}
       <PlusGridItem className="relative flex">
         <Link
           href="/contact"
-          className="flex items-center px-4 py-3 text-base font-medium text-gray-950 bg-blend-multiply data-hover:bg-black/2.5"
+          className={`flex items-center px-4 py-3 text-base font-medium text-gray-950 bg-blend-multiply transition-colors hover:bg-black/2.5 hover:text-black ${
+            isActive('/contact') ? 'bg-black/5 text-black' : ''
+          }`}
         >
           Kontakt
         </Link>
@@ -340,17 +379,15 @@ function MobileNav({
                 delay: 0.1,
               }}
             >
-              <div className="flex w-full items-center justify-between rounded-2xl px-6 py-4 text-2xl font-bold text-gray-900">
-                <Link
-                  href="/competencies"
-                  className="-mx-6 -my-4 flex items-center rounded-2xl px-6 py-4 transition-all duration-300 hover:bg-blue-50 hover:text-blue-700"
-                >
-                  <div className="mr-4 flex h-8 w-8 items-center justify-center rounded-lg bg-blue-100">
-                    <span className="text-blue-600">-</span>
-                  </div>
-                  Kompetenzen
-                </Link>
-              </div>
+              <Link
+                href="/competencies"
+                className="flex w-full items-center rounded-2xl px-6 py-4 text-2xl font-bold text-gray-900 transition-all duration-300 hover:bg-blue-50 hover:text-blue-700"
+              >
+                <div className="mr-4 flex h-8 w-8 items-center justify-center rounded-lg bg-blue-100">
+                  <span className="text-blue-600">-</span>
+                </div>
+                Kompetenzen
+              </Link>
             </motion.div>
 
             {/* Technologien */}
@@ -364,17 +401,15 @@ function MobileNav({
                 delay: 0.15,
               }}
             >
-              <div className="flex w-full items-center justify-between rounded-2xl px-6 py-4 text-2xl font-bold text-gray-900">
-                <Link
-                  href="/technologies"
-                  className="-mx-6 -my-4 flex items-center rounded-2xl px-6 py-4 transition-all duration-300 hover:bg-blue-50 hover:text-blue-700"
-                >
-                  <div className="mr-4 flex h-8 w-8 items-center justify-center rounded-lg bg-blue-100">
-                    <span className="text-blue-600">-</span>
-                  </div>
-                  Technologien
-                </Link>
-              </div>
+              <Link
+                href="/technologies"
+                className="flex w-full items-center rounded-2xl px-6 py-4 text-2xl font-bold text-gray-900 transition-all duration-300 hover:bg-blue-50 hover:text-blue-700"
+              >
+                <div className="mr-4 flex h-8 w-8 items-center justify-center rounded-lg bg-blue-100">
+                  <span className="text-blue-600">-</span>
+                </div>
+                Technologien
+              </Link>
             </motion.div>
 
             {/* Unternehmen */}
@@ -390,10 +425,10 @@ function MobileNav({
               className="space-y-4"
             >
               <Disclosure as="div" className="space-y-4">
-                <DisclosureButton className="flex w-full items-center justify-between rounded-2xl px-6 py-4 text-2xl font-bold text-gray-900 transition-all duration-300 hover:bg-green-50 hover:text-green-700">
+                <DisclosureButton className="flex w-full items-center justify-between rounded-2xl px-6 py-4 text-2xl font-bold text-gray-900 transition-all duration-300 hover:bg-blue-50 hover:text-blue-700">
                   <div className="flex items-center">
-                    <div className="mr-4 flex h-8 w-8 items-center justify-center rounded-lg bg-green-100">
-                      <span className="text-green-600">-</span>
+                    <div className="mr-4 flex h-8 w-8 items-center justify-center rounded-lg bg-blue-100">
+                      <span className="text-blue-600">-</span>
                     </div>
                     Unternehmen
                   </div>
@@ -465,7 +500,7 @@ function MobileNav({
             >
               <Link
                 href="/contact"
-                className="flex items-center rounded-2xl px-6 py-4 text-2xl font-bold text-gray-900 transition-all duration-300 hover:bg-blue-50 hover:text-blue-700"
+                className="flex w-full items-center rounded-2xl px-6 py-4 text-2xl font-bold text-gray-900 transition-all duration-300 hover:bg-blue-50 hover:text-blue-700"
               >
                 <div className="mr-4 flex h-8 w-8 items-center justify-center rounded-lg bg-blue-100">
                   <span className="text-blue-600">-</span>

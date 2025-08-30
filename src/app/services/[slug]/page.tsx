@@ -63,7 +63,7 @@ export default async function ServicePage({ params }: ServicePageProps) {
         {/* Breadcrumb */}
         <nav className="mb-8 flex items-center space-x-2 text-sm text-gray-500">
           <Link href="/services" className="hover:text-gray-700">
-            Services
+            Dienstleistungen
           </Link>
           <span>/</span>
           <Link
@@ -123,7 +123,7 @@ export default async function ServicePage({ params }: ServicePageProps) {
                 service.data.pricing) && (
                 <div className="rounded-xl border border-gray-200 bg-white p-6">
                   <h3 className="mb-4 font-semibold text-gray-900">
-                    Service Details
+                    Dienstleistungs-Details
                   </h3>
                   <dl className="space-y-3">
                     {service.data.duration && (
@@ -163,10 +163,10 @@ export default async function ServicePage({ params }: ServicePageProps) {
               {/* Action Buttons */}
               <div className="rounded-xl border border-gray-200 bg-white p-6">
                 <Button href="/contact#beratung-buchen" className="mb-3 w-full">
-                  Booking Form
+                  Beratung buchen
                 </Button>
                 <Button href="/contact" variant="outline" className="w-full">
-                  Request Quote
+                  Angebot anfordern
                 </Button>
               </div>
             </div>
@@ -188,7 +188,7 @@ export default async function ServicePage({ params }: ServicePageProps) {
             {/* Key Benefits */}
             {service.data.benefits && service.data.benefits.length > 0 && (
               <div>
-                <Subheading>Key Benefits</Subheading>
+                <Subheading>Hauptvorteile</Subheading>
                 <ul className="mt-6 space-y-3">
                   {service.data.benefits.map(
                     (benefit: string, index: number) => (
@@ -218,7 +218,7 @@ export default async function ServicePage({ params }: ServicePageProps) {
             <div className="grid gap-8 sm:grid-cols-2">
               {service.data.targetAudience && (
                 <div>
-                  <Subheading>Target Audience</Subheading>
+                  <Subheading>Zielgruppe</Subheading>
                   <p className="mt-4 text-gray-700">
                     {service.data.targetAudience}
                   </p>
@@ -227,7 +227,7 @@ export default async function ServicePage({ params }: ServicePageProps) {
 
               {service.data.prerequisites && (
                 <div>
-                  <Subheading>Prerequisites</Subheading>
+                  <Subheading>Voraussetzungen</Subheading>
                   <p className="mt-4 text-gray-700">
                     {service.data.prerequisites}
                   </p>
@@ -241,7 +241,7 @@ export default async function ServicePage({ params }: ServicePageProps) {
       {/* Related Services */}
       {otherServices.length > 0 && (
         <Container className="mt-24">
-          <Subheading>Related Services</Subheading>
+          <Subheading>Ähnliche Dienstleistungen</Subheading>
           <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {otherServices.slice(0, 3).map((relatedService: Service) => (
               <Link
@@ -256,7 +256,7 @@ export default async function ServicePage({ params }: ServicePageProps) {
                   {relatedService.shortDescription}
                 </p>
                 <div className="flex items-center text-sm font-medium text-blue-600">
-                  Learn more
+                  Mehr erfahren
                   <svg
                     className="ml-1 h-4 w-4"
                     fill="none"

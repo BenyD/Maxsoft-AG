@@ -66,7 +66,7 @@ export default async function ServiceCategoryPage({
         {/* Breadcrumb */}
         <nav className="mb-8 flex items-center space-x-2 text-sm text-gray-500">
           <Link href="/services" className="hover:text-gray-700">
-            Services
+            Dienstleistungen
           </Link>
           <span>/</span>
           <span className="text-gray-900">{category.name}</span>
@@ -93,10 +93,10 @@ export default async function ServiceCategoryPage({
       </Container>
 
       {/* Services Grid */}
-      <Container className="mt-16">
+      <Container className="mt-16 mb-16">
         {services.data && services.data.length > 0 ? (
           <React.Fragment key="services-list">
-            <Subheading>Available Services</Subheading>
+            <Subheading>Verfügbare Dienstleistungen</Subheading>
             <div className="mt-8 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
               {services.data.map((service: ServiceExpanded) => (
                 <Link
@@ -139,7 +139,7 @@ export default async function ServiceCategoryPage({
 
                   <div className="flex items-center justify-between">
                     <div className="flex items-center text-sm font-medium text-blue-600">
-                      Learn more
+                      Mehr erfahren
                       <svg
                         className="ml-1 h-4 w-4"
                         fill="none"
@@ -181,7 +181,7 @@ export default async function ServiceCategoryPage({
               <div className="flex flex-col gap-3 sm:flex-row sm:justify-center">
                 <Button href="/contact">Contact Us</Button>
                 <Button href="/services" variant="outline">
-                  Browse All Services
+                  Alle Dienstleistungen anzeigen
                 </Button>
               </div>
             </div>

@@ -220,6 +220,23 @@ function IndexSection() {
                   Wir setzen auf moderne Technologien und bewährte Tools, um
                   deine IT effizienter und sicherer zu machen.
                 </p>
+                {/* Click indicator */}
+                <div className="mt-4 flex items-center text-sm font-medium text-blue-600 transition-colors group-hover:text-blue-700">
+                  Mehr erfahren
+                  <svg
+                    className="ml-2 h-4 w-4 transition-transform duration-300 group-hover:translate-x-1"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M9 5l7 7-7 7"
+                    />
+                  </svg>
+                </div>
               </div>
             </div>
           </Link>
@@ -244,6 +261,23 @@ function IndexSection() {
                   Infrastrukturautomatisierung und mehr bieten wir dir die
                   besten Lösungen, die perfekt zu deinem Unternehmen passen.
                 </p>
+                {/* Click indicator */}
+                <div className="mt-4 flex items-center text-sm font-medium text-blue-600 transition-colors group-hover:text-blue-700">
+                  Mehr erfahren
+                  <svg
+                    className="ml-2 h-4 w-4 transition-transform duration-300 group-hover:translate-x-1"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M9 5l7 7-7 7"
+                    />
+                  </svg>
+                </div>
               </div>
             </div>
           </Link>
@@ -267,6 +301,23 @@ function IndexSection() {
                   Unsere Services bieten dir massgeschneiderte Lösungen, die
                   deine IT-Systeme optimieren und zukunftssicher machen.
                 </p>
+                {/* Click indicator */}
+                <div className="mt-4 flex items-center text-sm font-medium text-blue-600 transition-colors group-hover:text-blue-700">
+                  Mehr erfahren
+                  <svg
+                    className="ml-2 h-4 w-4 transition-transform duration-300 group-hover:translate-x-1"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M9 5l7 7-7 7"
+                    />
+                  </svg>
+                </div>
               </div>
             </div>
           </Link>
