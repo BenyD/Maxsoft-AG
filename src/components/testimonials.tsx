@@ -117,9 +117,10 @@ function CallToAction() {
   return (
     <div>
       <p className="max-w-sm text-sm/6 text-gray-600">
-        Schliessen Sie sich den führenden Unternehmen an, die Maxsoft AG
-        vertrauen, um ihre Technologie zu transformieren und das
-        Geschäftswachstum zu fördern.
+        Schliesse dich den führenden Unternehmen an, die der Maxsoft AG
+        vertrauen, um ihre Technologie zu transformieren und ihr
+        Geschäftswachstum zu fördern, und erhalte so einen entscheidenden
+        Wettbewerbsvorteil.
       </p>
       <div className="mt-2">
         <Link

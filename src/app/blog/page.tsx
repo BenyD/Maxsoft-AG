@@ -1,3 +1,4 @@
+import { AnimationWrapper } from '@/components/animation-wrapper'
 import { Button } from '@/components/button'
 import { Container } from '@/components/container'
 import { Footer } from '@/components/footer'
@@ -5,7 +6,6 @@ import { GradientBackground } from '@/components/gradient'
 import { Link } from '@/components/link'
 import { NavbarServer } from '@/components/navbar-server'
 import { Heading, Lead, Subheading } from '@/components/text'
-import { AnimationWrapper } from '@/components/animation-wrapper'
 import { image } from '@/sanity/image'
 import {
   getCategories,
@@ -56,8 +56,8 @@ async function FeaturedPosts() {
                 Noch keine empfohlenen Beiträge
               </h3>
               <p className="mt-2 text-lg/[1.6] text-gray-500">
-                Wir arbeiten an grossartigen empfohlenen Inhalten. Schauen Sie
-                bald wieder vorbei für unsere neuesten Einblicke und Updates.
+                Wir arbeiten an grossartigen empfohlenen Inhalten. Schau bald
+                wieder vorbei für meine neuesten Einblicke und Updates.
               </p>
             </div>
           </div>
@@ -81,7 +81,7 @@ async function FeaturedPosts() {
               animation="scaleIn"
               delay={1.0 + index * 0.2}
             >
-              <div className="relative flex flex-col rounded-3xl bg-white p-2 shadow-md ring-1 shadow-black/5 ring-black/5 hover:scale-105 transition-transform duration-300">
+              <div className="relative flex flex-col rounded-3xl bg-white p-2 shadow-md ring-1 shadow-black/5 ring-black/5 transition-transform duration-300 hover:scale-105">
                 {post.mainImage && (
                   <img
                     alt={post.mainImage.alt || ''}
@@ -214,7 +214,7 @@ async function Posts({ page, category }: { page: number; category?: string }) {
           <p className="mt-2 text-lg/[1.6] text-gray-500">
             {category
               ? `Wir haben noch keine Beiträge in dieser Kategorie veröffentlicht. Schauen Sie bald wieder vorbei für neue Inhalte.`
-              : 'Wir arbeiten an grossartigen Inhalten. Schauen Sie bald wieder vorbei für unsere neuesten Einblicke und Updates.'}
+              : 'Wir arbeiten an grossartigen Inhalten. Schau bald wieder vorbei für meine neuesten Einblicke und Updates.'}
           </p>
           {category && (
             <div className="mt-6">
@@ -372,7 +372,7 @@ export default async function Blog({
         </AnimationWrapper>
         <AnimationWrapper animation="slideUp" delay={0.6}>
           <Lead className="mt-6 max-w-3xl">
-            Bleiben Sie informiert mit Technologie-Einblicken,
+            Bleib informiert mit aktuellen Technologie-Einblicken,
             Unternehmensnachrichten und Expertenratschlägen zu digitaler
             Transformation und IT-Strategie.
           </Lead>

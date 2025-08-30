@@ -39,11 +39,11 @@ export default async function CareersPage() {
         </AnimationWrapper>
         <AnimationWrapper animation="slideUp" delay={0.4}>
           <Lead className="mt-6 max-w-3xl">
-            Werden Sie Teil unseres innovativen Teams und helfen Sie dabei,
-            Unternehmen durch modernste Technologielösungen zu transformieren.
-            Wir arbeiten zusammen von unseren Büros in der Schweiz aus und
-            remote, fördern eine kollaborative Umgebung, die Innovation und
-            Exzellenz schätzt.
+            Werde Teil unseres innovativen Teams und hilf dabei, Unternehmen
+            durch modernste Technologielösungen zu transformieren. Gemeinsam
+            arbeiten wir von unseren Büros in der Schweiz aus sowie remote und
+            fördern eine kollaborative Umgebung, die Innovation und Exzellenz
+            schätzt.
           </Lead>
         </AnimationWrapper>
       </Container>

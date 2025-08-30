@@ -86,8 +86,8 @@ export default async function CompetenciesPage() {
           <AnimationWrapper animation="slideUp" delay={0.6}>
             <p className="mt-3 max-w-2xl text-lg text-gray-600">
               Unsere Expertise liegt in der Entwicklung massgeschneiderter
-              IT-Lösungen, die Unternehmen dabei unterstützen, ihre digitalen
-              Ziele zu erreichen und nachhaltig zu wachsen.
+              IT-Lösungen, die dir dabei helfen, deine digitalen Ziele zu
+              erreichen und nachhaltig zu wachsen.
             </p>
           </AnimationWrapper>
         </div>

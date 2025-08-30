@@ -205,7 +205,7 @@ function DesktopNav({
   }
 
   return (
-    <nav className="relative hidden lg:flex">
+    <nav className="3xl:flex relative mr-2 hidden items-center space-x-2 lg:flex xl:flex 2xl:flex">
       {/* Dienstleistungen (Services) */}
       <PlusGridItem className="relative flex">
         <ServicesDropdown
@@ -261,7 +261,7 @@ function DesktopNav({
 function MobileNavButton() {
   return (
     <DisclosureButton
-      className="flex size-12 items-center justify-center self-center rounded-xl transition-all duration-200 hover:scale-105 lg:hidden"
+      className="flex size-12 items-center justify-center self-center rounded-xl transition-all duration-200 hover:scale-105"
       aria-label="Hauptmenü öffnen"
     >
       <Bars2Icon className="size-6 text-gray-700" />
@@ -280,7 +280,7 @@ function MobileNav({
   // This component only renders when mobile nav is open
 
   return (
-    <DisclosurePanel className="fixed inset-0 top-0 right-0 bottom-0 left-0 isolate z-[9999] transform-none bg-white shadow-2xl will-change-transform lg:hidden">
+    <DisclosurePanel className="fixed inset-0 top-0 right-0 bottom-0 left-0 isolate z-[9999] transform-none bg-white shadow-2xl will-change-transform">
       {/* Header with close button */}
       <div className="relative flex items-center justify-between border-b border-gray-200 bg-white px-6 py-6">
         {/* Mobile Progress Bar */}
@@ -566,9 +566,22 @@ export function Navbar({
   React.useEffect(() => {
     const handleDropdownStateChange = () => {
       // Check if any dropdown is open by looking for Menu components with open state
-      const openDropdowns = document.querySelectorAll('[data-headlessui-state="open"]')
+      const openDropdowns = document.querySelectorAll(
+        '[data-headlessui-state="open"]',
+      )
+
+      // Check if we're in Edge browser (including Chromium-based Edge)
+      const isEdge =
+        navigator.userAgent.includes('Edge') ||
+        navigator.userAgent.includes('Edg') ||
+        navigator.userAgent.includes('MSIE') ||
+        navigator.userAgent.includes('Trident/')
+
       if (openDropdowns.length > 0) {
-        document.body.classList.add('dropdown-open')
+        if (!isEdge) {
+          // Only add dropdown-open class for non-Edge browsers
+          document.body.classList.add('dropdown-open')
+        }
       } else {
         document.body.classList.remove('dropdown-open')
       }
@@ -662,69 +675,80 @@ export function Navbar({
       }`}
     >
       {/* Progress Bar - Only for Mobile */}
+      <div className="3xl:hidden lg:hidden xl:hidden 2xl:hidden">
+        <div
+          className="absolute bottom-0 left-0 h-0.5 bg-gradient-to-r from-blue-600 to-blue-500 shadow-sm transition-all duration-500 ease-in-out"
+          style={{ width: `${scrollProgress}%` }}
+        />
+      </div>
       <div
-        className="absolute bottom-0 left-0 h-0.5 bg-gradient-to-r from-blue-600 to-blue-500 shadow-sm transition-all duration-500 ease-in-out lg:hidden"
-        style={{ width: `${scrollProgress}%` }}
-      />
-      <div
-        className={`w-full px-4 transition-all duration-300 sm:px-6 lg:px-8 ${
+        className={`w-full transition-all duration-300 ${
           isScrolled ? 'pt-2 sm:pt-3' : 'pt-4 sm:pt-6'
         }`}
       >
-        <PlusGrid>
-          <PlusGridRow className="relative flex items-center justify-between !pt-0 !pb-0">
-            <div className="relative flex items-center gap-6">
-              <PlusGridItem className="-mt-2 px-3 py-2">
-                <Menu as="div" className="relative">
-                  <MenuButton className="group flex items-center">
-                    <Link href="/" title="Home" className="flex items-center">
-                      <Logo className="h-7 w-auto transition-transform group-hover:scale-105" />
-                    </Link>
-                  </MenuButton>
-                  {mostRecentPost && (
-                    <MenuItems className="absolute left-0 z-50 mt-2 w-80 origin-top-left rounded-lg border border-gray-100 bg-white shadow-lg ring-1 ring-black/5 focus:outline-none">
-                      <div className="p-4">
-                        <div className="mb-3">
-                          <h3 className="text-sm font-medium text-gray-900">
-                            Neuester Blog-Beitrag
-                          </h3>
-                          <p className="mt-1 text-xs text-gray-500">
-                            {new Date(
-                              mostRecentPost.publishedAt || '',
-                            ).toLocaleDateString('de-CH', {
-                              year: 'numeric',
-                              month: 'long',
-                              day: 'numeric',
-                            })}
-                          </p>
+        {/* Centered container with max-width and horizontal spacing */}
+        <div className="mx-auto max-w-6xl px-4 sm:px-4 lg:px-4 xl:px-6 2xl:px-8">
+          <PlusGrid>
+            <PlusGridRow className="relative flex items-center justify-between !pt-0 !pb-0">
+              <div className="relative flex items-center gap-6">
+                <PlusGridItem className="-mt-2 px-1 py-2">
+                  <Menu as="div" className="relative">
+                    <MenuButton className="group flex items-center">
+                      <Link href="/" title="Home" className="flex items-center">
+                        <Logo className="h-7 w-auto transition-transform group-hover:scale-105" />
+                      </Link>
+                    </MenuButton>
+                    {mostRecentPost && (
+                      <MenuItems className="absolute left-0 z-50 mt-2 w-80 origin-top-left rounded-lg border border-gray-100 bg-white shadow-lg ring-1 ring-black/5 focus:outline-none">
+                        <div className="p-4">
+                          <div className="mb-3">
+                            <h3 className="text-sm font-medium text-gray-900">
+                              Neuester Blog-Beitrag
+                            </h3>
+                            <p className="mt-1 text-xs text-gray-500">
+                              {new Date(
+                                mostRecentPost.publishedAt || '',
+                              ).toLocaleDateString('de-CH', {
+                                year: 'numeric',
+                                month: 'long',
+                                day: 'numeric',
+                              })}
+                            </p>
+                          </div>
+                          <MenuItem>
+                            <Link
+                              href={`/blog/${mostRecentPost.slug?.current}`}
+                              className="block rounded-md px-3 py-2 text-sm font-medium text-gray-900 transition-colors hover:bg-gray-50 hover:text-blue-600"
+                            >
+                              {mostRecentPost.title}
+                            </Link>
+                          </MenuItem>
                         </div>
-                        <MenuItem>
-                          <Link
-                            href={`/blog/${mostRecentPost.slug?.current}`}
-                            className="block rounded-md px-3 py-2 text-sm font-medium text-gray-900 transition-colors hover:bg-gray-50 hover:text-blue-600"
-                          >
-                            {mostRecentPost.title}
-                          </Link>
-                        </MenuItem>
-                      </div>
-                    </MenuItems>
-                  )}
-                </Menu>
-              </PlusGridItem>
-              {banner && (
-                <div className="relative hidden items-center py-1 lg:flex">
-                  {banner}
-                </div>
-              )}
-            </div>
-            <DesktopNav serviceCategories={serviceCategories} />
-            <MobileNavButton />
-          </PlusGridRow>
-        </PlusGrid>
-        <MobileNav
-          serviceCategories={serviceCategories}
-          scrollProgress={scrollProgress}
-        />
+                      </MenuItems>
+                    )}
+                  </Menu>
+                </PlusGridItem>
+                {banner && (
+                  <div className="3xl:flex relative hidden items-center py-1 lg:flex xl:flex 2xl:flex">
+                    {banner}
+                  </div>
+                )}
+              </div>
+              <DesktopNav serviceCategories={serviceCategories} />
+              {/* Mobile Nav Button - Only render on mobile/tablet */}
+              <div className="3xl:hidden lg:hidden xl:hidden 2xl:hidden">
+                <MobileNavButton />
+              </div>
+            </PlusGridRow>
+          </PlusGrid>
+          {/* Mobile Navigation - Only render on mobile/tablet */}
+          <div className="3xl:hidden lg:hidden xl:hidden 2xl:hidden">
+            <MobileNav
+              serviceCategories={serviceCategories}
+              scrollProgress={scrollProgress}
+            />
+          </div>
+        </div>
       </div>
     </Disclosure>
   )

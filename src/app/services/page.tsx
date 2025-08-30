@@ -153,10 +153,10 @@ export default async function ServicesPage() {
         </AnimationWrapper>
         <AnimationWrapper animation="slideUp" delay={0.4}>
           <Lead className="mt-6 max-w-3xl">
-            Entdecken Sie unser umfassendes Angebot an IT-Dienstleistungen, die
-            darauf ausgerichtet sind, Ihr Unternehmen zu transformieren. Von
+            Entdecke unser umfassendes Angebot an IT-Dienstleistungen, die
+            darauf ausgerichtet sind, Dein Unternehmen zu transformieren. Von
             praktischen Schulungsworkshops bis hin zu strategischer Beratung
-            bieten wir die Expertise, die Sie benötigen, um in der heutigen
+            bieten wir die Expertise, die Du benötigst, um in der heutigen
             digitalen Landschaft erfolgreich zu sein.
           </Lead>
         </AnimationWrapper>

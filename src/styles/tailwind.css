@@ -20,13 +20,27 @@
 
 /* Fix for Edge browser scrollbar issue with dropdowns */
 @supports (-ms-ime-align: auto) {
-  /* Edge-specific styles */
+  /* Edge-specific styles - always keep scrollbar visible to prevent layout shifts */
   html {
     overflow-y: scroll;
   }
 
   body {
     overflow-x: hidden;
+    /* Always reserve scrollbar space in Edge to prevent layout shifts */
+    padding-right: 8px;
+  }
+
+  /* Ensure the navbar and all content maintains position */
+  header,
+  .fixed,
+  .sticky {
+    right: 8px; /* Compensate for the reserved scrollbar space */
+  }
+
+  /* Ensure dropdowns don't cause layout shifts */
+  [data-headlessui-state='open'] {
+    overflow: visible !important;
   }
 }
 
@@ -54,20 +68,20 @@ html {
   background-color: rgba(0, 0, 0, 0.3);
 }
 
-/* Prevent scrollbar from affecting layout when dropdowns are open */
+/* Prevent content scrolling when dropdowns are open (but keep scrollbar visible) */
 body.dropdown-open {
-  overflow: hidden;
-  padding-right: 8px; /* Compensate for scrollbar width */
+  /* Don't hide overflow in Edge - just prevent scrolling */
 }
 
 /* Additional Edge-specific fixes */
 @supports (-ms-ime-align: auto) {
   body.dropdown-open {
-    overflow: hidden !important;
-    padding-right: 8px !important;
+    /* In Edge, we don't hide overflow - just prevent scrolling */
+    position: fixed;
+    width: 100%;
   }
 
-  /* Ensure dropdowns don't cause scrollbar to appear */
+  /* Ensure dropdowns don't cause layout shifts */
   [data-headlessui-state='open'] {
     overflow: visible !important;
   }
@@ -98,6 +112,14 @@ header {
 /* Prevent content jumping when scrollbar appears */
 body {
   scrollbar-gutter: stable;
+}
+
+/* Edge-specific navbar positioning fix */
+@supports (-ms-ime-align: auto) {
+  header {
+    right: 8px; /* Compensate for the reserved scrollbar space */
+    width: calc(100% - 8px); /* Adjust width to account for the right offset */
+  }
 }
 
 @theme inline {

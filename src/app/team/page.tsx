@@ -127,16 +127,18 @@ async function Team() {
           <AnimationWrapper animation="slideUp" delay={0.4}>
             <div>
               <Heading as="h3" className="mt-2 max-w-3xl">
-                Erfahrene Fachkräfte, die sich deinem Erfolg widmen
+                Kompetent, neugierig, lösungsorientiert – und immer auf deiner
+                Seite.
               </Heading>
             </div>
           </AnimationWrapper>
           <AnimationWrapper animation="slideUp" delay={0.6}>
             <div>
               <Lead className="mt-6 max-w-2xl">
-                Unser Team von IT-Experten bringt jahrzehntelange Erfahrung in
-                der Technologieberatung, digitalen Transformation und
-                Unternehmenslösungen zusammen.
+                Wir sind ein interdisziplinäres Team aus Technik-, Architektur-
+                und Beratungsexperten. Gemeinsam entwickeln wir Lösungen, die
+                nicht nur technisch funktionieren, sondern im Alltag wirklich
+                weiterhelfen.
               </Lead>
             </div>
           </AnimationWrapper>

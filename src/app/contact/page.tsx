@@ -88,15 +88,15 @@ async function ContactHero() {
           </AnimationWrapper>
           <AnimationWrapper animation="slideUp" delay={0.4}>
             <Heading as="h1" className="mt-2">
-              Kontaktieren Sie unser Team
+              Einfach erreichbar. Klar in der Sache. Persönlich in der
+              Zusammenarbeit.
             </Heading>
           </AnimationWrapper>
           <AnimationWrapper animation="slideUp" delay={0.6}>
             <Lead className="mt-6">
-              Bereit, Ihr Unternehmen mit modernsten IT-Lösungen zu
-              transformieren? Kontaktieren Sie uns heute, um Ihre Bedürfnisse zu
-              besprechen und zu entdecken, wie wir Ihnen helfen können, Ihre
-              Ziele zu erreichen.
+              Hast du Fragen, ein Projekt im Kopf oder möchtest du einfach mal
+              unverbindlich reden? Melde dich – wir freuen uns auf den
+              Austausch.
             </Lead>
           </AnimationWrapper>
         </div>
@@ -124,13 +124,13 @@ async function ContactInformation({ mainContact }: { mainContact: Contact }) {
         </AnimationWrapper>
         <AnimationWrapper animation="slideUp" delay={0.4}>
           <Heading as="h3" className="mt-2">
-            Besuchen Sie unser Büro
+            Besuche unser Büro.
           </Heading>
         </AnimationWrapper>
         <AnimationWrapper animation="slideUp" delay={0.6}>
           <Lead className="mt-6 max-w-3xl">
             {mainContact.address?.city
-              ? `Im Herzen von ${mainContact.address.city} gelegen, ist unser Büro leicht mit öffentlichen Verkehrsmitteln und dem Auto erreichbar.`
+              ? `Im Zentrum von Rotkreuz – optimal erreichbar mit öffentlichen Verkehrsmitteln und dem Auto.`
               : 'Unser Büro ist leicht mit öffentlichen Verkehrsmitteln und dem Auto erreichbar.'}
           </Lead>
         </AnimationWrapper>
@@ -331,7 +331,7 @@ async function BookingSection() {
         <Container className="pb-24">
           <Subheading>Beratung buchen</Subheading>
           <Heading as="h3" className="mt-2">
-            Ihre kostenlose Beratung planen
+            Plane Deine kostenlose Beratung.
           </Heading>
           <Lead className="mt-6 max-w-3xl">
             {externalLinks && externalLinks.length > 0 ? (
@@ -357,14 +357,14 @@ async function BookingSection() {
         </AnimationWrapper>
         <AnimationWrapper animation="slideUp" delay={0.4}>
           <Heading as="h3" className="mt-2">
-            Ihre kostenlose Beratung planen
+            Plane Deine kostenlose Beratung.
           </Heading>
         </AnimationWrapper>
         <AnimationWrapper animation="slideUp" delay={0.6}>
           <Lead className="mt-6 max-w-3xl">
-            Bereit loszulegen? Buchen Sie eine Beratung mit unseren Experten, um
-            Ihre IT-Bedürfnisse zu besprechen und maßgeschneiderte Lösungen für
-            Ihr Unternehmen zu entdecken.
+            Bereit loszulegen? Buche eine Beratung mit unseren Experten, um
+            deine IT-Bedürfnisse zu besprechen und individuelle Lösungen für
+            dein Unternehmen zu entdecken.
           </Lead>
         </AnimationWrapper>
 
@@ -377,7 +377,7 @@ async function BookingSection() {
               </h4>
               <p className="mt-2 text-lg/[1.6] text-gray-600">
                 {bookingLink.description ||
-                  'Nutzen Sie unser integriertes Buchungssystem, um eine Beratung nach Ihren Wünschen zu planen.'}
+                  'Nutze unser integriertes Buchungssystem, um eine Beratung ganz nach deinen Wünschen zu planen.'}
               </p>
 
               {bookingLink.embedContent ? (

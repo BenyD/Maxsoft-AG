@@ -117,8 +117,8 @@ export function ContactForm({
               Kontaktformular
             </h2>
             <p className="mt-2 text-lg text-gray-600">
-              Füllen Sie das Formular aus und wir melden uns innerhalb von 24
-              Stunden bei Ihnen.
+              Fülle das Formular aus und wir melden uns innerhalb von 24 Stunden
+              bei Dir.
             </p>
           </div>
         </AnimationWrapper>
@@ -289,7 +289,7 @@ export function ContactForm({
                 disabled={isSubmitting}
                 className="w-full px-8 py-3 sm:w-auto"
               >
-                {isSubmitting ? 'Wird gesendet...' : 'Nachricht senden'}
+                {isSubmitting ? 'Wird gesendet...' : 'Senden'}
               </Button>
             </div>
           </AnimationWrapper>

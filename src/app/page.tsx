@@ -49,7 +49,7 @@ async function Hero() {
           }
         />
         <div className="pt-16 pb-24 sm:pt-24 sm:pb-32 md:pt-32 md:pb-48">
-          <div className="mx-auto max-w-4xl text-center">
+          <div className="relative z-10 mx-auto max-w-4xl text-center">
             <div className="space-y-8">
               <AnimationWrapper animation="slideUp" delay={0.2}>
                 <h1 className="font-display text-4xl/[1.1] font-medium tracking-tight text-balance text-gray-950 sm:text-5xl/[1.1] md:text-6xl/[1.1]">
@@ -88,7 +88,7 @@ async function Hero() {
           </div>
 
           {/* Threads Background Component */}
-          <div className="absolute inset-0 opacity-30">
+          <div className="absolute inset-0 z-0 opacity-30">
             <Threads
               color={[0, 0.639, 0.933]} // Your exact accent color #00A3EE
               amplitude={3}
