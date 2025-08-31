@@ -129,7 +129,7 @@ function IndexSection() {
           <AnimationWrapper animation="scaleIn" delay={0.2}>
             <Link href="/technologies" className="group block h-full">
               <div className="relative flex h-full flex-col overflow-hidden rounded-xl bg-white p-6 shadow-md ring-1 ring-gray-200 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:ring-gray-300">
-                <div className="mb-4 h-72 w-full flex-shrink-0 overflow-hidden rounded-lg">
+                <div className="mb-4 h-80 w-full flex-shrink-0 overflow-hidden rounded-lg">
                   <img
                     src="/pictures/technology.png"
                     alt="Technologien"
@@ -171,7 +171,7 @@ function IndexSection() {
           <AnimationWrapper animation="scaleIn" delay={0.4}>
             <Link href="/competencies" className="group block h-full">
               <div className="relative flex h-full flex-col overflow-hidden rounded-xl bg-white p-6 shadow-md ring-1 ring-gray-200 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:ring-gray-300">
-                <div className="mb-4 h-72 w-full flex-shrink-0 overflow-hidden rounded-lg">
+                <div className="mb-4 h-80 w-full flex-shrink-0 overflow-hidden rounded-lg">
                   <img
                     src="/pictures/competency.png"
                     alt="Kompetenzen"
@@ -214,7 +214,7 @@ function IndexSection() {
           <AnimationWrapper animation="scaleIn" delay={0.6}>
             <Link href="/services" className="group block h-full">
               <div className="relative flex h-full flex-col overflow-hidden rounded-xl bg-white p-6 shadow-md ring-1 ring-gray-200 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:ring-gray-300">
-                <div className="mb-4 h-72 w-full flex-shrink-0 overflow-hidden rounded-lg">
+                <div className="mb-4 h-80 w-full flex-shrink-0 overflow-hidden rounded-lg">
                   <img
                     src="/pictures/service.png"
                     alt="Dienstleistungen"
@@ -436,7 +436,7 @@ export default async function Home() {
           <IndexSection />
         </div>
         <BranchenSection />
-        <Container className="mt-10">
+        <Container className="mt-10 mb-16">
           <LogoCloud />
         </Container>
       </main>
