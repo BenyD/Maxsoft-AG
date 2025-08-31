@@ -24,36 +24,102 @@ export function LogoCloud({
         </AnimationWrapper>
       </div>
 
-      <div
-        className={clsx(
-          'flex justify-between max-sm:mx-auto max-sm:max-w-md max-sm:flex-wrap max-sm:justify-evenly max-sm:gap-x-4 max-sm:gap-y-4',
-        )}
-      >
-        <img
-          alt="Coop"
-          src="/logo-cloud/coop_logo.svg"
-          className="h-9 brightness-50 grayscale transition-all duration-300 hover:brightness-100 hover:grayscale-0 max-sm:mx-auto sm:h-8 lg:h-12"
-        />
-        <img
-          alt="Costinhalo"
-          src="/logo-cloud/costinhalogo.svg"
-          className="h-9 brightness-50 grayscale transition-all duration-300 hover:brightness-100 hover:grayscale-0 max-sm:mx-auto sm:h-8 lg:h-12"
-        />
-        <img
-          alt="dzferi"
-          src="/logo-cloud/dzferi.svg"
-          className="h-9 brightness-50 grayscale transition-all duration-300 hover:brightness-100 hover:grayscale-0 max-sm:mx-auto sm:h-8 lg:h-12"
-        />
-        <img
-          alt="Maxapp"
-          src="/logo-cloud/maxapp_logo.png"
-          className="h-9 brightness-50 grayscale transition-all duration-300 hover:brightness-100 hover:grayscale-0 max-sm:mx-auto sm:h-8 lg:h-12"
-        />
-        <img
-          alt="Posaka"
-          src="/logo-cloud/posaka.png"
-          className="h-9 brightness-50 grayscale transition-all duration-300 hover:brightness-100 hover:grayscale-0 max-sm:mx-auto sm:h-8 lg:h-12"
-        />
+      {/* Scrolling Logo Container */}
+      <div className="relative overflow-hidden">
+        <div className="animate-scroll flex">
+          {/* First set of logos */}
+          <div className="flex min-w-max items-center space-x-8 sm:space-x-12 lg:space-x-16">
+            <img
+              alt="Coop"
+              src="/logo-cloud/coop_logo.svg"
+              className="h-8 brightness-50 grayscale transition-all duration-300 hover:brightness-100 hover:grayscale-0 sm:h-9 lg:h-12"
+            />
+            <img
+              alt="Costinhalo"
+              src="/logo-cloud/costinhalogo.svg"
+              className="h-8 brightness-50 grayscale transition-all duration-300 hover:brightness-100 hover:grayscale-0 sm:h-9 lg:h-12"
+            />
+            <img
+              alt="dzferi"
+              src="/logo-cloud/dzferi.svg"
+              className="h-8 brightness-50 grayscale transition-all duration-300 hover:brightness-100 hover:grayscale-0 sm:h-9 lg:h-12"
+            />
+            <img
+              alt="Maxapp"
+              src="/logo-cloud/maxapp_logo.png"
+              className="h-8 brightness-50 grayscale transition-all duration-300 hover:brightness-100 hover:grayscale-0 sm:h-9 lg:h-12"
+            />
+            <img
+              alt="Posaka"
+              src="/logo-cloud/posaka.png"
+              className="h-8 brightness-50 grayscale transition-all duration-300 hover:brightness-100 hover:grayscale-0 sm:h-9 lg:h-12"
+            />
+          </div>
+          
+          {/* Gap between sets */}
+          <div className="w-16 sm:w-20 lg:w-24"></div>
+          
+          {/* Duplicate set for seamless loop - no gap */}
+          <div className="flex min-w-max items-center space-x-8 sm:space-x-12 lg:space-x-16">
+            <img
+              alt="Coop"
+              src="/logo-cloud/coop_logo.svg"
+              className="h-8 brightness-50 grayscale transition-all duration-300 hover:brightness-100 hover:grayscale-0 sm:h-9 lg:h-12"
+            />
+            <img
+              alt="Costinhalo"
+              src="/logo-cloud/costinhalogo.svg"
+              className="h-8 brightness-50 grayscale transition-all duration-300 hover:brightness-100 hover:grayscale-0 sm:h-9 lg:h-12"
+            />
+            <img
+              alt="dzferi"
+              src="/logo-cloud/dzferi.svg"
+              className="h-8 brightness-50 grayscale transition-all duration-300 hover:brightness-100 hover:grayscale-0 sm:h-9 lg:h-12"
+            />
+            <img
+              alt="Maxapp"
+              src="/logo-cloud/maxapp_logo.png"
+              className="h-8 brightness-50 grayscale transition-all duration-300 hover:brightness-100 hover:grayscale-0 sm:h-9 lg:h-12"
+            />
+            <img
+              alt="Posaka"
+              src="/logo-cloud/posaka.png"
+              className="h-8 brightness-50 grayscale transition-all duration-300 hover:brightness-100 hover:grayscale-0 sm:h-9 lg:h-12"
+            />
+          </div>
+          
+          {/* Gap between sets */}
+          <div className="w-16 sm:w-20 lg:w-24"></div>
+          
+          {/* Third set to ensure perfect loop */}
+          <div className="flex min-w-max items-center space-x-8 sm:space-x-12 lg:space-x-16">
+            <img
+              alt="Coop"
+              src="/logo-cloud/coop_logo.svg"
+              className="h-8 brightness-50 grayscale transition-all duration-300 hover:brightness-100 hover:grayscale-0 sm:h-9 lg:h-12"
+            />
+            <img
+              alt="Costinhalo"
+              src="/logo-cloud/costinhalogo.svg"
+              className="h-8 brightness-50 grayscale transition-all duration-300 hover:brightness-100 hover:grayscale-0 sm:h-9 lg:h-12"
+            />
+            <img
+              alt="dzferi"
+              src="/logo-cloud/dzferi.svg"
+              className="h-8 brightness-50 grayscale transition-all duration-300 hover:brightness-100 hover:grayscale-0 sm:h-9 lg:h-12"
+            />
+            <img
+              alt="Maxapp"
+              src="/logo-cloud/maxapp_logo.png"
+              className="h-8 brightness-50 grayscale transition-all duration-300 hover:brightness-100 hover:grayscale-0 sm:h-9 lg:h-12"
+            />
+            <img
+              alt="Posaka"
+              src="/logo-cloud/posaka.png"
+              className="h-8 brightness-50 grayscale transition-all duration-300 hover:brightness-100 hover:grayscale-0 sm:h-9 lg:h-12"
+            />
+          </div>
+        </div>
       </div>
     </div>
   )

@@ -237,3 +237,29 @@ body {
     @apply bg-background text-foreground;
   }
 }
+
+/* Logo Cloud Scrolling Animation */
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-33.333%);
+  }
+}
+
+.animate-scroll {
+  animation: scroll 25s linear infinite;
+}
+
+/* Mobile optimization */
+@media (max-width: 640px) {
+  .animate-scroll {
+    animation-duration: 20s;
+  }
+}
+
+/* Pause animation on hover for better UX */
+.animate-scroll:hover {
+  animation-play-state: paused;
+}
