@@ -61,7 +61,7 @@ function ServicesDropdown({
   return (
     <Menu as="div" className="relative">
       <MenuButton
-        className={`flex items-center px-4 py-3 text-base font-medium text-gray-950 bg-blend-multiply transition-colors hover:bg-black/2.5 hover:text-black ${
+        className={`flex items-center px-4 py-4 text-base font-medium text-gray-950 bg-blend-multiply transition-colors hover:bg-black/2.5 hover:text-black ${
           isActive('/services') ? 'bg-black/5 text-black' : ''
         }`}
       >
@@ -129,7 +129,7 @@ function CompanyDropdown({
   return (
     <Menu as="div" className="relative">
       <MenuButton
-        className={`flex items-center px-4 py-3 text-base font-medium text-gray-950 bg-blend-multiply transition-colors hover:bg-black/2.5 hover:text-black ${
+        className={`flex items-center px-4 py-4 text-base font-medium text-gray-950 bg-blend-multiply transition-colors hover:bg-black/2.5 hover:text-black ${
           isActive('/company') ||
           isActive('/team') ||
           isActive('/careers') ||
@@ -218,7 +218,7 @@ function DesktopNav({
       <PlusGridItem className="relative flex">
         <Link
           href="/competencies"
-          className={`flex items-center px-4 py-3 text-base font-medium text-gray-950 bg-blend-multiply transition-colors hover:bg-black/2.5 hover:text-black ${
+          className={`flex items-center px-4 py-4 text-base font-medium text-gray-950 bg-blend-multiply transition-colors hover:bg-black/2.5 hover:text-black ${
             isActive('/competencies') ? 'bg-black/5 text-black' : ''
           }`}
         >
@@ -230,7 +230,7 @@ function DesktopNav({
       <PlusGridItem className="relative flex">
         <Link
           href="/technologies"
-          className={`flex items-center px-4 py-3 text-base font-medium text-gray-950 bg-blend-multiply transition-colors hover:bg-black/2.5 hover:text-black ${
+          className={`flex items-center px-4 py-4 text-base font-medium text-gray-950 bg-blend-multiply transition-colors hover:bg-black/2.5 hover:text-black ${
             isActive('/technologies') ? 'bg-black/5 text-black' : ''
           }`}
         >
@@ -247,7 +247,7 @@ function DesktopNav({
       <PlusGridItem className="relative flex">
         <Link
           href="/contact"
-          className={`flex items-center px-4 py-3 text-base font-medium text-gray-950 bg-blend-multiply transition-colors hover:bg-black/2.5 hover:text-black ${
+          className={`flex items-center px-4 py-4 text-base font-medium text-gray-950 bg-blend-multiply transition-colors hover:bg-black/2.5 hover:text-black ${
             isActive('/contact') ? 'bg-black/5 text-black' : ''
           }`}
         >
@@ -261,7 +261,7 @@ function DesktopNav({
 function MobileNavButton() {
   return (
     <DisclosureButton
-      className="flex size-12 items-center justify-center self-center rounded-xl transition-all duration-200 hover:scale-105"
+      className="flex size-14 items-center justify-center self-center rounded-xl transition-all duration-200 hover:scale-105"
       aria-label="Hauptmenü öffnen"
     >
       <Bars2Icon className="size-6 text-gray-700" />
@@ -271,33 +271,35 @@ function MobileNavButton() {
 
 function MobileNav({
   serviceCategories,
-  scrollProgress,
 }: {
   serviceCategories: ServiceCategory[]
-  scrollProgress: number
 }) {
+  const pathname = usePathname()
+
+  const isActive = (path: string) => {
+    if (path === '/') {
+      return pathname === '/'
+    }
+    return pathname.startsWith(path)
+  }
+
   // Note: Scroll locking is handled by the parent Disclosure component
   // This component only renders when mobile nav is open
 
   return (
     <DisclosurePanel className="fixed inset-0 top-0 right-0 bottom-0 left-0 isolate z-[9999] transform-none bg-white shadow-2xl will-change-transform">
-      {/* Header with close button */}
-      <div className="relative flex items-center justify-between border-b border-gray-200 bg-white px-6 py-6">
-        {/* Mobile Progress Bar */}
-        <div
-          className="absolute bottom-0 left-0 h-0.5 bg-gradient-to-r from-blue-600 to-blue-500 shadow-sm transition-all duration-500 ease-in-out"
-          style={{ width: `${scrollProgress}%` }}
-        />
+      {/* Header with close button - Match desktop navbar height */}
+      <div className="relative flex items-center justify-between border-b border-gray-200 bg-white px-6 py-4">
         <Link href="/" title="Home" className="flex items-center">
-          <Logo className="h-8 w-auto transition-transform hover:scale-105" />
+          <Logo className="h-7 w-auto transition-transform hover:scale-105" />
         </Link>
         <DisclosureButton className="rounded-lg p-2 text-gray-500 hover:bg-gray-100">
           <XMarkIcon className="h-6 w-6" />
         </DisclosureButton>
       </div>
 
-      {/* Navigation Content - Fixed height with proper scrolling */}
-      <div className="h-[calc(100vh-88px)] touch-pan-y overflow-y-auto overscroll-contain bg-white px-6 py-8">
+      {/* Navigation Content - Adjust height calculation for new header height */}
+      <div className="isolate h-[calc(100vh-72px)] touch-pan-y overflow-y-auto overscroll-contain bg-white px-6 py-8">
         <AnimatePresence mode="wait">
           <motion.div
             className="space-y-4"
@@ -328,10 +330,20 @@ function MobileNav({
               className="space-y-4"
             >
               <Disclosure as="div" className="space-y-4">
-                <DisclosureButton className="flex w-full items-center justify-between rounded-2xl px-6 py-4 text-2xl font-bold text-gray-900 transition-all duration-300 hover:bg-purple-50 hover:text-purple-700">
+                <DisclosureButton
+                  className={`flex w-full items-center justify-between rounded-2xl px-6 py-4 text-2xl font-bold transition-all duration-300 ${
+                    isActive('/services')
+                      ? 'bg-blue-100 text-blue-700'
+                      : 'text-gray-900 hover:bg-blue-50 hover:text-blue-700'
+                  }`}
+                >
                   <div className="flex items-center">
-                    <div className="mr-4 flex h-8 w-8 items-center justify-center rounded-lg bg-purple-100">
-                      <span className="text-purple-600">-</span>
+                    <div
+                      className={`mr-4 flex h-8 w-8 items-center justify-center rounded-lg ${
+                        isActive('/services') ? 'bg-blue-200' : 'bg-blue-100'
+                      }`}
+                    >
+                      <span className="text-blue-600">-</span>
                     </div>
                     Dienstleistungen
                   </div>
@@ -344,10 +356,37 @@ function MobileNav({
                   <DisclosurePanel className="ml-8 space-y-3 border-l-2 border-gray-200 pl-6 transition-all duration-300 ease-in-out">
                     <Link
                       href="/services"
-                      className="flex items-center rounded-xl px-6 py-3 text-lg font-semibold text-gray-700 transition-all duration-300 hover:bg-gray-50 hover:text-gray-900"
+                      className={`flex items-center rounded-xl px-6 py-3 text-lg font-semibold transition-all duration-300 ${
+                        isActive('/services') &&
+                        !serviceCategories.some((cat) =>
+                          isActive(`/services/category/${cat.slug}`),
+                        )
+                          ? 'bg-blue-50 text-blue-700'
+                          : 'text-gray-700 hover:bg-gray-50 hover:text-gray-900'
+                      }`}
                     >
-                      <div className="mr-3 flex h-6 w-6 items-center justify-center rounded-md bg-gray-100">
-                        <span className="text-sm text-gray-500">•</span>
+                      <div
+                        className={`mr-3 flex h-6 w-6 items-center justify-center rounded-md ${
+                          isActive('/services') &&
+                          !serviceCategories.some((cat) =>
+                            isActive(`/services/category/${cat.slug}`),
+                          )
+                            ? 'bg-blue-200'
+                            : 'bg-gray-100'
+                        }`}
+                      >
+                        <span
+                          className={`text-sm ${
+                            isActive('/services') &&
+                            !serviceCategories.some((cat) =>
+                              isActive(`/services/category/${cat.slug}`),
+                            )
+                              ? 'text-blue-600'
+                              : 'text-gray-500'
+                          }`}
+                        >
+                          •
+                        </span>
                       </div>
                       Alle Dienstleistungen
                     </Link>
@@ -355,10 +394,28 @@ function MobileNav({
                       <Link
                         key={category._id}
                         href={`/services/category/${category.slug}`}
-                        className="flex items-center rounded-xl px-6 py-3 text-lg font-semibold text-gray-700 transition-all duration-300 hover:bg-gray-50 hover:text-gray-900"
+                        className={`flex items-center rounded-xl px-6 py-3 text-lg font-semibold transition-all duration-300 ${
+                          isActive(`/services/category/${category.slug}`)
+                            ? 'bg-blue-50 text-blue-700'
+                            : 'text-gray-700 hover:bg-gray-50 hover:text-gray-900'
+                        }`}
                       >
-                        <div className="mr-3 flex h-6 w-6 items-center justify-center rounded-md bg-gray-100">
-                          <span className="text-sm text-gray-500">•</span>
+                        <div
+                          className={`mr-3 flex h-6 w-6 items-center justify-center rounded-md ${
+                            isActive(`/services/category/${category.slug}`)
+                              ? 'bg-blue-200'
+                              : 'bg-gray-100'
+                          }`}
+                        >
+                          <span
+                            className={`text-sm ${
+                              isActive(`/services/category/${category.slug}`)
+                                ? 'text-blue-600'
+                                : 'text-gray-500'
+                            }`}
+                          >
+                            •
+                          </span>
                         </div>
                         {category.name}
                       </Link>
@@ -381,9 +438,17 @@ function MobileNav({
             >
               <Link
                 href="/competencies"
-                className="flex w-full items-center rounded-2xl px-6 py-4 text-2xl font-bold text-gray-900 transition-all duration-300 hover:bg-blue-50 hover:text-blue-700"
+                className={`flex w-full items-center rounded-2xl px-6 py-4 text-2xl font-bold transition-all duration-300 ${
+                  isActive('/competencies')
+                    ? 'bg-blue-100 text-blue-700'
+                    : 'text-gray-900 hover:bg-blue-50 hover:text-blue-700'
+                }`}
               >
-                <div className="mr-4 flex h-8 w-8 items-center justify-center rounded-lg bg-blue-100">
+                <div
+                  className={`mr-4 flex h-8 w-8 items-center justify-center rounded-lg ${
+                    isActive('/competencies') ? 'bg-blue-200' : 'bg-blue-100'
+                  }`}
+                >
                   <span className="text-blue-600">-</span>
                 </div>
                 Kompetenzen
@@ -403,9 +468,17 @@ function MobileNav({
             >
               <Link
                 href="/technologies"
-                className="flex w-full items-center rounded-2xl px-6 py-4 text-2xl font-bold text-gray-900 transition-all duration-300 hover:bg-blue-50 hover:text-blue-700"
+                className={`flex w-full items-center rounded-2xl px-6 py-4 text-2xl font-bold transition-all duration-300 ${
+                  isActive('/technologies')
+                    ? 'bg-blue-100 text-blue-700'
+                    : 'text-gray-900 hover:bg-blue-50 hover:text-blue-700'
+                }`}
               >
-                <div className="mr-4 flex h-8 w-8 items-center justify-center rounded-lg bg-blue-100">
+                <div
+                  className={`mr-4 flex h-8 w-8 items-center justify-center rounded-lg ${
+                    isActive('/technologies') ? 'bg-blue-200' : 'bg-blue-100'
+                  }`}
+                >
                   <span className="text-blue-600">-</span>
                 </div>
                 Technologien
@@ -425,9 +498,29 @@ function MobileNav({
               className="space-y-4"
             >
               <Disclosure as="div" className="space-y-4">
-                <DisclosureButton className="flex w-full items-center justify-between rounded-2xl px-6 py-4 text-2xl font-bold text-gray-900 transition-all duration-300 hover:bg-blue-50 hover:text-blue-700">
+                <DisclosureButton
+                  className={`flex w-full items-center justify-between rounded-2xl px-6 py-4 text-2xl font-bold transition-all duration-300 ${
+                    isActive('/company') ||
+                    isActive('/team') ||
+                    isActive('/careers') ||
+                    isActive('/partners') ||
+                    isActive('/blog')
+                      ? 'bg-blue-100 text-blue-700'
+                      : 'text-gray-900 hover:bg-blue-50 hover:text-blue-700'
+                  }`}
+                >
                   <div className="flex items-center">
-                    <div className="mr-4 flex h-8 w-8 items-center justify-center rounded-lg bg-blue-100">
+                    <div
+                      className={`mr-4 flex h-8 w-8 items-center justify-center rounded-lg ${
+                        isActive('/company') ||
+                        isActive('/team') ||
+                        isActive('/careers') ||
+                        isActive('/partners') ||
+                        isActive('/blog')
+                          ? 'bg-blue-200'
+                          : 'bg-blue-100'
+                      }`}
+                    >
                       <span className="text-blue-600">-</span>
                     </div>
                     Unternehmen
@@ -440,46 +533,122 @@ function MobileNav({
                 <DisclosurePanel className="ml-8 space-y-3 border-l-2 border-gray-200 pl-6 transition-all duration-300 ease-in-out">
                   <Link
                     href="/company"
-                    className="flex items-center rounded-xl px-6 py-3 text-lg font-semibold text-gray-700 transition-all duration-300 hover:bg-gray-50 hover:text-gray-900"
+                    className={`flex items-center rounded-xl px-6 py-3 text-lg font-semibold transition-all duration-300 ${
+                      isActive('/company')
+                        ? 'bg-blue-50 text-blue-700'
+                        : 'text-gray-700 hover:bg-gray-50 hover:text-gray-900'
+                    }`}
                   >
-                    <div className="mr-3 flex h-6 w-6 items-center justify-center rounded-md bg-gray-100">
-                      <span className="text-sm text-gray-500">•</span>
+                    <div
+                      className={`mr-3 flex h-6 w-6 items-center justify-center rounded-md ${
+                        isActive('/company') ? 'bg-blue-200' : 'bg-gray-100'
+                      }`}
+                    >
+                      <span
+                        className={`text-sm ${
+                          isActive('/company')
+                            ? 'text-blue-600'
+                            : 'text-gray-500'
+                        }`}
+                      >
+                        •
+                      </span>
                     </div>
                     Über uns
                   </Link>
                   <Link
                     href="/team"
-                    className="flex items-center rounded-xl px-6 py-3 text-lg font-semibold text-gray-700 transition-all duration-300 hover:bg-gray-50 hover:text-gray-900"
+                    className={`flex items-center rounded-xl px-6 py-3 text-lg font-semibold transition-all duration-300 ${
+                      isActive('/team')
+                        ? 'bg-blue-50 text-blue-700'
+                        : 'text-gray-700 hover:bg-gray-50 hover:text-gray-900'
+                    }`}
                   >
-                    <div className="mr-3 flex h-6 w-6 items-center justify-center rounded-md bg-gray-100">
-                      <span className="text-sm text-gray-500">•</span>
+                    <div
+                      className={`mr-3 flex h-6 w-6 items-center justify-center rounded-md ${
+                        isActive('/team') ? 'bg-blue-200' : 'bg-gray-100'
+                      }`}
+                    >
+                      <span
+                        className={`text-sm ${
+                          isActive('/team') ? 'text-blue-600' : 'text-gray-500'
+                        }`}
+                      >
+                        •
+                      </span>
                     </div>
                     Team
                   </Link>
                   <Link
                     href="/careers"
-                    className="flex items-center rounded-xl px-6 py-3 text-lg font-semibold text-gray-700 transition-all duration-300 hover:bg-gray-50 hover:text-gray-900"
+                    className={`flex items-center rounded-xl px-6 py-3 text-lg font-semibold transition-all duration-300 ${
+                      isActive('/careers')
+                        ? 'bg-blue-50 text-blue-700'
+                        : 'text-gray-700 hover:bg-gray-50 hover:text-gray-900'
+                    }`}
                   >
-                    <div className="mr-3 flex h-6 w-6 items-center justify-center rounded-md bg-gray-100">
-                      <span className="text-sm text-gray-500">•</span>
+                    <div
+                      className={`mr-3 flex h-6 w-6 items-center justify-center rounded-md ${
+                        isActive('/careers') ? 'bg-blue-200' : 'bg-gray-100'
+                      }`}
+                    >
+                      <span
+                        className={`text-sm ${
+                          isActive('/careers')
+                            ? 'text-blue-600'
+                            : 'text-gray-500'
+                        }`}
+                      >
+                        •
+                      </span>
                     </div>
                     Karriere
                   </Link>
                   <Link
                     href="/partners"
-                    className="flex items-center rounded-xl px-6 py-3 text-lg font-semibold text-gray-700 transition-all duration-300 hover:bg-gray-50 hover:text-gray-900"
+                    className={`flex items-center rounded-xl px-6 py-3 text-lg font-semibold transition-all duration-300 ${
+                      isActive('/partners')
+                        ? 'bg-blue-50 text-blue-700'
+                        : 'text-gray-700 hover:bg-gray-50 hover:text-gray-900'
+                    }`}
                   >
-                    <div className="mr-3 flex h-6 w-6 items-center justify-center rounded-md bg-gray-100">
-                      <span className="text-sm text-gray-500">•</span>
+                    <div
+                      className={`mr-3 flex h-6 w-6 items-center justify-center rounded-md ${
+                        isActive('/partners') ? 'bg-blue-200' : 'bg-gray-100'
+                      }`}
+                    >
+                      <span
+                        className={`text-sm ${
+                          isActive('/partners')
+                            ? 'text-blue-600'
+                            : 'text-gray-500'
+                        }`}
+                      >
+                        •
+                      </span>
                     </div>
                     Partner
                   </Link>
                   <Link
                     href="/blog"
-                    className="flex items-center rounded-xl px-6 py-3 text-lg font-semibold text-gray-700 transition-all duration-300 hover:bg-gray-50 hover:text-gray-900"
+                    className={`flex items-center rounded-xl px-6 py-3 text-lg font-semibold transition-all duration-300 ${
+                      isActive('/blog')
+                        ? 'bg-blue-50 text-blue-700'
+                        : 'text-gray-700 hover:bg-gray-50 hover:text-gray-900'
+                    }`}
                   >
-                    <div className="mr-3 flex h-6 w-6 items-center justify-center rounded-md bg-gray-100">
-                      <span className="text-sm text-gray-500">•</span>
+                    <div
+                      className={`mr-3 flex h-6 w-6 items-center justify-center rounded-md ${
+                        isActive('/blog') ? 'bg-blue-200' : 'bg-gray-100'
+                      }`}
+                    >
+                      <span
+                        className={`text-sm ${
+                          isActive('/blog') ? 'text-blue-600' : 'text-gray-500'
+                        }`}
+                      >
+                        •
+                      </span>
                     </div>
                     Blog
                   </Link>
@@ -500,9 +669,17 @@ function MobileNav({
             >
               <Link
                 href="/contact"
-                className="flex w-full items-center rounded-2xl px-6 py-4 text-2xl font-bold text-gray-900 transition-all duration-300 hover:bg-blue-50 hover:text-blue-700"
+                className={`flex w-full items-center rounded-2xl px-6 py-4 text-2xl font-bold transition-all duration-300 ${
+                  isActive('/contact')
+                    ? 'bg-blue-100 text-blue-700'
+                    : 'text-gray-900 hover:bg-blue-50 hover:text-blue-700'
+                }`}
               >
-                <div className="mr-4 flex h-8 w-8 items-center justify-center rounded-lg bg-blue-100">
+                <div
+                  className={`mr-4 flex h-8 w-8 items-center justify-center rounded-lg ${
+                    isActive('/contact') ? 'bg-blue-200' : 'bg-blue-100'
+                  }`}
+                >
                   <span className="text-blue-600">-</span>
                 </div>
                 Kontakt
@@ -510,41 +687,6 @@ function MobileNav({
             </motion.div>
           </motion.div>
         </AnimatePresence>
-
-        {/* Bottom Section with Contact Info */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: 30 }}
-          transition={{
-            duration: 0.3,
-            ease: [0.25, 0.46, 0.45, 0.94],
-            delay: 0.15,
-          }}
-          className="mt-16 border-t border-gray-200 pt-8"
-        >
-          <div className="space-y-6 text-center">
-            <div>
-              <p className="mb-4 text-lg font-medium text-gray-700">
-                Brauchen Sie Hilfe? Kontaktieren Sie uns
-              </p>
-              <Link
-                href="/contact"
-                className="inline-block rounded-2xl bg-blue-600 px-8 py-4 text-lg font-bold text-white transition-all duration-300 hover:scale-105 hover:bg-blue-700"
-              >
-                Kontakt aufnehmen
-              </Link>
-            </div>
-
-            {/* Company Info */}
-            <div className="space-y-2 text-sm text-gray-500">
-              <p>Maxsoft AG</p>
-              <p>Birkenstrasse 49, 6343 Rotkreuz</p>
-              <p>Schweiz</p>
-              <p>+41 41 5111166</p>
-            </div>
-          </div>
-        </motion.div>
       </div>
     </DisclosurePanel>
   )
@@ -561,6 +703,7 @@ export function Navbar({
 }) {
   const [isScrolled, setIsScrolled] = React.useState(false)
   const [scrollProgress, setScrollProgress] = React.useState(0)
+  const [isMobileNavOpen, setIsMobileNavOpen] = React.useState(false)
 
   // Global effect to handle dropdown scrollbar issues in Edge browser
   React.useEffect(() => {
@@ -614,18 +757,34 @@ export function Navbar({
 
   React.useEffect(() => {
     const handleScroll = () => {
-      const scrollTop = window.scrollY
-      const docHeight =
-        document.documentElement.scrollHeight - window.innerHeight
-      const scrollPercent = (scrollTop / docHeight) * 100
+      // Only update scroll progress if mobile nav is closed
+      if (!isMobileNavOpen) {
+        const scrollTop = window.scrollY
+        const docHeight =
+          document.documentElement.scrollHeight - window.innerHeight
+        const scrollPercent = (scrollTop / docHeight) * 100
 
-      setIsScrolled(scrollTop > 10)
-      setScrollProgress(Math.min(scrollPercent, 100))
+        setIsScrolled(scrollTop > 10)
+        // Add some smoothing to the progress bar
+        setScrollProgress(Math.min(Math.max(scrollPercent, 0), 100))
+      }
     }
 
-    window.addEventListener('scroll', handleScroll)
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
+    // Throttle scroll events for better performance
+    let ticking = false
+    const throttledScroll = () => {
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          handleScroll()
+          ticking = false
+        })
+        ticking = true
+      }
+    }
+
+    window.addEventListener('scroll', throttledScroll, { passive: true })
+    return () => window.removeEventListener('scroll', throttledScroll)
+  }, [isMobileNavOpen])
 
   // Lock body scroll when mobile nav is open using MutationObserver
   React.useEffect(() => {
@@ -638,8 +797,10 @@ export function Navbar({
           const mobileNav = document.querySelector('[data-state="open"]')
           if (mobileNav) {
             document.body.style.overflow = 'hidden'
+            setIsMobileNavOpen(true)
           } else {
             document.body.style.overflow = ''
+            setIsMobileNavOpen(false)
           }
         }
       })
@@ -654,6 +815,7 @@ export function Navbar({
     return () => {
       observer.disconnect()
       document.body.style.overflow = ''
+      setIsMobileNavOpen(false)
       document.body.classList.remove('dropdown-open')
     }
   }, [])
@@ -674,16 +836,35 @@ export function Navbar({
           : 'bg-transparent'
       }`}
     >
-      {/* Progress Bar - Only for Mobile */}
-      <div className="3xl:hidden lg:hidden xl:hidden 2xl:hidden">
+      {/* Enhanced Progress Bar - Visible on all breakpoints */}
+      <div className="relative">
+        {/* Background track */}
+        <div className="absolute right-0 bottom-0 left-0 h-1 bg-gray-200/50" />
+        {/* Main progress bar */}
         <div
-          className="absolute bottom-0 left-0 h-0.5 bg-gradient-to-r from-blue-600 to-blue-500 shadow-sm transition-all duration-500 ease-in-out"
+          className={`absolute bottom-0 left-0 h-1 bg-blue-600 shadow-sm transition-all duration-300 ease-out ${
+            scrollProgress >= 100 ? 'animate-pulse' : ''
+          }`}
           style={{ width: `${scrollProgress}%` }}
+        />
+        {/* Progress bar glow effect */}
+        <div
+          className="absolute bottom-0 left-0 h-1 bg-blue-500/60 blur-sm transition-all duration-300 ease-out"
+          style={{ width: `${scrollProgress}%` }}
+        />
+        {/* Animated progress indicator */}
+        <div
+          className="absolute bottom-0 h-1 w-1 rounded-full bg-white shadow-md transition-all duration-300 ease-out"
+          style={{
+            left: `calc(${scrollProgress}% - 2px)`,
+            opacity: scrollProgress > 0 ? 1 : 0,
+            transform: `scale(${scrollProgress > 0 ? 1 : 0.5})`,
+          }}
         />
       </div>
       <div
         className={`w-full transition-all duration-300 ${
-          isScrolled ? 'pt-2 sm:pt-3' : 'pt-4 sm:pt-6'
+          isScrolled ? 'pt-3 sm:pt-4' : 'pt-4 sm:pt-5'
         }`}
       >
         {/* Centered container with max-width and horizontal spacing */}
@@ -691,7 +872,7 @@ export function Navbar({
           <PlusGrid>
             <PlusGridRow className="relative flex items-center justify-between !pt-0 !pb-0">
               <div className="relative flex items-center gap-6">
-                <PlusGridItem className="-mt-2 px-1 py-2">
+                <PlusGridItem className="-mt-1 px-1 py-2">
                   <Menu as="div" className="relative">
                     <MenuButton className="group flex items-center">
                       <Link href="/" title="Home" className="flex items-center">
@@ -743,10 +924,7 @@ export function Navbar({
           </PlusGrid>
           {/* Mobile Navigation - Only render on mobile/tablet */}
           <div className="3xl:hidden lg:hidden xl:hidden 2xl:hidden">
-            <MobileNav
-              serviceCategories={serviceCategories}
-              scrollProgress={scrollProgress}
-            />
+            <MobileNav serviceCategories={serviceCategories} />
           </div>
         </div>
       </div>

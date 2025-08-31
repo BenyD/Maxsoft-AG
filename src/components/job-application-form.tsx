@@ -111,7 +111,7 @@ export function JobApplicationForm({
 
     if (!formData.resume || !formData.gdprConsent) {
       setAlertMessage(
-        'Please fill in all required fields and accept the privacy policy.',
+        'Bitte fülle alle erforderlichen Felder aus und akzeptiere die Datenschutzerklärung.',
       )
       setShowAlert(true)
       return
@@ -195,7 +195,9 @@ export function JobApplicationForm({
 
       if (!response.ok) {
         const errorData = await response.json()
-        throw new Error(errorData.error || 'Failed to submit application')
+        throw new Error(
+          errorData.error || 'Fehler beim Einreichen der Bewerbung',
+        )
       }
 
       // Call the onSubmit callback with the result
@@ -203,7 +205,7 @@ export function JobApplicationForm({
     } catch (error) {
       console.error('Error submitting application:', error)
       alert(
-        `There was an error submitting your application: ${error instanceof Error ? error.message : 'Please try again.'}`,
+        `Es gab einen Fehler beim Einreichen deiner Bewerbung: ${error instanceof Error ? error.message : 'Bitte versuche es erneut.'}`,
       )
     } finally {
       setIsSubmitting(false)
@@ -216,11 +218,11 @@ export function JobApplicationForm({
         <div className="w-full max-w-4xl rounded-2xl bg-white shadow-2xl">
           <div className="border-b border-gray-200 px-8 py-6">
             <Heading as="h2" className="text-2xl">
-              Apply for {jobTitle}
+              Bewerbung für {jobTitle}
             </Heading>
             <p className="mt-2 text-gray-600">
-              Fill out the form below to submit your application. All fields
-              marked with * are required.
+              Fülle das Formular unten aus, um deine Bewerbung einzureichen.
+              Alle mit * markierten Felder sind erforderlich.
             </p>
           </div>
 
@@ -228,11 +230,13 @@ export function JobApplicationForm({
             <div className="space-y-8">
               {/* Personal Information */}
               <div>
-                <Subheading className="mb-4">Personal Information</Subheading>
+                <Subheading className="mb-4">
+                  Persönliche Informationen
+                </Subheading>
                 <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                   <div>
                     <label className="block text-sm font-medium text-gray-700">
-                      Full Name *
+                      Vollständiger Name *
                     </label>
                     <input
                       type="text"
@@ -246,7 +250,7 @@ export function JobApplicationForm({
                   </div>
                   <div>
                     <label className="block text-sm font-medium text-gray-700">
-                      Email Address *
+                      E-Mail-Adresse *
                     </label>
                     <input
                       type="email"
@@ -260,7 +264,7 @@ export function JobApplicationForm({
                   </div>
                   <div>
                     <label className="block text-sm font-medium text-gray-700">
-                      Phone Number *
+                      Telefonnummer *
                     </label>
                     <input
                       type="tel"
@@ -274,11 +278,11 @@ export function JobApplicationForm({
                   </div>
                   <div>
                     <label className="block text-sm font-medium text-gray-700">
-                      LinkedIn Profile
+                      LinkedIn-Profil
                     </label>
                     <input
                       type="url"
-                      placeholder="https://linkedin.com/in/yourprofile"
+                      placeholder="https://linkedin.com/in/deinprofil"
                       value={formData.candidateLinkedin || ''}
                       onChange={(e) =>
                         handleInputChange('candidateLinkedin', e.target.value)
@@ -288,11 +292,11 @@ export function JobApplicationForm({
                   </div>
                   <div>
                     <label className="block text-sm font-medium text-gray-700">
-                      GitHub Profile
+                      GitHub-Profil
                     </label>
                     <input
                       type="url"
-                      placeholder="https://github.com/yourusername"
+                      placeholder="https://github.com/deinbenutzername"
                       value={formData.candidateGithub || ''}
                       onChange={(e) =>
                         handleInputChange('candidateGithub', e.target.value)
@@ -302,11 +306,11 @@ export function JobApplicationForm({
                   </div>
                   <div>
                     <label className="block text-sm font-medium text-gray-700">
-                      Current Location
+                      Aktueller Standort
                     </label>
                     <input
                       type="text"
-                      placeholder="City, Country"
+                      placeholder="Stadt, Land"
                       value={formData.candidateLocation || ''}
                       onChange={(e) =>
                         handleInputChange('candidateLocation', e.target.value)
@@ -319,15 +323,15 @@ export function JobApplicationForm({
 
               {/* Application Details */}
               <div>
-                <Subheading className="mb-4">Application Details</Subheading>
+                <Subheading className="mb-4">Bewerbungsdetails</Subheading>
                 <div className="space-y-4">
                   <div>
                     <label className="block text-sm font-medium text-gray-700">
-                      Cover Letter *
+                      Motivationsschreiben *
                     </label>
                     <p className="text-sm text-gray-500">
-                      Tell us why you&apos;re interested in this position and
-                      what makes you a great fit.
+                      Erzähle uns, warum du an dieser Position interessiert bist
+                      und was dich zu einer guten Besetzung macht.
                     </p>
                     <textarea
                       required
@@ -339,17 +343,17 @@ export function JobApplicationForm({
                         handleInputChange('coverLetter', e.target.value)
                       }
                       className="mt-1 block w-full rounded-lg border border-gray-300 px-3 py-2 shadow-sm focus:border-[#01A2EE] focus:ring-1 focus:ring-[#01A2EE] focus:outline-none"
-                      placeholder="I am excited to apply for this position because..."
+                      placeholder="Ich bin begeistert, mich für diese Position zu bewerben, weil..."
                     />
                     <p className="mt-1 text-xs text-gray-500">
-                      {formData.coverLetter?.length || 0}/2000 characters
-                      (minimum 100)
+                      {formData.coverLetter?.length || 0}/2000 Zeichen
+                      (Mindestlänge 100)
                     </p>
                   </div>
 
                   <div>
                     <label className="block text-sm font-medium text-gray-700">
-                      Years of Experience
+                      Jahre der Berufserfahrung
                     </label>
                     <input
                       type="number"
@@ -363,17 +367,17 @@ export function JobApplicationForm({
                         )
                       }
                       className="mt-1 block w-full rounded-lg border border-gray-300 px-3 py-2 shadow-sm focus:border-[#01A2EE] focus:ring-1 focus:ring-[#01A2EE] focus:outline-none"
-                      placeholder="e.g., 5"
+                      placeholder="z.B. 5"
                     />
                   </div>
 
                   <div>
                     <label className="block text-sm font-medium text-gray-700">
-                      Key Skills
+                      Wichtige Fähigkeiten
                     </label>
                     <p className="text-sm text-gray-500">
-                      List your key technical and soft skills, separated by
-                      commas.
+                      Liste deine wichtigsten technischen und sozialen
+                      Fähigkeiten auf, getrennt durch Kommas.
                     </p>
                     <input
                       type="text"
@@ -381,14 +385,14 @@ export function JobApplicationForm({
                       onChange={(e) => handleSkillsChange(e.target.value)}
                       onBlur={handleSkillsBlur}
                       className="mt-1 block w-full rounded-lg border border-gray-300 px-3 py-2 shadow-sm focus:border-[#01A2EE] focus:ring-1 focus:ring-[#01A2EE] focus:outline-none"
-                      placeholder="JavaScript, React, Node.js, Project Management, Communication"
+                      placeholder="JavaScript, React, Node.js, Projektmanagement, Kommunikation"
                     />
                   </div>
 
                   <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                     <div>
                       <label className="block text-sm font-medium text-gray-700">
-                        Expected Salary (CHF)
+                        Erwartetes Gehalt (CHF)
                       </label>
                       <input
                         type="number"
@@ -402,12 +406,12 @@ export function JobApplicationForm({
                           )
                         }
                         className="mt-1 block w-full rounded-lg border border-gray-300 px-3 py-2 shadow-sm focus:border-[#01A2EE] focus:ring-1 focus:ring-[#01A2EE] focus:outline-none"
-                        placeholder="e.g., 80000"
+                        placeholder="z.B. 80000"
                       />
                     </div>
                     <div>
                       <label className="block text-sm font-medium text-gray-700">
-                        Notice Period
+                        Kündigungsfrist
                       </label>
                       <input
                         type="text"
@@ -416,14 +420,14 @@ export function JobApplicationForm({
                           handleInputChange('noticePeriod', e.target.value)
                         }
                         className="mt-1 block w-full rounded-lg border border-gray-300 px-3 py-2 shadow-sm focus:border-[#01A2EE] focus:ring-1 focus:ring-[#01A2EE] focus:outline-none"
-                        placeholder="e.g., 2 weeks, 1 month, immediately"
+                        placeholder="z.B. 2 Wochen, 1 Monat, sofort"
                       />
                     </div>
                   </div>
 
                   <div>
                     <label className="block text-sm font-medium text-gray-700">
-                      Current Company
+                      Aktuelles Unternehmen
                     </label>
                     <input
                       type="text"
@@ -432,12 +436,12 @@ export function JobApplicationForm({
                         handleInputChange('currentCompany', e.target.value)
                       }
                       className="mt-1 block w-full rounded-lg border border-gray-300 px-3 py-2 shadow-sm focus:border-[#01A2EE] focus:ring-1 focus:ring-[#01A2EE] focus:outline-none"
-                      placeholder="e.g., Maxsoft AG"
+                      placeholder="z.B. Maxsoft AG"
                     />
                   </div>
                   <div>
                     <label className="block text-sm font-medium text-gray-700">
-                      Current Position
+                      Aktuelle Position
                     </label>
                     <input
                       type="text"
@@ -446,7 +450,7 @@ export function JobApplicationForm({
                         handleInputChange('currentPosition', e.target.value)
                       }
                       className="mt-1 block w-full rounded-lg border border-gray-300 px-3 py-2 shadow-sm focus:border-[#01A2EE] focus:ring-1 focus:ring-[#01A2EE] focus:outline-none"
-                      placeholder="e.g., Senior Software Engineer"
+                      placeholder="z.B. Senior Software Engineer"
                     />
                   </div>
                 </div>
@@ -454,15 +458,16 @@ export function JobApplicationForm({
 
               {/* File Uploads */}
               <div>
-                <Subheading className="mb-4">Documents</Subheading>
+                <Subheading className="mb-4">Dokumente</Subheading>
                 <div className="space-y-6">
                   {/* Resume Upload */}
                   <div>
                     <label className="mb-2 block text-sm font-medium text-gray-700">
-                      Resume/CV *
+                      Lebenslauf/CV *
                     </label>
                     <p className="mb-3 text-sm text-gray-500">
-                      Upload your resume in PDF, DOC, or DOCX format (max 10MB).
+                      Lade deinen Lebenslauf im PDF-, DOC- oder DOCX-Format hoch
+                      (max. 10MB).
                     </p>
 
                     {formData.resume ? (
@@ -538,11 +543,11 @@ export function JobApplicationForm({
                             className="cursor-pointer"
                           >
                             <span className="text-sm font-medium text-[#01A2EE] hover:text-[#01A2EE]/80">
-                              Click to upload
+                              Klicke zum Hochladen
                             </span>
                             <span className="text-gray-500">
                               {' '}
-                              or drag and drop
+                              oder ziehe und lasse los
                             </span>
                           </label>
                           <input
@@ -560,7 +565,7 @@ export function JobApplicationForm({
                           />
                         </div>
                         <p className="mt-2 text-xs text-gray-500">
-                          PDF, DOC, or DOCX up to 10MB
+                          PDF, DOC oder DOCX bis zu 10MB
                         </p>
                       </div>
                     )}
@@ -569,11 +574,11 @@ export function JobApplicationForm({
                   {/* Additional Documents */}
                   <div>
                     <label className="mb-2 block text-sm font-medium text-gray-700">
-                      Additional Documents
+                      Zusätzliche Dokumente
                     </label>
                     <p className="mb-3 text-sm text-gray-500">
-                      Upload additional files like portfolio, certificates, or
-                      references (optional, max 10MB each).
+                      Lade zusätzliche Dateien wie Portfolio, Zertifikate oder
+                      Referenzen hoch (optional, max. 10MB pro Datei).
                     </p>
 
                     <div className="space-y-3">
@@ -659,7 +664,7 @@ export function JobApplicationForm({
                                       />
                                     </svg>
                                     <span className="mt-1 block text-xs text-[#01A2EE] hover:text-[#01A2EE]/80">
-                                      Click to upload
+                                      Klicke zum Hochladen
                                     </span>
                                   </label>
                                   <input
@@ -713,7 +718,7 @@ export function JobApplicationForm({
                             d="M12 4v16m8-8H4"
                           />
                         </svg>
-                        <span>Add Document</span>
+                        <span>Dokument hinzufügen</span>
                       </button>
                     </div>
                   </div>
@@ -734,21 +739,22 @@ export function JobApplicationForm({
                   />
                   <div className="ml-3">
                     <label className="text-sm text-gray-700">
-                      I consent to the processing of my personal data for
-                      recruitment purposes. *
+                      Ich stimme der Verarbeitung meiner personenbezogenen Daten
+                      für Rekrutierungszwecke zu. *
                     </label>
                     <p className="text-xs text-gray-500">
-                      By checking this box, you agree that Maxsoft AG may
-                      process your personal data in accordance with our{' '}
+                      Durch das Aktivieren dieser Checkbox stimmst du zu, dass
+                      Maxsoft AG deine personenbezogenen Daten gemäß unserer{' '}
                       <a
                         href="/cookies"
                         className="text-[#01A2EE] hover:underline"
                       >
-                        Privacy Policy
-                      </a>
-                      . Your data will be used solely for recruitment purposes
-                      and will be deleted after the recruitment process is
-                      completed, unless you are hired.
+                        Datenschutzerklärung
+                      </a>{' '}
+                      verarbeiten darf. Deine Daten werden ausschließlich für
+                      Rekrutierungszwecke verwendet und nach Abschluss des
+                      Rekrutierungsprozesses gelöscht, es sei denn, du wirst
+                      eingestellt.
                     </p>
                   </div>
                 </div>
@@ -764,7 +770,7 @@ export function JobApplicationForm({
                 disabled={isSubmitting}
                 className="px-6 py-2"
               >
-                Cancel
+                Abbrechen
               </Button>
               <Button
                 type="submit"
@@ -773,7 +779,7 @@ export function JobApplicationForm({
                 }
                 className="px-6 py-2"
               >
-                {isSubmitting ? 'Submitting...' : 'Submit Application'}
+                {isSubmitting ? 'Wird eingereicht...' : 'Bewerbung einreichen'}
               </Button>
             </div>
           </form>
@@ -782,7 +788,7 @@ export function JobApplicationForm({
 
       {/* Alert Dialog */}
       <Alert open={showAlert} onClose={() => setShowAlert(false)}>
-        <AlertTitle>Form Validation Error</AlertTitle>
+        <AlertTitle>Fehler bei der Formularvalidierung</AlertTitle>
         <AlertDescription>{alertMessage}</AlertDescription>
         <AlertActions>
           <Button onClick={() => setShowAlert(false)} className="px-4 py-2">

@@ -5,6 +5,7 @@ import { Gradient } from '@/components/gradient'
 import { Link } from '@/components/link'
 
 import { AnimationWrapper } from '@/components/animation-wrapper'
+import { LogoCloud } from '@/components/logo-cloud'
 import { NavbarServer } from '@/components/navbar-server'
 import { Screenshot } from '@/components/screenshot'
 import { Testimonials } from '@/components/testimonials'
@@ -431,15 +432,13 @@ export default async function Home() {
     <div className="overflow-hidden">
       <Hero />
       <main>
-        {/* Company logos section - temporarily hidden
-        <Container className="mt-10">
-          <LogoCloud />
-        </Container>
-        */}
         <div className="bg-linear-to-b from-white from-50% to-gray-100 py-32">
           <IndexSection />
         </div>
         <BranchenSection />
+        <Container className="mt-10">
+          <LogoCloud />
+        </Container>
       </main>
       {testimonials.data && testimonials.data.length > 0 && (
         <Testimonials testimonials={testimonials.data} />

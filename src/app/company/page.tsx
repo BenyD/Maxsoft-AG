@@ -33,91 +33,6 @@ function Header() {
           der Umsetzung zukunftsfähiger IT-Lösungen.
         </Lead>
       </AnimationWrapper>
-      <section className="mt-16 grid grid-cols-1 lg:grid-cols-2 lg:gap-12">
-        <AnimationWrapper animation="slideUp" delay={0.6}>
-          <div className="max-w-lg">
-            <h2 className="text-xl font-semibold text-gray-900">
-              Warum Maxsoft?
-            </h2>
-            <p className="mt-6 text-lg text-gray-600">
-              Maxsoft unterscheidet sich durch unseren ganzheitlichen Ansatz.
-              Wir navigieren dich durch alle Phasen der IT-Modernisierung – von
-              der Analyse über das Design bis hin zur Implementierung und dem
-              laufenden Betrieb. Mit unserer Erfahrung in verschiedenen Branchen
-              bieten wir dir Lösungen, die perfekt zu deinen spezifischen
-              Anforderungen passen.
-            </p>
-          </div>
-        </AnimationWrapper>
-        <AnimationWrapper animation="scaleIn" delay={0.8}>
-          <div className="pt-20 lg:row-span-2 lg:-mr-16 xl:mr-auto">
-            <div className="-mx-8 grid grid-cols-2 gap-4 sm:-mx-16 sm:grid-cols-4 lg:mx-0 lg:grid-cols-2 lg:gap-4 xl:gap-8">
-              <div className="aspect-square overflow-hidden rounded-xl shadow-xl outline-1 -outline-offset-1 outline-black/10">
-                <img
-                  alt="professional working"
-                  src="/company/1.jpg"
-                  className="block size-full object-cover"
-                />
-              </div>
-              <div className="-mt-8 aspect-square overflow-hidden rounded-xl shadow-xl outline-1 -outline-offset-1 outline-black/10 lg:-mt-32">
-                <img
-                  alt="team discussion"
-                  src="/company/2.jpg"
-                  className="block size-full object-cover"
-                />
-              </div>
-              <div className="aspect-square overflow-hidden rounded-xl shadow-xl outline-1 -outline-offset-1 outline-black/10">
-                <img
-                  alt="working in office"
-                  src="/company/3.jpg"
-                  className="block size-full object-cover"
-                />
-              </div>
-              <div className="-mt-8 aspect-square overflow-hidden rounded-xl shadow-xl outline-1 -outline-offset-1 outline-black/10 lg:-mt-32">
-                <img
-                  alt="team collaboration"
-                  src="/company/4.jpg"
-                  className="block size-full object-cover"
-                />
-              </div>
-            </div>
-          </div>
-        </AnimationWrapper>
-        <AnimationWrapper animation="slideUp" delay={1.0}>
-          <div className="max-lg:mt-16 lg:col-span-1">
-            <Subheading>Unser Weg</Subheading>
-            <hr className="mt-6 border-t border-gray-200" />
-            <dl className="mt-6 grid grid-cols-1 gap-x-8 gap-y-4 sm:grid-cols-2">
-              <div className="flex flex-col gap-y-2 border-b border-dotted border-gray-200 pb-4">
-                <dt className="text-lg/[1.6] text-gray-600">Gründung</dt>
-                <dd className="order-first text-6xl font-medium tracking-tight">
-                  2020
-                </dd>
-              </div>
-              <div className="flex flex-col gap-y-2 border-b border-dotted border-gray-200 pb-4">
-                <dt className="text-lg/[1.6] text-gray-600">Mitarbeiter</dt>
-                <dd className="order-first text-6xl font-medium tracking-tight">
-                  <AnimatedNumber start={1} end={3} />+
-                </dd>
-              </div>
-              <div className="flex flex-col gap-y-2 border-b border-dotted border-gray-200 pb-4">
-                <dt className="text-lg/[1.6] text-gray-600">Neue Kunden</dt>
-                <dd className="order-first text-6xl font-medium tracking-tight">
-                  <AnimatedNumber start={8} end={10} />+
-                </dd>
-              </div>
-              <div className="flex flex-col gap-y-2 border-b border-dotted border-gray-200 pb-4">
-                <dt className="text-lg/[1.6] text-gray-600">
-                  Projekte abgeschlossen
-                </dt>
-                <dd className="order-first text-6xl font-medium tracking-tight">
-                  <AnimatedNumber start={12} end={15} />+
-                </dd>
-              </div>
-            </dl>
-          </div>
-        </AnimationWrapper>
-      </section>
     </Container>
   )
 }
@@ -257,6 +172,102 @@ export default function Company() {
         <NavbarServer />
       </Container>
       <Header />
+      <Container>
+        {/* Main content with images on the right */}
+        <section className="mt-16 grid grid-cols-1 lg:grid-cols-2 lg:gap-12">
+          {/* Left column: Warum Maxsoft and Statistics */}
+          <div className="space-y-16">
+            {/* Warum Maxsoft? section */}
+            <AnimationWrapper animation="slideUp" delay={0.6}>
+              <div>
+                <h2 className="text-xl font-semibold text-gray-900">
+                  Warum Maxsoft?
+                </h2>
+                <p className="mt-6 text-lg text-gray-600">
+                  Maxsoft unterscheidet sich durch unseren ganzheitlichen
+                  Ansatz. Wir navigieren dich durch alle Phasen der
+                  IT-Modernisierung – von der Analyse über das Design bis hin
+                  zur Implementierung und dem laufenden Betrieb. Mit unserer
+                  Erfahrung in verschiedenen Branchen bieten wir dir Lösungen,
+                  die perfekt zu deinen spezifischen Anforderungen passen.
+                </p>
+              </div>
+            </AnimationWrapper>
+
+            {/* Statistics */}
+            <AnimationWrapper animation="slideUp" delay={0.8}>
+              <div>
+                <Subheading>Unser Weg</Subheading>
+                <hr className="mt-6 border-t border-gray-200" />
+                <dl className="mt-6 grid grid-cols-1 gap-x-8 gap-y-4 sm:grid-cols-2">
+                  <div className="flex flex-col gap-y-2 border-b border-dotted border-gray-200 pb-4">
+                    <dt className="text-lg/[1.6] text-gray-600">Gründung</dt>
+                    <dd className="order-first text-6xl font-medium tracking-tight">
+                      2020
+                    </dd>
+                  </div>
+                  <div className="flex flex-col gap-y-2 border-b border-dotted border-gray-200 pb-4">
+                    <dt className="text-lg/[1.6] text-gray-600">Mitarbeiter</dt>
+                    <dd className="order-first text-6xl font-medium tracking-tight">
+                      <AnimatedNumber start={1} end={3} />+
+                    </dd>
+                  </div>
+                  <div className="flex flex-col gap-y-2 border-b border-dotted border-gray-200 pb-4">
+                    <dt className="text-lg/[1.6] text-gray-600">Neue Kunden</dt>
+                    <dd className="order-first text-6xl font-medium tracking-tight">
+                      <AnimatedNumber start={8} end={10} />+
+                    </dd>
+                  </div>
+                  <div className="flex flex-col gap-y-2 border-b border-dotted border-gray-200 pb-4">
+                    <dt className="text-lg/[1.6] text-gray-600">
+                      Projekte abgeschlossen
+                    </dt>
+                    <dd className="order-first text-6xl font-medium tracking-tight">
+                      <AnimatedNumber start={12} end={15} />+
+                    </dd>
+                  </div>
+                </dl>
+              </div>
+            </AnimationWrapper>
+          </div>
+
+          {/* Right column: Images spanning both sections */}
+          <AnimationWrapper animation="scaleIn" delay={1.0}>
+            <div className="pt-20 lg:-mr-16 xl:mr-auto">
+              <div className="-mx-8 grid grid-cols-2 gap-4 sm:-mx-16 sm:grid-cols-4 lg:mx-0 lg:grid-cols-2 lg:gap-4 xl:gap-8">
+                <div className="aspect-square overflow-hidden rounded-xl shadow-xl outline-1 -outline-offset-1 outline-black/10">
+                  <img
+                    alt="professional working"
+                    src="/company/1.jpg"
+                    className="block size-full object-cover"
+                  />
+                </div>
+                <div className="-mt-8 aspect-square overflow-hidden rounded-xl shadow-xl outline-1 -outline-offset-1 outline-black/10 lg:-mt-32">
+                  <img
+                    alt="team discussion"
+                    src="/company/2.jpg"
+                    className="block size-full object-cover"
+                  />
+                </div>
+                <div className="aspect-square overflow-hidden rounded-xl shadow-xl outline-1 -outline-offset-1 outline-black/10">
+                  <img
+                    alt="working in office"
+                    src="/company/3.jpg"
+                    className="block size-full object-cover"
+                  />
+                </div>
+                <div className="-mt-8 aspect-square overflow-hidden rounded-xl shadow-xl outline-1 -outline-offset-1 outline-black/10 lg:-mt-32">
+                  <img
+                    alt="team collaboration"
+                    src="/company/4.jpg"
+                    className="block size-full object-cover"
+                  />
+                </div>
+              </div>
+            </div>
+          </AnimationWrapper>
+        </section>
+      </Container>
       <VisionValues />
       <Footer />
     </main>

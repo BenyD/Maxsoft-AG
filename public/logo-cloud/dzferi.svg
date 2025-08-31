@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_2" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 653.84 513.75">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: url(#linear-gradient-3);
+      }
+
+      .cls-2 {
+        fill: url(#linear-gradient-2);
+      }
+
+      .cls-3 {
+        fill: url(#linear-gradient);
+      }
+
+      .cls-4 {
+        fill: #499e00;
+        font-size: 184.57px;
+      }
+
+      .cls-4, .cls-5 {
+        font-family: MicrosoftTaiLe, MicrosoftTaiLe;
+      }
+
+      .cls-5 {
+        fill: #b27d02;
+        font-size: 64.97px;
+      }
+    </style>
+    <linearGradient id="linear-gradient" x1="125.22" y1="99.02" x2="269.97" y2="99.02" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#89c43f"/>
+      <stop offset=".42" stop-color="#7fbf40"/>
+      <stop offset=".57" stop-color="#7bbd41"/>
+      <stop offset=".87" stop-color="#6eb541"/>
+      <stop offset=".99" stop-color="#61b042"/>
+    </linearGradient>
+    <linearGradient id="linear-gradient-2" x1="134.08" y1="261.92" x2="653.84" y2="261.92" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#52aa43"/>
+      <stop offset=".47" stop-color="#5bad43"/>
+      <stop offset=".57" stop-color="#5eae43"/>
+      <stop offset=".87" stop-color="#59ac43"/>
+      <stop offset=".99" stop-color="#50a843"/>
+    </linearGradient>
+    <linearGradient id="linear-gradient-3" x1="187.33" y1="56.85" x2="402.36" y2="56.85" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#7abc41"/>
+      <stop offset=".22" stop-color="#72b741"/>
+      <stop offset=".99" stop-color="#70b741"/>
+    </linearGradient>
+  </defs>
+  <g id="Layer_1-2" data-name="Layer 1">
+    <g>
+      <path class="cls-3" d="M125.22,0c36.28,11.38,61.3,28.09,76.04,39.68,9.2,7.23,21.13,16.75,33.22,32.67,19.7,25.94,26.41,51.24,29.53,63.49,3.12,12.25,6.34,29.97,5.91,51.68-6.14,3.5-12.28,7.01-18.42,10.51-1.73-17.02-5.87-38.68-15.54-62.19-21-51.01-56.1-81.62-75.31-95.98,18.33,20.46,31.87,39.02,41.34,53.16,20.18,30.12,26.35,46.86,28.06,51.68,5.28,14.9,7.67,27.89,8.86,36.91-11.87-.58-31.48-3.39-49.32-16.54-16.56-12.21-27.05-27.37-34.17-53.6C135.56,38.39,138.51,26.58,125.22,0Z"/>
+      <path class="cls-2" d="M134.08,425.26c.51-12.56,1.96-29.33,5.91-48.73,2.01-9.88,9.28-43.17,29.53-82.69,0,0,32.69-63.79,98.93-119.6,7.38-6.21,14.77-11.81,14.77-11.81,24.42-18.5,46.25-30.23,56.3-34.98,43.56-20.56,81.07-24.86,101.7-27.04,94.68-10.01,181.94,23.83,212.63,36.91-33.96,20.18-67.92,40.36-101.88,60.54-14.35,8.47-34.96,20.06-60.54,32.48-25,12.14-37.51,18.22-52.79,22.89-20.39,6.23-54.6,16.69-94.87,6.64-12.45-3.11-33.58-10.19-56.11-28.06,11.45-9.18,28.84-21.86,51.68-33.96,41.93-22.21,77.92-29.58,115.17-36.91,28.46-5.6,67.7-11.26,115.17-11.81-28.32-3.45-68.09-5.66-114.99.37-21.16,2.72-55.25,7.32-96.16,23.26-54.8,21.34-90.62,51.19-112.22,69.4-16.5,13.9-35.38,29.81-54.63,54.63-17.37,22.39-44.65,64.42-57.59,128.46Z"/>
+      <circle class="cls-1" cx="322.34" cy="56.85" r="48.73"/>
+      <text class="cls-4" transform="translate(0 426.64)"><tspan x="0" y="0">D </tspan></text>
+      <text class="cls-4" transform="translate(197.8 426.06)"><tspan x="0" y="0">zaferi</tspan></text>
+      <text class="cls-5" transform="translate(15.79 497.51)"><tspan x="0" y="0">Gartenbau und Pflege</tspan></text>
+    </g>
+  </g>
+</svg>
