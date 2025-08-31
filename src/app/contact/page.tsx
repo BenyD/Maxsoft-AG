@@ -1,3 +1,4 @@
+import { AnchorNavigation } from '@/components/anchor-navigation'
 import { AnimationWrapper } from '@/components/animation-wrapper'
 import { Button } from '@/components/button'
 import { ContactForm } from '@/components/contact-form'
@@ -74,6 +75,7 @@ export default async function ContactPage() {
         <ExternalLinksSection />
       </main>
       <Footer />
+      <AnchorNavigation />
     </div>
   )
 }
@@ -350,8 +352,14 @@ async function BookingSection() {
   }
 
   return (
-    <div className="overflow-hidden">
-      <Container className="scroll-mt-20 pb-24" id="beratung-buchen">
+    <section
+      className="overflow-hidden"
+      id="beratung-buchen"
+      style={{ scrollMarginTop: '5rem' }}
+    >
+      {/* Anchor marker for debugging */}
+      <div className="sr-only">Booking Section Anchor Point</div>
+      <Container className="pb-24">
         <AnimationWrapper animation="slideUp" delay={0.2}>
           <Subheading>Beratung buchen</Subheading>
         </AnimationWrapper>
@@ -399,7 +407,7 @@ async function BookingSection() {
           </div>
         </AnimationWrapper>
       </Container>
-    </div>
+    </section>
   )
 }
 

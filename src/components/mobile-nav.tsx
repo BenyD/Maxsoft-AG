@@ -554,7 +554,7 @@ export function MobileNav({
               Kontakt
             </Link>
             <Link
-              href="/contact#booking"
+              href="/contact#beratung-buchen"
               className="flex flex-1 items-center justify-center gap-2 rounded-xl bg-gray-100 px-4 py-3 font-semibold text-gray-700 transition-colors duration-200 hover:bg-gray-200"
             >
               <svg
