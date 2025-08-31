@@ -266,6 +266,12 @@ export function Navbar({
   const [isScrolled, setIsScrolled] = React.useState(false)
   const [scrollProgress, setScrollProgress] = React.useState(0)
   const [isMobileNavOpen, setIsMobileNavOpen] = React.useState(false)
+  const [isMounted, setIsMounted] = React.useState(false)
+
+  // Ensure navbar is mounted and visible
+  React.useEffect(() => {
+    setIsMounted(true)
+  }, [])
 
   const toggleMobileNav = () => {
     setIsMobileNavOpen(!isMobileNavOpen)
@@ -349,16 +355,30 @@ export function Navbar({
     return () => window.removeEventListener('scroll', throttledScroll)
   }, [])
 
+  // Don't render until mounted to prevent hydration issues
+  if (!isMounted) {
+    return null
+  }
+
   return (
     <Disclosure
       as="header"
-      className={`fixed top-0 right-0 left-0 z-[9999] w-full transition-all duration-300 ${
+      className={`maxsoft-navbar fixed top-0 right-0 left-0 z-[99999] w-full transition-all duration-300 will-change-transform ${
         isMobileNavOpen
           ? 'border-b border-gray-200/50 bg-white shadow-sm'
           : isScrolled
             ? 'border-b border-gray-200/50 bg-white/90 backdrop-blur-lg'
             : 'bg-transparent'
       }`}
+      style={{
+        // Ensure navbar is always visible and properly positioned
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        right: 0,
+        zIndex: 99999,
+        transform: 'translateZ(0)', // Force hardware acceleration
+      }}
     >
       {/* Enhanced Progress Bar - Visible on all breakpoints */}
       <div className="relative">

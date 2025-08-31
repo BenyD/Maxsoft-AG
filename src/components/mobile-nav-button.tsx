@@ -12,7 +12,7 @@ export function MobileNavButton({ isOpen, onClick }: MobileNavButtonProps) {
   return (
     <button
       onClick={onClick}
-      className="flex size-14 items-center justify-center self-center rounded-xl transition-all duration-200 hover:scale-105"
+      className="mobile-nav-button flex size-14 items-center justify-center self-center rounded-xl transition-all duration-200 hover:scale-105"
       aria-label={isOpen ? "Hauptmenü schließen" : "Hauptmenü öffnen"}
     >
       <Bars2Icon className={`size-6 text-gray-700 transition-all duration-200 ${isOpen ? 'hidden' : 'block'}`} />

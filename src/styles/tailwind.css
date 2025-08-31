@@ -99,6 +99,43 @@ html {
   scrollbar-gutter: stable;
 }
 
+/* Fix for navbar visibility issues in Chrome/Safari */
+@supports not (-ms-ime-align: auto) {
+  /* Non-Edge browsers - ensure navbar is always visible */
+  header[class*="fixed"] {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    z-index: 99999 !important;
+    transform: translateZ(0) !important;
+    will-change: transform !important;
+  }
+  
+  /* Ensure mobile nav is always on top */
+  .mobile-nav-overlay {
+    z-index: 999999 !important;
+    position: fixed !important;
+    transform: translateZ(0) !important;
+  }
+}
+
+/* Additional fixes for mobile navbar visibility */
+@media (max-width: 1024px) {
+  /* Ensure mobile navbar button is always visible */
+  .mobile-nav-button {
+    position: relative !important;
+    z-index: 99999 !important;
+  }
+  
+  /* Force mobile nav to be visible when open */
+  .mobile-nav-open {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+}
+
 /* Ensure navbar maintains position */
 header {
   position: fixed;

@@ -108,16 +108,26 @@ export function MobileNav({
 
   return (
     <motion.div
-      className="fixed inset-0 top-20 right-0 bottom-0 left-0 z-[9999] bg-black/20"
+      className="fixed inset-0 top-20 right-0 bottom-0 left-0 z-[999999] bg-black/20"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.2 }}
       onClick={onToggle}
+      style={{
+        // Ensure mobile nav is always on top
+        position: 'fixed',
+        top: '5rem', // 80px - matches top-20
+        right: 0,
+        bottom: 0,
+        left: 0,
+        zIndex: 999999,
+        transform: 'translateZ(0)', // Force hardware acceleration
+      }}
     >
       {/* Navigation Container - Slides in from right */}
       <motion.div
-        className="fixed top-20 right-0 bottom-0 left-0 border-l border-gray-200/50 bg-gradient-to-b from-white/95 to-white/90 backdrop-blur-md"
+        className={`mobile-nav-open fixed top-20 right-0 bottom-0 left-0 border-l border-gray-200/50 bg-gradient-to-b from-white/95 to-white/90 backdrop-blur-md`}
         initial={{ x: '100%' }}
         animate={{ x: 0 }}
         exit={{ x: '100%' }}
@@ -130,6 +140,13 @@ export function MobileNav({
         style={{
           overscrollBehavior: 'none',
           touchAction: 'pan-y',
+          position: 'fixed',
+          top: '5rem', // 80px - matches top-20
+          right: 0,
+          bottom: 0,
+          left: 0,
+          zIndex: 999999,
+          transform: 'translateZ(0)', // Force hardware acceleration
         }}
       >
         {/* Navigation Content */}
