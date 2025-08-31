@@ -435,10 +435,10 @@ export default async function Home() {
         <div className="bg-linear-to-b from-white from-50% to-gray-100 py-32">
           <IndexSection />
         </div>
-        <BranchenSection />
         <Container className="mt-10 mb-16">
           <LogoCloud />
         </Container>
+        <BranchenSection />
       </main>
       {testimonials.data && testimonials.data.length > 0 && (
         <Testimonials testimonials={testimonials.data} />
