@@ -21,6 +21,7 @@ import {
   PhoneIcon,
 } from '@heroicons/react/24/outline'
 import type { Metadata } from 'next'
+import { Suspense } from 'react'
 
 export const metadata: Metadata = {
   title: 'Kontakt - Maxsoft AG',
@@ -75,7 +76,9 @@ export default async function ContactPage() {
         <ExternalLinksSection />
       </main>
       <Footer />
-      <AnchorNavigation />
+      <Suspense fallback={null}>
+        <AnchorNavigation />
+      </Suspense>
     </div>
   )
 }
