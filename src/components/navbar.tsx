@@ -4,8 +4,6 @@ import type { Post } from '@/sanity/types'
 import type { ServiceCategory } from '@/sanity/types/serviceCategory'
 import {
   Disclosure,
-  DisclosureButton,
-  DisclosurePanel,
   Menu,
   MenuButton,
   MenuItem,
@@ -13,23 +11,22 @@ import {
 } from '@headlessui/react'
 import {
   ArrowRightIcon,
-  Bars2Icon,
   BriefcaseIcon,
   ChevronDownIcon,
-  ChevronUpIcon,
   CpuChipIcon,
   DocumentTextIcon,
   EnvelopeIcon,
   LightBulbIcon,
   UserGroupIcon,
   WrenchScrewdriverIcon,
-  XMarkIcon,
 } from '@heroicons/react/24/outline'
-import { AnimatePresence, motion } from 'framer-motion'
 import { usePathname } from 'next/navigation'
 import React from 'react'
 import { Link } from './link'
 import { Logo } from './logo'
+
+import { MobileNav } from './mobile-nav'
+import { MobileNavButton } from './mobile-nav-button'
 import { PlusGrid, PlusGridItem, PlusGridRow } from './plus-grid'
 
 function ServicesDropdown({
@@ -52,7 +49,6 @@ function ServicesDropdown({
       EnvelopeIcon: EnvelopeIcon,
       DocumentTextIcon: DocumentTextIcon,
       ArrowRightIcon: ArrowRightIcon,
-      Bars2Icon: Bars2Icon,
       ChevronDownIcon: ChevronDownIcon,
     }
     return iconMap[iconName] || UserGroupIcon
@@ -258,440 +254,6 @@ function DesktopNav({
   )
 }
 
-function MobileNavButton() {
-  return (
-    <DisclosureButton
-      className="flex size-14 items-center justify-center self-center rounded-xl transition-all duration-200 hover:scale-105"
-      aria-label="Hauptmenü öffnen"
-    >
-      <Bars2Icon className="size-6 text-gray-700" />
-    </DisclosureButton>
-  )
-}
-
-function MobileNav({
-  serviceCategories,
-}: {
-  serviceCategories: ServiceCategory[]
-}) {
-  const pathname = usePathname()
-
-  const isActive = (path: string) => {
-    if (path === '/') {
-      return pathname === '/'
-    }
-    return pathname.startsWith(path)
-  }
-
-  // Note: Scroll locking is handled by the parent Disclosure component
-  // This component only renders when mobile nav is open
-
-  return (
-    <DisclosurePanel className="fixed inset-0 top-0 right-0 bottom-0 left-0 isolate z-[9999] transform-none bg-white shadow-2xl will-change-transform">
-      {/* Header with close button - Match desktop navbar height */}
-      <div className="relative flex items-center justify-between border-b border-gray-200 bg-white px-6 py-4">
-        <Link href="/" title="Home" className="flex items-center">
-          <Logo className="h-7 w-auto transition-transform hover:scale-105" />
-        </Link>
-        <DisclosureButton className="rounded-lg p-2 text-gray-500 hover:bg-gray-100">
-          <XMarkIcon className="h-6 w-6" />
-        </DisclosureButton>
-      </div>
-
-      {/* Navigation Content - Adjust height calculation for new header height */}
-      <div className="isolate h-[calc(100vh-72px)] touch-pan-y overflow-y-auto overscroll-contain bg-white px-6 py-8">
-        <AnimatePresence mode="wait">
-          <motion.div
-            className="space-y-4"
-            initial="hidden"
-            animate="visible"
-            exit="hidden"
-            variants={{
-              hidden: { opacity: 0 },
-              visible: {
-                opacity: 1,
-                transition: {
-                  staggerChildren: 0.05,
-                  delayChildren: 0.1,
-                },
-              },
-            }}
-          >
-            {/* Dienstleistungen (Services) */}
-            <motion.div
-              initial={{ opacity: 0, x: -50 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -50 }}
-              transition={{
-                duration: 0.3,
-                ease: [0.25, 0.46, 0.45, 0.94],
-                delay: 0.05,
-              }}
-              className="space-y-4"
-            >
-              <Disclosure as="div" className="space-y-4">
-                <DisclosureButton
-                  className={`flex w-full items-center justify-between rounded-2xl px-6 py-4 text-2xl font-bold transition-all duration-300 ${
-                    isActive('/services')
-                      ? 'bg-blue-100 text-blue-700'
-                      : 'text-gray-900 hover:bg-blue-50 hover:text-blue-700'
-                  }`}
-                >
-                  <div className="flex items-center">
-                    <div
-                      className={`mr-4 flex h-8 w-8 items-center justify-center rounded-lg ${
-                        isActive('/services') ? 'bg-blue-200' : 'bg-blue-100'
-                      }`}
-                    >
-                      <span className="text-blue-600">-</span>
-                    </div>
-                    Dienstleistungen
-                  </div>
-                  <ChevronDownIcon className="ui-open:hidden h-6 w-6 transition-all duration-300 ease-in-out" />
-                  <ChevronUpIcon className="ui-open:block hidden h-6 w-6 transition-all duration-300 ease-in-out" />
-                </DisclosureButton>
-
-                {/* Service Categories Sub-links */}
-                {serviceCategories && serviceCategories.length > 0 && (
-                  <DisclosurePanel className="ml-8 space-y-3 border-l-2 border-gray-200 pl-6 transition-all duration-300 ease-in-out">
-                    <Link
-                      href="/services"
-                      className={`flex items-center rounded-xl px-6 py-3 text-lg font-semibold transition-all duration-300 ${
-                        isActive('/services') &&
-                        !serviceCategories.some((cat) =>
-                          isActive(`/services/category/${cat.slug}`),
-                        )
-                          ? 'bg-blue-50 text-blue-700'
-                          : 'text-gray-700 hover:bg-gray-50 hover:text-gray-900'
-                      }`}
-                    >
-                      <div
-                        className={`mr-3 flex h-6 w-6 items-center justify-center rounded-md ${
-                          isActive('/services') &&
-                          !serviceCategories.some((cat) =>
-                            isActive(`/services/category/${cat.slug}`),
-                          )
-                            ? 'bg-blue-200'
-                            : 'bg-gray-100'
-                        }`}
-                      >
-                        <span
-                          className={`text-sm ${
-                            isActive('/services') &&
-                            !serviceCategories.some((cat) =>
-                              isActive(`/services/category/${cat.slug}`),
-                            )
-                              ? 'text-blue-600'
-                              : 'text-gray-500'
-                          }`}
-                        >
-                          •
-                        </span>
-                      </div>
-                      Alle Dienstleistungen
-                    </Link>
-                    {serviceCategories.map((category) => (
-                      <Link
-                        key={category._id}
-                        href={`/services/category/${category.slug}`}
-                        className={`flex items-center rounded-xl px-6 py-3 text-lg font-semibold transition-all duration-300 ${
-                          isActive(`/services/category/${category.slug}`)
-                            ? 'bg-blue-50 text-blue-700'
-                            : 'text-gray-700 hover:bg-gray-50 hover:text-gray-900'
-                        }`}
-                      >
-                        <div
-                          className={`mr-3 flex h-6 w-6 items-center justify-center rounded-md ${
-                            isActive(`/services/category/${category.slug}`)
-                              ? 'bg-blue-200'
-                              : 'bg-gray-100'
-                          }`}
-                        >
-                          <span
-                            className={`text-sm ${
-                              isActive(`/services/category/${category.slug}`)
-                                ? 'text-blue-600'
-                                : 'text-gray-500'
-                            }`}
-                          >
-                            •
-                          </span>
-                        </div>
-                        {category.name}
-                      </Link>
-                    ))}
-                  </DisclosurePanel>
-                )}
-              </Disclosure>
-            </motion.div>
-
-            {/* Kompetenzen */}
-            <motion.div
-              initial={{ opacity: 0, x: -50 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -50 }}
-              transition={{
-                duration: 0.3,
-                ease: [0.25, 0.46, 0.45, 0.94],
-                delay: 0.1,
-              }}
-            >
-              <Link
-                href="/competencies"
-                className={`flex w-full items-center rounded-2xl px-6 py-4 text-2xl font-bold transition-all duration-300 ${
-                  isActive('/competencies')
-                    ? 'bg-blue-100 text-blue-700'
-                    : 'text-gray-900 hover:bg-blue-50 hover:text-blue-700'
-                }`}
-              >
-                <div
-                  className={`mr-4 flex h-8 w-8 items-center justify-center rounded-lg ${
-                    isActive('/competencies') ? 'bg-blue-200' : 'bg-blue-100'
-                  }`}
-                >
-                  <span className="text-blue-600">-</span>
-                </div>
-                Kompetenzen
-              </Link>
-            </motion.div>
-
-            {/* Technologien */}
-            <motion.div
-              initial={{ opacity: 0, x: -50 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -50 }}
-              transition={{
-                duration: 0.3,
-                ease: [0.25, 0.46, 0.45, 0.94],
-                delay: 0.15,
-              }}
-            >
-              <Link
-                href="/technologies"
-                className={`flex w-full items-center rounded-2xl px-6 py-4 text-2xl font-bold transition-all duration-300 ${
-                  isActive('/technologies')
-                    ? 'bg-blue-100 text-blue-700'
-                    : 'text-gray-900 hover:bg-blue-50 hover:text-blue-700'
-                }`}
-              >
-                <div
-                  className={`mr-4 flex h-8 w-8 items-center justify-center rounded-lg ${
-                    isActive('/technologies') ? 'bg-blue-200' : 'bg-blue-100'
-                  }`}
-                >
-                  <span className="text-blue-600">-</span>
-                </div>
-                Technologien
-              </Link>
-            </motion.div>
-
-            {/* Unternehmen */}
-            <motion.div
-              initial={{ opacity: 0, x: -50 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -50 }}
-              transition={{
-                duration: 0.3,
-                ease: [0.25, 0.46, 0.45, 0.94],
-                delay: 0.2,
-              }}
-              className="space-y-4"
-            >
-              <Disclosure as="div" className="space-y-4">
-                <DisclosureButton
-                  className={`flex w-full items-center justify-between rounded-2xl px-6 py-4 text-2xl font-bold transition-all duration-300 ${
-                    isActive('/company') ||
-                    isActive('/team') ||
-                    isActive('/careers') ||
-                    isActive('/partners') ||
-                    isActive('/blog')
-                      ? 'bg-blue-100 text-blue-700'
-                      : 'text-gray-900 hover:bg-blue-50 hover:text-blue-700'
-                  }`}
-                >
-                  <div className="flex items-center">
-                    <div
-                      className={`mr-4 flex h-8 w-8 items-center justify-center rounded-lg ${
-                        isActive('/company') ||
-                        isActive('/team') ||
-                        isActive('/careers') ||
-                        isActive('/partners') ||
-                        isActive('/blog')
-                          ? 'bg-blue-200'
-                          : 'bg-blue-100'
-                      }`}
-                    >
-                      <span className="text-blue-600">-</span>
-                    </div>
-                    Unternehmen
-                  </div>
-                  <ChevronDownIcon className="ui-open:hidden h-6 w-6 transition-all duration-300 ease-in-out" />
-                  <ChevronUpIcon className="ui-open:block hidden h-6 w-6 transition-all duration-300 ease-in-out" />
-                </DisclosureButton>
-
-                {/* Company Sub-links */}
-                <DisclosurePanel className="ml-8 space-y-3 border-l-2 border-gray-200 pl-6 transition-all duration-300 ease-in-out">
-                  <Link
-                    href="/company"
-                    className={`flex items-center rounded-xl px-6 py-3 text-lg font-semibold transition-all duration-300 ${
-                      isActive('/company')
-                        ? 'bg-blue-50 text-blue-700'
-                        : 'text-gray-700 hover:bg-gray-50 hover:text-gray-900'
-                    }`}
-                  >
-                    <div
-                      className={`mr-3 flex h-6 w-6 items-center justify-center rounded-md ${
-                        isActive('/company') ? 'bg-blue-200' : 'bg-gray-100'
-                      }`}
-                    >
-                      <span
-                        className={`text-sm ${
-                          isActive('/company')
-                            ? 'text-blue-600'
-                            : 'text-gray-500'
-                        }`}
-                      >
-                        •
-                      </span>
-                    </div>
-                    Über uns
-                  </Link>
-                  <Link
-                    href="/team"
-                    className={`flex items-center rounded-xl px-6 py-3 text-lg font-semibold transition-all duration-300 ${
-                      isActive('/team')
-                        ? 'bg-blue-50 text-blue-700'
-                        : 'text-gray-700 hover:bg-gray-50 hover:text-gray-900'
-                    }`}
-                  >
-                    <div
-                      className={`mr-3 flex h-6 w-6 items-center justify-center rounded-md ${
-                        isActive('/team') ? 'bg-blue-200' : 'bg-gray-100'
-                      }`}
-                    >
-                      <span
-                        className={`text-sm ${
-                          isActive('/team') ? 'text-blue-600' : 'text-gray-500'
-                        }`}
-                      >
-                        •
-                      </span>
-                    </div>
-                    Team
-                  </Link>
-                  <Link
-                    href="/careers"
-                    className={`flex items-center rounded-xl px-6 py-3 text-lg font-semibold transition-all duration-300 ${
-                      isActive('/careers')
-                        ? 'bg-blue-50 text-blue-700'
-                        : 'text-gray-700 hover:bg-gray-50 hover:text-gray-900'
-                    }`}
-                  >
-                    <div
-                      className={`mr-3 flex h-6 w-6 items-center justify-center rounded-md ${
-                        isActive('/careers') ? 'bg-blue-200' : 'bg-gray-100'
-                      }`}
-                    >
-                      <span
-                        className={`text-sm ${
-                          isActive('/careers')
-                            ? 'text-blue-600'
-                            : 'text-gray-500'
-                        }`}
-                      >
-                        •
-                      </span>
-                    </div>
-                    Karriere
-                  </Link>
-                  <Link
-                    href="/partners"
-                    className={`flex items-center rounded-xl px-6 py-3 text-lg font-semibold transition-all duration-300 ${
-                      isActive('/partners')
-                        ? 'bg-blue-50 text-blue-700'
-                        : 'text-gray-700 hover:bg-gray-50 hover:text-gray-900'
-                    }`}
-                  >
-                    <div
-                      className={`mr-3 flex h-6 w-6 items-center justify-center rounded-md ${
-                        isActive('/partners') ? 'bg-blue-200' : 'bg-gray-100'
-                      }`}
-                    >
-                      <span
-                        className={`text-sm ${
-                          isActive('/partners')
-                            ? 'text-blue-600'
-                            : 'text-gray-500'
-                        }`}
-                      >
-                        •
-                      </span>
-                    </div>
-                    Partner
-                  </Link>
-                  <Link
-                    href="/blog"
-                    className={`flex items-center rounded-xl px-6 py-3 text-lg font-semibold transition-all duration-300 ${
-                      isActive('/blog')
-                        ? 'bg-blue-50 text-blue-700'
-                        : 'text-gray-700 hover:bg-gray-50 hover:text-gray-900'
-                    }`}
-                  >
-                    <div
-                      className={`mr-3 flex h-6 w-6 items-center justify-center rounded-md ${
-                        isActive('/blog') ? 'bg-blue-200' : 'bg-gray-100'
-                      }`}
-                    >
-                      <span
-                        className={`text-sm ${
-                          isActive('/blog') ? 'text-blue-600' : 'text-gray-500'
-                        }`}
-                      >
-                        •
-                      </span>
-                    </div>
-                    Blog
-                  </Link>
-                </DisclosurePanel>
-              </Disclosure>
-            </motion.div>
-
-            {/* Kontakt */}
-            <motion.div
-              initial={{ opacity: 0, x: -50 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -50 }}
-              transition={{
-                duration: 0.3,
-                ease: [0.25, 0.46, 0.45, 0.94],
-                delay: 0.25,
-              }}
-            >
-              <Link
-                href="/contact"
-                className={`flex w-full items-center rounded-2xl px-6 py-4 text-2xl font-bold transition-all duration-300 ${
-                  isActive('/contact')
-                    ? 'bg-blue-100 text-blue-700'
-                    : 'text-gray-900 hover:bg-blue-50 hover:text-blue-700'
-                }`}
-              >
-                <div
-                  className={`mr-4 flex h-8 w-8 items-center justify-center rounded-lg ${
-                    isActive('/contact') ? 'bg-blue-200' : 'bg-blue-100'
-                  }`}
-                >
-                  <span className="text-blue-600">-</span>
-                </div>
-                Kontakt
-              </Link>
-            </motion.div>
-          </motion.div>
-        </AnimatePresence>
-      </div>
-    </DisclosurePanel>
-  )
-}
-
 export function Navbar({
   banner,
   serviceCategories = [],
@@ -704,6 +266,10 @@ export function Navbar({
   const [isScrolled, setIsScrolled] = React.useState(false)
   const [scrollProgress, setScrollProgress] = React.useState(0)
   const [isMobileNavOpen, setIsMobileNavOpen] = React.useState(false)
+
+  const toggleMobileNav = () => {
+    setIsMobileNavOpen(!isMobileNavOpen)
+  }
 
   // Global effect to handle dropdown scrollbar issues in Edge browser
   React.useEffect(() => {
@@ -757,17 +323,14 @@ export function Navbar({
 
   React.useEffect(() => {
     const handleScroll = () => {
-      // Only update scroll progress if mobile nav is closed
-      if (!isMobileNavOpen) {
-        const scrollTop = window.scrollY
-        const docHeight =
-          document.documentElement.scrollHeight - window.innerHeight
-        const scrollPercent = (scrollTop / docHeight) * 100
+      const scrollTop = window.scrollY
+      const docHeight =
+        document.documentElement.scrollHeight - window.innerHeight
+      const scrollPercent = (scrollTop / docHeight) * 100
 
-        setIsScrolled(scrollTop > 10)
-        // Add some smoothing to the progress bar
-        setScrollProgress(Math.min(Math.max(scrollPercent, 0), 100))
-      }
+      setIsScrolled(scrollTop > 10)
+      // Add some smoothing to the progress bar
+      setScrollProgress(Math.min(Math.max(scrollPercent, 0), 100))
     }
 
     // Throttle scroll events for better performance
@@ -784,56 +347,17 @@ export function Navbar({
 
     window.addEventListener('scroll', throttledScroll, { passive: true })
     return () => window.removeEventListener('scroll', throttledScroll)
-  }, [isMobileNavOpen])
-
-  // Lock body scroll when mobile nav is open using MutationObserver
-  React.useEffect(() => {
-    const observer = new MutationObserver((mutations) => {
-      mutations.forEach((mutation) => {
-        if (
-          mutation.type === 'attributes' &&
-          mutation.attributeName === 'data-state'
-        ) {
-          const mobileNav = document.querySelector('[data-state="open"]')
-          if (mobileNav) {
-            document.body.style.overflow = 'hidden'
-            setIsMobileNavOpen(true)
-          } else {
-            document.body.style.overflow = ''
-            setIsMobileNavOpen(false)
-          }
-        }
-      })
-    })
-
-    observer.observe(document.body, {
-      attributes: true,
-      attributeFilter: ['data-state'],
-      subtree: true,
-    })
-
-    return () => {
-      observer.disconnect()
-      document.body.style.overflow = ''
-      setIsMobileNavOpen(false)
-      document.body.classList.remove('dropdown-open')
-    }
-  }, [])
-
-  // Cleanup effect when component unmounts
-  React.useEffect(() => {
-    return () => {
-      document.body.classList.remove('dropdown-open')
-    }
   }, [])
 
   return (
     <Disclosure
       as="header"
-      className={`fixed top-0 right-0 left-0 z-50 w-full transition-all duration-300 ${
-        isScrolled
-          ? 'border-b border-gray-200/50 bg-white/90 backdrop-blur-lg'
-          : 'bg-transparent'
+      className={`fixed top-0 right-0 left-0 z-[9999] w-full transition-all duration-300 ${
+        isMobileNavOpen
+          ? 'border-b border-gray-200/50 bg-white shadow-sm'
+          : isScrolled
+            ? 'border-b border-gray-200/50 bg-white/90 backdrop-blur-lg'
+            : 'bg-transparent'
       }`}
     >
       {/* Enhanced Progress Bar - Visible on all breakpoints */}
@@ -918,13 +442,20 @@ export function Navbar({
               <DesktopNav serviceCategories={serviceCategories} />
               {/* Mobile Nav Button - Only render on mobile/tablet */}
               <div className="3xl:hidden lg:hidden xl:hidden 2xl:hidden">
-                <MobileNavButton />
+                <MobileNavButton
+                  isOpen={isMobileNavOpen}
+                  onClick={toggleMobileNav}
+                />
               </div>
             </PlusGridRow>
           </PlusGrid>
           {/* Mobile Navigation - Only render on mobile/tablet */}
           <div className="3xl:hidden lg:hidden xl:hidden 2xl:hidden">
-            <MobileNav serviceCategories={serviceCategories} />
+            <MobileNav
+              serviceCategories={serviceCategories}
+              isOpen={isMobileNavOpen}
+              onToggle={toggleMobileNav}
+            />
           </div>
         </div>
       </div>
