@@ -129,11 +129,11 @@ function IndexSection() {
           <AnimationWrapper animation="scaleIn" delay={0.2}>
             <Link href="/technologies" className="group block h-full">
               <div className="relative flex h-full flex-col overflow-hidden rounded-xl bg-white p-6 shadow-md ring-1 ring-gray-200 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:ring-gray-300">
-                <div className="mb-4 h-56 w-full flex-shrink-0 overflow-hidden rounded-lg">
+                <div className="mb-4 h-72 w-full flex-shrink-0 overflow-hidden rounded-lg">
                   <img
-                    src="/pictures/technologies.png"
+                    src="/pictures/technology.png"
                     alt="Technologien"
-                    className="h-full w-full object-contain transition-transform duration-300 group-hover:scale-105"
+                    className="h-full w-full scale-110 object-cover transition-transform duration-300 group-hover:scale-115"
                   />
                 </div>
                 <div className="flex flex-1 flex-col">
@@ -171,11 +171,11 @@ function IndexSection() {
           <AnimationWrapper animation="scaleIn" delay={0.4}>
             <Link href="/competencies" className="group block h-full">
               <div className="relative flex h-full flex-col overflow-hidden rounded-xl bg-white p-6 shadow-md ring-1 ring-gray-200 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:ring-gray-300">
-                <div className="mb-4 h-56 w-full flex-shrink-0 overflow-hidden rounded-lg">
+                <div className="mb-4 h-72 w-full flex-shrink-0 overflow-hidden rounded-lg">
                   <img
-                    src="/pictures/competencies.png"
+                    src="/pictures/competency.png"
                     alt="Kompetenzen"
-                    className="h-full w-full object-contain transition-transform duration-300 group-hover:scale-105"
+                    className="h-full w-full scale-110 object-cover transition-transform duration-300 group-hover:scale-115"
                   />
                 </div>
                 <div className="flex flex-1 flex-col">
@@ -214,11 +214,11 @@ function IndexSection() {
           <AnimationWrapper animation="scaleIn" delay={0.6}>
             <Link href="/services" className="group block h-full">
               <div className="relative flex h-full flex-col overflow-hidden rounded-xl bg-white p-6 shadow-md ring-1 ring-gray-200 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:ring-gray-300">
-                <div className="mb-4 h-56 w-full flex-shrink-0 overflow-hidden rounded-lg">
+                <div className="mb-4 h-72 w-full flex-shrink-0 overflow-hidden rounded-lg">
                   <img
-                    src="/pictures/services.png"
+                    src="/pictures/service.png"
                     alt="Dienstleistungen"
-                    className="h-full w-full object-contain transition-transform duration-300 group-hover:scale-105"
+                    className="h-full w-full scale-110 object-cover transition-transform duration-300 group-hover:scale-115"
                   />
                 </div>
                 <div className="flex flex-1 flex-col">
