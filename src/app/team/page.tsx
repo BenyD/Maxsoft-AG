@@ -3,7 +3,6 @@ import { Container } from '@/components/container'
 import { Footer } from '@/components/footer'
 import { GradientBackground } from '@/components/gradient'
 import { LinkedInIcon } from '@/components/linkedin-icon'
-import { NavbarServer } from '@/components/navbar-server'
 import { Heading, Lead, Subheading } from '@/components/text'
 import { image } from '@/sanity/image'
 import { getTeamMembers } from '@/sanity/queries'
@@ -179,9 +178,7 @@ export default function TeamPage() {
   return (
     <main className="overflow-hidden">
       <GradientBackground />
-      <Container>
-        <NavbarServer />
-      </Container>
+
       <Team />
       <Footer />
     </main>

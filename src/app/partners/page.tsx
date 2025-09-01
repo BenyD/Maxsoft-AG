@@ -2,7 +2,7 @@ import { AnimationWrapper } from '@/components/animation-wrapper'
 import { Container } from '@/components/container'
 import { Footer } from '@/components/footer'
 import { GradientBackground } from '@/components/gradient'
-import { NavbarServer } from '@/components/navbar-server'
+
 import { Heading, Lead, Subheading } from '@/components/text'
 import { image } from '@/sanity/image'
 import { getIndustryPartners, getTechnologyPartners } from '@/sanity/queries'
@@ -286,9 +286,7 @@ export default function PartnersPage() {
   return (
     <main className="overflow-hidden">
       <GradientBackground />
-      <Container>
-        <NavbarServer />
-      </Container>
+
       <Partners />
       <Footer />
     </main>

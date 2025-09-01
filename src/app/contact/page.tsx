@@ -6,7 +6,6 @@ import { Container } from '@/components/container'
 import { EmbeddedContent } from '@/components/embedded-content'
 import { Footer } from '@/components/footer'
 import { GradientBackground } from '@/components/gradient'
-import { NavbarServer } from '@/components/navbar-server'
 import { Heading, Lead, Subheading } from '@/components/text'
 import {
   getContactInfo,
@@ -39,9 +38,6 @@ export default async function ContactPage() {
     return (
       <div className="overflow-hidden">
         <GradientBackground />
-        <Container className="relative z-20">
-          <NavbarServer />
-        </Container>
         <main>
           <Container className="pb-24">
             <Subheading>Kontaktinformationen</Subheading>
@@ -65,9 +61,6 @@ export default async function ContactPage() {
   return (
     <div className="overflow-hidden">
       <GradientBackground />
-      <Container className="relative z-20">
-        <NavbarServer />
-      </Container>
       <main>
         <ContactHero />
         <ContactForm serviceCategories={serviceCategories.data || []} />

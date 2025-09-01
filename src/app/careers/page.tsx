@@ -3,7 +3,6 @@ import { Button } from '@/components/button'
 import { Container } from '@/components/container'
 import { Footer } from '@/components/footer'
 import { GradientBackground } from '@/components/gradient'
-import { NavbarServer } from '@/components/navbar-server'
 import { NoPositionsIcon } from '@/components/no-positions-icon'
 import { Heading, Lead, Subheading } from '@/components/text'
 import { getJobCategories, getJobListings } from '@/sanity/queries'
@@ -29,10 +28,6 @@ export default async function CareersPage() {
   return (
     <main className="overflow-hidden">
       <GradientBackground />
-      <Container className="relative z-20">
-        <NavbarServer />
-      </Container>
-
       <Container className="mt-16">
         <AnimationWrapper animation="slideUp" delay={0.2}>
           <Heading as="h1">Karriere bei Maxsoft AG</Heading>

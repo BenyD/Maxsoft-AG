@@ -1,4 +1,5 @@
 import { CookieBanner } from '@/components/cookie-banner'
+import NavbarServer from '@/components/navbar-server'
 import { PageTransition } from '@/components/page-transition'
 import { SanityLive } from '@/sanity/live'
 import { revalidateSyncTags } from '@/sanity/revalidateSyncTags'
@@ -74,78 +75,9 @@ export default function RootLayout({
           title="Der Maxsoft IT Solutions Blog"
           href="/blog/feed.xml"
         />
-        <style jsx global>{`
-          /* Ensure navbar is always visible and properly positioned */
-          .maxsoft-navbar,
-          header[class*="fixed"] {
-            position: fixed !important;
-            top: 0 !important;
-            left: 0 !important;
-            right: 0 !important;
-            z-index: 99999 !important;
-            transform: translateZ(0) !important;
-            will-change: transform !important;
-          }
-          
-          /* Force mobile nav to be visible when open */
-          .mobile-nav-open {
-            display: block !important;
-            visibility: visible !important;
-            opacity: 1 !important;
-            z-index: 999999 !important;
-          }
-          
-          /* Ensure mobile nav button is always visible */
-          .mobile-nav-button {
-            position: relative !important;
-            z-index: 99999 !important;
-          }
-          
-          /* Fix body padding issues that could affect navbar */
-          body {
-            padding-top: 0 !important;
-          }
-          
-          /* Ensure proper stacking context for navbar */
-          html {
-            position: relative;
-            z-index: 0;
-          }
-          
-          /* Force navbar to be above all content - specific targeting */
-          .maxsoft-navbar {
-            position: fixed !important;
-            top: 0px !important;
-            left: 0px !important;
-            right: 0px !important;
-            width: 100% !important;
-            height: auto !important;
-            z-index: 99999 !important;
-            transform: translateZ(0) !important;
-            will-change: transform !important;
-            /* Additional positioning for problematic browsers */
-            position: fixed !important;
-            top: 0px !important;
-            left: 0px !important;
-            right: 0px !important;
-            width: 100% !important;
-            height: auto !important;
-          }
-          
-          /* Additional fixes for Chrome/Safari navbar visibility */
-          @media (max-width: 1024px) {
-            .maxsoft-navbar {
-              position: fixed !important;
-              top: 0 !important;
-              left: 0 !important;
-              right: 0 !important;
-              z-index: 99999 !important;
-              transform: translateZ(0) !important;
-            }
-          }
-        `}</style>
       </head>
-      <body className="pt-20 text-gray-950 antialiased sm:pt-24">
+      <body className="text-gray-950 antialiased">
+        <NavbarServer />
         <PageTransition type="fade">{children}</PageTransition>
         <SanityLive revalidateSyncTags={revalidateSyncTags} />
         <CookieBanner />

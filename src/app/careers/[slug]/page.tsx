@@ -2,7 +2,6 @@ import { Container } from '@/components/container'
 import { Footer } from '@/components/footer'
 import { GradientBackground } from '@/components/gradient'
 import { JobPageClient } from '@/components/job-page-client'
-import { NavbarServer } from '@/components/navbar-server'
 import { getJobListing } from '@/sanity/queries'
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
@@ -42,10 +41,6 @@ export default async function JobPage({ params }: JobPageProps) {
   return (
     <main className="overflow-hidden">
       <GradientBackground />
-      <Container className="relative z-20">
-        <NavbarServer />
-      </Container>
-
       <Container className="mt-16 mb-16">
         <JobPageClient job={job.data} />
       </Container>

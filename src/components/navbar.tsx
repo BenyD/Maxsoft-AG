@@ -1,484 +1,430 @@
 'use client'
 
-import type { Post } from '@/sanity/types'
-import type { ServiceCategory } from '@/sanity/types/serviceCategory'
+import { getIconComponent } from '@/lib/icon-mapping'
 import {
+  Dialog,
+  DialogPanel,
   Disclosure,
-  Menu,
-  MenuButton,
-  MenuItem,
-  MenuItems,
+  DisclosureButton,
+  DisclosurePanel,
+  Popover,
+  PopoverButton,
+  PopoverGroup,
+  PopoverPanel,
 } from '@headlessui/react'
+import { ChevronDownIcon } from '@heroicons/react/20/solid'
+import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
+import Image from 'next/image'
+import Link from 'next/link'
+import { useEffect, useState } from 'react'
+
+interface ServiceCategory {
+  _id: string
+  name: string
+  slug: string
+  description: string
+  icon: string
+  color: string
+  order: number
+}
+
+interface NavbarProps {
+  initialServiceCategories: ServiceCategory[]
+}
+
 import {
-  ArrowRightIcon,
   BriefcaseIcon,
-  ChevronDownIcon,
-  CpuChipIcon,
-  DocumentTextIcon,
-  EnvelopeIcon,
-  LightBulbIcon,
+  BuildingOfficeIcon,
+  GlobeAltIcon,
   UserGroupIcon,
-  WrenchScrewdriverIcon,
 } from '@heroicons/react/24/outline'
 import { usePathname } from 'next/navigation'
-import React from 'react'
-import { Link } from './link'
-import { Logo } from './logo'
 
-import { MobileNav } from './mobile-nav'
-import { MobileNavButton } from './mobile-nav-button'
-import { PlusGrid, PlusGridItem, PlusGridRow } from './plus-grid'
+const companyLinks = [
+  { name: 'Über uns', href: '/company', icon: BuildingOfficeIcon },
+  { name: 'Team', href: '/team', icon: UserGroupIcon },
+  { name: 'Karriere', href: '/careers', icon: BriefcaseIcon },
+  { name: 'Partner', href: '/partners', icon: GlobeAltIcon },
+]
 
-function ServicesDropdown({
-  serviceCategories,
-  isActive,
-}: {
-  serviceCategories: ServiceCategory[]
-  isActive: (path: string) => boolean
-}) {
-  // Map icon names to Heroicon components
-  const getIconComponent = (iconName: string) => {
-    const iconMap: {
-      [key: string]: React.ComponentType<React.SVGProps<SVGSVGElement>>
-    } = {
-      UserGroupIcon: UserGroupIcon,
-      WrenchScrewdriverIcon: WrenchScrewdriverIcon,
-      CpuChipIcon: CpuChipIcon,
-      LightBulbIcon: LightBulbIcon,
-      BriefcaseIcon: BriefcaseIcon,
-      EnvelopeIcon: EnvelopeIcon,
-      DocumentTextIcon: DocumentTextIcon,
-      ArrowRightIcon: ArrowRightIcon,
-      ChevronDownIcon: ChevronDownIcon,
-    }
-    return iconMap[iconName] || UserGroupIcon
-  }
+const defaultServiceCategories = [
+  {
+    _id: 'default-1',
+    name: 'IT-Beratung',
+    slug: 'it-beratung',
+    description: 'Professionelle Beratung für Ihre IT-Infrastruktur',
+    icon: 'ComputerDesktopIcon',
+    color: 'bg-blue-100 text-blue-800',
+    order: 1,
+  },
+  {
+    _id: 'default-2',
+    name: 'Cloud-Lösungen',
+    slug: 'cloud-loesungen',
+    description: 'Moderne Cloud-Infrastruktur und Migration',
+    icon: 'CloudIcon',
+    color: 'bg-green-100 text-green-800',
+    order: 2,
+  },
+  {
+    _id: 'default-3',
+    name: 'Cybersicherheit',
+    slug: 'cybersicherheit',
+    description: 'Umfassender Schutz für Ihre digitalen Assets',
+    icon: 'ShieldCheckIcon',
+    color: 'bg-red-100 text-red-800',
+    order: 3,
+  },
+  {
+    _id: 'default-4',
+    name: 'Digitale Transformation',
+    slug: 'digitale-transformation',
+    description: 'Strategische Begleitung bei der digitalen Transformation',
+    icon: 'RocketLaunchIcon',
+    color: 'bg-purple-100 text-purple-800',
+    order: 4,
+  },
+]
 
-  return (
-    <Menu as="div" className="relative">
-      <MenuButton
-        className={`flex items-center px-4 py-4 text-base font-medium text-gray-950 bg-blend-multiply transition-colors hover:bg-black/2.5 hover:text-black ${
-          isActive('/services') ? 'bg-black/5 text-black' : ''
-        }`}
-      >
-        Dienstleistungen
-        <ChevronDownIcon className="ml-1 h-4 w-4" />
-      </MenuButton>
-      <MenuItems className="absolute left-0 z-50 mt-2 w-64 origin-top-left rounded-lg bg-white shadow-lg ring-1 ring-black/5 focus:outline-none">
-        <div className="p-2">
-          <MenuItem>
-            <Link
-              href="/services"
-              className="block rounded-md px-3 py-2 text-sm font-medium text-gray-900 hover:bg-gray-50"
-            >
-              Alle Dienstleistungen
-            </Link>
-          </MenuItem>
-
-          {/* Service Categories - Always show if they exist */}
-          {serviceCategories && serviceCategories.length > 0 && (
-            <>
-              <div className="my-2 border-t border-gray-100" />
-              {serviceCategories.map((category) => {
-                const IconComponent = getIconComponent(category.icon || '')
-                return (
-                  <MenuItem key={category._id}>
-                    <Link
-                      href={`/services/category/${category.slug}`}
-                      className="block rounded-md px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
-                    >
-                      <div className="flex items-center">
-                        <div
-                          className={`h-6 w-6 rounded ${category.color} mr-3 flex items-center justify-center`}
-                        >
-                          <IconComponent className="h-4 w-4" />
-                        </div>
-                        {category.name}
-                      </div>
-                    </Link>
-                  </MenuItem>
-                )
-              })}
-            </>
-          )}
-
-          {/* Fallback if no service categories */}
-          {(!serviceCategories || serviceCategories.length === 0) && (
-            <>
-              <div className="my-2 border-t border-gray-100" />
-              <div className="px-3 py-2 text-sm text-gray-500">
-                Keine Kategorien verfügbar
-              </div>
-            </>
-          )}
-        </div>
-      </MenuItems>
-    </Menu>
-  )
-}
-
-function CompanyDropdown({
-  isActive,
-}: {
-  isActive: (path: string) => boolean
-}) {
-  return (
-    <Menu as="div" className="relative">
-      <MenuButton
-        className={`flex items-center px-4 py-4 text-base font-medium text-gray-950 bg-blend-multiply transition-colors hover:bg-black/2.5 hover:text-black ${
-          isActive('/company') ||
-          isActive('/team') ||
-          isActive('/careers') ||
-          isActive('/partners') ||
-          isActive('/blog')
-            ? 'bg-black/5 text-black'
-            : ''
-        }`}
-      >
-        Unternehmen
-        <ChevronDownIcon className="ml-1 h-4 w-4" />
-      </MenuButton>
-      <MenuItems className="absolute left-0 z-50 mt-2 w-64 origin-top-left rounded-lg bg-white shadow-lg ring-1 ring-black/5 focus:outline-none">
-        <div className="p-2">
-          <MenuItem>
-            <Link
-              href="/company"
-              className="block rounded-md px-3 py-2 text-sm font-medium text-gray-900 hover:bg-gray-50"
-            >
-              Über uns
-            </Link>
-          </MenuItem>
-          <MenuItem>
-            <Link
-              href="/team"
-              className="block rounded-md px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
-            >
-              Team
-            </Link>
-          </MenuItem>
-          <MenuItem>
-            <Link
-              href="/careers"
-              className="block rounded-md px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
-            >
-              Karriere
-            </Link>
-          </MenuItem>
-          <MenuItem>
-            <Link
-              href="/partners"
-              className="block rounded-md px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
-            >
-              Partner
-            </Link>
-          </MenuItem>
-          <MenuItem>
-            <Link
-              href="/blog"
-              className="block rounded-md px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
-            >
-              Blog
-            </Link>
-          </MenuItem>
-        </div>
-      </MenuItems>
-    </Menu>
-  )
-}
-
-function DesktopNav({
-  serviceCategories,
-}: {
-  serviceCategories: ServiceCategory[]
-}) {
+export default function Navbar({ initialServiceCategories }: NavbarProps) {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const [scrollProgress, setScrollProgress] = useState(0)
   const pathname = usePathname()
 
-  const isActive = (path: string) => {
-    if (path === '/') {
+  // Use Sanity categories if available, otherwise use defaults
+  const serviceCategories =
+    initialServiceCategories.length > 0
+      ? initialServiceCategories
+      : defaultServiceCategories
+
+  // Check if current page is active
+  const isActive = (href: string) => {
+    if (href === '/') {
       return pathname === '/'
     }
-    return pathname.startsWith(path)
+    return pathname.startsWith(href)
   }
 
-  return (
-    <nav className="3xl:flex relative mr-2 hidden items-center space-x-2 lg:flex xl:flex 2xl:flex">
-      {/* Dienstleistungen (Services) */}
-      <PlusGridItem className="relative flex">
-        <ServicesDropdown
-          serviceCategories={serviceCategories}
-          isActive={isActive}
-        />
-      </PlusGridItem>
-
-      {/* Kompetenzen */}
-      <PlusGridItem className="relative flex">
-        <Link
-          href="/competencies"
-          className={`flex items-center px-4 py-4 text-base font-medium text-gray-950 bg-blend-multiply transition-colors hover:bg-black/2.5 hover:text-black ${
-            isActive('/competencies') ? 'bg-black/5 text-black' : ''
-          }`}
-        >
-          Kompetenzen
-        </Link>
-      </PlusGridItem>
-
-      {/* Technologien */}
-      <PlusGridItem className="relative flex">
-        <Link
-          href="/technologies"
-          className={`flex items-center px-4 py-4 text-base font-medium text-gray-950 bg-blend-multiply transition-colors hover:bg-black/2.5 hover:text-black ${
-            isActive('/technologies') ? 'bg-black/5 text-black' : ''
-          }`}
-        >
-          Technologien
-        </Link>
-      </PlusGridItem>
-
-      {/* Unternehmen */}
-      <PlusGridItem className="relative flex">
-        <CompanyDropdown isActive={isActive} />
-      </PlusGridItem>
-
-      {/* Kontakt */}
-      <PlusGridItem className="relative flex">
-        <Link
-          href="/contact"
-          className={`flex items-center px-4 py-4 text-base font-medium text-gray-950 bg-blend-multiply transition-colors hover:bg-black/2.5 hover:text-black ${
-            isActive('/contact') ? 'bg-black/5 text-black' : ''
-          }`}
-        >
-          Kontakt
-        </Link>
-      </PlusGridItem>
-    </nav>
-  )
-}
-
-export function Navbar({
-  banner,
-  serviceCategories = [],
-  mostRecentPost,
-}: {
-  banner?: React.ReactNode
-  serviceCategories?: ServiceCategory[]
-  mostRecentPost?: Post
-}) {
-  const [isScrolled, setIsScrolled] = React.useState(false)
-  const [scrollProgress, setScrollProgress] = React.useState(0)
-  const [isMobileNavOpen, setIsMobileNavOpen] = React.useState(false)
-  const [isMounted, setIsMounted] = React.useState(false)
-
-  // Ensure navbar is mounted and visible
-  React.useEffect(() => {
-    setIsMounted(true)
-  }, [])
-
-  const toggleMobileNav = () => {
-    setIsMobileNavOpen(!isMobileNavOpen)
-  }
-
-  // Global effect to handle dropdown scrollbar issues in Edge browser
-  React.useEffect(() => {
-    const handleDropdownStateChange = () => {
-      // Check if any dropdown is open by looking for Menu components with open state
-      const openDropdowns = document.querySelectorAll(
-        '[data-headlessui-state="open"]',
-      )
-
-      // Check if we're in Edge browser (including Chromium-based Edge)
-      const isEdge =
-        navigator.userAgent.includes('Edge') ||
-        navigator.userAgent.includes('Edg') ||
-        navigator.userAgent.includes('MSIE') ||
-        navigator.userAgent.includes('Trident/')
-
-      if (openDropdowns.length > 0) {
-        if (!isEdge) {
-          // Only add dropdown-open class for non-Edge browsers
-          document.body.classList.add('dropdown-open')
-        }
-      } else {
-        document.body.classList.remove('dropdown-open')
-      }
-    }
-
-    // Use MutationObserver to watch for dropdown state changes
-    const observer = new MutationObserver((mutations) => {
-      mutations.forEach((mutation) => {
-        if (
-          mutation.type === 'attributes' &&
-          mutation.attributeName === 'data-headlessui-state'
-        ) {
-          handleDropdownStateChange()
-        }
-      })
-    })
-
-    // Observe the entire document for attribute changes
-    observer.observe(document.body, {
-      attributes: true,
-      attributeFilter: ['data-headlessui-state'],
-      subtree: true,
-    })
-
-    return () => {
-      observer.disconnect()
-      document.body.classList.remove('dropdown-open')
-    }
-  }, [])
-
-  React.useEffect(() => {
+  // Track scroll progress
+  useEffect(() => {
     const handleScroll = () => {
       const scrollTop = window.scrollY
       const docHeight =
         document.documentElement.scrollHeight - window.innerHeight
       const scrollPercent = (scrollTop / docHeight) * 100
-
-      setIsScrolled(scrollTop > 10)
-      // Add some smoothing to the progress bar
-      setScrollProgress(Math.min(Math.max(scrollPercent, 0), 100))
+      setScrollProgress(scrollPercent)
     }
 
-    // Throttle scroll events for better performance
-    let ticking = false
-    const throttledScroll = () => {
-      if (!ticking) {
-        requestAnimationFrame(() => {
-          handleScroll()
-          ticking = false
-        })
-        ticking = true
-      }
-    }
-
-    window.addEventListener('scroll', throttledScroll, { passive: true })
-    return () => window.removeEventListener('scroll', throttledScroll)
+    window.addEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
-  // Don't render until mounted to prevent hydration issues
-  if (!isMounted) {
-    return null
-  }
-
   return (
-    <Disclosure
-      as="header"
-      className={`maxsoft-navbar fixed top-0 right-0 left-0 z-[99999] w-full transition-all duration-300 will-change-transform ${
-        isMobileNavOpen
-          ? 'border-b border-gray-200/50 bg-white shadow-sm'
-          : isScrolled
-            ? 'border-b border-gray-200/50 bg-white/90 backdrop-blur-lg'
-            : 'bg-transparent'
-      }`}
-      style={{
-        // Ensure navbar is always visible and properly positioned
-        position: 'fixed',
-        top: 0,
-        left: 0,
-        right: 0,
-        zIndex: 99999,
-        transform: 'translateZ(0)', // Force hardware acceleration
-      }}
-    >
-      {/* Enhanced Progress Bar - Visible on all breakpoints */}
-      <div className="relative">
-        {/* Background track */}
-        <div className="absolute right-0 bottom-0 left-0 h-1 bg-gray-200/50" />
-        {/* Main progress bar */}
-        <div
-          className={`absolute bottom-0 left-0 h-1 bg-blue-600 shadow-sm transition-all duration-300 ease-out ${
-            scrollProgress >= 100 ? 'animate-pulse' : ''
-          }`}
-          style={{ width: `${scrollProgress}%` }}
-        />
-        {/* Progress bar glow effect */}
-        <div
-          className="absolute bottom-0 left-0 h-1 bg-blue-500/60 blur-sm transition-all duration-300 ease-out"
-          style={{ width: `${scrollProgress}%` }}
-        />
-        {/* Animated progress indicator */}
-        <div
-          className="absolute bottom-0 h-1 w-1 rounded-full bg-white shadow-md transition-all duration-300 ease-out"
-          style={{
-            left: `calc(${scrollProgress}% - 2px)`,
-            opacity: scrollProgress > 0 ? 1 : 0,
-            transform: `scale(${scrollProgress > 0 ? 1 : 0.5})`,
-          }}
-        />
-      </div>
+    <header className="sticky top-0 isolate z-50 bg-white/95 backdrop-blur-sm dark:bg-gray-900/95">
+      {/* Scroll Progress Indicator */}
       <div
-        className={`w-full transition-all duration-300 ${
-          isScrolled ? 'pt-3 sm:pt-4' : 'pt-4 sm:pt-5'
-        }`}
+        className="absolute bottom-0 left-0 h-0.5 bg-[#09A7ED] transition-all duration-300 ease-out"
+        style={{ width: `${scrollProgress}%` }}
+      />
+      <nav
+        aria-label="Global"
+        className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8"
       >
-        {/* Centered container with max-width and horizontal spacing */}
-        <div className="mx-auto max-w-6xl px-4 sm:px-4 lg:px-4 xl:px-6 2xl:px-8">
-          <PlusGrid>
-            <PlusGridRow className="relative flex items-center justify-between !pt-0 !pb-0">
-              <div className="relative flex items-center gap-6">
-                <PlusGridItem className="-mt-1 px-1 py-2">
-                  <Menu as="div" className="relative">
-                    <MenuButton className="group flex items-center">
-                      <Link href="/" title="Home" className="flex items-center">
-                        <Logo className="h-7 w-auto transition-transform group-hover:scale-105" />
-                      </Link>
-                    </MenuButton>
-                    {mostRecentPost && (
-                      <MenuItems className="absolute left-0 z-50 mt-2 w-80 origin-top-left rounded-lg border border-gray-100 bg-white shadow-lg ring-1 ring-black/5 focus:outline-none">
-                        <div className="p-4">
-                          <div className="mb-3">
-                            <h3 className="text-sm font-medium text-gray-900">
-                              Neuester Blog-Beitrag
-                            </h3>
-                            <p className="mt-1 text-xs text-gray-500">
-                              {new Date(
-                                mostRecentPost.publishedAt || '',
-                              ).toLocaleDateString('de-CH', {
-                                year: 'numeric',
-                                month: 'long',
-                                day: 'numeric',
-                              })}
-                            </p>
-                          </div>
-                          <MenuItem>
-                            <Link
-                              href={`/blog/${mostRecentPost.slug?.current}`}
-                              className="block rounded-md px-3 py-2 text-sm font-medium text-gray-900 transition-colors hover:bg-gray-50 hover:text-blue-600"
-                            >
-                              {mostRecentPost.title}
-                            </Link>
-                          </MenuItem>
-                        </div>
-                      </MenuItems>
-                    )}
-                  </Menu>
-                </PlusGridItem>
-                {banner && (
-                  <div className="3xl:flex relative hidden items-center py-1 lg:flex xl:flex 2xl:flex">
-                    {banner}
-                  </div>
-                )}
-              </div>
-              <DesktopNav serviceCategories={serviceCategories} />
-              {/* Mobile Nav Button - Only render on mobile/tablet */}
-              <div className="3xl:hidden lg:hidden xl:hidden 2xl:hidden">
-                <MobileNavButton
-                  isOpen={isMobileNavOpen}
-                  onClick={toggleMobileNav}
-                />
-              </div>
-            </PlusGridRow>
-          </PlusGrid>
-          {/* Mobile Navigation - Only render on mobile/tablet */}
-          <div className="3xl:hidden lg:hidden xl:hidden 2xl:hidden">
-            <MobileNav
-              serviceCategories={serviceCategories}
-              isOpen={isMobileNavOpen}
-              onToggle={toggleMobileNav}
+        <div className="flex lg:flex-1">
+          <Link href="/" className="group -m-1.5 p-1.5">
+            <span className="sr-only">Maxsoft IT Solutions</span>
+            <Image
+              src="/logo.png"
+              alt="Maxsoft IT Solutions"
+              width={120}
+              height={32}
+              className="h-8 w-auto transition-transform duration-300 group-hover:scale-105"
             />
-          </div>
+          </Link>
         </div>
-      </div>
-    </Disclosure>
+        <div className="flex lg:hidden">
+          <button
+            type="button"
+            onClick={() => setMobileMenuOpen(true)}
+            className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700 transition-colors duration-200 hover:text-[#09A7ED] dark:text-gray-400 dark:hover:text-[#09A7ED]"
+          >
+            <span className="sr-only">Menü öffnen</span>
+            <Bars3Icon aria-hidden="true" className="size-6" />
+          </button>
+        </div>
+        <PopoverGroup className="hidden lg:flex lg:gap-x-12">
+          <Popover>
+            <PopoverButton className="flex items-center gap-x-1 text-sm/6 font-semibold text-gray-900 transition-colors duration-200 hover:text-[#09A7ED] dark:text-white dark:hover:text-[#09A7ED]">
+              Dienstleistungen
+              <ChevronDownIcon
+                aria-hidden="true"
+                className="size-5 flex-none text-gray-400 dark:text-gray-500"
+              />
+            </PopoverButton>
+
+            <PopoverPanel
+              transition
+              className="absolute inset-x-0 top-16 border border-gray-200 bg-white/95 shadow-xl backdrop-blur-sm transition-all duration-300 data-closed:-translate-y-2 data-closed:opacity-0 data-enter:duration-300 data-enter:ease-out data-leave:duration-200 data-leave:ease-in dark:border-gray-700 dark:bg-gray-900/95"
+            >
+              {/* Presentational element used to render the bottom shadow */}
+              <div
+                aria-hidden="true"
+                className="absolute inset-0 top-1/2 bg-white/95 shadow-lg ring-1 ring-gray-900/5 backdrop-blur-sm dark:bg-gray-900/95 dark:shadow-none dark:ring-white/15"
+              />
+              <div className="relative bg-white/95 backdrop-blur-sm dark:bg-gray-900/95">
+                <div className="mx-auto grid max-w-7xl grid-cols-4 gap-x-4 px-6 py-10 lg:px-8 xl:gap-x-8">
+                  {serviceCategories.map((category) => {
+                    const IconComponent = getIconComponent(category.icon)
+                    return (
+                      <div
+                        key={category._id}
+                        className="group relative rounded-lg p-6 text-sm/6 transition-all duration-300 hover:-translate-y-1 hover:bg-gray-50 hover:shadow-lg dark:hover:bg-white/5"
+                      >
+                        <div className="flex size-11 items-center justify-center rounded-lg bg-gray-50 transition-colors duration-300 group-hover:bg-[#09A7ED]/10 dark:bg-gray-700/50 dark:group-hover:bg-[#09A7ED]/20">
+                          <IconComponent className="size-6 text-gray-600 transition-colors duration-300 group-hover:text-[#09A7ED] dark:text-gray-400 dark:group-hover:text-[#09A7ED]" />
+                        </div>
+                        <Link
+                          href={`/services/category/${category.slug}`}
+                          className="mt-6 block font-semibold text-gray-900 transition-colors duration-300 group-hover:text-[#09A7ED] dark:text-white"
+                        >
+                          {category.name}
+                          <span className="absolute inset-0" />
+                        </Link>
+                        <p className="mt-1 text-gray-600 dark:text-gray-400">
+                          {category.description}
+                        </p>
+                      </div>
+                    )
+                  })}
+                </div>
+                <div className="bg-gray-50 dark:bg-gray-800/50">
+                  <div className="mx-auto max-w-7xl px-6 lg:px-8">
+                    <div className="grid grid-cols-1 divide-y divide-gray-900/5 border-y border-gray-900/5 dark:divide-white/5 dark:border-white/10">
+                      <Link
+                        href="/services"
+                        className="flex items-center justify-center gap-x-2.5 p-3 text-sm/6 font-semibold text-gray-900 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-800"
+                      >
+                        Alle Services anzeigen
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </PopoverPanel>
+          </Popover>
+
+          <Link
+            href="/competencies"
+            className={`text-sm/6 font-semibold transition-colors duration-200 ${
+              isActive('/competencies')
+                ? 'text-[#09A7ED]'
+                : 'text-gray-900 hover:text-[#09A7ED] dark:text-white dark:hover:text-[#09A7ED]'
+            }`}
+          >
+            Kompetenzen
+          </Link>
+          <Link
+            href="/technologies"
+            className={`text-sm/6 font-semibold transition-colors duration-200 ${
+              isActive('/technologies')
+                ? 'text-[#09A7ED]'
+                : 'text-gray-900 hover:text-[#09A7ED] dark:text-white dark:hover:text-[#09A7ED]'
+            }`}
+          >
+            Technologien
+          </Link>
+          <Popover>
+            <PopoverButton className="flex items-center gap-x-1 text-sm/6 font-semibold text-gray-900 transition-colors duration-200 hover:text-[#09A7ED] dark:text-white dark:hover:text-[#09A7ED]">
+              Unternehmen
+              <ChevronDownIcon
+                aria-hidden="true"
+                className="size-5 flex-none text-gray-400 dark:text-gray-500"
+              />
+            </PopoverButton>
+
+            <PopoverPanel
+              transition
+              className="absolute inset-x-0 top-16 border border-gray-200 bg-white/95 shadow-xl backdrop-blur-sm transition-all duration-300 data-closed:-translate-y-2 data-closed:opacity-0 data-enter:duration-300 data-enter:ease-out data-leave:duration-200 data-leave:ease-in dark:border-gray-700 dark:bg-gray-900/95"
+            >
+              <div
+                aria-hidden="true"
+                className="absolute inset-0 top-1/2 bg-white/95 shadow-lg ring-1 ring-gray-900/5 backdrop-blur-sm dark:bg-gray-900/95 dark:shadow-none dark:ring-white/15"
+              />
+              <div className="relative bg-white/95 backdrop-blur-sm dark:bg-gray-900/95">
+                <div className="mx-auto max-w-7xl px-6 py-8 lg:px-8">
+                  <div className="grid grid-cols-2 gap-x-4 gap-y-6">
+                    {companyLinks.map((item) => (
+                      <Link
+                        key={item.name}
+                        href={item.href}
+                        className="group relative rounded-lg p-4 text-sm/6 hover:bg-gray-50 dark:hover:bg-white/5"
+                      >
+                        <div className="flex items-center gap-3">
+                          <item.icon className="size-5 text-gray-400 group-hover:text-[#09A7ED] dark:text-gray-500 dark:group-hover:text-[#09A7ED]" />
+                          <div className="font-semibold text-gray-900 group-hover:text-[#09A7ED] dark:text-white dark:group-hover:text-[#09A7ED]">
+                            {item.name}
+                          </div>
+                        </div>
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </PopoverPanel>
+          </Popover>
+          <Link
+            href="/blog"
+            className={`text-sm/6 font-semibold transition-colors duration-200 ${
+              isActive('/blog')
+                ? 'text-[#09A7ED]'
+                : 'text-gray-900 hover:text-[#09A7ED] dark:text-white dark:hover:text-[#09A7ED]'
+            }`}
+          >
+            Blog
+          </Link>
+        </PopoverGroup>
+        <div className="hidden lg:flex lg:flex-1 lg:justify-end">
+          <Link
+            href="/contact"
+            className={`text-sm/6 font-semibold transition-colors duration-200 ${
+              isActive('/contact')
+                ? 'text-[#09A7ED]'
+                : 'text-gray-900 hover:text-[#09A7ED] dark:text-white dark:hover:text-[#09A7ED]'
+            }`}
+          >
+            Kontakt <span aria-hidden="true">&rarr;</span>
+          </Link>
+        </div>
+      </nav>
+      <Dialog
+        open={mobileMenuOpen}
+        onClose={setMobileMenuOpen}
+        className="lg:hidden"
+      >
+        <div className="fixed inset-0 z-50 bg-black/20 backdrop-blur-sm transition-opacity duration-300" />
+        <DialogPanel className="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-white p-6 shadow-xl transition-transform duration-300 ease-out sm:max-w-sm sm:ring-1 sm:ring-gray-900/10 dark:bg-gray-900 dark:sm:ring-gray-100/10">
+          <div className="flex items-center justify-between">
+            <Link href="/" className="-m-1.5 p-1.5">
+              <span className="sr-only">Maxsoft IT Solutions</span>
+              <Image
+                src="/logo.png"
+                alt="Maxsoft IT Solutions"
+                width={120}
+                height={32}
+                className="h-8 w-auto"
+              />
+            </Link>
+            <button
+              type="button"
+              onClick={() => setMobileMenuOpen(false)}
+              className="-m-2.5 rounded-md p-2.5 text-gray-700 transition-colors duration-200 hover:text-[#09A7ED] dark:text-gray-400 dark:hover:text-[#09A7ED]"
+            >
+              <span className="sr-only">Menü schließen</span>
+              <XMarkIcon aria-hidden="true" className="size-6" />
+            </button>
+          </div>
+          <div className="mt-6 flow-root">
+            <div className="-my-6 divide-y divide-gray-500/10 dark:divide-white/10">
+              <div className="space-y-2 py-6">
+                <Disclosure as="div" className="-mx-3">
+                  <DisclosureButton className="group flex w-full items-center justify-between rounded-lg py-2 pr-3.5 pl-3 text-base/7 font-semibold text-gray-900 hover:bg-gray-50 dark:text-white dark:hover:bg-white/5">
+                    Dienstleistungen
+                    <ChevronDownIcon
+                      aria-hidden="true"
+                      className="size-5 flex-none transition-transform duration-200 group-data-open:rotate-180"
+                    />
+                  </DisclosureButton>
+                  <DisclosurePanel className="mt-2 space-y-2">
+                    {serviceCategories.map((category) => (
+                      <DisclosureButton
+                        key={category._id}
+                        as={Link}
+                        href={`/services/category/${category.slug}`}
+                        className="block rounded-lg py-2 pr-3 pl-6 text-sm/7 font-semibold text-gray-900 hover:bg-gray-50 dark:text-white dark:hover:bg-white/5"
+                      >
+                        {category.name}
+                      </DisclosureButton>
+                    ))}
+                    <DisclosureButton
+                      as={Link}
+                      href="/services"
+                      className="block rounded-lg py-2 pr-3 pl-6 text-sm/7 font-semibold text-gray-900 hover:bg-gray-50 dark:text-white dark:hover:bg-white/5"
+                    >
+                      Alle Services
+                    </DisclosureButton>
+                  </DisclosurePanel>
+                </Disclosure>
+                <Link
+                  href="/competencies"
+                  className={`-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold transition-colors duration-200 ${
+                    isActive('/competencies')
+                      ? 'bg-[#09A7ED]/10 text-[#09A7ED]'
+                      : 'text-gray-900 hover:bg-gray-50 hover:text-[#09A7ED] dark:text-white dark:hover:bg-white/5 dark:hover:text-[#09A7ED]'
+                  }`}
+                >
+                  Kompetenzen
+                </Link>
+                <Link
+                  href="/technologies"
+                  className={`-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold transition-colors duration-200 ${
+                    isActive('/technologies')
+                      ? 'bg-[#09A7ED]/10 text-[#09A7ED]'
+                      : 'text-gray-900 hover:bg-gray-50 hover:text-[#09A7ED] dark:text-white dark:hover:bg-white/5 dark:hover:text-[#09A7ED]'
+                  }`}
+                >
+                  Technologien
+                </Link>
+                <Disclosure as="div" className="-mx-3">
+                  <DisclosureButton className="group flex w-full items-center justify-between rounded-lg py-2 pr-3.5 pl-3 text-base/7 font-semibold text-gray-900 hover:bg-gray-50 dark:text-white dark:hover:bg-white/5">
+                    Unternehmen
+                    <ChevronDownIcon
+                      aria-hidden="true"
+                      className="size-5 flex-none transition-transform duration-200 group-data-open:rotate-180"
+                    />
+                  </DisclosureButton>
+                  <DisclosurePanel className="mt-2 space-y-2">
+                    {companyLinks.map((item) => (
+                      <DisclosureButton
+                        key={item.name}
+                        as={Link}
+                        href={item.href}
+                        className="block rounded-lg py-2 pr-3 pl-6 text-sm/7 font-semibold text-gray-900 hover:bg-gray-50 dark:text-white dark:hover:bg-white/5"
+                      >
+                        <div className="flex items-center gap-3">
+                          <item.icon className="size-4 text-gray-400 group-hover:text-[#09A7ED] dark:text-gray-500 dark:group-hover:text-[#09A7ED]" />
+                          {item.name}
+                        </div>
+                      </DisclosureButton>
+                    ))}
+                  </DisclosurePanel>
+                </Disclosure>
+                <Link
+                  href="/blog"
+                  className={`-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold transition-colors duration-200 ${
+                    isActive('/blog')
+                      ? 'bg-[#09A7ED]/10 text-[#09A7ED]'
+                      : 'text-gray-900 hover:bg-gray-50 hover:text-[#09A7ED] dark:text-white dark:hover:bg-white/5 dark:hover:text-[#09A7ED]'
+                  }`}
+                >
+                  Blog
+                </Link>
+              </div>
+              <div className="py-6">
+                <Link
+                  href="/contact"
+                  className={`-mx-3 block rounded-lg px-3 py-2.5 text-base/7 font-semibold transition-colors duration-200 ${
+                    isActive('/contact')
+                      ? 'bg-[#09A7ED]/10 text-[#09A7ED]'
+                      : 'text-gray-900 hover:bg-gray-50 hover:text-[#09A7ED] dark:text-white dark:hover:bg-white/5 dark:hover:text-[#09A7ED]'
+                  }`}
+                >
+                  Kontakt
+                </Link>
+              </div>
+            </div>
+          </div>
+        </DialogPanel>
+      </Dialog>
+    </header>
   )
 }

@@ -3,7 +3,6 @@ import { Container } from '@/components/container'
 import { Footer } from '@/components/footer'
 import { GradientBackground } from '@/components/gradient'
 import { Link } from '@/components/link'
-import { NavbarServer } from '@/components/navbar-server'
 import { Heading, Subheading } from '@/components/text'
 import { image } from '@/sanity/image'
 import { getPost } from '@/sanity/queries'
@@ -34,9 +33,6 @@ export default async function BlogPost({
   return (
     <main className="overflow-hidden">
       <GradientBackground />
-      <Container className="relative z-20">
-        <NavbarServer />
-      </Container>
       <Container>
         <Subheading className="mt-16">
           {dayjs(post.publishedAt).format('dddd, MMMM D, YYYY')}

@@ -3,7 +3,6 @@ import { Container } from '@/components/container'
 import { EmptyState } from '@/components/empty-state'
 import { Footer } from '@/components/footer'
 import { GradientBackground } from '@/components/gradient'
-import { NavbarServer } from '@/components/navbar-server'
 import { Heading, Subheading } from '@/components/text'
 import { image } from '@/sanity/image'
 import { getTechnologies } from '@/sanity/queries'
@@ -64,9 +63,7 @@ export default async function TechnologiesPage() {
   return (
     <div className="overflow-hidden">
       <GradientBackground />
-      <Container className="relative z-20">
-        <NavbarServer />
-      </Container>
+
       <Container className="mt-16">
         <div className="mb-16">
           <AnimationWrapper animation="slideUp" delay={0.2}>

@@ -381,10 +381,10 @@ export async function getServiceCategories() {
     const result = await sanityFetch({
       query: SERVICE_CATEGORIES_QUERY,
     })
-    return result
+    return result.data || []
   } catch (error) {
     console.error('Error fetching service categories:', error)
-    return { data: [], error: 'Failed to fetch service categories' }
+    return []
   }
 }
 
@@ -416,10 +416,10 @@ export async function getServices() {
     const result = await sanityFetch({
       query: SERVICES_QUERY,
     })
-    return result
+    return result.data || []
   } catch (error) {
     console.error('Error fetching services:', error)
-    return { data: [], error: 'Failed to fetch services' }
+    return []
   }
 }
 
@@ -457,10 +457,10 @@ export async function getService(slug: string) {
       query: SERVICE_QUERY,
       params: { slug },
     })
-    return result
+    return result.data || null
   } catch (error) {
     console.error('Error fetching service:', error)
-    return { data: null, error: 'Failed to fetch service' }
+    return null
   }
 }
 
@@ -504,10 +504,10 @@ export async function getServicesByCategory(categorySlug: string) {
       })
     }
 
-    return result
+    return result.data || []
   } catch (error) {
     console.error('Error fetching services by category:', error)
-    return { data: [], error: 'Failed to fetch services by category' }
+    return []
   }
 }
 

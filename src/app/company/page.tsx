@@ -3,7 +3,6 @@ import { AnimationWrapper } from '@/components/animation-wrapper'
 import { Container } from '@/components/container'
 import { Footer } from '@/components/footer'
 import { GradientBackground } from '@/components/gradient'
-import { NavbarServer } from '@/components/navbar-server'
 import { Heading, Lead, Subheading } from '@/components/text'
 
 import type { Metadata } from 'next'
@@ -168,9 +167,6 @@ export default function Company() {
   return (
     <main className="overflow-hidden">
       <GradientBackground />
-      <Container>
-        <NavbarServer />
-      </Container>
       <Header />
       <Container>
         {/* Main content with images on the right */}

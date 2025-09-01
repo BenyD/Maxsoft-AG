@@ -1,7 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
 interface AnimationWrapperProps {
   children: React.ReactNode
@@ -91,7 +91,28 @@ export function AnimationWrapper({
   once = true,
   margin = '-100px 0px -100px 0px',
 }: AnimationWrapperProps) {
+  const [isPageReady, setIsPageReady] = useState(false)
   const selectedAnimation = animations[animation]
+
+  useEffect(() => {
+    // Check if this is the initial page load
+    const hasVisitedThisSession = sessionStorage.getItem(
+      'maxsoft-session-visited',
+    )
+
+    if (hasVisitedThisSession) {
+      // Not first visit - animations can start immediately
+      setIsPageReady(true)
+    } else {
+      // First visit - wait for page transition to complete
+      // The page transition shows splash for 2.5s + transition time
+      const timer = setTimeout(() => {
+        setIsPageReady(true)
+      }, 3000) // Wait for splash + transition to complete
+
+      return () => clearTimeout(timer)
+    }
+  }, [])
 
   // Customize slide direction
   if (animation === 'slideIn') {
@@ -103,19 +124,27 @@ export function AnimationWrapper({
     selectedAnimation.exit = { opacity: 0, x: xOffset, y: yOffset }
   }
 
+  // For first page load, use animate instead of whileInView for hero elements
+  const shouldUseWhileInView = isPageReady
+
   return (
     <motion.div
       className={className}
       initial={selectedAnimation.initial}
-      whileInView={selectedAnimation.animate}
-      viewport={{
-        once,
-        amount: threshold,
-        margin,
-      }}
+      animate={shouldUseWhileInView ? undefined : selectedAnimation.animate}
+      whileInView={shouldUseWhileInView ? selectedAnimation.animate : undefined}
+      viewport={
+        shouldUseWhileInView
+          ? {
+              once,
+              amount: threshold,
+              margin,
+            }
+          : undefined
+      }
       transition={{
         duration,
-        delay,
+        delay: shouldUseWhileInView ? delay : delay + 0.5, // Add extra delay for initial load
         ease: [0.25, 0.46, 0.45, 0.94],
       }}
     >

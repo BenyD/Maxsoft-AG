@@ -4,7 +4,6 @@ import { Container } from '@/components/container'
 import { Footer } from '@/components/footer'
 import { GradientBackground } from '@/components/gradient'
 import { Link } from '@/components/link'
-import { NavbarServer } from '@/components/navbar-server'
 import { Heading, Lead, Subheading } from '@/components/text'
 import { image } from '@/sanity/image'
 import {
@@ -358,9 +357,6 @@ export default async function Blog({
   return (
     <main className="overflow-hidden">
       <GradientBackground />
-      <Container className="relative z-20">
-        <NavbarServer />
-      </Container>
       <Container>
         <AnimationWrapper animation="slideUp" delay={0.2}>
           <Subheading className="mt-16">Blog</Subheading>

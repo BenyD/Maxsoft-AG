@@ -4,9 +4,7 @@ import { Button } from '@/components/button'
 import { Container } from '@/components/container'
 import { Footer } from '@/components/footer'
 import { GradientBackground } from '@/components/gradient'
-import { Navbar } from '@/components/navbar'
 import { Heading, Lead, Subheading } from '@/components/text'
-import { client } from '@/sanity/client'
 
 import { useEffect, useState } from 'react'
 
@@ -28,7 +26,6 @@ export default function CookiesPage() {
   const [preferences, setPreferences] =
     useState<CookiePreferences>(defaultPreferences)
   const [hasLoaded, setHasLoaded] = useState(false)
-  const [serviceCategories, setServiceCategories] = useState([])
 
   useEffect(() => {
     // Load saved preferences from localStorage
@@ -42,25 +39,6 @@ export default function CookiesPage() {
       }
     }
     setHasLoaded(true)
-
-    // Fetch service categories for navbar
-    const fetchServiceCategories = async () => {
-      try {
-        const query = `*[_type == "serviceCategory" && isActive == true] | order(order asc) {
-          _id,
-          name,
-          slug,
-          icon,
-          color
-        }`
-        const categories = await client.fetch(query)
-        setServiceCategories(categories)
-      } catch (error) {
-        console.error('Error fetching service categories:', error)
-      }
-    }
-
-    fetchServiceCategories()
   }, [])
 
   const handlePreferenceChange = (
@@ -161,9 +139,6 @@ export default function CookiesPage() {
     return (
       <main className="overflow-hidden">
         <GradientBackground />
-        <Container className="relative z-20">
-          <Navbar serviceCategories={serviceCategories} />
-        </Container>
         <Container className="mt-16">
           <div className="animate-pulse">
             <div className="mb-4 h-8 w-1/3 rounded bg-gray-200"></div>
@@ -177,9 +152,6 @@ export default function CookiesPage() {
   return (
     <main className="overflow-hidden">
       <GradientBackground />
-      <Container className="relative z-20">
-        <Navbar serviceCategories={serviceCategories} />
-      </Container>
 
       <Container className="mt-16">
         <Heading as="h1">Cookie-Einstellungen</Heading>

@@ -6,13 +6,11 @@ import { Link } from '@/components/link'
 
 import { AnimationWrapper } from '@/components/animation-wrapper'
 import { LogoCloud } from '@/components/logo-cloud'
-import { NavbarServer } from '@/components/navbar-server'
 import { Screenshot } from '@/components/screenshot'
 import { Testimonials } from '@/components/testimonials'
 import { Heading, Subheading } from '@/components/text'
 import Threads from '@/components/Threads/Threads'
-import { getMostRecentPost, getTestimonials } from '@/sanity/queries'
-import { ChevronRightIcon } from '@heroicons/react/16/solid'
+import { getTestimonials } from '@/sanity/queries'
 import {
   DollarSign,
   Factory,
@@ -28,28 +26,13 @@ export const metadata: Metadata = {
 }
 
 async function Hero() {
-  const mostRecentPost = await getMostRecentPost()
-
   return (
     <div className="relative">
       <div className="absolute inset-0 z-10">
         <Gradient className="absolute inset-2 bottom-0 rounded-4xl opacity-80 ring-1 ring-black/5 ring-inset" />
       </div>
       <Container className="relative z-20">
-        <NavbarServer
-          banner={
-            mostRecentPost?.data ? (
-              <Link
-                href={`/blog/${mostRecentPost.data.slug?.current}`}
-                className="flex items-center gap-1 rounded-full bg-[#01A2EE]/35 px-3 py-0.5 text-sm/6 font-medium text-white data-hover:bg-[#01A2EE]/30"
-              >
-                {mostRecentPost.data.title}
-                <ChevronRightIcon className="size-4" />
-              </Link>
-            ) : undefined
-          }
-        />
-        <div className="pt-16 pb-24 sm:pt-24 sm:pb-32 md:pt-32 md:pb-48">
+        <div className="pt-8 pb-24 sm:pt-16 sm:pb-32 md:pt-24 md:pb-48">
           <div className="relative z-10 mx-auto max-w-4xl text-center">
             <div className="space-y-8">
               <AnimationWrapper animation="slideUp" delay={0.2}>

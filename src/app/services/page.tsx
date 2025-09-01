@@ -3,7 +3,7 @@ import { Button } from '@/components/button'
 import { Container } from '@/components/container'
 import { Footer } from '@/components/footer'
 import { GradientBackground } from '@/components/gradient'
-import { NavbarServer } from '@/components/navbar-server'
+
 import { Heading, Lead, Subheading } from '@/components/text'
 import { Icon } from '@/components/ui/icon'
 import { getServiceCategories, getServices } from '@/sanity/queries'
@@ -134,18 +134,13 @@ export default async function ServicesPage() {
   const services = await getServices()
 
   const featuredServices =
-    services.data?.filter((service: ServiceExpanded) => service.isFeatured) ||
-    []
-  const hasServices = services.data && services.data.length > 0
-  const hasCategories =
-    serviceCategories.data && serviceCategories.data.length > 0
+    services.filter((service: ServiceExpanded) => service.isFeatured) || []
+  const hasServices = services && services.length > 0
+  const hasCategories = serviceCategories && serviceCategories.length > 0
 
   return (
     <main className="overflow-hidden">
       <GradientBackground />
-      <Container className="relative z-20">
-        <NavbarServer />
-      </Container>
 
       <Container className="mt-16">
         <AnimationWrapper animation="slideUp" delay={0.2}>
@@ -263,7 +258,7 @@ export default async function ServicesPage() {
             <Subheading>Alle Dienstleistungen</Subheading>
           </AnimationWrapper>
           <div className="mt-8 grid gap-8 lg:grid-cols-2">
-            {serviceCategories.data?.map(
+            {serviceCategories?.map(
               (category: ServiceCategory, index: number) => {
                 return (
                   <AnimationWrapper
@@ -273,7 +268,7 @@ export default async function ServicesPage() {
                   >
                     <ServiceCategoryCard
                       category={category}
-                      services={services.data || []}
+                      services={services || []}
                     />
                   </AnimationWrapper>
                 )

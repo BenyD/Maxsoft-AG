@@ -1,7 +1,7 @@
 import { Container } from '@/components/container'
 import { Footer } from '@/components/footer'
 import { GradientBackground } from '@/components/gradient'
-import { NavbarServer } from '@/components/navbar-server'
+
 import { Heading, Lead } from '@/components/text'
 import type { Metadata } from 'next'
 
@@ -15,10 +15,6 @@ export default function TermsPage() {
   return (
     <main className="overflow-hidden">
       <GradientBackground />
-      <Container className="relative z-20">
-        <NavbarServer />
-      </Container>
-
       <Container className="mt-16">
         <Heading as="h1">Datenschutzerklärung</Heading>
         <Lead className="mt-6 max-w-3xl">

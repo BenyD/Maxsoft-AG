@@ -2,7 +2,7 @@ import { Button } from '@/components/button'
 import { Container } from '@/components/container'
 import { Footer } from '@/components/footer'
 import { GradientBackground } from '@/components/gradient'
-import { NavbarServer } from '@/components/navbar-server'
+
 import { Heading, Lead, Subheading } from '@/components/text'
 import { Icon } from '@/components/ui/icon'
 import { getServiceCategories, getServicesByCategory } from '@/sanity/queries'
@@ -22,9 +22,7 @@ export async function generateMetadata({
 }: CategoryPageProps): Promise<Metadata> {
   const { slug } = await params
   const categories = await getServiceCategories()
-  const category = categories.data?.find(
-    (cat: ServiceCategory) => cat.slug === slug,
-  )
+  const category = categories?.find((cat: ServiceCategory) => cat.slug === slug)
 
   if (!category) {
     return {
@@ -45,9 +43,7 @@ export default async function ServiceCategoryPage({
 }: CategoryPageProps) {
   const { slug } = await params
   const categories = await getServiceCategories()
-  const category = categories.data?.find(
-    (cat: ServiceCategory) => cat.slug === slug,
-  )
+  const category = categories?.find((cat: ServiceCategory) => cat.slug === slug)
 
   if (!category) {
     notFound()
@@ -58,9 +54,6 @@ export default async function ServiceCategoryPage({
   return (
     <main className="overflow-hidden">
       <GradientBackground />
-      <Container className="relative z-20">
-        <NavbarServer />
-      </Container>
 
       <Container className="mt-16">
         {/* Breadcrumb */}
@@ -94,11 +87,11 @@ export default async function ServiceCategoryPage({
 
       {/* Services Grid */}
       <Container className="mt-16 mb-16">
-        {services.data && services.data.length > 0 ? (
+        {services && services.length > 0 ? (
           <React.Fragment key="services-list">
             <Subheading>Verfügbare Dienstleistungen</Subheading>
             <div className="mt-8 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-              {services.data.map((service: ServiceExpanded) => (
+              {services.map((service: ServiceExpanded) => (
                 <Link
                   key={service._id}
                   href={`/services/${service.slug}`}
