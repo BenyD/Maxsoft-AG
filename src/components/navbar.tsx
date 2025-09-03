@@ -148,15 +148,15 @@ export default function Navbar({ initialServiceCategories }: NavbarProps) {
         aria-label="Global"
         className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8"
       >
-        <div className="flex lg:flex-1">
-          <Link href="/" className="group -m-1.5 p-1.5">
+        <div className="flex items-center lg:flex-1">
+          <Link href="/" className="group -mt-3 flex items-center p-1.5">
             <span className="sr-only">Maxsoft IT Solutions</span>
             <Image
               src="/logo.png"
               alt="Maxsoft IT Solutions"
-              width={120}
-              height={32}
-              className="h-8 w-auto transition-transform duration-300 group-hover:scale-105"
+              width={130}
+              height={35}
+              className="h-9 w-auto transition-transform duration-300 group-hover:scale-105"
             />
           </Link>
         </div>
@@ -286,7 +286,7 @@ export default function Navbar({ initialServiceCategories }: NavbarProps) {
                 className="absolute inset-0 top-1/2 bg-white/95 backdrop-blur-sm dark:bg-gray-900/95"
               />
               <div className="relative bg-white/95 backdrop-blur-sm dark:bg-gray-900/95">
-                <div className="mx-auto grid max-w-7xl grid-cols-2 gap-x-4 gap-y-6 px-6 py-10 lg:px-8 xl:gap-x-8">
+                <div className="mx-auto grid max-w-7xl grid-cols-1 gap-x-4 gap-y-6 px-6 py-10 sm:grid-cols-2 lg:grid-cols-3 lg:px-8 xl:gap-x-8">
                   {companyLinks.map((item) => (
                     <div
                       key={item.name}
@@ -342,8 +342,6 @@ export default function Navbar({ initialServiceCategories }: NavbarProps) {
               </div>
             </PopoverPanel>
           </Popover>
-        </PopoverGroup>
-        <div className="hidden lg:flex lg:flex-1 lg:justify-end">
           <Link
             href="/contact"
             className={`text-sm/6 font-semibold transition-colors duration-200 ${
@@ -352,7 +350,15 @@ export default function Navbar({ initialServiceCategories }: NavbarProps) {
                 : 'text-gray-900 hover:text-[#09A7ED] dark:text-white dark:hover:text-[#09A7ED]'
             }`}
           >
-            Kontakt <span aria-hidden="true">&rarr;</span>
+            Kontakt
+          </Link>
+        </PopoverGroup>
+        <div className="hidden lg:flex lg:flex-1 lg:justify-end">
+          <Link
+            href="/contact#beratung-buchen"
+            className="rounded-full bg-[#09A7ED] px-6 py-2.5 text-sm/6 font-semibold text-white transition-all duration-200 hover:bg-[#08A0E0] hover:shadow-md"
+          >
+            Termin Buchen
           </Link>
         </div>
       </nav>
@@ -369,9 +375,9 @@ export default function Navbar({ initialServiceCategories }: NavbarProps) {
               <Image
                 src="/logo.png"
                 alt="Maxsoft IT Solutions"
-                width={120}
-                height={32}
-                className="h-8 w-auto"
+                width={130}
+                height={35}
+                className="h-9 w-auto"
               />
             </Link>
             <button
@@ -491,7 +497,7 @@ export default function Navbar({ initialServiceCategories }: NavbarProps) {
                   </DisclosurePanel>
                 </Disclosure>
               </div>
-              <div className="py-6">
+              <div className="space-y-2 py-6">
                 <Link
                   href="/contact"
                   onClick={() => setMobileMenuOpen(false)}
@@ -502,6 +508,13 @@ export default function Navbar({ initialServiceCategories }: NavbarProps) {
                   }`}
                 >
                   Kontakt
+                </Link>
+                <Link
+                  href="/contact#beratung-buchen"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="-mx-3 block rounded-full bg-[#09A7ED] px-6 py-3 text-base/7 font-semibold text-white transition-all duration-200 hover:bg-[#08A0E0]"
+                >
+                  Termin Buchen
                 </Link>
               </div>
             </div>
