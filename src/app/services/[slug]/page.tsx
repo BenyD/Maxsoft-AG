@@ -9,8 +9,8 @@ import { getService, getServicesByCategory } from '@/sanity/queries'
 
 import { image } from '@/sanity/image'
 import type { Service } from '@/sanity/types/service'
-import { PortableText } from '@portabletext/react'
 import type { Metadata } from 'next'
+import { PortableText } from 'next-sanity'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 
@@ -70,15 +70,15 @@ export default async function ServicePage({ params }: ServicePageProps) {
         </nav>
 
         {/* Service Header */}
-        <div className="grid gap-12 lg:grid-cols-3">
-          <div className="lg:col-span-2">
-            <div className="mb-4 flex items-center gap-3">
+        <div className="lg:flex lg:gap-12">
+          <div className="lg:flex-1">
+            <div className="mb-6 flex items-center gap-3">
               <div
-                className={`inline-flex h-12 w-12 items-center justify-center rounded-lg ${service.category.color}`}
+                className={`inline-flex h-10 w-10 items-center justify-center rounded-lg ${service.category.color}`}
               >
                 <Icon
                   name={service.category.icon || ''}
-                  className="h-6 w-6"
+                  className="h-5 w-5"
                   fallback={service.category.name.charAt(0)}
                 />
               </div>
@@ -91,6 +91,9 @@ export default async function ServicePage({ params }: ServicePageProps) {
 
             <Heading as="h1">{service.title}</Heading>
             <Lead className="mt-6">{service.shortDescription}</Lead>
+
+            {/* Separator */}
+            <div className="my-8 border-t border-gray-200"></div>
 
             {/* Service Image */}
             {service.featuredImage && (
@@ -105,24 +108,163 @@ export default async function ServicePage({ params }: ServicePageProps) {
                 />
               </div>
             )}
+
+            {/* Full Description */}
+            {service.fullDescription && (
+              <div className="prose prose-gray mt-8 max-w-none">
+                <PortableText
+                  value={service.fullDescription}
+                  components={{
+                    block: {
+                      normal: ({ children }) => (
+                        <p className="my-6 text-base leading-relaxed text-gray-700 first:mt-0 last:mb-0">
+                          {children}
+                        </p>
+                      ),
+                      h1: ({ children }) => (
+                        <h1 className="mt-8 mb-6 text-3xl font-bold tracking-tight text-gray-900 first:mt-0 last:mb-0">
+                          {children}
+                        </h1>
+                      ),
+                      h2: ({ children }) => (
+                        <h2 className="mt-8 mb-6 text-2xl font-semibold tracking-tight text-gray-900 first:mt-0 last:mb-0">
+                          {children}
+                        </h2>
+                      ),
+                      h3: ({ children }) => (
+                        <h3 className="mt-6 mb-4 text-xl font-semibold tracking-tight text-gray-900 first:mt-0 last:mb-0">
+                          {children}
+                        </h3>
+                      ),
+                      h4: ({ children }) => (
+                        <h4 className="mt-6 mb-4 text-lg font-semibold tracking-tight text-gray-900 first:mt-0 last:mb-0">
+                          {children}
+                        </h4>
+                      ),
+                      blockquote: ({ children }) => (
+                        <blockquote className="my-6 border-l-4 border-blue-500 pl-6 text-base leading-relaxed text-gray-700 italic first:mt-0 last:mb-0">
+                          {children}
+                        </blockquote>
+                      ),
+                    },
+                    types: {
+                      image: ({ value }) => (
+                        <img
+                          alt={value.alt || ''}
+                          src={image(value).width(800).url()}
+                          className="my-6 w-full rounded-lg shadow-md"
+                        />
+                      ),
+                      separator: ({ value }) => {
+                        switch (value.separatorType) {
+                          case 'line':
+                            return (
+                              <hr className="my-8 border-t border-gray-200" />
+                            )
+                          case 'dots':
+                            return (
+                              <div className="my-8 flex justify-center">
+                                <div className="flex space-x-2">
+                                  <div className="h-2 w-2 rounded-full bg-gray-400"></div>
+                                  <div className="h-2 w-2 rounded-full bg-gray-400"></div>
+                                  <div className="h-2 w-2 rounded-full bg-gray-400"></div>
+                                </div>
+                              </div>
+                            )
+                          case 'arrow':
+                            return (
+                              <div className="my-8 flex justify-center">
+                                <svg
+                                  className="h-6 w-6 text-gray-400"
+                                  fill="none"
+                                  stroke="currentColor"
+                                  viewBox="0 0 24 24"
+                                >
+                                  <path
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    strokeWidth={2}
+                                    d="M19 14l-7 7m0 0l-7-7m7 7V3"
+                                  />
+                                </svg>
+                              </div>
+                            )
+                          default:
+                            return (
+                              <hr className="my-8 border-t border-gray-200" />
+                            )
+                        }
+                      },
+                    },
+                    list: {
+                      bullet: ({ children }) => (
+                        <ul className="my-6 list-disc pl-6 text-base leading-relaxed text-gray-700 marker:text-gray-400">
+                          {children}
+                        </ul>
+                      ),
+                      number: ({ children }) => (
+                        <ol className="my-6 list-decimal pl-6 text-base leading-relaxed text-gray-700 marker:text-gray-400">
+                          {children}
+                        </ol>
+                      ),
+                    },
+                    listItem: {
+                      bullet: ({ children }) => (
+                        <li className="my-2 pl-2">{children}</li>
+                      ),
+                      number: ({ children }) => (
+                        <li className="my-2 pl-2">{children}</li>
+                      ),
+                    },
+                    marks: {
+                      strong: ({ children }) => (
+                        <strong className="font-semibold text-gray-900">
+                          {children}
+                        </strong>
+                      ),
+                      em: ({ children }) => (
+                        <em className="text-gray-800 italic">{children}</em>
+                      ),
+                      code: ({ children }) => (
+                        <code className="rounded bg-gray-100 px-2 py-1 font-mono text-sm text-gray-800">
+                          {children}
+                        </code>
+                      ),
+                      link: ({ value, children }) => {
+                        return (
+                          <a
+                            href={value.href}
+                            className="font-medium text-blue-600 underline decoration-blue-300 underline-offset-2 hover:text-blue-800 hover:decoration-blue-500"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            {children}
+                          </a>
+                        )
+                      },
+                    },
+                  }}
+                />
+              </div>
+            )}
           </div>
 
           {/* Service Details Sidebar */}
-          <div className="lg:col-span-1">
+          <div className="lg:w-80 lg:flex-shrink-0">
             <div className="sticky top-8 space-y-6">
               {/* Only show Service Details card if any of the details exist */}
               {(service.duration ||
                 service.deliveryMethod ||
                 service.pricing) && (
-                <div className="rounded-xl border border-gray-200 bg-white p-6">
-                  <h3 className="mb-4 font-semibold text-gray-900">
+                <div className="rounded-xl border border-gray-200 bg-white p-6 shadow-sm">
+                  <h3 className="mb-4 text-lg font-semibold text-gray-900">
                     Dienstleistungs-Details
                   </h3>
                   <dl className="space-y-3">
                     {service.duration && (
                       <div>
                         <dt className="text-sm font-medium text-gray-500">
-                          Duration
+                          Dauer
                         </dt>
                         <dd className="text-sm text-gray-900">
                           {service.duration}
@@ -132,17 +274,20 @@ export default async function ServicePage({ params }: ServicePageProps) {
                     {service.deliveryMethod && (
                       <div>
                         <dt className="text-sm font-medium text-gray-500">
-                          Delivery Method
+                          Durchführungsart
                         </dt>
                         <dd className="text-sm text-gray-900 capitalize">
-                          {service.deliveryMethod}
+                          {service.deliveryMethod === 'on-site' && 'Vor Ort'}
+                          {service.deliveryMethod === 'remote' && 'Remote'}
+                          {service.deliveryMethod === 'hybrid' && 'Hybrid'}
+                          {service.deliveryMethod === 'online' && 'Online'}
                         </dd>
                       </div>
                     )}
                     {service.pricing && (
                       <div>
                         <dt className="text-sm font-medium text-gray-500">
-                          Pricing
+                          Preis
                         </dt>
                         <dd className="text-sm text-gray-900">
                           {service.pricing}
@@ -154,7 +299,7 @@ export default async function ServicePage({ params }: ServicePageProps) {
               )}
 
               {/* Action Buttons */}
-              <div className="rounded-xl border border-gray-200 bg-white p-6">
+              <div className="rounded-xl border border-gray-200 bg-white p-6 shadow-sm">
                 <Button href="/contact#beratung-buchen" className="mb-3 w-full">
                   Beratung buchen
                 </Button>
@@ -167,19 +312,11 @@ export default async function ServicePage({ params }: ServicePageProps) {
         </div>
       </Container>
 
-      {/* Service Content */}
-      <Container className="mt-16">
-        <div className="grid gap-12 lg:grid-cols-3">
-          <div className="space-y-12 lg:col-span-2">
-            {/* Full Description */}
-            {service.fullDescription && (
-              <div className="prose prose-gray max-w-none">
-                <PortableText value={service.fullDescription} />
-              </div>
-            )}
-
-            {/* Key Benefits */}
-            {service.benefits && service.benefits.length > 0 && (
+      {/* Key Benefits */}
+      {service.benefits && service.benefits.length > 0 && (
+        <Container className="mt-16">
+          <div className="grid gap-12 lg:grid-cols-3">
+            <div className="space-y-12 lg:col-span-2">
               <div>
                 <Subheading>Hauptvorteile</Subheading>
                 <ul className="mt-6 space-y-3">
@@ -203,27 +340,31 @@ export default async function ServicePage({ params }: ServicePageProps) {
                   ))}
                 </ul>
               </div>
-            )}
 
-            {/* Target Audience & Prerequisites */}
-            <div className="grid gap-8 sm:grid-cols-2">
-              {service.targetAudience && (
-                <div>
-                  <Subheading>Zielgruppe</Subheading>
-                  <p className="mt-4 text-gray-700">{service.targetAudience}</p>
-                </div>
-              )}
+              {/* Target Audience & Prerequisites */}
+              <div className="grid gap-8 sm:grid-cols-2">
+                {service.targetAudience && (
+                  <div>
+                    <Subheading>Zielgruppe</Subheading>
+                    <p className="mt-4 text-gray-700">
+                      {service.targetAudience}
+                    </p>
+                  </div>
+                )}
 
-              {service.prerequisites && (
-                <div>
-                  <Subheading>Voraussetzungen</Subheading>
-                  <p className="mt-4 text-gray-700">{service.prerequisites}</p>
-                </div>
-              )}
+                {service.prerequisites && (
+                  <div>
+                    <Subheading>Voraussetzungen</Subheading>
+                    <p className="mt-4 text-gray-700">
+                      {service.prerequisites}
+                    </p>
+                  </div>
+                )}
+              </div>
             </div>
           </div>
-        </div>
-      </Container>
+        </Container>
+      )}
 
       {/* Related Services */}
       {otherServices.length > 0 && (
@@ -264,7 +405,9 @@ export default async function ServicePage({ params }: ServicePageProps) {
         </Container>
       )}
 
-      <Footer />
+      <div className="mt-16">
+        <Footer />
+      </div>
     </main>
   )
 }

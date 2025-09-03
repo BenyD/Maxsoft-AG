@@ -112,24 +112,6 @@ export default async function ServiceCategoryPage({
                     {service.shortDescription}
                   </p>
 
-                  <div className="mb-4 flex flex-wrap gap-2">
-                    {service.duration && (
-                      <span className="inline-flex items-center rounded-full bg-gray-100 px-2 py-1 text-xs text-gray-800">
-                        ⏱️ {service.duration}
-                      </span>
-                    )}
-                    {service.deliveryMethod && (
-                      <span className="inline-flex items-center rounded-full bg-green-100 px-2 py-1 text-xs text-green-800">
-                        📍 {service.deliveryMethod}
-                      </span>
-                    )}
-                    {service.pricing && (
-                      <span className="inline-flex items-center rounded-full bg-yellow-100 px-2 py-1 text-xs text-yellow-800">
-                        💰 {service.pricing}
-                      </span>
-                    )}
-                  </div>
-
                   <div className="flex items-center justify-between">
                     <div className="flex items-center text-sm font-medium text-blue-600">
                       Mehr erfahren

@@ -67,26 +67,9 @@ function ServiceCategoryCard({
                   <h4 className="mb-1 font-medium text-gray-900">
                     {service.title}
                   </h4>
-                  <p className="mb-2 text-sm text-gray-600">
+                  <p className="text-sm text-gray-600">
                     {service.shortDescription}
                   </p>
-                  <div className="flex flex-wrap gap-2 text-xs">
-                    {service.duration && (
-                      <span className="inline-flex items-center rounded-full bg-blue-100 px-2 py-1 text-blue-800">
-                        ⏱️ {service.duration}
-                      </span>
-                    )}
-                    {service.deliveryMethod && (
-                      <span className="inline-flex items-center rounded-full bg-green-100 px-2 py-1 text-green-800">
-                        📍 {service.deliveryMethod}
-                      </span>
-                    )}
-                    {service.pricing && (
-                      <span className="inline-flex items-center rounded-full bg-yellow-100 px-2 py-1 text-yellow-800">
-                        💰 {service.pricing}
-                      </span>
-                    )}
-                  </div>
                 </div>
                 <div className="ml-4">
                   <svg

@@ -16,7 +16,7 @@ import { ChevronDownIcon } from '@heroicons/react/20/solid'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 interface ServiceCategory {
   _id: string
@@ -35,6 +35,7 @@ interface NavbarProps {
 import {
   BriefcaseIcon,
   BuildingOfficeIcon,
+  DocumentTextIcon,
   GlobeAltIcon,
   UserGroupIcon,
 } from '@heroicons/react/24/outline'
@@ -45,6 +46,7 @@ const companyLinks = [
   { name: 'Team', href: '/team', icon: UserGroupIcon },
   { name: 'Karriere', href: '/careers', icon: BriefcaseIcon },
   { name: 'Partner', href: '/partners', icon: GlobeAltIcon },
+  { name: 'Blog', href: '/blog', icon: DocumentTextIcon },
 ]
 
 const defaultServiceCategories = [
@@ -89,6 +91,8 @@ const defaultServiceCategories = [
 export default function Navbar({ initialServiceCategories }: NavbarProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [scrollProgress, setScrollProgress] = useState(0)
+  const servicesButtonRef = useRef<HTMLButtonElement>(null)
+  const companyButtonRef = useRef<HTMLButtonElement>(null)
   const pathname = usePathname()
 
   // Use Sanity categories if available, otherwise use defaults
@@ -105,6 +109,15 @@ export default function Navbar({ initialServiceCategories }: NavbarProps) {
     return pathname.startsWith(href)
   }
 
+  // Close dropdowns by clicking the button
+  const closeDropdown = (
+    buttonRef: React.RefObject<HTMLButtonElement | null>,
+  ) => {
+    if (buttonRef.current) {
+      buttonRef.current.click()
+    }
+  }
+
   // Track scroll progress
   useEffect(() => {
     const handleScroll = () => {
@@ -118,6 +131,11 @@ export default function Navbar({ initialServiceCategories }: NavbarProps) {
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
+
+  // Don't show navbar on studio pages
+  if (pathname.startsWith('/studio')) {
+    return null
+  }
 
   return (
     <header className="sticky top-0 isolate z-50 bg-white/95 backdrop-blur-sm dark:bg-gray-900/95">
@@ -154,7 +172,10 @@ export default function Navbar({ initialServiceCategories }: NavbarProps) {
         </div>
         <PopoverGroup className="hidden lg:flex lg:gap-x-12">
           <Popover>
-            <PopoverButton className="flex items-center gap-x-1 text-sm/6 font-semibold text-gray-900 transition-colors duration-200 hover:text-[#09A7ED] dark:text-white dark:hover:text-[#09A7ED]">
+            <PopoverButton
+              ref={servicesButtonRef}
+              className="flex items-center gap-x-1 text-sm/6 font-semibold text-gray-900 transition-colors duration-200 hover:text-[#09A7ED] dark:text-white dark:hover:text-[#09A7ED]"
+            >
               Dienstleistungen
               <ChevronDownIcon
                 aria-hidden="true"
@@ -164,28 +185,33 @@ export default function Navbar({ initialServiceCategories }: NavbarProps) {
 
             <PopoverPanel
               transition
-              className="absolute inset-x-0 top-16 border border-gray-200 bg-white/95 shadow-xl backdrop-blur-sm transition-all duration-300 data-closed:-translate-y-2 data-closed:opacity-0 data-enter:duration-300 data-enter:ease-out data-leave:duration-200 data-leave:ease-in dark:border-gray-700 dark:bg-gray-900/95"
+              className="absolute inset-x-0 top-16 border border-gray-200 bg-white/95 backdrop-blur-sm transition-all duration-300 data-closed:-translate-y-2 data-closed:opacity-0 data-enter:duration-300 data-enter:ease-out data-leave:duration-200 data-leave:ease-in dark:border-gray-700 dark:bg-gray-900/95"
             >
-              {/* Presentational element used to render the bottom shadow */}
+              {/* Presentational element */}
               <div
                 aria-hidden="true"
-                className="absolute inset-0 top-1/2 bg-white/95 shadow-lg ring-1 ring-gray-900/5 backdrop-blur-sm dark:bg-gray-900/95 dark:shadow-none dark:ring-white/15"
+                className="absolute inset-0 top-1/2 bg-white/95 backdrop-blur-sm dark:bg-gray-900/95"
               />
               <div className="relative bg-white/95 backdrop-blur-sm dark:bg-gray-900/95">
-                <div className="mx-auto grid max-w-7xl grid-cols-4 gap-x-4 px-6 py-10 lg:px-8 xl:gap-x-8">
+                <div className="mx-auto grid max-w-7xl grid-cols-4 gap-x-4 gap-y-6 px-6 py-10 lg:px-8 xl:gap-x-8">
                   {serviceCategories.map((category) => {
                     const IconComponent = getIconComponent(category.icon)
                     return (
                       <div
                         key={category._id}
-                        className="group relative rounded-lg p-6 text-sm/6 transition-all duration-300 hover:-translate-y-1 hover:bg-gray-50 hover:shadow-lg dark:hover:bg-white/5"
+                        className="group relative rounded-lg border border-gray-200/50 bg-white p-6 text-sm/6 transition-all duration-300 hover:-translate-y-1 hover:border-[#09A7ED]/30 hover:bg-gray-50 dark:border-gray-700/50 dark:bg-gray-800/50 dark:hover:bg-white/5"
                       >
                         <div className="flex size-11 items-center justify-center rounded-lg bg-gray-50 transition-colors duration-300 group-hover:bg-[#09A7ED]/10 dark:bg-gray-700/50 dark:group-hover:bg-[#09A7ED]/20">
                           <IconComponent className="size-6 text-gray-600 transition-colors duration-300 group-hover:text-[#09A7ED] dark:text-gray-400 dark:group-hover:text-[#09A7ED]" />
                         </div>
                         <Link
                           href={`/services/category/${category.slug}`}
-                          className="mt-6 block font-semibold text-gray-900 transition-colors duration-300 group-hover:text-[#09A7ED] dark:text-white"
+                          onClick={() => closeDropdown(servicesButtonRef)}
+                          className={`mt-6 block font-semibold transition-colors duration-300 group-hover:text-[#09A7ED] ${
+                            isActive(`/services/category/${category.slug}`)
+                              ? 'text-[#09A7ED]'
+                              : 'text-gray-900 dark:text-white'
+                          }`}
                         >
                           {category.name}
                           <span className="absolute inset-0" />
@@ -202,7 +228,12 @@ export default function Navbar({ initialServiceCategories }: NavbarProps) {
                     <div className="grid grid-cols-1 divide-y divide-gray-900/5 border-y border-gray-900/5 dark:divide-white/5 dark:border-white/10">
                       <Link
                         href="/services"
-                        className="flex items-center justify-center gap-x-2.5 p-3 text-sm/6 font-semibold text-gray-900 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-800"
+                        onClick={() => closeDropdown(servicesButtonRef)}
+                        className={`flex items-center justify-center gap-x-2.5 p-3 text-sm/6 font-semibold transition-colors duration-200 hover:bg-gray-100 dark:hover:bg-gray-800 ${
+                          isActive('/services')
+                            ? 'bg-[#09A7ED]/10 text-[#09A7ED]'
+                            : 'text-gray-900 dark:text-white'
+                        }`}
                       >
                         Alle Services anzeigen
                       </Link>
@@ -234,7 +265,10 @@ export default function Navbar({ initialServiceCategories }: NavbarProps) {
             Technologien
           </Link>
           <Popover>
-            <PopoverButton className="flex items-center gap-x-1 text-sm/6 font-semibold text-gray-900 transition-colors duration-200 hover:text-[#09A7ED] dark:text-white dark:hover:text-[#09A7ED]">
+            <PopoverButton
+              ref={companyButtonRef}
+              className="flex items-center gap-x-1 text-sm/6 font-semibold text-gray-900 transition-colors duration-200 hover:text-[#09A7ED] dark:text-white dark:hover:text-[#09A7ED]"
+            >
               Unternehmen
               <ChevronDownIcon
                 aria-hidden="true"
@@ -244,44 +278,70 @@ export default function Navbar({ initialServiceCategories }: NavbarProps) {
 
             <PopoverPanel
               transition
-              className="absolute inset-x-0 top-16 border border-gray-200 bg-white/95 shadow-xl backdrop-blur-sm transition-all duration-300 data-closed:-translate-y-2 data-closed:opacity-0 data-enter:duration-300 data-enter:ease-out data-leave:duration-200 data-leave:ease-in dark:border-gray-700 dark:bg-gray-900/95"
+              className="absolute inset-x-0 top-16 border border-gray-200 bg-white/95 backdrop-blur-sm transition-all duration-300 data-closed:-translate-y-2 data-closed:opacity-0 data-enter:duration-300 data-enter:ease-out data-leave:duration-200 data-leave:ease-in dark:border-gray-700 dark:bg-gray-900/95"
             >
+              {/* Presentational element */}
               <div
                 aria-hidden="true"
-                className="absolute inset-0 top-1/2 bg-white/95 shadow-lg ring-1 ring-gray-900/5 backdrop-blur-sm dark:bg-gray-900/95 dark:shadow-none dark:ring-white/15"
+                className="absolute inset-0 top-1/2 bg-white/95 backdrop-blur-sm dark:bg-gray-900/95"
               />
               <div className="relative bg-white/95 backdrop-blur-sm dark:bg-gray-900/95">
-                <div className="mx-auto max-w-7xl px-6 py-8 lg:px-8">
-                  <div className="grid grid-cols-2 gap-x-4 gap-y-6">
-                    {companyLinks.map((item) => (
+                <div className="mx-auto grid max-w-7xl grid-cols-2 gap-x-4 gap-y-6 px-6 py-10 lg:px-8 xl:gap-x-8">
+                  {companyLinks.map((item) => (
+                    <div
+                      key={item.name}
+                      className="group relative rounded-lg border border-gray-200/50 bg-white p-6 text-sm/6 transition-all duration-300 hover:-translate-y-1 hover:border-[#09A7ED]/30 hover:bg-gray-50 dark:border-gray-700/50 dark:bg-gray-800/50 dark:hover:bg-white/5"
+                    >
+                      <div className="flex size-11 items-center justify-center rounded-lg bg-gray-50 transition-colors duration-300 group-hover:bg-[#09A7ED]/10 dark:bg-gray-700/50 dark:group-hover:bg-[#09A7ED]/20">
+                        <item.icon className="size-6 text-gray-600 transition-colors duration-300 group-hover:text-[#09A7ED] dark:text-gray-400 dark:group-hover:text-[#09A7ED]" />
+                      </div>
                       <Link
-                        key={item.name}
                         href={item.href}
-                        className="group relative rounded-lg p-4 text-sm/6 hover:bg-gray-50 dark:hover:bg-white/5"
+                        onClick={() => closeDropdown(companyButtonRef)}
+                        className={`mt-6 block font-semibold transition-colors duration-300 group-hover:text-[#09A7ED] ${
+                          isActive(item.href)
+                            ? 'text-[#09A7ED]'
+                            : 'text-gray-900 dark:text-white'
+                        }`}
                       >
-                        <div className="flex items-center gap-3">
-                          <item.icon className="size-5 text-gray-400 group-hover:text-[#09A7ED] dark:text-gray-500 dark:group-hover:text-[#09A7ED]" />
-                          <div className="font-semibold text-gray-900 group-hover:text-[#09A7ED] dark:text-white dark:group-hover:text-[#09A7ED]">
-                            {item.name}
-                          </div>
-                        </div>
+                        {item.name}
+                        <span className="absolute inset-0" />
                       </Link>
-                    ))}
+                      <p className="mt-1 text-gray-600 dark:text-gray-400">
+                        {item.name === 'Über uns' &&
+                          'Erfahren Sie mehr über unser Unternehmen und unsere Mission'}
+                        {item.name === 'Team' &&
+                          'Lernen Sie unser erfahrenes Team kennen'}
+                        {item.name === 'Karriere' &&
+                          'Werden Sie Teil unseres Teams'}
+                        {item.name === 'Partner' &&
+                          'Unsere vertrauensvollen Geschäftspartner'}
+                        {item.name === 'Blog' &&
+                          'Aktuelle Nachrichten und Insights'}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+                <div className="bg-gray-50 dark:bg-gray-800/50">
+                  <div className="mx-auto max-w-7xl px-6 lg:px-8">
+                    <div className="grid grid-cols-1 divide-y divide-gray-900/5 border-y border-gray-900/5 dark:divide-white/5 dark:border-white/10">
+                      <Link
+                        href="/company"
+                        onClick={() => closeDropdown(companyButtonRef)}
+                        className={`flex items-center justify-center gap-x-2.5 p-3 text-sm/6 font-semibold transition-colors duration-200 hover:bg-gray-100 dark:hover:bg-gray-800 ${
+                          isActive('/company')
+                            ? 'bg-[#09A7ED]/10 text-[#09A7ED]'
+                            : 'text-gray-900 dark:text-white'
+                        }`}
+                      >
+                        Mehr über uns erfahren
+                      </Link>
+                    </div>
                   </div>
                 </div>
               </div>
             </PopoverPanel>
           </Popover>
-          <Link
-            href="/blog"
-            className={`text-sm/6 font-semibold transition-colors duration-200 ${
-              isActive('/blog')
-                ? 'text-[#09A7ED]'
-                : 'text-gray-900 hover:text-[#09A7ED] dark:text-white dark:hover:text-[#09A7ED]'
-            }`}
-          >
-            Blog
-          </Link>
         </PopoverGroup>
         <div className="hidden lg:flex lg:flex-1 lg:justify-end">
           <Link
@@ -335,27 +395,48 @@ export default function Navbar({ initialServiceCategories }: NavbarProps) {
                     />
                   </DisclosureButton>
                   <DisclosurePanel className="mt-2 space-y-2">
-                    {serviceCategories.map((category) => (
-                      <DisclosureButton
-                        key={category._id}
-                        as={Link}
-                        href={`/services/category/${category.slug}`}
-                        className="block rounded-lg py-2 pr-3 pl-6 text-sm/7 font-semibold text-gray-900 hover:bg-gray-50 dark:text-white dark:hover:bg-white/5"
-                      >
-                        {category.name}
-                      </DisclosureButton>
-                    ))}
-                    <DisclosureButton
-                      as={Link}
+                    {serviceCategories.map((category) => {
+                      const IconComponent = getIconComponent(category.icon)
+                      return (
+                        <Link
+                          key={category._id}
+                          href={`/services/category/${category.slug}`}
+                          onClick={() => setMobileMenuOpen(false)}
+                          className={`block rounded-lg py-2 pr-3 pl-6 text-sm/7 font-semibold transition-colors duration-200 hover:bg-gray-50 dark:hover:bg-white/5 ${
+                            isActive(`/services/category/${category.slug}`)
+                              ? 'bg-[#09A7ED]/10 text-[#09A7ED]'
+                              : 'text-gray-900 dark:text-white'
+                          }`}
+                        >
+                          <div className="flex items-center gap-3">
+                            <IconComponent
+                              className={`size-4 transition-colors duration-200 ${
+                                isActive(`/services/category/${category.slug}`)
+                                  ? 'text-[#09A7ED]'
+                                  : 'text-gray-400 group-hover:text-[#09A7ED] dark:text-gray-500 dark:group-hover:text-[#09A7ED]'
+                              }`}
+                            />
+                            {category.name}
+                          </div>
+                        </Link>
+                      )
+                    })}
+                    <Link
                       href="/services"
-                      className="block rounded-lg py-2 pr-3 pl-6 text-sm/7 font-semibold text-gray-900 hover:bg-gray-50 dark:text-white dark:hover:bg-white/5"
+                      onClick={() => setMobileMenuOpen(false)}
+                      className={`block rounded-lg py-2 pr-3 pl-6 text-sm/7 font-semibold transition-colors duration-200 hover:bg-gray-50 dark:hover:bg-white/5 ${
+                        isActive('/services')
+                          ? 'bg-[#09A7ED]/10 text-[#09A7ED]'
+                          : 'text-gray-900 dark:text-white'
+                      }`}
                     >
                       Alle Services
-                    </DisclosureButton>
+                    </Link>
                   </DisclosurePanel>
                 </Disclosure>
                 <Link
                   href="/competencies"
+                  onClick={() => setMobileMenuOpen(false)}
                   className={`-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold transition-colors duration-200 ${
                     isActive('/competencies')
                       ? 'bg-[#09A7ED]/10 text-[#09A7ED]'
@@ -366,6 +447,7 @@ export default function Navbar({ initialServiceCategories }: NavbarProps) {
                 </Link>
                 <Link
                   href="/technologies"
+                  onClick={() => setMobileMenuOpen(false)}
                   className={`-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold transition-colors duration-200 ${
                     isActive('/technologies')
                       ? 'bg-[#09A7ED]/10 text-[#09A7ED]'
@@ -384,34 +466,35 @@ export default function Navbar({ initialServiceCategories }: NavbarProps) {
                   </DisclosureButton>
                   <DisclosurePanel className="mt-2 space-y-2">
                     {companyLinks.map((item) => (
-                      <DisclosureButton
+                      <Link
                         key={item.name}
-                        as={Link}
                         href={item.href}
-                        className="block rounded-lg py-2 pr-3 pl-6 text-sm/7 font-semibold text-gray-900 hover:bg-gray-50 dark:text-white dark:hover:bg-white/5"
+                        onClick={() => setMobileMenuOpen(false)}
+                        className={`block rounded-lg py-2 pr-3 pl-6 text-sm/7 font-semibold transition-colors duration-200 hover:bg-gray-50 dark:hover:bg-white/5 ${
+                          isActive(item.href)
+                            ? 'bg-[#09A7ED]/10 text-[#09A7ED]'
+                            : 'text-gray-900 dark:text-white'
+                        }`}
                       >
                         <div className="flex items-center gap-3">
-                          <item.icon className="size-4 text-gray-400 group-hover:text-[#09A7ED] dark:text-gray-500 dark:group-hover:text-[#09A7ED]" />
+                          <item.icon
+                            className={`size-4 transition-colors duration-200 ${
+                              isActive(item.href)
+                                ? 'text-[#09A7ED]'
+                                : 'text-gray-400 group-hover:text-[#09A7ED] dark:text-gray-500 dark:group-hover:text-[#09A7ED]'
+                            }`}
+                          />
                           {item.name}
                         </div>
-                      </DisclosureButton>
+                      </Link>
                     ))}
                   </DisclosurePanel>
                 </Disclosure>
-                <Link
-                  href="/blog"
-                  className={`-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold transition-colors duration-200 ${
-                    isActive('/blog')
-                      ? 'bg-[#09A7ED]/10 text-[#09A7ED]'
-                      : 'text-gray-900 hover:bg-gray-50 hover:text-[#09A7ED] dark:text-white dark:hover:bg-white/5 dark:hover:text-[#09A7ED]'
-                  }`}
-                >
-                  Blog
-                </Link>
               </div>
               <div className="py-6">
                 <Link
                   href="/contact"
+                  onClick={() => setMobileMenuOpen(false)}
                   className={`-mx-3 block rounded-lg px-3 py-2.5 text-base/7 font-semibold transition-colors duration-200 ${
                     isActive('/contact')
                       ? 'bg-[#09A7ED]/10 text-[#09A7ED]'

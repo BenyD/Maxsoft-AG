@@ -42,9 +42,9 @@ export const serviceType = defineType({
     defineField({
       name: 'fullDescription',
       title: 'Full Description',
-      type: 'array',
-      of: [{ type: 'block' }],
-      description: 'Detailed description for the service page',
+      type: 'blockContent',
+      description:
+        'Detailed description for the service page with rich formatting',
     }),
     createImageField('featuredImage', 'Featured Image'),
     defineField({

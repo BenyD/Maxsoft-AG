@@ -159,3 +159,8 @@
 .animate-scroll:hover {
   animation-play-state: paused;
 }
+
+/* Hide navbar on 404 pages */
+body.hide-navbar header {
+  display: none !important;
+}
