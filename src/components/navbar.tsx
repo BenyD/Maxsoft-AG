@@ -185,7 +185,7 @@ export default function Navbar({ initialServiceCategories }: NavbarProps) {
 
             <PopoverPanel
               transition
-              className="absolute inset-x-0 top-16 border border-gray-200 bg-white/95 backdrop-blur-sm transition-all duration-300 data-closed:-translate-y-2 data-closed:opacity-0 data-enter:duration-300 data-enter:ease-out data-leave:duration-200 data-leave:ease-in dark:border-gray-700 dark:bg-gray-900/95"
+              className="absolute inset-x-0 top-20 border border-gray-200 bg-white/95 backdrop-blur-sm transition-all duration-300 data-closed:-translate-y-2 data-closed:opacity-0 data-enter:duration-300 data-enter:ease-out data-leave:duration-200 data-leave:ease-in dark:border-gray-700 dark:bg-gray-900/95"
             >
               {/* Presentational element */}
               <div
@@ -278,7 +278,7 @@ export default function Navbar({ initialServiceCategories }: NavbarProps) {
 
             <PopoverPanel
               transition
-              className="absolute inset-x-0 top-16 border border-gray-200 bg-white/95 backdrop-blur-sm transition-all duration-300 data-closed:-translate-y-2 data-closed:opacity-0 data-enter:duration-300 data-enter:ease-out data-leave:duration-200 data-leave:ease-in dark:border-gray-700 dark:bg-gray-900/95"
+              className="absolute inset-x-0 top-20 border border-gray-200 bg-white/95 backdrop-blur-sm transition-all duration-300 data-closed:-translate-y-2 data-closed:opacity-0 data-enter:duration-300 data-enter:ease-out data-leave:duration-200 data-leave:ease-in dark:border-gray-700 dark:bg-gray-900/95"
             >
               {/* Presentational element */}
               <div

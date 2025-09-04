@@ -16,7 +16,7 @@ function CallToAction() {
       </p>
       <div className="mt-6">
         <Button className="w-full sm:w-auto" href="/contact#booking">
-          Jetzt buche
+          Jetzt buchen
         </Button>
       </div>
     </div>
