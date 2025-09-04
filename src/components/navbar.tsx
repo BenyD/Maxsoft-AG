@@ -36,7 +36,9 @@ import {
   BriefcaseIcon,
   BuildingOfficeIcon,
   DocumentTextIcon,
+  EnvelopeIcon,
   GlobeAltIcon,
+  PhoneIcon,
   UserGroupIcon,
 } from '@heroicons/react/24/outline'
 import { usePathname } from 'next/navigation'
@@ -370,14 +372,14 @@ export default function Navbar({ initialServiceCategories }: NavbarProps) {
         <div className="fixed inset-0 z-50 bg-black/20 backdrop-blur-sm transition-opacity duration-300" />
         <DialogPanel className="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-white p-6 shadow-xl transition-transform duration-300 ease-out sm:max-w-sm sm:ring-1 sm:ring-gray-900/10 dark:bg-gray-900 dark:sm:ring-gray-100/10">
           <div className="flex items-center justify-between">
-            <Link href="/" className="-m-1.5 p-1.5">
+            <Link href="/" className="group -mt-3 flex items-center p-1.5">
               <span className="sr-only">Maxsoft IT Solutions</span>
               <Image
                 src="/logo.png"
                 alt="Maxsoft IT Solutions"
                 width={130}
                 height={35}
-                className="h-9 w-auto"
+                className="h-9 w-auto transition-transform duration-300 group-hover:scale-105"
               />
             </Link>
             <button
@@ -496,12 +498,10 @@ export default function Navbar({ initialServiceCategories }: NavbarProps) {
                     ))}
                   </DisclosurePanel>
                 </Disclosure>
-              </div>
-              <div className="space-y-2 py-6">
                 <Link
                   href="/contact"
                   onClick={() => setMobileMenuOpen(false)}
-                  className={`-mx-3 block rounded-lg px-3 py-2.5 text-base/7 font-semibold transition-colors duration-200 ${
+                  className={`-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold transition-colors duration-200 ${
                     isActive('/contact')
                       ? 'bg-[#09A7ED]/10 text-[#09A7ED]'
                       : 'text-gray-900 hover:bg-gray-50 hover:text-[#09A7ED] dark:text-white dark:hover:bg-white/5 dark:hover:text-[#09A7ED]'
@@ -509,13 +509,46 @@ export default function Navbar({ initialServiceCategories }: NavbarProps) {
                 >
                   Kontakt
                 </Link>
+              </div>
+              <div className="space-y-2 py-6">
                 <Link
                   href="/contact#beratung-buchen"
                   onClick={() => setMobileMenuOpen(false)}
-                  className="-mx-3 block rounded-full bg-[#09A7ED] px-6 py-3 text-base/7 font-semibold text-white transition-all duration-200 hover:bg-[#08A0E0]"
+                  className="-mx-3 block rounded-lg bg-[#09A7ED] px-6 py-3 text-base/7 font-semibold text-white transition-all duration-200 hover:bg-[#08A0E0]"
                 >
                   Termin Buchen
                 </Link>
+              </div>
+            </div>
+          </div>
+
+          {/* Mobile Navigation Footer */}
+          <div className="mt-8 border-t border-gray-200/50 pt-6 dark:border-gray-700/50">
+            <div className="space-y-4">
+              <div className="flex items-center justify-center space-x-6">
+                <Link
+                  href="tel:+41415111166"
+                  className="flex items-center space-x-2 text-sm text-gray-600 transition-colors duration-200 hover:text-[#09A7ED] dark:text-gray-400 dark:hover:text-[#09A7ED]"
+                >
+                  <PhoneIcon className="size-4" />
+                  <span>+41 41 511 11 66</span>
+                </Link>
+                <span className="text-sm text-gray-400 dark:text-gray-500">
+                  |
+                </span>
+                <Link
+                  href="mailto:info@maxsoft.ch"
+                  className="flex items-center space-x-2 text-sm text-gray-600 transition-colors duration-200 hover:text-[#09A7ED] dark:text-gray-400 dark:hover:text-[#09A7ED]"
+                >
+                  <EnvelopeIcon className="size-4" />
+                  <span>info@maxsoft.ch</span>
+                </Link>
+              </div>
+              <div className="text-center">
+                <p className="text-xs text-gray-500 dark:text-gray-400">
+                  © {new Date().getFullYear()} Maxsoft AG. Alle Rechte
+                  vorbehalten.
+                </p>
               </div>
             </div>
           </div>
